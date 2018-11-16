@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package slidingtiles;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

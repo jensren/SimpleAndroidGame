@@ -1,4 +1,4 @@
-package fall2018.csc2017.slidingtiles;
+package slidingtiles;
 
 import java.io.Serializable;
 import java.util.ArrayList;

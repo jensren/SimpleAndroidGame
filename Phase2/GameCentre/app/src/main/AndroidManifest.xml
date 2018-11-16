@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fall2018.csc2017.slidingtiles">
+    package="slidingtiles">
 
     <application
         android:allowBackup="true"
@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="fall2018.csc2017.slidingtiles.GameLaunchCentreActivity">
+        <activity android:name="slidingtiles.GameLaunchCentreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="fall2018.csc2017.slidingtiles.GameActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.SignInActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.SignUpActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.StartingActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.ScoreboardActivity" />
-        <activity android:name="fall2018.csc2017.slidingtiles.GameChoiceActivity" />
+        <activity android:name="slidingtiles.GameActivity" />
+        <activity android:name="slidingtiles.SignInActivity" />
+        <activity android:name="slidingtiles.SignUpActivity" />
+        <activity android:name="slidingtiles.StartingActivity" />
+        <activity android:name="slidingtiles.ScoreboardActivity" />
+        <activity android:name="slidingtiles.GameChoiceActivity" />
     </application>
 
 </manifest>
