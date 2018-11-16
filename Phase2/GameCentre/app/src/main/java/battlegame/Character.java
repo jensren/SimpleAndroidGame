@@ -16,8 +16,7 @@ abstract class Character {
         return mp;
     }
 
-    int getHp() {
-        return hp;
+    int getHp() { return hp;
 
     }
 
@@ -55,5 +54,11 @@ abstract class Character {
      * @param damage The amount of damage on the opponent.
      */
     abstract void makeMove(int damage);
+
+    /**
+     * Get the next sprite for the character to display.
+     * @return The name of the next sprite.
+     */
+    abstract String getSprite();
 
 }

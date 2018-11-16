@@ -19,4 +19,9 @@ class DruidShibe extends Character {
     void makeMove(int damage) {
 
     }
+
+    @Override
+    String getSprite() {
+        return null;
+    }
 }
