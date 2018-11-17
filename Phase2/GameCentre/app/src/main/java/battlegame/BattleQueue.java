@@ -16,7 +16,7 @@ public class BattleQueue {
     }
 
     private void removeInvalidCharacters() {
-        while (!getNextCharacter().hasMp()) {
+        while (!getNextCharacter().hasAttackMp()) {
             remove();
         }
     }

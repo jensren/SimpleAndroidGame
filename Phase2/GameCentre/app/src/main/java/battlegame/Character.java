@@ -6,18 +6,16 @@ abstract class Character {
     private int hp = 100;
     private int mp = 100;
     private Character opponent;
+    private BattleQueue battleQueue;
 
 
-    boolean hasMp() {
-        return true;
-    }
+    abstract boolean hasAttackMp();
 
     int getMp() {
         return mp;
     }
 
     int getHp() { return hp;
-
     }
 
     /**
