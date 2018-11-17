@@ -43,7 +43,7 @@ public class StartingActivity extends AppCompatActivity {
         boardManager = new BoardManager();
         saveToFile(tempSaveFileName);
 
-        setContentView(R.layout.activity_starting);
+        setContentView(R.layout.activity_slidingtiles_starting);
         addStartButtonListener();
         addLoadButtonListener();
         addSaveButtonListener();
