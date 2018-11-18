@@ -21,7 +21,7 @@ import java.io.ObjectOutputStream;
 public class SlidingtilesScoreboardActivity extends AppCompatActivity {
 
     TextView scoreBoard;
-    static String user;
+    public static String user;
     public static final String SCORE_FILENAME = "scoreboard_file.ser";
     SlidingtilesScoreboard scoreboard;
     static SlidingtilesScore scores;
