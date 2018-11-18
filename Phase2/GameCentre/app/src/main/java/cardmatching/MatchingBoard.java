@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
-public class CardMatchingBoard extends Observable implements Serializable {
+public class MatchingBoard extends Observable implements Serializable {
     /**
      * The number of rows.
      */
@@ -31,11 +31,11 @@ public class CardMatchingBoard extends Observable implements Serializable {
      * Creates two "boards" of tiles. One of all unknown tiles. One of the tile images.
      * @param tiles
      */
-    CardMatchingBoard(List<MatchingTile> tiles) {
+    MatchingBoard(List<MatchingTile> tiles) {
         Iterator<MatchingTile> iter = tiles.iterator();
 
-        for (int row = 0; row != CardMatchingBoard.numRows; row++) {
-            for (int col = 0; col != CardMatchingBoard.numCols; col++) {
+        for (int row = 0; row != MatchingBoard.numRows; row++) {
+            for (int col = 0; col != MatchingBoard.numCols; col++) {
                 this.tiles[row][col] = iter.next();
                 this.unknownTiles[row][col] = new MatchingTile(16);
             }
