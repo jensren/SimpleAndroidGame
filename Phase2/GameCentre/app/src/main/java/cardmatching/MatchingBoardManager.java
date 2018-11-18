@@ -12,6 +12,11 @@ public class MatchingBoardManager implements Serializable {
     private MatchingBoard board;
 
     /**
+     * Keeps track of number of cards flipped. Up to 2.
+     */
+    private int tilesCurrentlyFlipped = 0;
+
+    /**
      * Manage a board that has been pre-populated.
      *
      * @param board the board
@@ -51,5 +56,23 @@ public class MatchingBoardManager implements Serializable {
         int col = position % MatchingBoard.numCols;
         int blankId = board.numTiles() + 2;
         return board.getTile(row, col).getId() != blankId;
+    }
+
+    void touchMove(int position){
+        int row = position / MatchingBoard.numCols;
+        int col = position % MatchingBoard.numCols;
+
+        if (isValidTap(position)) {
+            if (tilesCurrentlyFlipped == 0){
+                board.flipTile(row,col);
+                tilesCurrentlyFlipped++;
+            } else if(tilesCurrentlyFlipped == 1){
+                board.flipTile(row,col);
+                board.checkMatching();
+                tilesCurrentlyFlipped++;
+            } else {
+
+            }
+        }
     }
 }
