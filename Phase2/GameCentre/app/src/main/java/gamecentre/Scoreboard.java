@@ -61,7 +61,7 @@ public abstract class Scoreboard implements Serializable {
                         scoreList[i].toString());
             }
         }
-        return scores;
+        return "SCORE BOARD\n\n" + scores;
     }
 
     /**
