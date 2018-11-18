@@ -80,20 +80,16 @@ public class MatchingBoardManager implements Serializable {
                 checkMatching();
                 tilesCurrentlyFlipped++;
             } else {
-                if(board.tiles[flippedTiles[0]][flippedTiles[1]] == board.tiles[flippedTiles[2]][flippedTiles[3]]){
-                    board.flipBlank(flippedTiles);
-                }else{
-                    board.flipBack(flippedTiles[0],flippedTiles[1]);
-                    board.flipBack(flippedTiles[2],flippedTiles[3]);
+                board.flipBack(flippedTiles[0],flippedTiles[1]);
+                board.flipBack(flippedTiles[2],flippedTiles[3]);
                 }
                 flippedTiles = new int[4];
                 tilesCurrentlyFlipped = 0;
             }
         }
-    }
     private void checkMatching(){
-        if (board.tiles[flippedTiles[0]][flippedTiles[1]] == board.unknownTiles[flippedTiles[2]][flippedTiles[3]]){
-            board.flipBlank();
+        if(board.tiles[flippedTiles[0]][flippedTiles[1]] == board.tiles[flippedTiles[2]][flippedTiles[3]]){
+            board.flipBlank(flippedTiles);
         }
     }
 }
