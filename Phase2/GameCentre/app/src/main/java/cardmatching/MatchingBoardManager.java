@@ -16,6 +16,8 @@ public class MatchingBoardManager implements Serializable {
      */
     private int tilesCurrentlyFlipped = 0;
 
+    private int[] flippedTiles = new int[4];
+
     /**
      * Manage a board that has been pre-populated.
      *
@@ -65,13 +67,19 @@ public class MatchingBoardManager implements Serializable {
         if (isValidTap(position)) {
             if (tilesCurrentlyFlipped == 0){
                 board.flipTile(row,col);
+                flippedTiles[0] = row;
+                flippedTiles[1] = col;
                 tilesCurrentlyFlipped++;
             } else if(tilesCurrentlyFlipped == 1){
                 board.flipTile(row,col);
-                board.checkMatching();
+                flippedTiles[2] = row;
+                flippedTiles[3] = col;
+                board.checkMatching(flippedTiles);
                 tilesCurrentlyFlipped++;
             } else {
-
+                board.flipBack(flippedTiles[0],flippedTiles[1]);
+                board.flipBack(flippedTiles[2],flippedTiles[3]);
+                flippedTiles = new int[4];
             }
         }
     }
