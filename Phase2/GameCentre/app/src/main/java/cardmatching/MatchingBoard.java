@@ -28,12 +28,7 @@ public class MatchingBoard extends Observable implements Serializable {
     private MatchingTile[][] tiles = new MatchingTile[numRows][numCols];
 
     /**
-     * The blank cards, to be used once you've matched 2 cards.
-     */
-    private MatchingTile[][] blankTiles = new MatchingTile[numRows][numCols];
-
-    /**
-     * Creates three "boards" of tiles. One of all unknown tiles. One of the tile images. One of blank tiles.
+     * Creates two "boards" of tiles. One of all unknown tiles. One of the tile images.
      * @param tiles
      */
     MatchingBoard(List<MatchingTile> tiles) {
@@ -43,7 +38,6 @@ public class MatchingBoard extends Observable implements Serializable {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
                 this.tiles[row][col] = iter.next();
                 this.unknownTiles[row][col] = new MatchingTile(16);
-                this.blankTiles[row][col] = new MatchingTile(17);
             }
         }
     }
