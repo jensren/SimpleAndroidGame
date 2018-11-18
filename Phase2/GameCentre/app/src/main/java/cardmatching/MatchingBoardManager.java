@@ -17,7 +17,7 @@ public class MatchingBoardManager implements Serializable {
     private int tilesCurrentlyFlipped = 0;
 
     /**
-     * Keeps track of the row and col indices of the two flipped tiles. 
+     * Keeps track of the row and col indices of the two flipped tiles.
      */
     private int[] flippedTiles = new int[4];
 
@@ -77,7 +77,7 @@ public class MatchingBoardManager implements Serializable {
                 board.flipTile(row,col);
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
-                board.checkMatching(flippedTiles);
+                checkMatching();
                 tilesCurrentlyFlipped++;
             } else {
                 board.flipBack(flippedTiles[0],flippedTiles[1]);
@@ -85,6 +85,11 @@ public class MatchingBoardManager implements Serializable {
                 flippedTiles = new int[4];
                 tilesCurrentlyFlipped = 0;
             }
+        }
+    }
+    private void checkMatching(){
+        if (board.tiles[flippedTiles[0]][flippedTiles[1]] == board.unknownTiles[flippedTiles[2]][flippedTiles[3]]){
+            board.flipBlank();
         }
     }
 }

@@ -20,12 +20,12 @@ public class MatchingBoard extends Observable implements Serializable {
     /**
      * The question mark cards.
      */
-    private MatchingTile[][] unknownTiles = new MatchingTile[numRows][numCols];
+    public MatchingTile[][] unknownTiles = new MatchingTile[numRows][numCols];
 
     /**
      * The actual image cards.
      */
-    private MatchingTile[][] tiles = new MatchingTile[numRows][numCols];
+    public MatchingTile[][] tiles = new MatchingTile[numRows][numCols];
 
     /**
      * Creates two "boards" of tiles. One of all unknown tiles. One of the tile images.
