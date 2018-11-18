@@ -1,8 +1,8 @@
-package slidingtiles;
+package gamecentre;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +15,18 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import slidingtiles.GameChoiceActivity;
+import slidingtiles.R;
+import slidingtiles.SlidingtilesScoreboardActivity;
+import slidingtiles.SlidingtilesStartingActivity;
+
 /**
- * Allow the user to sign up.
+ * Allow the user to sign in.
  */
-public class SignUpActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     /**
-     * The filename to save user to.
+     * The filename to save users to.
      */
     public static final String USER_FILENAME = "user_file.ser";
 
@@ -35,44 +40,45 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         userManager = new UserManager();
 
-        setContentView(R.layout.activity_signup);
-        addSignUpButtonListener();
+        setContentView(R.layout.activity_signin);
+        addSignInButtonListener();
     }
 
     /**
-     * Create a new user if username and password are nonempty and the username is not taken.
+     * Sign in as a user if the user exists.
      */
-    private void createUser() {
-        EditText usernameEditText = findViewById(R.id.UsernameSignUp);
-        EditText passwordEditText = findViewById(R.id.PasswordSignUp);
+    private void signIn() {
+        EditText usernameEditText = findViewById(R.id.UsernameSignIn);
+        EditText passwordEditText = findViewById(R.id.PasswordSignIn);
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if (username.equals("") || password.equals("")) {
-            Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
-        } else if (userManager.getPassword(username) == null) {
-            userManager.addUser(username, password);
+        loadFromFile(USER_FILENAME);
+
+        if (userManager.getPassword(username) == null) {
+            Toast.makeText(this, "Username does not exist", Toast.LENGTH_LONG).show();
+        } else if (userManager.getPassword(username).equals(password)) {
             SlidingtilesStartingActivity.saveFileName = username + ".ser";
             SlidingtilesStartingActivity.autoSaveFileName = username + "_autosave.ser";
             SlidingtilesStartingActivity.tempSaveFileName = username + "_tmp.ser";
-            saveToFile();
+            saveToFile(USER_FILENAME);
             SlidingtilesScoreboardActivity.user = username;
             switchToGameChoiceActivity();
         } else {
-            Toast.makeText(this, "Username taken", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Invalid password", Toast.LENGTH_LONG).show();
         }
     }
 
     /**
      * Activate the ok button.
      */
-    private void addSignUpButtonListener() {
-        Button startButton = findViewById(R.id.okup);
+    private void addSignInButtonListener() {
+        Button startButton = findViewById(R.id.okin);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile();
-                createUser();
+                loadFromFile(USER_FILENAME);
+                signIn();
             }
         });
     }
@@ -86,18 +92,20 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Load the user manager from USER_FILENAME.
+     * Load the user manager from fileName.
+     *
+     * @param fileName the name of the file
      */
-    private void loadFromFile() {
+    private void loadFromFile(String fileName) {
         try {
-            InputStream inputStream = this.openFileInput(USER_FILENAME);
+            InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 userManager = (UserManager) input.readObject();
+                inputStream.close();
                 if (userManager == null) {
                     userManager = new UserManager();
                 }
-                inputStream.close();
             }
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
@@ -109,12 +117,14 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Save the user manager to USER_FILENAME.
+     * Save the user manager to fileName.
+     *
+     * @param fileName the name of the file
      */
-    public void saveToFile() {
+    public void saveToFile(String fileName) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(USER_FILENAME, MODE_PRIVATE));
+                    this.openFileOutput(fileName, MODE_PRIVATE));
             outputStream.writeObject(userManager);
             outputStream.close();
         } catch (IOException e) {

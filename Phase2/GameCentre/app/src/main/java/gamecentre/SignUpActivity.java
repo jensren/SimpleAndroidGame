@@ -1,8 +1,8 @@
-package slidingtiles;
+package gamecentre;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +15,18 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import slidingtiles.GameChoiceActivity;
+import slidingtiles.R;
+import slidingtiles.SlidingtilesScoreboardActivity;
+import slidingtiles.SlidingtilesStartingActivity;
+
 /**
  * Allow the user to sign up.
  */
 public class SignUpActivity extends AppCompatActivity {
 
     /**
-     * The filename to save user to.
+     * The filename to save users to.
      */
     public static final String USER_FILENAME = "user_file.ser";
 

@@ -42,9 +42,9 @@ class MovementController extends Observable {
             boardManager.touchMove(position);
             if (boardManager.puzzleSolved()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
-                Scoreboard.setUser(ScoreboardActivity.users);
-                Scoreboard.setNumMoves(boardManager.getNumMoves());
-                Scoreboard.setBoardSize(boardManager.getBoardSize());
+                SlidingtilesScoreboard.setUser(SlidingtilesScoreboardActivity.user);
+                SlidingtilesScoreboard.setNumMoves(boardManager.getNumMoves());
+                SlidingtilesScoreboard.setBoardSize(boardManager.getBoardSize());
                 setChanged();
                 notifyObservers();
             }

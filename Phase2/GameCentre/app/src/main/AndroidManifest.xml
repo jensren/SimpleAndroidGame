@@ -18,8 +18,8 @@
         <activity android:name="slidingtiles.GameActivity" />
         <activity android:name="slidingtiles.SignInActivity" />
         <activity android:name="slidingtiles.SignUpActivity" />
-        <activity android:name="slidingtiles.StartingActivity" />
-        <activity android:name="slidingtiles.ScoreboardActivity" />
+        <activity android:name="slidingtiles.SlidingtilesStartingActivity" />
+        <activity android:name="slidingtiles.SlidingtilesScoreboardActivity" />
         <activity android:name="slidingtiles.GameChoiceActivity" />
     </application>
 

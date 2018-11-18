@@ -50,9 +50,9 @@ public class GameActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadFromFile(StartingActivity.tempSaveFileName);
+        loadFromFile(SlidingtilesStartingActivity.tempSaveFileName);
         createTileButtons(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_slidingtiles_main);
         Button undoButton = findViewById(R.id.Undo);
 
 
@@ -128,8 +128,8 @@ public class GameActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(StartingActivity.tempSaveFileName);
-        saveToFile(StartingActivity.autoSaveFileName);
+        saveToFile(SlidingtilesStartingActivity.tempSaveFileName);
+        saveToFile(SlidingtilesStartingActivity.autoSaveFileName);
     }
 
     /**
@@ -174,11 +174,11 @@ public class GameActivity extends AppCompatActivity implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         display();
-        saveToFile(StartingActivity.autoSaveFileName);
+        saveToFile(SlidingtilesStartingActivity.autoSaveFileName);
     }
 
     private void switchToScoreBoardActivity() {
-        Intent tmp = new Intent(this, ScoreboardActivity.class);
+        Intent tmp = new Intent(this, SlidingtilesScoreboardActivity.class);
         startActivity(tmp);
     }
 

@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Locale;
 
+import gamecentre.Scoreboard;
+
 /**
- * Manage the scores for users and games.
+ * Manage the scores for user and games.
  */
-public class Scoreboard implements Serializable {
+public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     /**
      * Size of scoreboard (ie. how many top scores are stored and displayed).
@@ -17,12 +19,12 @@ public class Scoreboard implements Serializable {
     /**
      * An ordered list with the highest score as first item.
      */
-    private Score[] scoreList = new Score[LENGTH];
+    private SlidingtilesScore[] scoreList = new SlidingtilesScore[LENGTH];
 
     /**
      * A map of username to high scores.
      */
-    private HashMap<String, Score> userToBestScore = new HashMap<>();
+    private HashMap<String, SlidingtilesScore> userToBestScore = new HashMap<>();
 
     private static String user;
     private static int numMoves;
@@ -34,7 +36,7 @@ public class Scoreboard implements Serializable {
      * @param user the user
      */
     static void setUser(String user) {
-        Scoreboard.user = user;
+        SlidingtilesScoreboard.user = user;
     }
 
     /**
@@ -43,7 +45,7 @@ public class Scoreboard implements Serializable {
      * @param numMoves the number of moves
      */
     static void setNumMoves(int numMoves) {
-        Scoreboard.numMoves = numMoves;
+        SlidingtilesScoreboard.numMoves = numMoves;
     }
 
     /**
@@ -52,7 +54,7 @@ public class Scoreboard implements Serializable {
      * @param boardSize the size of the board
      */
     static void setBoardSize(int boardSize) {
-        Scoreboard.boardSize = boardSize;
+        SlidingtilesScoreboard.boardSize = boardSize;
     }
 
     /**
@@ -76,10 +78,10 @@ public class Scoreboard implements Serializable {
      * @return A string representation of the user's current score
      */
     String getUserCurrentScore() {
-        if (ScoreboardActivity.scores == null) {
+        if (SlidingtilesScoreboardActivity.scores == null) {
             return "Your Score: None";
         } else {
-            return String.format(Locale.getDefault(), "Your Score: %d", ScoreboardActivity.scores.getPoints());
+            return String.format(Locale.getDefault(), "Your Score: %d", SlidingtilesScoreboardActivity.scores.getPoints());
         }
     }
 
@@ -104,11 +106,11 @@ public class Scoreboard implements Serializable {
      *
      * @param newScore the newest score
      */
-    private void updateGameHighScore(Score newScore) {
+    private void updateGameHighScore(SlidingtilesScore newScore) {
 
         for (int i = LENGTH - 1; i >= 0; i--) {
             if (scoreList[i] == null || newScore.compareTo(scoreList[i]) < 0) {
-                Score current = scoreList[i];
+                SlidingtilesScore current = scoreList[i];
                 scoreList[i] = newScore;
                 if (i < LENGTH - 1) {
                     scoreList[i + 1] = current;
@@ -123,7 +125,7 @@ public class Scoreboard implements Serializable {
      *
      * @param newScore the newest score
      */
-    private void updateUserHighScore(Score newScore) {
+    private void updateUserHighScore(SlidingtilesScore newScore) {
         String username = newScore.getUsername();
         if ((userToBestScore.get(username) == null) ||
                 (userToBestScore.get(username).compareTo(newScore) > 0)) {
@@ -137,9 +139,9 @@ public class Scoreboard implements Serializable {
     void update() {
         if (boardSize != 0) {
             int points = numMoves / boardSize;
-            ScoreboardActivity.scores = new Score(user, points);
-            updateGameHighScore(ScoreboardActivity.scores);
-            updateUserHighScore(ScoreboardActivity.scores);
+            SlidingtilesScoreboardActivity.scores = new SlidingtilesScore(user, points);
+            updateGameHighScore(SlidingtilesScoreboardActivity.scores);
+            updateUserHighScore(SlidingtilesScoreboardActivity.scores);
         }
     }
 }

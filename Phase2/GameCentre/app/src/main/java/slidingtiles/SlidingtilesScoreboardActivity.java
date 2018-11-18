@@ -18,13 +18,13 @@ import java.io.ObjectOutputStream;
  * Manage the scoreBoard layout during the game and save the current scoreBoard.
  */
 
-public class ScoreboardActivity extends AppCompatActivity {
+public class SlidingtilesScoreboardActivity extends AppCompatActivity {
 
     TextView scoreBoard;
-    static String users;
+    public static String user;
     public static final String SCORE_FILENAME = "scoreboard_file.ser";
-    public Scoreboard scoreboard;
-    static Score scores;
+    public SlidingtilesScoreboard scoreboard;
+    static SlidingtilesScore scores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class ScoreboardActivity extends AppCompatActivity {
         scoreBoard = findViewById(R.id.s_b);
         loadFromFile(SCORE_FILENAME);
         if (scoreboard == null) {
-            scoreboard = new Scoreboard();
+            scoreboard = new SlidingtilesScoreboard();
         }
         scoreboard.update();
         saveToFile(SCORE_FILENAME);
@@ -53,7 +53,7 @@ public class ScoreboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent in = new Intent(this, StartingActivity.class);
+        Intent in = new Intent(this, SlidingtilesStartingActivity.class);
         startActivity(in);
         finish();
     }
@@ -73,7 +73,7 @@ public class ScoreboardActivity extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                scoreboard = (Scoreboard) input.readObject();
+                scoreboard = (SlidingtilesScoreboard) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -134,8 +134,7 @@ public class ScoreboardActivity extends AppCompatActivity {
      * Display the game's starting activity.
      */
     private void switchToSlidingTilesActivity() {
-        Intent tmp = new Intent(this, StartingActivity.class);
+        Intent tmp = new Intent(this, SlidingtilesStartingActivity.class);
         startActivity(tmp);
     }
 }
-

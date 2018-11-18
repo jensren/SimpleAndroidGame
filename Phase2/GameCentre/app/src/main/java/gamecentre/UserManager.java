@@ -1,19 +1,19 @@
-package slidingtiles;
+package gamecentre;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
 /**
- * Manage user.
+ * Manage users.
  */
 class UserManager implements Serializable {
     /**
-     * HashMap of user, with key username and value password
+     * HashMap of users, with key username and value password
      */
     private HashMap<String, String> users = new HashMap<>();
 
     /**
-     * Adds a user with username and password to user
+     * Adds a user with username and password to users
      *
      * @param username the user's username
      * @param password the user's password

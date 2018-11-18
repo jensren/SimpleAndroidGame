@@ -1,4 +1,4 @@
-package slidingtiles;
+package gamecentre;
 
 
 import android.content.Intent;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import slidingtiles.R;
+import slidingtiles.SlidingtilesStartingActivity;
 
 /**
  * The activity for choosing a game.

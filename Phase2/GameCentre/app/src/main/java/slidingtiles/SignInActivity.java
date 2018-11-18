@@ -21,7 +21,7 @@ import java.io.ObjectOutputStream;
 public class SignInActivity extends AppCompatActivity {
 
     /**
-     * The filename to save users to.
+     * The filename to save user to.
      */
     public static final String USER_FILENAME = "user_file.ser";
 
@@ -53,11 +53,11 @@ public class SignInActivity extends AppCompatActivity {
         if (userManager.getPassword(username) == null) {
             Toast.makeText(this, "Username does not exist", Toast.LENGTH_LONG).show();
         } else if (userManager.getPassword(username).equals(password)) {
-            StartingActivity.saveFileName = username + ".ser";
-            StartingActivity.autoSaveFileName = username + "_autosave.ser";
-            StartingActivity.tempSaveFileName = username + "_tmp.ser";
+            SlidingtilesStartingActivity.saveFileName = username + ".ser";
+            SlidingtilesStartingActivity.autoSaveFileName = username + "_autosave.ser";
+            SlidingtilesStartingActivity.tempSaveFileName = username + "_tmp.ser";
             saveToFile(USER_FILENAME);
-            ScoreboardActivity.users = username;
+            SlidingtilesScoreboardActivity.user = username;
             switchToGameChoiceActivity();
         } else {
             Toast.makeText(this, "Invalid password", Toast.LENGTH_LONG).show();

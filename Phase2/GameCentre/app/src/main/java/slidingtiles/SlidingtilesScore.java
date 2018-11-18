@@ -5,10 +5,12 @@ import android.support.annotation.NonNull;
 import java.io.Serializable;
 import java.util.Locale;
 
+import gamecentre.Score;
+
 /**
  * Keep track of the user's score by their username.
  */
-public class Score implements Comparable<Score>, Serializable {
+public class SlidingtilesScore extends Score implements Comparable<SlidingtilesScore>, Serializable {
     /**
      * The user.
      */
@@ -25,7 +27,7 @@ public class Score implements Comparable<Score>, Serializable {
      * @param username The user's username
      * @param points   The points of this user
      */
-    Score(String username, int points) {
+    SlidingtilesScore(String username, int points) {
         this.username = username;
         this.points = points;
     }
@@ -55,7 +57,7 @@ public class Score implements Comparable<Score>, Serializable {
      * @return This scores points minus the other scores points
      */
     @Override
-    public int compareTo(@NonNull Score other) {
+    public int compareTo(@NonNull SlidingtilesScore other) {
         return this.points - other.points;
     }
 

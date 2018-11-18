@@ -18,7 +18,7 @@ import java.io.ObjectOutputStream;
 /**
  * The initial activity for the sliding puzzle tile game.
  */
-public class StartingActivity extends AppCompatActivity {
+public class SlidingtilesStartingActivity extends AppCompatActivity {
 
     /**
      * The main save file.
@@ -141,7 +141,7 @@ public class StartingActivity extends AppCompatActivity {
      * Switch to the score board activity.
      */
     private void switchToScoreBoard() {
-        Intent m = new Intent(this, ScoreboardActivity.class);
+        Intent m = new Intent(this, SlidingtilesScoreboardActivity.class);
         startActivity(m);
     }
 
@@ -150,7 +150,7 @@ public class StartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity.class);
-        saveToFile(StartingActivity.tempSaveFileName);
+        saveToFile(SlidingtilesStartingActivity.tempSaveFileName);
         startActivity(tmp);
     }
 
