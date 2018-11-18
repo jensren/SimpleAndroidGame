@@ -7,10 +7,8 @@ public abstract class Scoreboard {
     /**
      * Size of scoreboard (ie. how many top scores are stored and displayed).
      */
-    private static final int LENGTH = 10;
-    private static String user;
-    private static int numMoves;
-    private static int boardSize;
+    protected static final int LENGTH = 10;
+
     /**
      * An ordered list with the highest score as first item.
      */
@@ -21,45 +19,18 @@ public abstract class Scoreboard {
     private HashMap<String, Score> userToBestScore = new HashMap<>();
 
     /**
-     * Set the user.
-     *
-     * @param user the user
-     */
-    public static void setUser(String user) {
-        Scoreboard.user = user;
-    }
-
-    /**
-     * Set the number of moves to numMoves.
-     *
-     * @param numMoves the number of moves
-     */
-    public static void setNumMoves(int numMoves) {
-        Scoreboard.numMoves = numMoves;
-    }
-
-    /**
-     * Set the size of the board to boardSize.
-     *
-     * @param boardSize the size of the board
-     */
-    public static void setBoardSize(int boardSize) {
-        Scoreboard.boardSize = boardSize;
-    }
-
-    /**
      * Gets the user's best score
      *
+     * @param user The user
      * @return A string representation of the user's best score
      */
-    public String getUserBestScore() {
+    protected String getUserBestScore(String user) {
         if (userToBestScore.get(user) == null) {
             return "Best Score: None";
         } else {
             return String.format(Locale.getDefault(), "Best Score: %d",
                     userToBestScore.get(user).getPoints());
         }
-
     }
 
     /**

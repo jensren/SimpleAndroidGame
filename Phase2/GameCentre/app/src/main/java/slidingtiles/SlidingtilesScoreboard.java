@@ -12,11 +12,6 @@ import gamecentre.Scoreboard;
 public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     /**
-     * Size of scoreboard (ie. how many top scores are stored and displayed).
-     */
-    private static final int LENGTH = 10;
-
-    /**
      * An ordered list with the highest score as first item.
      */
     private SlidingtilesScore[] scoreList = new SlidingtilesScore[LENGTH];
@@ -34,14 +29,21 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
         SlidingtilesScoreboard.user = user;
     }
 
-    public static void setNumMoves(int numMoves) {
+    static void setNumMoves(int numMoves) {
         SlidingtilesScoreboard.numMoves = numMoves;
     }
 
-    public static void setBoardSize(int boardSize) {
+    static void setBoardSize(int boardSize) {
         SlidingtilesScoreboard.boardSize = boardSize;
     }
 
+    public String toString() {
+        return super.toString();
+    }
+
+    String getUserBestScore() {
+        return super.getUserBestScore(user);
+    }
 
     @Override
     public String getUserCurrentScore() {
@@ -50,6 +52,14 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
         } else {
             return String.format(Locale.getDefault(), "Your Score: %d", SlidingtilesScoreboardActivity.scores.getPoints());
         }
+    }
+
+    private void updateGameHighScore(SlidingtilesScore newScore) {
+        super.updateGameHighScore(newScore);
+    }
+
+    private void updateUserHighScore(SlidingtilesScore newScore) {
+        super.updateUserHighScore(newScore);
     }
 
     @Override
