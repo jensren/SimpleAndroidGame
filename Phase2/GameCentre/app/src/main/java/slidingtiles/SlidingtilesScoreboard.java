@@ -7,7 +7,7 @@ import java.util.Locale;
 import gamecentre.Scoreboard;
 
 /**
- * Manage the scores for user and games.
+ * Manage the scores the slidingtiles game.
  */
 public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
