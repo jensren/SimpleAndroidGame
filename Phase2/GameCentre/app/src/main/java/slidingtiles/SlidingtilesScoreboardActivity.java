@@ -37,18 +37,10 @@ public class SlidingtilesScoreboardActivity extends AppCompatActivity {
         }
         scoreboard.update();
         saveToFile(SCORE_FILENAME);
-        printScoreboard();
+        scoreBoard.setText(scoreboard.toString());
         displayScore();
         displayBestScore();
         addMainButtonListener();
-    }
-
-    /**
-     * Prints out the scoreboard on the scoreboard screen for user to view.
-     */
-    private void printScoreboard() {
-        String s = "SCORE BOARD\n\n" + scoreboard.toString();
-        scoreBoard.setText(s);
     }
 
     @Override
