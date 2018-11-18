@@ -21,15 +21,15 @@ public class MatchingStartingActivity extends AppCompatActivity {
     /**
      * The main save file.
      */
-    public static String matchingSaveFileName;
+    public static String matchingSaveFileName = "matching_save.ser";
     /**
      * A temporary save file.
      */
-    public static String matchingTempSaveFileName;
+    public static String matchingTempSaveFileName = "matching_temp.ser";
     /**
      * The auto saved file.
      */
-    public static String matchingAutoSaveFileName;
+    public static String matchingAutoSaveFileName = "matching_auto.ser";
     /**
      * The board manager.
      */
@@ -51,7 +51,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
      * Activate the start button.
      */
     private void addStartButtonListener() {
-        Button startButton = findViewById(R.id.StartButton);
+        Button startButton = findViewById(R.id.MatchingGameStartButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
      * Activate the load button.
      */
     private void addLoadButtonListener() {
-        Button loadButton = findViewById(R.id.LoadButton);
+        Button loadButton = findViewById(R.id.MatchingGameLoadButton);
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +87,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
      * Activate the save button.
      */
     private void addSaveButtonListener() {
-        Button saveButton = findViewById(R.id.SaveButton);
+        Button saveButton = findViewById(R.id.MatchingGameSaveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,7 +161,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            matchingBoardManager = new MatchingBoardManager();
+            outputStream.writeObject(matchingBoardManager);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());

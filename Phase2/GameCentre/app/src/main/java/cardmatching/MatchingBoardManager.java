@@ -1,10 +1,11 @@
 package cardmatching;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MatchingBoardManager {
+public class MatchingBoardManager implements Serializable {
     /**
      * The board being managed.
      */
