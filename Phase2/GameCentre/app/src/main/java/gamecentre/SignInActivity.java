@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import slidingtiles.GameChoiceActivity;
 import slidingtiles.R;
 import slidingtiles.SlidingtilesScoreboardActivity;
 import slidingtiles.SlidingtilesStartingActivity;
