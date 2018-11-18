@@ -10,12 +10,12 @@ public class MatchingBoard extends Observable implements Serializable {
     /**
      * The number of rows.
      */
-    private final static int numRows = 4;
+    final static int numRows = 4;
 
     /**
      * The number of rows.
      */
-    private final static int numCols = 4;
+    final static int numCols = 4;
 
     /**
      * The question mark cards.

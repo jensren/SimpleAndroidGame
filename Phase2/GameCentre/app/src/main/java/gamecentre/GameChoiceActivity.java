@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import cardmatching.MatchingStartingActivity;
 import slidingtiles.R;
 import slidingtiles.SlidingtilesStartingActivity;
 
@@ -21,6 +22,28 @@ public class GameChoiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gamechoice);
 
         addSlidingTilesButtonListener();
+        addCardMatchingButtonListener();
+    }
+
+    /**
+     * Add a Card Matching game button.
+     */
+    private void addCardMatchingButtonListener() {
+        Button cardMatchingButton = findViewById(R.id.cardmatching);
+        cardMatchingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToCardMatchingActivity();
+            }
+        });
+    }
+
+    /**
+     * Switch to and display the card Matching starting activity.
+     */
+    private void switchToCardMatchingActivity() {
+        Intent tmp = new Intent(this, MatchingStartingActivity.class);
+        startActivity(tmp);
     }
 
     /**
