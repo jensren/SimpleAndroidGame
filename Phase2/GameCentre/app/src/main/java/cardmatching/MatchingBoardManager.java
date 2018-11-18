@@ -45,4 +45,10 @@ public class MatchingBoardManager {
         this.board = new MatchingBoard(tiles);
     }
 
+    boolean isValidTap(int position) {
+        int row = position / MatchingBoard.numCols;
+        int col = position % MatchingBoard.numCols;
+        int blankId = board.numTiles() + 2;
+        return board.getTile(row, col).getId() != blankId;
+    }
 }
