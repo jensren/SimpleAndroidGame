@@ -22,6 +22,7 @@
         <activity android:name="slidingtiles.SlidingtilesScoreboardActivity" />
         <activity android:name="gamecentre.GameChoiceActivity" />
         <activity android:name="battlegame.BattleScoreboardActivity" />
+        <activity android:name="cardmatching.MatchingStartingActivity" />
     </application>
 
 </manifest>
