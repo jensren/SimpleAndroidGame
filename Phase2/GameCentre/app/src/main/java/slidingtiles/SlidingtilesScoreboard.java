@@ -28,19 +28,6 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     private static String user;
     private static int numMoves;
-
-    public static void setUser(String user) {
-        SlidingtilesScoreboard.user = user;
-    }
-
-    public static void setNumMoves(int numMoves) {
-        SlidingtilesScoreboard.numMoves = numMoves;
-    }
-
-    public static void setBoardSize(int boardSize) {
-        SlidingtilesScoreboard.boardSize = boardSize;
-    }
-
     private static int boardSize;
 
     @Override
