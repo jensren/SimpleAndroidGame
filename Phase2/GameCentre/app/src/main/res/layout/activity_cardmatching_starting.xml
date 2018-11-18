@@ -34,7 +34,7 @@
         android:layout_below="@+id/GameText"
         android:layout_marginTop="242dp"
         android:layout_marginEnd="-127dp"
-        android:layout_toStartOf="@+id/StartButton"
+        android:layout_toStartOf="@+id/MatchingGameStartButton"
         android:text="Load Saved Game" />
 
     <Button
@@ -44,7 +44,7 @@
         android:layout_below="@+id/GameText"
         android:layout_marginStart="-98dp"
         android:layout_marginTop="151dp"
-        android:layout_toEndOf="@+id/StartButton"
+        android:layout_toEndOf="@+id/MatchingGameStartButton"
         android:text="Save Game" />
 
 
