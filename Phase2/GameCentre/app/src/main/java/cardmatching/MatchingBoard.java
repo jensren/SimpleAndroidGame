@@ -61,6 +61,19 @@ public class MatchingBoard extends Observable implements Serializable {
         return tiles[row][col];
     }
 
+    public void flipTile(int row, int col){
+        unknownTiles[row][col] = tiles[row][col];
+    }
+
+    public void flipBack(int row, int col){
+        unknownTiles[row][col] = new MatchingTile(16);
+    }
+
+    public void flipBlank(int[] flippedTiles){
+        unknownTiles[flippedTiles[0]][flippedTiles[1]] = new MatchingTile(17);
+        unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17);
+    }
+
     @Override
     public String toString() {
         return "Board{" +
