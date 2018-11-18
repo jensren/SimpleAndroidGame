@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fall2018.csc2017.slidingtiles.StartingActivity">
+
+    <TextView
+        android:id="@+id/GameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="153dp"
+        android:gravity="center"
+        android:text="Welcome To Card Matching Memory Game"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <Button
+        android:id="@+id/StartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/GameText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:text="New Game" />
+
+    <Button
+        android:id="@+id/LoadButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/GameText"
+        android:layout_marginTop="242dp"
+        android:layout_marginEnd="-127dp"
+        android:layout_toStartOf="@+id/StartButton"
+        android:text="Load Saved Game" />
+
+    <Button
+        android:id="@+id/SaveButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/GameText"
+        android:layout_marginStart="-98dp"
+        android:layout_marginTop="151dp"
+        android:layout_toEndOf="@+id/StartButton"
+        android:text="Save Game" />
+
+
+</RelativeLayout>
