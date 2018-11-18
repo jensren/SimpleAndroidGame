@@ -12,15 +12,8 @@ import gamecentre.Scoreboard;
 public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     /**
-     * An ordered list with the highest score as first item.
+     * The current user, number of moves, and board size
      */
-    private SlidingtilesScore[] scoreList = new SlidingtilesScore[LENGTH];
-
-    /**
-     * A map of username to high scores.
-     */
-    private HashMap<String, SlidingtilesScore> userToBestScore = new HashMap<>();
-
     private static String user;
     private static int numMoves;
     private static int boardSize;
@@ -35,10 +28,6 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     static void setBoardSize(int boardSize) {
         SlidingtilesScoreboard.boardSize = boardSize;
-    }
-
-    public String toString() {
-        return super.toString();
     }
 
     String getUserBestScore() {

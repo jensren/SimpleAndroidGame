@@ -1,13 +1,14 @@
 package gamecentre;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Locale;
 
-public abstract class Scoreboard {
+public abstract class Scoreboard implements Serializable {
     /**
      * Size of scoreboard (ie. how many top scores are stored and displayed).
      */
-    protected static final int LENGTH = 10;
+    private static final int LENGTH = 10;
 
     /**
      * An ordered list with the highest score as first item.
