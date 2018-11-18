@@ -24,7 +24,7 @@ public class SlidingtilesScoreboardActivity extends AppCompatActivity {
     public static String user;
     public static final String SCORE_FILENAME = "slidingtiles_scoreboard_file.ser";
     SlidingtilesScoreboard scoreboard;
-    static SlidingtilesScore scores;
+    static SlidingtilesScore score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

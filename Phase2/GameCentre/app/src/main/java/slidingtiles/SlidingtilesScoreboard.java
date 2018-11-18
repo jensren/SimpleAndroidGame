@@ -36,10 +36,10 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     @Override
     public String getUserCurrentScore() {
-        if (SlidingtilesScoreboardActivity.scores == null) {
+        if (SlidingtilesScoreboardActivity.score == null) {
             return "Your Score: None";
         } else {
-            return String.format(Locale.getDefault(), "Your Score: %d", SlidingtilesScoreboardActivity.scores.getPoints());
+            return String.format(Locale.getDefault(), "Your Score: %d", SlidingtilesScoreboardActivity.score.getPoints());
         }
     }
 
@@ -55,9 +55,9 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
     public void update() {
         if (boardSize != 0) {
             int points = numMoves / boardSize;
-            SlidingtilesScoreboardActivity.scores = new SlidingtilesScore(user, points);
-            updateGameHighScore(SlidingtilesScoreboardActivity.scores);
-            updateUserHighScore(SlidingtilesScoreboardActivity.scores);
+            SlidingtilesScoreboardActivity.score = new SlidingtilesScore(user, points);
+            updateGameHighScore(SlidingtilesScoreboardActivity.score);
+            updateUserHighScore(SlidingtilesScoreboardActivity.score);
         }
     }
 }
