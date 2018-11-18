@@ -109,6 +109,8 @@ public class MatchingTile implements Comparable<MatchingTile>, Serializable {
                 break;
             case 17:
                 background = R.drawable.card_unknown;
+            case 18:
+                background = R.drawable.tile_25;
         }
     }
     @Override
