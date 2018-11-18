@@ -22,7 +22,7 @@ public class SlidingtilesScoreboardActivity extends AppCompatActivity {
 
     TextView scoreBoard;
     public static String user;
-    public static final String SCORE_FILENAME = "scoreboard_file.ser";
+    public static final String SCORE_FILENAME = "slidingtiles_scoreboard_file.ser";
     SlidingtilesScoreboard scoreboard;
     static SlidingtilesScore scores;
 
