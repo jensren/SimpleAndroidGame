@@ -10,12 +10,12 @@ public class MatchingBoard extends Observable implements Serializable {
     /**
      * The number of rows.
      */
-    final static int numRows = 4;
+    private final static int numRows = 4;
 
     /**
      * The number of rows.
      */
-    final static int numCols = 4;
+    private final static int numCols = 4;
 
     /**
      * The question mark cards.
@@ -29,7 +29,7 @@ public class MatchingBoard extends Observable implements Serializable {
 
     /**
      * Creates two "boards" of tiles. One of all unknown tiles. One of the tile images.
-     * @param tiles
+     * @param tiles the tiles of actual card images for the board.
      */
     MatchingBoard(List<MatchingTile> tiles) {
         Iterator<MatchingTile> iter = tiles.iterator();
