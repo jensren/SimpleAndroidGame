@@ -37,9 +37,16 @@ public abstract class Scoreboard implements Serializable {
     /**
      * Gets the user's current score
      *
+     * @param activityScore The user's current score, from the ScoreboardActivity
      * @return A string representation of the user's current score
      */
-    protected abstract String getUserCurrentScore();
+    protected String getUserCurrentScore(Score activityScore) {
+        if (activityScore == null) {
+            return "Your Score: None";
+        } else {
+            return String.format(Locale.getDefault(), "Your Score: %d", activityScore.getPoints());
+        }
+    }
 
     @Override
     public String toString() {

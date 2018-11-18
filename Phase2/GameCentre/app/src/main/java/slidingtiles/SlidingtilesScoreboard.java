@@ -34,13 +34,8 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
         return super.getUserBestScore(user);
     }
 
-    @Override
-    public String getUserCurrentScore() {
-        if (SlidingtilesScoreboardActivity.score == null) {
-            return "Your Score: None";
-        } else {
-            return String.format(Locale.getDefault(), "Your Score: %d", SlidingtilesScoreboardActivity.score.getPoints());
-        }
+    String getUserCurrentScore() {
+        return super.getUserCurrentScore(SlidingtilesScoreboardActivity.score);
     }
 
     private void updateGameHighScore(SlidingtilesScore newScore) {
