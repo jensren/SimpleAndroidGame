@@ -84,28 +84,28 @@ public class MatchingTile implements Comparable<MatchingTile>, Serializable {
                 background = R.drawable.card_8;
                 break;
             case 9:
-                background = R.drawable.card_11;
+                background = R.drawable.card_1;
                 break;
             case 10:
-                background = R.drawable.card_22;
+                background = R.drawable.card_2;
                 break;
             case 11:
-                background = R.drawable.card_33;
+                background = R.drawable.card_3;
                 break;
             case 12:
-                background = R.drawable.card_44;
+                background = R.drawable.card_4;
                 break;
             case 13:
-                background = R.drawable.card_55;
+                background = R.drawable.card_5;
                 break;
             case 14:
-                background = R.drawable.card_66;
+                background = R.drawable.card_6;
                 break;
             case 15:
-                background = R.drawable.card_77;
+                background = R.drawable.card_7;
                 break;
             case 16:
-                background = R.drawable.card_88;
+                background = R.drawable.card_8;
                 break;
             case 17:
                 background = R.drawable.card_unknown;

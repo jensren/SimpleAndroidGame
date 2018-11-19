@@ -93,13 +93,17 @@ public class MatchingBoardManager implements Serializable {
             } else {
                 board.flipBack(flippedTiles[0],flippedTiles[1]);
                 board.flipBack(flippedTiles[2],flippedTiles[3]);
-                }
                 flippedTiles = new int[4];
                 tilesCurrentlyFlipped = 0;
+                board.flipTile(row,col);
+                flippedTiles[0] = row;
+                flippedTiles[1] = col;
+                tilesCurrentlyFlipped++;
+                }
             }
         }
     private void checkMatching(){
-        if(board.tiles[flippedTiles[0]][flippedTiles[1]] == board.tiles[flippedTiles[2]][flippedTiles[3]]){
+        if(board.tiles[flippedTiles[0]][flippedTiles[1]].getBackground() == board.tiles[flippedTiles[2]][flippedTiles[3]].getBackground()){
             board.flipBlank(flippedTiles);
         }
     }
