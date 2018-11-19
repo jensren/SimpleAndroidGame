@@ -1,7 +1,6 @@
 package cardmatching;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -51,7 +50,7 @@ public class MatchingGameActivity extends AppCompatActivity implements Observer{
         setContentView(R.layout.activity_cardmatching_main);
 
         // Add View to activity
-        gridView = findViewById(R.id.grid);
+        gridView = findViewById(R.id.matching_grid);
         gridView.setNumColumns(MatchingBoard.numCols);
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().addObserver(this);
