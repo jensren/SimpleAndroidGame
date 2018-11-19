@@ -61,51 +61,67 @@ public class MatchingTile implements Comparable<MatchingTile>, Serializable {
         switch (backgroundId + 1) {
             case 1:
                 background = R.drawable.card_1;
+                id = 1;
                 break;
             case 2:
                 background = R.drawable.card_2;
+                id = 2;
                 break;
             case 3:
                 background = R.drawable.card_3;
+                id = 3;
                 break;
             case 4:
                 background = R.drawable.card_4;
+                id = 4;
                 break;
             case 5:
                 background = R.drawable.card_5;
+                id = 5;
                 break;
             case 6:
                 background = R.drawable.card_6;
+                id = 6;
                 break;
             case 7:
                 background = R.drawable.card_7;
+                id = 7;
                 break;
             case 8:
                 background = R.drawable.card_8;
+                id = 8;
                 break;
             case 9:
-                background = R.drawable.card_11;
+                background = R.drawable.card_1;
+                id = 1;
                 break;
             case 10:
-                background = R.drawable.card_22;
+                background = R.drawable.card_2;
+                id = 2;
                 break;
             case 11:
-                background = R.drawable.card_33;
+                background = R.drawable.card_3;
+                id = 3;
                 break;
             case 12:
-                background = R.drawable.card_44;
+                background = R.drawable.card_4;
+                id = 4;
                 break;
             case 13:
-                background = R.drawable.card_55;
+                background = R.drawable.card_5;
+                id = 5;
                 break;
             case 14:
-                background = R.drawable.card_66;
+                background = R.drawable.card_6;
+                id = 6;
                 break;
             case 15:
-                background = R.drawable.card_77;
+                background = R.drawable.card_7;
+                id = 7;
                 break;
             case 16:
-                background = R.drawable.card_88;
+                background = R.drawable.card_8;
+                id = 8;
                 break;
             case 17:
                 background = R.drawable.card_unknown;
