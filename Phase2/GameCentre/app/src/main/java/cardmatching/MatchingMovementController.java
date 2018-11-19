@@ -44,7 +44,7 @@ class MatchingMovementController extends Observable {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 MatchingScoreBoard.setUser(MatchingScoreBoardActivity.user);
                 MatchingScoreBoard.setNumMoves(boardManager.getNumMoves());
-                MatchingScoreBoard.setBoardSize(boardManager.getBoardSize());
+               // MatchingScoreBoard.setBoardSize(boardManager.getBoardSize());
                 setChanged();
                 notifyObservers();
             }

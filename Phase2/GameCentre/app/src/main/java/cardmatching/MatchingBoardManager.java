@@ -69,9 +69,9 @@ public class MatchingBoardManager implements Serializable {
     }
 
     boolean isWin() {
-        for (int row = 0; row <= 4; row++){
-            for (int col = 0; col <= 4; col++){
-                if (board.tiles[row][col].compareTo(new MatchingTile(17, R.drawable.tile_25))!=0){
+        for (int row = 0; row <= 3; row++){
+            for (int col = 0; col <= 3; col++){
+                if (board.unknownTiles[row][col].compareTo(new MatchingTile(17, R.drawable.tile_25))!=0){
                     return false;
                 }
             }
@@ -93,10 +93,10 @@ public class MatchingBoardManager implements Serializable {
                 board.flipTile(row,col);
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
-               // checkMatching();
+                checkMatching();
                 tilesCurrentlyFlipped++;
             } else {
-                checkMatching();
+                //checkMatching();
                 flippedTiles = new int[4];
                 tilesCurrentlyFlipped = 0;
                 board.flipTile(row,col);
