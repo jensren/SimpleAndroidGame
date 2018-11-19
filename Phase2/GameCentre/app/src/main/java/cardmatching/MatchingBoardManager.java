@@ -61,6 +61,9 @@ public class MatchingBoardManager implements Serializable {
     boolean isValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
+        if (board.tiles[flippedTiles[0]][flippedTiles[1]] == board.tiles[row][col]){
+            return false;
+        }
         int blankId = 17;
         return board.getTile(row, col).getId() != blankId;
     }
