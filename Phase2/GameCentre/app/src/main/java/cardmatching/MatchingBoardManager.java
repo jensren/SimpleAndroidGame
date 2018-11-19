@@ -19,7 +19,6 @@ public class MatchingBoardManager implements Serializable {
      * Keeps track of number of cards flipped. Up to 2.
      */
     private int tilesCurrentlyFlipped = 0;
-
     /**
      * Keeps track of the row and col indices of the two flipped tiles.
      */
@@ -59,7 +58,7 @@ public class MatchingBoardManager implements Serializable {
         Collections.shuffle(tiles);
         this.board = new MatchingBoard(tiles);
     }
-
+    //TODO: Bug: Clicking the top left tile first always results in invalid tap.
     boolean isValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
@@ -80,7 +79,7 @@ public class MatchingBoardManager implements Serializable {
         }
         return true;
     }
-
+    //TODO: Bug:If player clicks something during the 0.5s time window it breaks things.
     void touchMove(int position){
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
@@ -95,12 +94,13 @@ public class MatchingBoardManager implements Serializable {
                 board.flipTile(row,col);
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
-                new Handler().postDelayed(new Runnable() {   //Waits 1 second and then checks matching and flips over accordingly
+                new Handler().postDelayed(new Runnable() {   //Waits 0.5 second and then checks matching and flips over accordingly
                     @Override
                     public void run() {
                         checkMatching();
                     }
-                }, 1000);
+                }, 500);
+                //checkMatching();
                 tilesCurrentlyFlipped++;
             } else {
                 //checkMatching();
