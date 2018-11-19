@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
+import slidingtiles.R;
+
 public class MatchingBoard extends Observable implements Serializable {
     /**
      * The number of rows.
@@ -37,7 +39,7 @@ public class MatchingBoard extends Observable implements Serializable {
         for (int row = 0; row != MatchingBoard.numRows; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
                 this.tiles[row][col] = iter.next();
-                this.unknownTiles[row][col] = new MatchingTile(16);
+                this.unknownTiles[row][col] = new MatchingTile(16,R.drawable.card_unknown);
             }
         }
     }
@@ -58,7 +60,7 @@ public class MatchingBoard extends Observable implements Serializable {
      * @return the tile at (row, col)
      */
     MatchingTile getTile(int row, int col) {
-        return tiles[row][col];
+        return unknownTiles[row][col];
     }
 
     public void flipTile(int row, int col){
