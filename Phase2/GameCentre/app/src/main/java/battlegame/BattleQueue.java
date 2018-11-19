@@ -1,8 +1,9 @@
 package battlegame;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BattleQueue {
+public class BattleQueue implements Serializable {
 
     private ArrayList<Character> queue = new ArrayList<>();
 
