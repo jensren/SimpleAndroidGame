@@ -1,5 +1,7 @@
 package cardmatching;
 
+import android.os.Handler;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,7 +95,12 @@ public class MatchingBoardManager implements Serializable {
                 board.flipTile(row,col);
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
-                checkMatching();
+                new Handler().postDelayed(new Runnable() {   //Waits 1 second and then checks matching and flips over accordingly
+                    @Override
+                    public void run() {
+                        checkMatching();
+                    }
+                }, 1000);
                 tilesCurrentlyFlipped++;
             } else {
                 //checkMatching();
