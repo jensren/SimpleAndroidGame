@@ -92,4 +92,19 @@ public class MatchingBoardManager implements Serializable {
             board.flipBlank(flippedTiles);
         }
     }
+
+    /**
+     * count the number of total moves made
+     */
+    void updateMoves() {
+        numMoves += 1;
+    }
+
+    /**
+     * @return the highest score
+     */
+
+    int getNumMoves() {
+        return numMoves;
+    }
 }
