@@ -24,6 +24,7 @@
         <activity android:name="battlegame.BattleScoreboardActivity" />
         <activity android:name="cardmatching.MatchingStartingActivity" />
         <activity android:name="cardmatching.MatchingGameActivity" />
+        <activity android:name="cardmatching.MatchingScoreBoardActivity" />
         <activity android:name="battlegame.BattleStartingActivity" />
         <activity android:name="battlegame.BattleGameActivity" />
         <activity android:name="battlegame.CatOrDogActivity" />

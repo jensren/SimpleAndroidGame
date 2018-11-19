@@ -42,9 +42,9 @@ class MatchingMovementController extends Observable {
             boardManager.touchMove(position);
             if (boardManager.isWin()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
-                // SlidingtilesScoreboard.setUser(SlidingtilesScoreboardActivity.user);
-                // SlidingtilesScoreboard.setNumMoves(boardManager.getNumMoves());
-                // SlidingtilesScoreboard.setBoardSize(boardManager.getBoardSize());
+                MatchingScoreBoard.setUser(MatchingScoreBoardActivity.user);
+                MatchingScoreBoard.setNumMoves(boardManager.getNumMoves());
+                MatchingScoreBoard.setBoardSize(boardManager.getBoardSize());
                 setChanged();
                 notifyObservers();
             }
