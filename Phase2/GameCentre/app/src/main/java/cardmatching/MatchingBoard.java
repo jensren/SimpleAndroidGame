@@ -65,15 +65,21 @@ public class MatchingBoard extends Observable implements Serializable {
 
     public void flipTile(int row, int col){
         unknownTiles[row][col] = tiles[row][col];
+        setChanged();
+        notifyObservers();
     }
 
     public void flipBack(int row, int col){
-        unknownTiles[row][col] = new MatchingTile(16);
+        unknownTiles[row][col] = new MatchingTile(16,R.drawable.card_unknown);
+        setChanged();
+        notifyObservers();
     }
 
     public void flipBlank(int[] flippedTiles){
-        unknownTiles[flippedTiles[0]][flippedTiles[1]] = new MatchingTile(17);
-        unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17);
+        unknownTiles[flippedTiles[0]][flippedTiles[1]] = new MatchingTile(17,R.drawable.tile_25);
+        unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17,R.drawable.tile_25);
+        setChanged();
+        notifyObservers();
     }
 
     @Override
