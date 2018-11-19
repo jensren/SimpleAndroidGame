@@ -59,4 +59,36 @@ abstract class Character {
      */
     abstract String getSprite();
 
+    /**
+     * Reduce this character's MP by damage if they have enough MP, else 0.
+     * @param amount
+     */
+    void reduceMp(int amount) {
+        if (mp >= amount) { mp = mp - amount; }
+        else { mp = 0; }
+    }
+
+    /**
+     * Reduce the Hp of this character by damage.
+     * @param damage Amount to reduce HP
+     */
+    void reduceHp(int damage) {
+        Math.abs(hp - damage);
+    }
+
+    /**
+     * Return this character's BattleQueue.
+     * @return Character's Battle Queue
+     */
+    public BattleQueue getBattleQueue() {
+        return battleQueue;
+    }
+
+    /**
+     * Set this character's Battle Queue.
+     * @param battleQueue The Battle Queue this character and its Opponent will use.
+     */
+    public void setBattleQueue(BattleQueue battleQueue) {
+        this.battleQueue = battleQueue;
+    }
 }

@@ -12,6 +12,9 @@ class DruidShibe extends Character {
     private int specialMoveDamage = 13;
     private int regularCost = 5;
     private int specialCost = 10;
+    AttackManager regularAttack = new AttackManager(regularCost, regularMoveDamage);
+    AttackManager specialAttack = new DruidSpecial(specialCost, specialMoveDamage);
+
 
     @Override
     boolean hasAttackMp() {

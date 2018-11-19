@@ -6,6 +6,10 @@ public class BattleQueue {
 
     private ArrayList<Character> queue = new ArrayList<>();
 
+    BattleQueue() {
+
+    }
+
     /**
      * Add a character to the end of the battle queue.
      *
@@ -17,15 +21,17 @@ public class BattleQueue {
 
     private void removeInvalidCharacters() {
         while (!getNextCharacter().hasAttackMp()) {
-            remove();
+            removeCharacter();
         }
     }
 
     /**
-     * Remove the next character from the front of the battle queue.
+     * Remove and return the next character from the front of the battle queue.
+     *
+     * @Return The rext character in this Battle Queue
      */
-    private void remove() {
-        queue.remove(0);
+    Character removeCharacter() {
+        return queue.remove(0);
     }
 
     /**
@@ -58,6 +64,15 @@ public class BattleQueue {
     @Override
     public String toString() {
         return "";
+    }
+
+    /**
+     * Return whether or not this Battle Queue is empty.
+     * @return true if this Battle Queue is empty, false otherwise.
+     */
+    boolean isEmpty() {
+        removeInvalidCharacters();
+        return queue.size() == 0;
     }
 
 
