@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import battlegame.BattleStartingActivity;
+import cardmatching.MatchingStartingActivity;
 import slidingtiles.R;
 import slidingtiles.SlidingtilesScoreboardActivity;
 import slidingtiles.SlidingtilesStartingActivity;
@@ -56,15 +58,30 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_LONG).show();
         } else if (userManager.getPassword(username) == null) {
             userManager.addUser(username, password);
-            SlidingtilesStartingActivity.saveFileName = username + ".ser";
-            SlidingtilesStartingActivity.autoSaveFileName = username + "_autosave.ser";
-            SlidingtilesStartingActivity.tempSaveFileName = username + "_tmp.ser";
+            setFileNames(username);
             saveToFile();
             SlidingtilesScoreboardActivity.user = username;
             switchToGameChoiceActivity();
         } else {
             Toast.makeText(this, "Username taken", Toast.LENGTH_LONG).show();
         }
+    }
+
+    /**
+     * Set the filesnames for the user.
+     *
+     * @param username the name of the user.
+     */
+    private void setFileNames(String username) {
+        SlidingtilesStartingActivity.saveFileName = username + "_slidingtiles.ser";
+        SlidingtilesStartingActivity.autoSaveFileName = username + "_slidingtiles_autosave.ser";
+        SlidingtilesStartingActivity.tempSaveFileName = username + "_slidingtiles_tmp.ser";
+        BattleStartingActivity.saveFileName = username + "_battlegame.ser";
+        BattleStartingActivity.autoSaveFileName = username + "_battlegame_autosave.ser";
+        BattleStartingActivity.tempSaveFileName = username + "_battlegame_tmp.ser";
+        MatchingStartingActivity.matchingSaveFileName = username + "_matching.ser";
+        MatchingStartingActivity.matchingAutoSaveFileName = username + "_matching_autosave.ser";
+        MatchingStartingActivity.matchingTempSaveFileName = username + "_matching_tmp.ser";
     }
 
     /**

@@ -23,6 +23,11 @@
         <activity android:name="gamecentre.GameChoiceActivity" />
         <activity android:name="battlegame.BattleScoreboardActivity" />
         <activity android:name="cardmatching.MatchingStartingActivity" />
+        <activity android:name="battlegame.BattleStartingActivity" />
+        <activity android:name="battlegame.BattleGameActivity" />
+        <activity android:name="battlegame.CatOrDogActivity" />
+        <activity android:name="battlegame.DogChoiceActivity" />
+        <activity android:name="battlegame.CatChoiceActivity" />
     </application>
 
 </manifest>

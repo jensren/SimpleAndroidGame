@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import battlegame.BattleStartingActivity;
 import cardmatching.MatchingStartingActivity;
 import slidingtiles.R;
 import slidingtiles.SlidingtilesStartingActivity;
@@ -23,6 +24,29 @@ public class GameChoiceActivity extends AppCompatActivity {
 
         addSlidingTilesButtonListener();
         addCardMatchingButtonListener();
+        addBattleButtonListener();
+    }
+
+    /**
+     * Add a Cats vs Doges game button.
+     */
+    private void addBattleButtonListener() {
+        Button battleButton = findViewById(R.id.battlegame);
+        battleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToBattleStartingActivity();
+
+            }
+        });
+    }
+
+    /**
+     * Switch to the starting activity for the battle game.
+     */
+    private void switchToBattleStartingActivity() {
+        Intent tmp = new Intent(this, BattleStartingActivity.class);
+        startActivity(tmp);
     }
 
     /**
