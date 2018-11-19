@@ -30,6 +30,10 @@ public class BattleScoreboard extends Scoreboard {
         BattleScoreboard.opponentHp = opponentHp;
     }
 
+    String getUserBestScore() {
+        return super.getUserBestScore(user);
+    }
+
     protected String getUserCurrentScore() {
         return super.getUserCurrentScore(BattleScoreboardActivity.score);
     }
