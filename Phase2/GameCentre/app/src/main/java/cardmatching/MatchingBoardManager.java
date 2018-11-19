@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import slidingtiles.R;
+
 public class MatchingBoardManager implements Serializable {
     /**
      * The board being managed.
@@ -59,14 +61,14 @@ public class MatchingBoardManager implements Serializable {
     boolean isValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
-        int blankId = board.numTiles() + 2;
+        int blankId = 17;
         return board.getTile(row, col).getId() != blankId;
     }
 
     boolean isWin() {
-        for (int ro = 0; ro <= 4; ro++){
-            for (int co = 0; co <= 4; co++){
-                if (board.unknownTiles[ro][co] != new MatchingTile(17)){
+        for (int row = 0; row <= 4; row++){
+            for (int col = 0; col <= 4; col++){
+                if (board.tiles[row][col].compareTo(new MatchingTile(17, R.drawable.tile_25))!=0){
                     return false;
                 }
             }
@@ -88,11 +90,10 @@ public class MatchingBoardManager implements Serializable {
                 board.flipTile(row,col);
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
-                checkMatching();
+               // checkMatching();
                 tilesCurrentlyFlipped++;
             } else {
-                board.flipBack(flippedTiles[0],flippedTiles[1]);
-                board.flipBack(flippedTiles[2],flippedTiles[3]);
+                checkMatching();
                 flippedTiles = new int[4];
                 tilesCurrentlyFlipped = 0;
                 board.flipTile(row,col);
@@ -105,6 +106,9 @@ public class MatchingBoardManager implements Serializable {
     private void checkMatching(){
         if(board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]][flippedTiles[3]])==0){
             board.flipBlank(flippedTiles);
+        } else {
+            board.flipBack(flippedTiles[0],flippedTiles[1]);
+            board.flipBack(flippedTiles[2],flippedTiles[3]);
         }
     }
 
