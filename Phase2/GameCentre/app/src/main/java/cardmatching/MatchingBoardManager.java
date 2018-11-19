@@ -19,6 +19,11 @@ public class MatchingBoardManager implements Serializable {
      * Keeps track of number of cards flipped. Up to 2.
      */
     private int tilesCurrentlyFlipped = 0;
+
+    /**
+     * Keeps track of matched tiles.
+     */
+    private int tilesMatched = 0;
     /**
      * Keeps track of the row and col indices of the two flipped tiles.
      */
@@ -55,7 +60,7 @@ public class MatchingBoardManager implements Serializable {
             tiles.add(new MatchingTile(tileNum));
         }
 
-        Collections.shuffle(tiles);
+      //  Collections.shuffle(tiles);
         this.board = new MatchingBoard(tiles);
     }
     //TODO: Bug: Clicking the top left tile first always results in invalid tap.
@@ -70,14 +75,15 @@ public class MatchingBoardManager implements Serializable {
     }
 
     boolean isWin() {
-        for (int row = 0; row <= 3; row++){
-            for (int col = 0; col <= 3; col++){
-                if (board.unknownTiles[row][col].compareTo(new MatchingTile(17, R.drawable.tile_25))!=0){
-                    return false;
-                }
-            }
-        }
-        return true;
+//        for (int row = 0; row <= 3; row++){
+//            for (int col = 0; col <= 3; col++){
+//                if (board.unknownTiles[row][col].compareTo(new MatchingTile(17, R.drawable.tile_25))!=0){
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+        return tilesMatched == 16;
     }
     //TODO: Bug:If player clicks something during the 0.5s time window it breaks things.
     void touchMove(int position){
@@ -116,6 +122,7 @@ public class MatchingBoardManager implements Serializable {
     private void checkMatching(){
         if(board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]][flippedTiles[3]])==0){
             board.flipBlank(flippedTiles);
+            tilesMatched += 2;
         } else {
             board.flipBack(flippedTiles[0],flippedTiles[1]);
             board.flipBack(flippedTiles[2],flippedTiles[3]);
