@@ -85,7 +85,7 @@ public class MatchingBoard extends Observable implements Serializable {
     @Override
     public String toString() {
         return "Board{" +
-                "tiles=" + Arrays.toString(tiles) +
+                "tiles=" + Arrays.toString(unknownTiles) +
                 '}';
     }
 }

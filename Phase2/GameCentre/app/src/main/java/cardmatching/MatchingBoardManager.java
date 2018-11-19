@@ -103,7 +103,7 @@ public class MatchingBoardManager implements Serializable {
             }
         }
     private void checkMatching(){
-        if(board.tiles[flippedTiles[0]][flippedTiles[1]].getBackground() == board.tiles[flippedTiles[2]][flippedTiles[3]].getBackground()){
+        if(board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]][flippedTiles[3]])==0){
             board.flipBlank(flippedTiles);
         }
     }

@@ -54,6 +54,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                matchingBoardManager = new MatchingBoardManager();
                 switchToGame();
             }
         });
