@@ -63,6 +63,17 @@ public class MatchingBoardManager implements Serializable {
         return board.getTile(row, col).getId() != blankId;
     }
 
+    boolean isWin() {
+        for (int ro = 0; ro <= 4; ro++){
+            for (int co = 0; co <= 4; co++){
+                if (board.unknownTiles[ro][co] != new MatchingTile(17)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     void touchMove(int position){
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
