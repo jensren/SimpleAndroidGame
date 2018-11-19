@@ -113,7 +113,7 @@ public class BattleStartingActivity extends AppCompatActivity {
      * Switch to the CatChoiceActivity view.
      */
     private void switchToCatChoiceActivity() {
-        Intent tmp = new Intent(this, CatChoiceActivity.class);
+        Intent tmp = new Intent(this, CatOrDogActivity.class);
         //saveToFile(SlidingtilesStartingActivity.tempSaveFileName);
         startActivity(tmp);
     }

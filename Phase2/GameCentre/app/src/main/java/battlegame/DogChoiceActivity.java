@@ -15,7 +15,7 @@ public class DogChoiceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battlegame_main);
+        setContentView(R.layout.activity_battlegame_dogcharacter);
 
         addDetectiveButtonListener();
         addDruidButtonListener();
