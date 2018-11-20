@@ -9,8 +9,8 @@ public class ShamanCat extends Character {
     private int regularMoveDamage = 7;
     private int specialMoveDamage = 13;
     private int specialMoveCost = 22;
-    AttackManager regularAttack = new AttackManager(0, regularMoveDamage);
-    ShamanSpecial specialAttack = new ShamanSpecial(specialMoveCost, specialMoveDamage);
+//    AttackManager regularAttack = new AttackManager(0, regularMoveDamage);
+//    ShamanSpecial specialAttack = new ShamanSpecial(specialMoveCost, specialMoveDamage);
 
     @Override
     boolean hasAttackMp() {
@@ -19,13 +19,17 @@ public class ShamanCat extends Character {
 
     @Override
     void regularMove() {
-        regularAttack.performAttack(this, this.getOpponent());
+        this.getOpponent().reduceHp(regularMoveDamage);
+        getBattleQueue().add(this);
 
     }
 
     @Override
     void specialMove() {
-        specialAttack.performAttack(this, this.getOpponent());
+        reduceMp(specialMoveCost);
+        getOpponent().reduceHp(specialMoveDamage);
+        increaseHp(specialMoveDamage);
+        getBattleQueue().add(this);
 
     }
 
