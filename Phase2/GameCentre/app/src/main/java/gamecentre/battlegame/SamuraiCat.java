@@ -5,9 +5,6 @@ public class SamuraiCat extends Character {
     private int regularMoveDamage = 6;
     private int specialMoveDamage = 15;
     private int specialMoveCost = 12;
-//    AttackManager regularAttack = new AttackManager(0, regularMoveDamage);
-//    SamuraiSpecial specialAttack = new SamuraiSpecial(specialMoveCost, specialMoveDamage);
-
     @Override
     boolean hasAttackMp() {
         return getHp() >= specialMoveCost;

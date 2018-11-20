@@ -9,8 +9,6 @@ public class SirShibe extends Character {
     private int specialMoveDamage = 13;
     private int regularCost = 6;
     private int specialMoveCost = 12;
-//    public AttackManager regularAttack = new AttackManager(regularCost, regularMoveDamage);
-//    public AttackManager specialAttack = new SirSpecial(specialMoveCost, specialMoveDamage);
 
     @Override
     boolean hasAttackMp() {

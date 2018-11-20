@@ -8,8 +8,6 @@ public class DetectiveShibe extends Character {
     private int regularMoveDamage = 7;
     private int specialMoveDamage = 12;
     private int specialMoveCost = 15;
-//    AttackManager regularAttack = new AttackManager(0, regularMoveDamage);
-//    DetectiveSpecial specialAttack = new DetectiveSpecial(specialMoveCost, specialMoveDamage);
 
     @Override
     boolean hasAttackMp() {
@@ -20,7 +18,7 @@ public class DetectiveShibe extends Character {
     void regularMove() {
         this.getOpponent().reduceHp(regularMoveDamage);
         getBattleQueue().add(this);
-        //regularAttack.performAttack(this, this.getOpponent());
+
     }
 
     @Override

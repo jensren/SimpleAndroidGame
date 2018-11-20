@@ -8,8 +8,6 @@ class NinjaCat extends Character {
     private int specialMoveCost = 9;
     private int specialMoveDamage = 15;
     private int regularMoveDamage = 5;
-//    AttackManager regularAttack = new AttackManager(0, regularMoveDamage);
-//    NinjaSpecial specialAttack = new NinjaSpecial(specialMoveCost, specialMoveDamage);
 
     @Override
     boolean hasAttackMp() {
