@@ -25,9 +25,9 @@ public class MatchingBoardManager implements Serializable {
      */
     private int tilesMatched = 0;
     /**
-     * Keeps track of the row and col indices of the two flipped tiles.
+     * Keeps track of the row and col indices of the two flipped tiles. Initialized as -1.
      */
-    private int[] flippedTiles = new int[4];
+    private int[] flippedTiles = new int[]{-1,-1,-1,-1};
 
     /**
      * Manage a board that has been pre-populated.
@@ -60,15 +60,16 @@ public class MatchingBoardManager implements Serializable {
             tiles.add(new MatchingTile(tileNum));
         }
 
-      //  Collections.shuffle(tiles);
+        Collections.shuffle(tiles);
         this.board = new MatchingBoard(tiles);
     }
-    //TODO: Bug: Clicking the top left tile first always results in invalid tap.
     boolean isValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
-        if (board.tiles[flippedTiles[0]][flippedTiles[1]] == board.tiles[row][col]){
-            return false;
+        if (flippedTiles[0] != -1) {
+            if (board.tiles[flippedTiles[0]][flippedTiles[1]] == board.tiles[row][col]) {  //Checks if you're flipping the same tile twice
+                return false;
+            }
         }
         int blankId = 17;
         return board.getTile(row, col).getId() != blankId;
@@ -104,21 +105,14 @@ public class MatchingBoardManager implements Serializable {
                     @Override
                     public void run() {
                         checkMatching();
+                        tilesCurrentlyFlipped = 0;
+                        flippedTiles = new int[]{-1,-1,-1,-1};
                     }
                 }, 500);
                 //checkMatching();
-                tilesCurrentlyFlipped++;
-            } else {
-                //checkMatching();
-                flippedTiles = new int[4];
-                tilesCurrentlyFlipped = 0;
-                board.flipTile(row,col);
-                flippedTiles[0] = row;
-                flippedTiles[1] = col;
-                tilesCurrentlyFlipped++;
-                }
             }
         }
+    }
     private void checkMatching(){
         if(board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]][flippedTiles[3]])==0){
             board.flipBlank(flippedTiles);
