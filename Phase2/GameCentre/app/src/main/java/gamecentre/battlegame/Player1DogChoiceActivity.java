@@ -11,11 +11,12 @@ import gamecentre.slidingtiles.R;
 /**
  * Activity for choosing the dog to play.
  */
-public class DogChoiceActivity extends AppCompatActivity {
+public class Player1DogChoiceActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battlegame_dogcharacter);
+        setContentView(R.layout.activity_battlegame_yourdogcharacter);
 
         addDetectiveButtonListener();
         addDruidButtonListener();
@@ -31,7 +32,7 @@ public class DogChoiceActivity extends AppCompatActivity {
         sirShibeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToPlayer2CatChoiceActivity();
             }
         });
     }
@@ -44,7 +45,7 @@ public class DogChoiceActivity extends AppCompatActivity {
         detectiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToPlayer2CatChoiceActivity();
             }
         });
     }
@@ -57,16 +58,16 @@ public class DogChoiceActivity extends AppCompatActivity {
         druidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToPlayer2CatChoiceActivity();
             }
         });
     }
 
     /**
-     * Switch to the battle game activity.
+     * Switch to the Player2CatChoiceActivity view.
      */
-    private void switchToGameActivity() {
-        Intent tmp = new Intent(this, BattleGameActivity.class);
+    private void switchToPlayer2CatChoiceActivity() {
+        Intent tmp = new Intent(this, Player2CatChoiceActivity.class);
         startActivity(tmp);
     }
 }

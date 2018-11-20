@@ -11,12 +11,12 @@ import gamecentre.slidingtiles.R;
 /**
  * Activity for choosing the cat to play.
  */
-public class CatChoiceActivity extends AppCompatActivity {
+public class Player1CatChoiceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battlegame_catcharacter);
+        setContentView(R.layout.activity_battlegame_yourcatcharacter);
 
         addNinjaButtonListener();
         addSamuraiButtonListener();
@@ -32,7 +32,8 @@ public class CatChoiceActivity extends AppCompatActivity {
         shamanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToDogChoiceActivity();
+
+                switchToPlayer2DogChoiceActivity();
             }
         });
     }
@@ -45,7 +46,7 @@ public class CatChoiceActivity extends AppCompatActivity {
         samuraiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToDogChoiceActivity();
+                switchToPlayer2DogChoiceActivity();
             }
         });
     }
@@ -58,16 +59,16 @@ public class CatChoiceActivity extends AppCompatActivity {
         ninjaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToDogChoiceActivity();
+                switchToPlayer2DogChoiceActivity();
             }
         });
     }
 
     /**
-     * Switch to the DogChoiceActivity view.
+     * Switch to the Player2DogChoiceActivity view.
      */
-    private void switchToDogChoiceActivity() {
-        Intent tmp = new Intent(this, DogChoiceActivity.class);
+    private void switchToPlayer2DogChoiceActivity() {
+        Intent tmp = new Intent(this, Player2DogChoiceActivity.class);
         startActivity(tmp);
     }
 }
