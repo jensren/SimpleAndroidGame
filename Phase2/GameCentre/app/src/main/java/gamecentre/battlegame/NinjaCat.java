@@ -20,7 +20,7 @@ class NinjaCat extends Character {
     void regularMove() {
         this.getOpponent().reduceHp(regularMoveDamage);
         getBattleQueue().add(this);
-        
+
     }
 
     @Override
