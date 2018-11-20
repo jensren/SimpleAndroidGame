@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 public class BattleQueue implements Serializable {
 
+    private Character player1;
+    private Character player2;
+
     private ArrayList<Character> queue = new ArrayList<>();
 
     BattleQueue() {
@@ -17,6 +20,10 @@ public class BattleQueue implements Serializable {
      * @param character The character to add.
      */
     void add(Character character) {
+        if (player1 == null) {
+            player1 = character;
+            player2 = character.getOpponent();
+        }
         queue.add(character);
     }
 
@@ -35,14 +42,14 @@ public class BattleQueue implements Serializable {
         return queue.remove(0);
     }
 
-    /**
-     * Return whether the game is over (i.e. there are no more moves left).
-     *
-     * @return true iff the game is over.
-     */
-    boolean isOver() {
-        return queue.isEmpty();
-    }
+//    /**
+//     * Return whether the game is over (i.e. there are no more moves left).
+//     *
+//     * @return true iff the game is over.
+//     */
+//    boolean isOver() {
+//        return queue.isEmpty();
+//    }
 
     /**
      * Return the next character to make a move.
@@ -59,7 +66,14 @@ public class BattleQueue implements Serializable {
      * @return the winner of the game if there is one, null otherwise.
      */
     Character getWinner() {
-        return null;
+
+        if (player1.getHp() > 0 && player2.getHp() == 0) {
+            return player1;
+        } else if (player1.getHp() == 0 && player2.getHp() > 0) {
+            return player2;
+        } else {
+            return null;
+        }
     }
 
     @Override
