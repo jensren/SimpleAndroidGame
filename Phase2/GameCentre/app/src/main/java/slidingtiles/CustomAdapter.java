@@ -32,7 +32,7 @@ public class CustomAdapter extends BaseAdapter {
      * @param columnHeight Height of the Column
      */
 
-    CustomAdapter(ArrayList<Button> buttons, int columnWidth, int columnHeight) {
+    public CustomAdapter(ArrayList<Button> buttons, int columnWidth, int columnHeight) {
         mButtons = buttons;
         mColumnWidth = columnWidth;
         mColumnHeight = columnHeight;

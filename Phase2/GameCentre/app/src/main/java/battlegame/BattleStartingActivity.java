@@ -1,11 +1,14 @@
 package battlegame;
 
+import android.animation.AnimatorInflater;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
@@ -39,16 +42,33 @@ public class BattleStartingActivity extends AppCompatActivity {
      * The board manager.
      */
 
+
+    AnimationDrawable shibeAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //saveToFile(tempSaveFileName);
 
         setContentView(R.layout.activity_battlegame_starting);
+        ImageView imageView = (ImageView) findViewById(R.id.animatedshibe);
+        imageView.setBackgroundResource(R.drawable.druidshibe_animated);
+        shibeAnimation = (AnimationDrawable) imageView.getBackground();
+        shibeAnimation.start();
+
+
+
         addStartButtonListener();
         //addLoadButtonListener();
         //addSaveButtonListener();
     }
+
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//
+//    }
+
 
     /**
      * Activate the start button.

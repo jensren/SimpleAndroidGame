@@ -17,19 +17,18 @@ import java.io.ObjectOutputStream;
 import slidingtiles.R;
 
 public class MatchingStartingActivity extends AppCompatActivity {
-
     /**
      * The main save file.
      */
-    public static String matchingSaveFileName = "matching_save.ser";
+    public static String matchingSaveFileName;
     /**
      * A temporary save file.
      */
-    public static String matchingTempSaveFileName = "matching_temp.ser";
+    public static String matchingTempSaveFileName;
     /**
      * The auto saved file.
      */
-    public static String matchingAutoSaveFileName = "matching_auto.ser";
+    public static String matchingAutoSaveFileName;
     /**
      * The board manager.
      */
@@ -55,6 +54,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                matchingBoardManager = new MatchingBoardManager();
                 switchToGame();
             }
         });

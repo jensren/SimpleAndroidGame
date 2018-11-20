@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/shaman_cat0"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/shaman_cat1"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/shaman_cat2"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/shaman_cat3"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/shaman_cat4"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/shaman_cat5"
+        android:duration="500" />
+</animation-list>
