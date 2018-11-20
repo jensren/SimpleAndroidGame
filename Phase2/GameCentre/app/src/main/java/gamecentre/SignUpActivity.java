@@ -15,11 +15,11 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import battlegame.BattleStartingActivity;
-import cardmatching.MatchingStartingActivity;
-import slidingtiles.R;
-import slidingtiles.SlidingtilesScoreboardActivity;
-import slidingtiles.SlidingtilesStartingActivity;
+import gamecentre.battlegame.BattleStartingActivity;
+import gamecentre.cardmatching.MatchingStartingActivity;
+import gamecentre.slidingtiles.R;
+import gamecentre.slidingtiles.SlidingtilesScoreboardActivity;
+import gamecentre.slidingtiles.SlidingtilesStartingActivity;
 
 /**
  * Allow the user to sign up.

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import slidingtiles.R;
+import gamecentre.slidingtiles.R;
 
 /**
  * The initial activity for the game centre.

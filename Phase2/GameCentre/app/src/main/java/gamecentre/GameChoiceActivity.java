@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import battlegame.BattleStartingActivity;
-import cardmatching.MatchingStartingActivity;
-import slidingtiles.R;
-import slidingtiles.SlidingtilesStartingActivity;
+import gamecentre.battlegame.BattleStartingActivity;
+import gamecentre.cardmatching.MatchingStartingActivity;
+import gamecentre.slidingtiles.R;
+import gamecentre.slidingtiles.SlidingtilesStartingActivity;
 
 /**
  * The activity for choosing a game.
