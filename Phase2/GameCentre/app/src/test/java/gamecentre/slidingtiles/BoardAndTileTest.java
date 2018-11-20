@@ -1,4 +1,4 @@
-package slidingtiles;
+package gamecentre.slidingtiles;
 
 import org.junit.Test;
 
