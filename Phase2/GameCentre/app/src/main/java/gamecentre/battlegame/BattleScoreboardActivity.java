@@ -114,11 +114,11 @@ public class BattleScoreboardActivity extends AppCompatActivity {
      * Add the main button to go back to the main game screen.
      */
     private void addMainButtonListener() {
-        Button slidingTilesButton = findViewById(R.id.main);
-        slidingTilesButton.setOnClickListener(new View.OnClickListener() {
+        Button BattleButton = findViewById(R.id.main);
+        BattleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToSlidingTilesActivity();
+                switchToBattleActivity();
             }
         });
     }
@@ -126,7 +126,7 @@ public class BattleScoreboardActivity extends AppCompatActivity {
     /**
      * Display the game's starting activity.
      */
-    private void switchToSlidingTilesActivity() {
+    private void switchToBattleActivity() {
         Intent tmp = new Intent(this, BattleStartingActivity.class);
         startActivity(tmp);
     }
