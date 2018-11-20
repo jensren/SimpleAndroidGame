@@ -25,7 +25,6 @@ public class DetectiveShibe extends Character {
     void specialMove() {
         reduceMp(specialMoveCost);
         getOpponent().reduceHp(specialMoveDamage);
-        getBattleQueue().add(getOpponent());
         getBattleQueue().add(this);
         getBattleQueue().add(this);
 
