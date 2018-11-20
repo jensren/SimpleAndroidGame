@@ -12,8 +12,8 @@ class DruidShibe extends Character {
     private int specialMoveDamage = 13;
     private int regularCost = 5;
     private int specialMoveCost = 10;
-    AttackManager regularAttack = new AttackManager(regularCost, regularMoveDamage);
-    DruidSpecial specialAttack = new DruidSpecial(specialMoveCost, specialMoveDamage);
+    //AttackManager regularAttack = new AttackManager(regularCost, regularMoveDamage);
+    //DruidSpecial specialAttack = new DruidSpecial(specialMoveCost, specialMoveDamage);
 
 
     @Override
@@ -23,12 +23,20 @@ class DruidShibe extends Character {
 
     @Override
     void regularMove() {
-        regularAttack.performAttack(this, this.getOpponent());
+
+        this.getOpponent().reduceHp(regularMoveDamage);
+        getBattleQueue().add(this);
+        //regularAttack.performAttack(this, this.getOpponent());
     }
 
     @Override
     void specialMove() {
-        specialAttack.performAttack(this, this.getOpponent());
+
+        //specialAttack.performAttack(this, this.getOpponent());
+        reduceMp(specialMoveCost);
+        this.getOpponent().reduceHp(specialMoveDamage);
+        getBattleQueue().add(this);
+        getBattleQueue().add(this);
     }
 
     @Override
