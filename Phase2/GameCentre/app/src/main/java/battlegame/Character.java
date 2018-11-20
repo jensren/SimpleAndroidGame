@@ -46,12 +46,6 @@ abstract class Character {
      */
     abstract void specialMove();
 
-    /**
-     * Deal the damage on this character's opponent.
-     *
-     * @param damage The amount of damage on the opponent.
-     */
-    abstract void makeMove(int damage);
 
     /**
      * Get the next sprite for the character to display.
@@ -73,7 +67,12 @@ abstract class Character {
      * @param damage Amount to reduce HP
      */
     void reduceHp(int damage) {
-        Math.abs(hp - damage);
+
+        if (hp >= damage) {
+            hp -= damage;
+        } else {
+            hp = 0;
+        }
     }
 
     /**
@@ -90,5 +89,21 @@ abstract class Character {
      */
     public void setBattleQueue(BattleQueue battleQueue) {
         this.battleQueue = battleQueue;
+    }
+
+    /**
+     * Return this Character's opponent
+     * @return Opponent
+     */
+    public Character getOpponent() {
+        return opponent;
+    }
+
+    /**
+     * Increase the character's Hp.
+     * @param amountHp Amount by which to increase the Hp.
+     */
+    public void increaseHp(int amountHp) {
+        hp += amountHp;
     }
 }

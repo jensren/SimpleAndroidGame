@@ -26,6 +26,10 @@ class SirSpecial extends AttackManager {
         BattleQueue bq = ch1.getBattleQueue();
         Character ch;
 
+        character.reduceMp(cost);
+        opponent.reduceHp(damage);
+        character.getBattleQueue().add(character);
+
         int p1Count = 0;
         int p2Count = 0;
 
@@ -34,6 +38,13 @@ class SirSpecial extends AttackManager {
             if (ch == ch1) { p1Count += 1;}
             else {p2Count += 1;}
         }
+        if (p1Count > 0) {
+            bq.add(ch1);
+        }
+        if (p2Count > 0) {
+            bq.add(ch1.getOpponent());
+        }
+
 
     }
 }
