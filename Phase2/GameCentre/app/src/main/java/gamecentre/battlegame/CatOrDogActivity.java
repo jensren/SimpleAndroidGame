@@ -30,10 +30,11 @@ public class CatOrDogActivity extends AppCompatActivity {
         dogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToCatChoiceActivity();
+                switchToDogChoiceActivity();
             }
         });
     }
+
 
     /**
      * Add the cat button.
@@ -43,16 +44,25 @@ public class CatOrDogActivity extends AppCompatActivity {
         catButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 switchToCatChoiceActivity();
             }
         });
     }
 
     /**
-     * Switch to the CatChoiceActivity view.
+     * Switch to the Player1CatChoiceActivity view.
      */
     private void switchToCatChoiceActivity() {
-        Intent tmp = new Intent(this, CatChoiceActivity.class);
+        Intent tmp = new Intent(this, Player1CatChoiceActivity.class);
+        startActivity(tmp);
+    }
+
+    /**
+     * Switch to the Player1DogChoiceActivity view.
+     */
+    private void switchToDogChoiceActivity() {
+        Intent tmp = new Intent(CatOrDogActivity.this, Player1DogChoiceActivity.class);
         startActivity(tmp);
     }
 }
