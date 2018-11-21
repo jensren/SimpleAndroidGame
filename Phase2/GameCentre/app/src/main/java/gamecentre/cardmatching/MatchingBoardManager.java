@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//TODO: Write more javadoc
+//TODO: Fix code smells. Extract superclass?
+//TODO: Rename solvable board stuff
+//TODO: Unit tests
+//TODO: Improvements to matching game?
+
 public class MatchingBoardManager implements Serializable {
     /**
      * The board being managed.
