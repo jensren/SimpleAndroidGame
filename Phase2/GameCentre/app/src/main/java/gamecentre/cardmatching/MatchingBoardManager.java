@@ -108,7 +108,7 @@ public class MatchingBoardManager implements Serializable {
                             tilesCurrentlyFlipped = 0;
                             flippedTiles = new int[]{-1,-1,-1,-1};
                         }
-                    }, 500);
+                    }, 350);
                 } else{                                          //This runs if you have only last two tiles left to match.
                     checkMatching();
                     tilesCurrentlyFlipped = 0;
