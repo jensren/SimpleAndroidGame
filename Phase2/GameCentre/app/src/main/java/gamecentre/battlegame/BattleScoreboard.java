@@ -1,7 +1,5 @@
 package gamecentre.battlegame;
 
-import java.util.Locale;
-
 import gamecentre.Score;
 import gamecentre.Scoreboard;
 
@@ -10,24 +8,25 @@ public class BattleScoreboard extends Scoreboard {
      * The current user, number of moves, and hp of both characters
      */
     private static String user;
-    private static String numMoves;
-    private static int playerHp;
-    private static int opponentHp;
+    private static int numMoves;
+    private static int playerHpLost;
+    private static int opponentHpLost;
+    private static Score currentScore;
 
     public static void setUser(String user) {
         BattleScoreboard.user = user;
     }
 
-    public static void setNumMoves(String numMoves) {
+    public static void setNumMoves(int numMoves) {
         BattleScoreboard.numMoves = numMoves;
     }
 
-    public static void setPlayerHp(int playerHp) {
-        BattleScoreboard.playerHp = playerHp;
+    public static void setPlayerHpLost(int playerHpLost) {
+        BattleScoreboard.playerHpLost = playerHpLost;
     }
 
-    public static void setOpponentHp(int opponentHp) {
-        BattleScoreboard.opponentHp = opponentHp;
+    public static void setOpponentHpLost(int opponentHpLost) {
+        BattleScoreboard.opponentHpLost = opponentHpLost;
     }
 
     String getUserBestScore() {
@@ -48,6 +47,11 @@ public class BattleScoreboard extends Scoreboard {
 
     @Override
     protected void update() {
-        // TODO
+        if (numMoves != 0) {
+            int points = (100 + (playerHpLost - opponentHpLost)) * numMoves;
+            currentScore = new Score(user, points);
+            updateGameHighScore(currentScore);
+            updateUserHighScore(currentScore);
+        }
     }
 }
