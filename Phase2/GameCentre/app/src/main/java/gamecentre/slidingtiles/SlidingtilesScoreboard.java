@@ -53,7 +53,7 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     @Override
     public void update() {
-        if (boardSize != 0) {
+        if (numMoves != 0) {
             int points = numMoves / boardSize;
             currentScore = new SlidingtilesScore(user, points);
             updateGameHighScore(currentScore);
