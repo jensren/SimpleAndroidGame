@@ -39,7 +39,7 @@ public class MatchingBoard extends Observable implements Serializable {
         for (int row = 0; row != MatchingBoard.numRows; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
                 this.tiles[row][col] = iter.next();
-                this.unknownTiles[row][col] = new MatchingTile(16,R.drawable.card_unknown);
+                this.unknownTiles[row][col] = new MatchingTile(16, R.drawable.card_unknown);
             }
         }
     }

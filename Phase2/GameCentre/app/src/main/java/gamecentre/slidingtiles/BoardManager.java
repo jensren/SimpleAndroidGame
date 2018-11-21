@@ -52,8 +52,68 @@ class BoardManager implements Serializable {
         }
 
         Collections.shuffle(tiles);
+        while (!rightWrong(sum123(intList(tiles)), tiles)){
+            Collections.shuffle(tiles);
+        }
         this.board = new Board(tiles);
+
     }
+
+    private int[] intList(List<Tile> tiles) {
+        Board board2;
+        board2 = new Board(tiles);
+        int blankId = board2.numTiles();
+        int[] myList = new int[Board.numRows*Board.numRows - 1];
+        //Iterator<Tile> tile = tiles.iterator();
+        //for(int i = 0; i < myList.length; i++){
+            //Tile a = tile.;
+            //if (a.getId() != blankId) {
+                //myList[i] = a.getId();
+            //}
+        int i = 0;
+        for (int row = 0; row != Board.numRows; row++) {
+            for (int col = 0; col != Board.numCols; col++) {
+                if (board2.tiles[row][col].getId() != blankId) {
+                    myList[i] = board2.tiles[row][col].getId();
+                    i++;
+                }
+            }
+        }
+        return myList;
+    }
+
+    private int sum123(int[] intList) {
+        int a = 0;
+        for (int i = 0; i < Board.numRows*Board.numRows-1; i++) {
+            int b = 0;
+            for (int j = i + 1; j < Board.numRows*Board.numRows-1; j++) {
+                if (intList[i] > intList[j]) {
+                    b++;
+                }
+            }
+            a = a + b;
+        }
+        return a;
+    }
+
+    private int findBlank(List<Tile> tiles) {
+        Board board2 = new Board(tiles);
+        int blankId = board2.numTiles();
+        for (int row = 0; row != Board.numRows; row++) {
+            for (int col = 0; col != Board.numCols; col++) {
+                if (board2.tiles[row][col].getId() == blankId) {
+                    return 4 - row;
+                }
+            }
+        }
+        return 0;
+    }
+
+    private Boolean rightWrong(int c, List<Tile> tiles){
+        int a = Board.numRows;
+        return ((a % 2 == 1 && c % 2 == 0)||(a % 2 == 0 && (findBlank(tiles)%2 == 0 && c % 2 == 1)));
+    }
+
 
     /**
      * Return whether the tiles are in row-major order.
