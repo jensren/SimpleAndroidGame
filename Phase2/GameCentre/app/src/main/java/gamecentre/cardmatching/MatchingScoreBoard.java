@@ -40,11 +40,9 @@ public class MatchingScoreBoard extends Scoreboard {
 
     @Override
     public void update() {
-        if (boardSize != 0) {
-            int points = numMoves / boardSize;
+            int points = numMoves;
             MatchingScoreBoardActivity.score = new MatchingScore(user, points);
             updateGameHighScore(MatchingScoreBoardActivity.score);
             updateUserHighScore(MatchingScoreBoardActivity.score);
-        }
     }
 }
