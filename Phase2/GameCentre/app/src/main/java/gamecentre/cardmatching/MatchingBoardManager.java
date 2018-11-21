@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MatchingBoardManager implements Serializable {
     /**
@@ -99,15 +100,20 @@ public class MatchingBoardManager implements Serializable {
                 board.flipTile(row,col);
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
-                new Handler().postDelayed(new Runnable() {   //Waits 0.5 second and then checks matching and flips over accordingly
-                    @Override
-                    public void run() {
-                        checkMatching();
-                        tilesCurrentlyFlipped = 0;
-                        flippedTiles = new int[]{-1,-1,-1,-1};
-                    }
-                }, 500);
-                //checkMatching();
+                if (tilesMatched != 14){                         //This part runs as long as you're not about to win.
+                    new Handler().postDelayed(new Runnable() {   //Waits 0.5 second and then checks matching and flips over accordingly
+                        @Override
+                        public void run() {
+                            checkMatching();
+                            tilesCurrentlyFlipped = 0;
+                            flippedTiles = new int[]{-1,-1,-1,-1};
+                        }
+                    }, 500);
+                } else{                                          //This runs if you have only last two tiles left to match.
+                    checkMatching();
+                    tilesCurrentlyFlipped = 0;
+                    flippedTiles = new int[]{-1,-1,-1,-1};
+                }
             }
         }
     }
