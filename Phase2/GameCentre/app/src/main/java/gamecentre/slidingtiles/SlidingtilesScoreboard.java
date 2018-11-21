@@ -18,6 +18,11 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
     private static int numMoves;
     private static int boardSize;
 
+    /**
+     * The user's current score
+     */
+    private SlidingtilesScore currentScore;
+
     static void setUser(String user) {
         SlidingtilesScoreboard.user = user;
     }
@@ -35,7 +40,7 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
     }
 
     String getUserCurrentScore() {
-        return super.getUserCurrentScore(SlidingtilesScoreboardActivity.score);
+        return super.getUserCurrentScore(currentScore);
     }
 
     private void updateGameHighScore(SlidingtilesScore newScore) {
@@ -50,9 +55,9 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
     public void update() {
         if (boardSize != 0) {
             int points = numMoves / boardSize;
-            SlidingtilesScoreboardActivity.score = new SlidingtilesScore(user, points);
-            updateGameHighScore(SlidingtilesScoreboardActivity.score);
-            updateUserHighScore(SlidingtilesScoreboardActivity.score);
+            currentScore = new SlidingtilesScore(user, points);
+            updateGameHighScore(currentScore);
+            updateUserHighScore(currentScore);
         }
     }
 }
