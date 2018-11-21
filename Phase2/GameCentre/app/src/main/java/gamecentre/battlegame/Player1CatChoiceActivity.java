@@ -16,7 +16,7 @@ public class Player1CatChoiceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battlegame_yourcatcharacter);
+        setContentView(R.layout.activity_battlegame_p1_cat_character);
 
         addNinjaButtonListener();
         addSamuraiButtonListener();

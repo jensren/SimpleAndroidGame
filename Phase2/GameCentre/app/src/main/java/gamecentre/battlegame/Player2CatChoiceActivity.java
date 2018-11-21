@@ -2,10 +2,12 @@ package gamecentre.battlegame;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import gamecentre.GameChoiceActivity;
 import gamecentre.slidingtiles.R;
 
 /**
@@ -13,12 +15,10 @@ import gamecentre.slidingtiles.R;
  */
 public class Player2CatChoiceActivity extends AppCompatActivity {
 
-    static boolean isPlayer1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_battlegame_yourcatcharacter);
+        setContentView(R.layout.activity_battlegame_p2_cat_character);
 
         addNinjaButtonListener();
         addSamuraiButtonListener();
@@ -34,7 +34,7 @@ public class Player2CatChoiceActivity extends AppCompatActivity {
         shamanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("shaman");
             }
         });
     }
@@ -47,7 +47,7 @@ public class Player2CatChoiceActivity extends AppCompatActivity {
         samuraiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("samurai");
             }
         });
     }
@@ -60,16 +60,20 @@ public class Player2CatChoiceActivity extends AppCompatActivity {
         ninjaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("ninja");
             }
         });
     }
 
     /**
-     * Switch to the GameActivity view.
+     * @param character The name of the character chosen
      */
-    private void switchToGameActivity() {
-        Intent tmp = new Intent(this, BattleGameActivity.class);
+    @NonNull
+    private void switchToGameActivity(String character) {
+        Intent tmp = new Intent(Player2CatChoiceActivity.this, GameChoiceActivity.class);
+        Bundle extras = tmp.getExtras();
+        extras.putString("cat", character);
         startActivity(tmp);
+
     }
 }
