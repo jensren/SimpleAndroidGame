@@ -1,6 +1,7 @@
 package gamecentre.cardmatching;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -158,11 +159,14 @@ public class MatchingGameActivity extends AppCompatActivity implements Observer{
         display();
         saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
     }
-    //TODO: implement switch to scoreboard activity
+    private void switchToScoreBoardActivity() {
+        Intent tmp = new Intent(this, MatchingScoreBoardActivity.class);
+        startActivity(tmp);
+    }
 
     private class WinObserver implements Observer {
         public void update(Observable o, Object arg) {
-            //TODO call the switch to scoreboard here
+            switchToScoreBoardActivity();
         }
     }
 }
