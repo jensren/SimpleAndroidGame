@@ -21,7 +21,16 @@ public abstract class Scoreboard implements Serializable {
     private HashMap<String, Score> userToBestScore = new HashMap<>();
 
     /**
-     * Set the scorelist. For testing only
+     * For testing only: get the scoreList
+     *
+     * @return the scoreList
+     */
+    public Score[] getScoreList() {
+        return scoreList;
+    }
+
+    /**
+     * For testing only: set the scorelist.
      *
      * @param scoreList A list of scores
      */
@@ -30,14 +39,22 @@ public abstract class Scoreboard implements Serializable {
     }
 
     /**
-     * Set the userToBestScore dictionary. For testing only
+     * For testing only: get the HashMap of userToBestScore
+     *
+     * @return the user to best score
+     */
+    public HashMap<String, Score> getUserToBestScore() {
+        return userToBestScore;
+    }
+
+    /**
+     * For testing only: set the userToBestScore dictionary.
      *
      * @param userToBestScore A dictionary of String user to Score score
      */
     public void setUserToBestScore(HashMap<String, Score> userToBestScore) {
         this.userToBestScore = userToBestScore;
     }
-
 
     /**
      * Gets the user's best score

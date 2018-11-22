@@ -21,16 +21,25 @@ public class BattleScoreboard extends Scoreboard {
         BattleScoreboard.user = user;
     }
 
-    public static void setNumMoves(int numMoves) {
+    static void setNumMoves(int numMoves) {
         BattleScoreboard.numMoves = numMoves;
     }
 
-    public static void setPlayerHpLost(int playerHpLost) {
+    static void setPlayerHpLost(int playerHpLost) {
         BattleScoreboard.playerHpLost = playerHpLost;
     }
 
-    public static void setOpponentHpLost(int opponentHpLost) {
+    static void setOpponentHpLost(int opponentHpLost) {
         BattleScoreboard.opponentHpLost = opponentHpLost;
+    }
+
+    /**
+     * For testing only: set the player's current score
+     *
+     * @param currentScore the score for the game just played
+     */
+    void setCurrentScore(Score currentScore) {
+        this.currentScore = currentScore;
     }
 
     String getUserBestScore() {
