@@ -21,6 +21,11 @@ public class DetectiveShibe extends Character {
 
     }
 
+    /**
+     * Reduce this character's magic points and reduce the enemy's Health points by
+     * specialMoveDamage. Add this character into the battle queue twice so it can attack twice in
+     * the next round.
+     */
     @Override
     void specialMove() {
         reduceMp(specialMoveCost);

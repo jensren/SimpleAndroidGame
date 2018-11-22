@@ -22,6 +22,10 @@ public class ShamanCat extends Character {
 
     }
 
+    /**
+     * Perform the Shaman Cat's special move by reducing this character's MP, reduce the opponent's
+     * HP and heal this character by the amount of damage it's opponent takes.
+     */
     @Override
     void specialMove() {
         reduceMp(specialMoveCost);

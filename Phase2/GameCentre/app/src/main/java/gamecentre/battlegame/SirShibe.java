@@ -7,7 +7,6 @@ public class SirShibe extends Character {
 
     private int regularMoveDamage = 10;
     private int specialMoveDamage = 13;
-    private int regularCost = 6;
     private int specialMoveCost = 12;
 
     @Override
@@ -22,6 +21,10 @@ public class SirShibe extends Character {
         getBattleQueue().add(this);
     }
 
+    /**
+     * Perform the special move of Sir Shibe with reduces this character's MP, reduces the
+     * opponent's HP and resets the battle queue so that there is only one copy of each character.
+     */
     @Override
     void specialMove() {
         Character ch1 = getBattleQueue().getNextCharacter();
