@@ -4,7 +4,14 @@ import android.os.Handler;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+//TODO: Write more javadoc
+//TODO: Fix code smells. Extract superclass?
+//TODO: Rename solvable board stuff
+//TODO: Unit tests
+//TODO: Improvements to matching game?
 
 public class MatchingBoardManager implements Serializable {
     /**
@@ -22,9 +29,9 @@ public class MatchingBoardManager implements Serializable {
      */
     private int tilesMatched = 0;
     /**
-     * Keeps track of the row and col indices of the two flipped tiles.
+     * Keeps track of the row and col indices of the two flipped tiles. Initialized as -1.
      */
-    private int[] flippedTiles = new int[4];
+    private int[] flippedTiles = new int[]{-1,-1,-1,-1};
 
     /**
      * Manage a board that has been pre-populated.
@@ -57,31 +64,33 @@ public class MatchingBoardManager implements Serializable {
             tiles.add(new MatchingTile(tileNum));
         }
 
-      //  Collections.shuffle(tiles);
+        Collections.shuffle(tiles);
         this.board = new MatchingBoard(tiles);
     }
-    //TODO: Bug: Clicking the top left tile first always results in invalid tap.
     boolean isValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
-        if (board.tiles[flippedTiles[0]][flippedTiles[1]] == board.tiles[row][col]){
-            return false;
+        if (flippedTiles[0] != -1) {
+            if (board.tiles[flippedTiles[0]][flippedTiles[1]] == board.tiles[row][col]) {  //Checks if you're flipping the same tile twice
+                return false;
+            }
         }
         int blankId = 17;
         return board.getTile(row, col).getId() != blankId;
     }
 
+    /**
+     * Checks if you won the game by seeing if there are 16 tiles matched.
+     * @return Whether you have won or not.
+     */
     boolean isWin() {
-//        for (int row = 0; row <= 3; row++){
-//            for (int col = 0; col <= 3; col++){
-//                if (board.unknownTiles[row][col].compareTo(new MatchingTile(17, R.drawable.tile_25))!=0){
-//                    return false;
-//                }
-//            }
-//        }
-//        return true;
         return tilesMatched == 16;
     }
+
+    /**
+     * Processes a touch on the screen and flips tiles accordingly depending on how many tiles are currently flipped.
+     * @param position the position you touched.
+     */
     //TODO: Bug:If player clicks something during the 0.5s time window it breaks things.
     void touchMove(int position){
         int row = position / MatchingBoard.numCols;
@@ -97,32 +106,35 @@ public class MatchingBoardManager implements Serializable {
                 board.flipTile(row,col);
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
-                new Handler().postDelayed(new Runnable() {   //Waits 0.5 second and then checks matching and flips over accordingly
-                    @Override
-                    public void run() {
-                        checkMatching();
-                    }
-                }, 500);
-                //checkMatching();
-                tilesCurrentlyFlipped++;
-            } else {
-                //checkMatching();
-                flippedTiles = new int[4];
-                tilesCurrentlyFlipped = 0;
-                board.flipTile(row,col);
-                flippedTiles[0] = row;
-                flippedTiles[1] = col;
-                tilesCurrentlyFlipped++;
+                if (tilesMatched != 14){                         //This part runs as long as you're not about to win.
+                    new Handler().postDelayed(new Runnable() {   //Waits 0.5 second and then checks matching and flips over accordingly
+                        @Override
+                        public void run() {
+                            checkMatching();
+                            tilesCurrentlyFlipped = 0;
+                            flippedTiles = new int[]{-1,-1,-1,-1};
+                        }
+                    }, 350);
+                } else{                                          //This runs if you have only last two tiles left to match.
+                    checkMatching();
+                    tilesCurrentlyFlipped = 0;
+                    flippedTiles = new int[]{-1,-1,-1,-1};
                 }
             }
         }
-    private void checkMatching(){
-        if(board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]][flippedTiles[3]])==0){
+    }
+
+    /**
+     * This function checks if the two tiles you flipped match. If they do, then remove them (ie. flip to blank) and increment
+     * tilesMatched by 2. If they don't match, flip both back to question mark tiles.
+     */
+    private void checkMatching() {
+        if (board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]][flippedTiles[3]]) == 0) {
             board.flipBlank(flippedTiles);
             tilesMatched += 2;
         } else {
-            board.flipBack(flippedTiles[0],flippedTiles[1]);
-            board.flipBack(flippedTiles[2],flippedTiles[3]);
+            board.flipBack(flippedTiles[0], flippedTiles[1]);
+            board.flipBack(flippedTiles[2], flippedTiles[3]);
         }
     }
 
@@ -134,7 +146,7 @@ public class MatchingBoardManager implements Serializable {
     }
 
     /**
-     * @return the highest score
+     * @return the number of moves so far.
      */
 
     int getNumMoves() {

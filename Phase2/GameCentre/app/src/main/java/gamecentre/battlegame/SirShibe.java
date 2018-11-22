@@ -9,8 +9,6 @@ public class SirShibe extends Character {
     private int specialMoveDamage = 13;
     private int regularCost = 6;
     private int specialMoveCost = 12;
-    public AttackManager regularAttack = new AttackManager(regularCost, regularMoveDamage);
-    public AttackManager specialAttack = new SirSpecial(specialMoveCost, specialMoveDamage);
 
     @Override
     boolean hasAttackMp() {
@@ -19,12 +17,35 @@ public class SirShibe extends Character {
 
     @Override
     void regularMove() {
-        regularAttack.performAttack(this, this.getOpponent());
+
+        this.getOpponent().reduceHp(regularMoveDamage);
+        getBattleQueue().add(this);
     }
 
     @Override
     void specialMove() {
-        specialAttack.performAttack(this, this.getOpponent());
+        Character ch1 = getBattleQueue().getNextCharacter();
+        BattleQueue bq = ch1.getBattleQueue();
+        Character ch;
+
+        reduceMp(specialMoveCost);
+        this.getOpponent().reduceHp(specialMoveDamage);
+
+        int p1Count = 0;
+        int p2Count = 0;
+
+        while (!bq.isEmpty()) {
+            ch = bq.removeCharacter();
+            if (ch == ch1) { p1Count += 1;}
+            else {p2Count += 1;}
+        }
+        if (p1Count > 0) {
+            bq.add(ch1);
+        }
+        if (p2Count > 0) {
+            bq.add(ch1.getOpponent());
+        }
+
     }
 
     @Override

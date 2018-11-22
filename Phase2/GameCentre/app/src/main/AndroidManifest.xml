@@ -28,8 +28,10 @@
         <activity android:name="gamecentre.battlegame.BattleStartingActivity" />
         <activity android:name="gamecentre.battlegame.BattleGameActivity" />
         <activity android:name="gamecentre.battlegame.CatOrDogActivity" />
-        <activity android:name="gamecentre.battlegame.DogChoiceActivity" />
-        <activity android:name="gamecentre.battlegame.CatChoiceActivity" />
+        <activity android:name="gamecentre.battlegame.Player1DogChoiceActivity" />
+        <activity android:name="gamecentre.battlegame.Player1CatChoiceActivity" />
+        <activity android:name="gamecentre.battlegame.Player2CatChoiceActivity" />
+        <activity android:name="gamecentre.battlegame.Player2DogChoiceActivity" />
     </application>
 
 </manifest>

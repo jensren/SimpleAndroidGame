@@ -8,8 +8,6 @@ class NinjaCat extends Character {
     private int specialMoveCost = 9;
     private int specialMoveDamage = 15;
     private int regularMoveDamage = 5;
-    AttackManager regularAttack = new AttackManager(0, regularMoveDamage);
-    NinjaSpecial specialAttack = new NinjaSpecial(specialMoveCost, specialMoveDamage);
 
     @Override
     boolean hasAttackMp() {
@@ -18,13 +16,17 @@ class NinjaCat extends Character {
 
     @Override
     void regularMove() {
-        regularAttack.performAttack(this, this.getOpponent());
+        this.getOpponent().reduceHp(regularMoveDamage);
+        getBattleQueue().add(this);
+
     }
 
     @Override
     void specialMove() {
-        specialAttack.performAttack(this, this.getOpponent());
-
+        reduceMp(specialMoveCost);
+        reduceHp(specialMoveDamage);
+        getBattleQueue().add(this);
+        getBattleQueue().add(this);
     }
 
     @Override
