@@ -22,7 +22,6 @@ public class BattleScoreboardActivity extends AppCompatActivity {
     public static final String SCORE_FILENAME = "battle_scoreboard_file.ser";
     public static String user;
     TextView scoreBoard;
-    static Score score;
     BattleScoreboard scoreboard;
 
     @Override

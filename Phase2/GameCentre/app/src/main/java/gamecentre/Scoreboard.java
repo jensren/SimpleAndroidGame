@@ -8,16 +8,53 @@ public abstract class Scoreboard implements Serializable {
     /**
      * Size of scoreboard (ie. how many top scores are stored and displayed).
      */
-    private static final int LENGTH = 10;
+    public static final int LENGTH = 10;
 
     /**
      * An ordered list with the highest score as first item.
      */
     private Score[] scoreList = new Score[LENGTH];
+
     /**
      * A map of username to high scores.
      */
     private HashMap<String, Score> userToBestScore = new HashMap<>();
+
+    /**
+     * For testing only: get the scoreList
+     *
+     * @return the scoreList
+     */
+    public Score[] getScoreList() {
+        return scoreList;
+    }
+
+    /**
+     * For testing only: set the scorelist.
+     *
+     * @param scoreList A list of scores
+     */
+    public void setScoreList(Score[] scoreList) {
+        this.scoreList = scoreList;
+    }
+
+    /**
+     * For testing only: get the HashMap of userToBestScore
+     *
+     * @return the user to best score
+     */
+    public HashMap<String, Score> getUserToBestScore() {
+        return userToBestScore;
+    }
+
+    /**
+     * For testing only: set the userToBestScore dictionary.
+     *
+     * @param userToBestScore A dictionary of String user to Score score
+     */
+    public void setUserToBestScore(HashMap<String, Score> userToBestScore) {
+        this.userToBestScore = userToBestScore;
+    }
 
     /**
      * Gets the user's best score

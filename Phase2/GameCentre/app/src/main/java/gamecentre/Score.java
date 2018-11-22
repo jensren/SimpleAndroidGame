@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import gamecentre.slidingtiles.SlidingtilesScore;
 
-public abstract class Score implements Comparable<Score>, Serializable {
+public class Score implements Comparable<Score>, Serializable {
     /**
      * The user.
      */
