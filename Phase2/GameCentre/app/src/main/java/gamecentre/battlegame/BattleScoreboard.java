@@ -11,7 +11,11 @@ public class BattleScoreboard extends Scoreboard {
     private static int numMoves;
     private static int playerHpLost;
     private static int opponentHpLost;
-    private static Score currentScore;
+
+    /**
+     * The user's current score
+     */
+    private Score currentScore;
 
     public static void setUser(String user) {
         BattleScoreboard.user = user;
@@ -34,7 +38,7 @@ public class BattleScoreboard extends Scoreboard {
     }
 
     protected String getUserCurrentScore() {
-        return super.getUserCurrentScore(BattleScoreboardActivity.score);
+        return super.getUserCurrentScore(currentScore);
     }
 
     protected void updateGameHighScore(Score newScore) {
