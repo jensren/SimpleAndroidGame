@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import java.io.Serializable;
 import java.util.Locale;
 
-import gamecentre.slidingtiles.SlidingtilesScore;
-
 public class Score implements Comparable<Score>, Serializable {
     /**
      * The user.
