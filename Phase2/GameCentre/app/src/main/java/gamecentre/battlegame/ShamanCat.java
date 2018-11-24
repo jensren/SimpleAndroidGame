@@ -6,18 +6,18 @@ package gamecentre.battlegame;
  */
 public class ShamanCat extends Character {
 
-    private int regularMoveDamage = 7;
-    private int specialMoveDamage = 13;
-    private int specialMoveCost = 22;
+    private static final int REGULAR_MOVE_DAMAGE = 7;
+    private static final int SPECIAL_MOVE_DAMAGE = 13;
+    private static final int SPECIAL_MOVE_COST = 22;
 
     @Override
     boolean hasAttackMp() {
-        return getMp() >= specialMoveCost;
+        return getMp() >= SPECIAL_MOVE_COST;
     }
 
     @Override
     void regularMove() {
-        this.getOpponent().reduceHp(regularMoveDamage);
+        this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
 
     }
@@ -28,9 +28,9 @@ public class ShamanCat extends Character {
      */
     @Override
     void specialMove() {
-        reduceMp(specialMoveCost);
-        getOpponent().reduceHp(specialMoveDamage);
-        increaseHp(specialMoveDamage);
+        reduceMp(SPECIAL_MOVE_COST);
+        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
+        increaseHp(SPECIAL_MOVE_DAMAGE);
         getBattleQueue().add(this);
 
     }
