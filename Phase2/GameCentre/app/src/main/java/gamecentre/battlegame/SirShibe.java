@@ -52,4 +52,10 @@ public class SirShibe extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    public String getType() {
+        return "dog";
+    }
+
 }

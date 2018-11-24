@@ -47,4 +47,10 @@ public class SamuraiCat extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    public String getType() {
+        return "cat";
+    }
+
 }

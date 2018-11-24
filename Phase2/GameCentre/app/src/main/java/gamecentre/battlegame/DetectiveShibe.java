@@ -32,6 +32,10 @@ public class DetectiveShibe extends Character {
 
     @Override
     String getSprite() {
-        return null;
+        return "detective_shibe";
+    }
+
+    public String getType() {
+        return "dog";
     }
 }

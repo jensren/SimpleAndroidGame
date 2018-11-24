@@ -33,4 +33,10 @@ class NinjaCat extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    public String getType() {
+        return "cat";
+    }
+
 }

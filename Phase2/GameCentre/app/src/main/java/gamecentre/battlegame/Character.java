@@ -21,7 +21,7 @@ abstract class Character {
     /**
      * Get an Array of the actions available for this character.
      *
-     * @return Array of attack
+     * @return Array of attacks
      */
     String[] getActions() {
         return new String[]{"A"};
@@ -106,4 +106,6 @@ abstract class Character {
     public void increaseHp(int amountHp) {
         hp += amountHp;
     }
+
+    public abstract String getType();
 }

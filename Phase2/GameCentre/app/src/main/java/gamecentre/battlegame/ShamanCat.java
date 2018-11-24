@@ -37,5 +37,9 @@ public class ShamanCat extends Character {
         return null;
     }
 
+    @Override
+    public String getType() {
+        return "cat";
+    }
 
 }
