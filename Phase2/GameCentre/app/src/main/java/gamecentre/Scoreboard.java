@@ -34,6 +34,9 @@ public abstract class Scoreboard implements Serializable {
      *
      * @param scoreList A list of scores
      */
+
+    protected Score currentScore;
+
     public void setScoreList(Score[] scoreList) {
         this.scoreList = scoreList;
     }
@@ -54,6 +57,15 @@ public abstract class Scoreboard implements Serializable {
      */
     public void setUserToBestScore(HashMap<String, Score> userToBestScore) {
         this.userToBestScore = userToBestScore;
+    }
+
+    /**
+     * For testing only: set the current score.
+     *
+     * @param currentScore the score
+     */
+    public void setCurrentScore(Score currentScore) {
+        this.currentScore = currentScore;
     }
 
     /**
