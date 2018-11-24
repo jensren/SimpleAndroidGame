@@ -1,5 +1,5 @@
 ## Contact information:
-* Yu Jie: andrew98jiang@gmail.com
+* Yu Jie (Andrew): andrew98jiang@gmail.com
 * Cassidy: cassidy.wang@mail.utoronto.ca
 * Jiaheng: jiahengwl.li@mail.utoronto.ca
 * Jenney: jenney.ren@mail.utoronto.ca
@@ -23,7 +23,7 @@
 
 ## Responsibilities:
 * Art for the battle game sprites: Jenney
-* 
+* Sliding Tiles only creates solvable boards: Jiaheng
 * 
 
 ## Battle Game Rules:
@@ -36,7 +36,11 @@
  
 
 ## Card Matching Game Rules:
-* 
+* A game where you must match pairs of cards.
+* Click a card to flip it over, when you flip over the second card, if they match, they will be removed from the board. If they
+don't match, they flip back over.
+* Game ends when players matches all the cards.
+* Your score depends on how many turns it took for you to complete the game.
 
 ## Battle Game design decisions:
 * Character will be an abstract superclass, and each specific type of playable character in the game will be a subclass that extends it.
@@ -49,7 +53,7 @@
 * Saving: save BattleQueue???
 
 ## Card Matching Game design decision:
-* 
+* TBD
 
 ## Current bugs that need fixing:
 *
