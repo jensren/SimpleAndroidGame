@@ -1,7 +1,5 @@
 package gamecentre.battlegame;
 
-import java.util.Locale;
-
 import gamecentre.Score;
 import gamecentre.Scoreboard;
 
@@ -10,24 +8,38 @@ public class BattleScoreboard extends Scoreboard {
      * The current user, number of moves, and hp of both characters
      */
     private static String user;
-    private static String numMoves;
-    private static int playerHp;
-    private static int opponentHp;
+    private static int numMoves;
+    private static int playerHpLost;
+    private static int opponentHpLost;
+
+    /**
+     * The user's current score
+     */
+    private Score currentScore;
 
     public static void setUser(String user) {
         BattleScoreboard.user = user;
     }
 
-    public static void setNumMoves(String numMoves) {
+    static void setNumMoves(int numMoves) {
         BattleScoreboard.numMoves = numMoves;
     }
 
-    public static void setPlayerHp(int playerHp) {
-        BattleScoreboard.playerHp = playerHp;
+    static void setPlayerHpLost(int playerHpLost) {
+        BattleScoreboard.playerHpLost = playerHpLost;
     }
 
-    public static void setOpponentHp(int opponentHp) {
-        BattleScoreboard.opponentHp = opponentHp;
+    static void setOpponentHpLost(int opponentHpLost) {
+        BattleScoreboard.opponentHpLost = opponentHpLost;
+    }
+
+    /**
+     * For testing only: set the player's current score
+     *
+     * @param currentScore the score for the game just played
+     */
+    void setCurrentScore(Score currentScore) {
+        this.currentScore = currentScore;
     }
 
     String getUserBestScore() {
@@ -35,7 +47,7 @@ public class BattleScoreboard extends Scoreboard {
     }
 
     protected String getUserCurrentScore() {
-        return super.getUserCurrentScore(BattleScoreboardActivity.score);
+        return super.getUserCurrentScore(currentScore);
     }
 
     protected void updateGameHighScore(Score newScore) {
@@ -48,6 +60,11 @@ public class BattleScoreboard extends Scoreboard {
 
     @Override
     protected void update() {
-        // TODO
+        if (numMoves != 0) {
+            int points = (100 + (playerHpLost - opponentHpLost)) * numMoves;
+            currentScore = new Score(user, points);
+            updateGameHighScore(currentScore);
+            updateUserHighScore(currentScore);
+        }
     }
 }

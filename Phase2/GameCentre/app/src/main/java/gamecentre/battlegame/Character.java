@@ -8,13 +8,24 @@ abstract class Character {
     private Character opponent;
     private BattleQueue battleQueue;
 
-
+    /**
+     * Return whether this character has enough Health points to perform a special attack.
+     * @return True if this character has enough HP to perform an attack.
+     */
     abstract boolean hasAttackMp();
 
+    /**
+     * Return the Magic points for this character.
+     * @return The amount of magic points.
+     */
     int getMp() {
         return mp;
     }
 
+    /**
+     * Return the number of Health points this character has.
+     * @return The amount of magic points.
+     */
     int getHp() { return hp;
     }
 
@@ -37,7 +48,8 @@ abstract class Character {
     }
 
     /**
-     * Perform this character's regular attack on its enemy.
+     * Perform this character's regular attack on its enemy and add the Character at the end of the
+     * Battle Queue.
      */
     abstract void regularMove();
 
