@@ -8,13 +8,14 @@ import gamecentre.Score;
 import gamecentre.Scoreboard;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BattleScoreboardTest {
 
     /**
      * The BattleScoreboard to test
      */
-    BattleScoreboard scoreboard = new BattleScoreboard();
+    private BattleScoreboard scoreboard = new BattleScoreboard();
 
     /**
      * Create a generic score list, where Player i is in ith place, with a score of i
@@ -60,8 +61,13 @@ public class BattleScoreboardTest {
     @Test
     public void testGetUserCurrentScoreWithScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("Player 1");
-        assertEquals("Your Score: 1", scoreboard.getUserCurrentScore());
+        BattleScoreboard.setUser("1");
+        BattleScoreboard.setNumMoves(1);
+        BattleScoreboard.setOpponentHpLost(1);
+        BattleScoreboard.setPlayerHpLost(1);
+        // The player's score will be 100
+        scoreboard.update();
+        assertEquals("Your Score: 100", scoreboard.getUserCurrentScore());
     }
 
     /**
@@ -80,7 +86,7 @@ public class BattleScoreboardTest {
     @Test
     public void getUserBestScoreWithScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("Player 1");
+        BattleScoreboard.setUser("1");
         assertEquals("Best Score: 1", scoreboard.getUserBestScore());
     }
 
@@ -100,7 +106,7 @@ public class BattleScoreboardTest {
     @Test
     public void testUpdateNotHighScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("Player 1");
+        BattleScoreboard.setUser("1");
         BattleScoreboard.setNumMoves(1);
         BattleScoreboard.setOpponentHpLost(1);
         BattleScoreboard.setPlayerHpLost(1);
@@ -122,10 +128,13 @@ public class BattleScoreboardTest {
     public void testUpdateNewPlayer() {
         populateScoreboard();
         BattleScoreboard.setUser("New Player");
-        Score newScore = new Score("New Player", 100);
-        scoreboard.setCurrentScore(newScore);
+        BattleScoreboard.setNumMoves(1);
+        BattleScoreboard.setOpponentHpLost(1);
+        BattleScoreboard.setPlayerHpLost(1);
+        // The player's score will be 100
         scoreboard.update();
 
+        Score newScore = new Score("New Player", 100);
         Score[] expectedGameHighScores = createScoreList();
         HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(expectedGameHighScores);
         expectedUserToBestScore.put("New Player", newScore);
@@ -144,20 +153,23 @@ public class BattleScoreboardTest {
     public void testUpdateNewHighScore() {
         populateScoreboard();
         BattleScoreboard.setUser("Underdog");
-        Score oldScore = new Score("Underdog", 100);
-        scoreboard.setCurrentScore(oldScore);
+        BattleScoreboard.setNumMoves(1);
+        BattleScoreboard.setOpponentHpLost(1);
+        BattleScoreboard.setPlayerHpLost(1);
+        // The player's score will be 100
         scoreboard.update();
         Score newScore = new Score("Underdog", 0);
-        scoreboard.setCurrentScore(newScore);
+        BattleScoreboard.setNumMoves(1);
+        BattleScoreboard.setOpponentHpLost(100);
+        BattleScoreboard.setPlayerHpLost(0);
+        // The player's score will be 0
         scoreboard.update();
 
         Score[] s = createScoreList();
+        HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(s);
         Score[] expectedGameHighScores = new Score[Scoreboard.LENGTH];
         expectedGameHighScores[0] = newScore;
-        for (int i = 0; i < Scoreboard.LENGTH - 1; i++) {
-            expectedGameHighScores[i + 1] = s[i];
-        }
-        HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(expectedGameHighScores);
+        System.arraycopy(s, 0, expectedGameHighScores, 1, Scoreboard.LENGTH - 1);
         expectedUserToBestScore.put("Underdog", newScore);
 
         Score[] actualGameHighScores = scoreboard.getScoreList();
