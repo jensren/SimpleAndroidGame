@@ -58,4 +58,11 @@ don't match, they flip back over.
 ## Current bugs that need fixing:
 *
 
+## To-do list:
+* Javadoc for matching game
+* Fix code smells
+* Rename solvable baord functions
+* Write more tests
+* Delete unused layouts and dead code
+
 

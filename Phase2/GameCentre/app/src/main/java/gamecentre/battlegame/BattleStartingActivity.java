@@ -32,25 +32,28 @@ public class BattleStartingActivity extends AppCompatActivity {
      * The board manager.
      */
 
-
-    AnimationDrawable shibeAnimation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //saveToFile(tempSaveFileName);
 
         setContentView(R.layout.activity_battlegame_starting);
-        ImageView imageView = (ImageView) findViewById(R.id.animatedshibe);
-        imageView.setBackgroundResource(R.drawable.druid_shibe_animated);
-        shibeAnimation = (AnimationDrawable) imageView.getBackground();
-        shibeAnimation.start();
-
-
+        startAnimations();
 
         addStartButtonListener();
         //addLoadButtonListener();
         //addSaveButtonListener();
+    }
+
+    /**
+     * Start the animations in the activity.
+     */
+    private void startAnimations() {
+        AnimationDrawable shibeAnimation;
+        ImageView imageView = findViewById(R.id.animatedshibe);
+        imageView.setBackgroundResource(R.drawable.druid_shibe_animated);
+        shibeAnimation = (AnimationDrawable) imageView.getBackground();
+        shibeAnimation.start();
     }
 
 //    @Override

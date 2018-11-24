@@ -2,18 +2,19 @@ package gamecentre.battlegame;
 
 public class SamuraiCat extends Character {
 
-    private int regularMoveDamage = 6;
-    private int specialMoveDamage = 15;
-    private int specialMoveCost = 12;
+    private static final int REGULAR_MOVE_DAMAGE = 6;
+    private static final int SPECIAL_MOVE_DAMAGE = 15;
+    private static final int SPECIAL_MOVE_COST = 12;
+
     @Override
     boolean hasAttackMp() {
-        return getHp() >= specialMoveCost;
+        return getHp() >= SPECIAL_MOVE_COST;
     }
 
     @Override
     void regularMove() {
 
-        this.getOpponent().reduceHp(regularMoveDamage);
+        this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
     }
 
@@ -27,16 +28,19 @@ public class SamuraiCat extends Character {
         BattleQueue bq = ch1.getBattleQueue();
         Character ch;
 
-        reduceMp(specialMoveCost);
-        this.getOpponent().reduceHp(specialMoveDamage);
+        reduceMp(SPECIAL_MOVE_COST);
+        this.getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
 
         int p1Count = 0;
         int p2Count = 0;
 
         while (!bq.isEmpty()) {
             ch = bq.removeCharacter();
-            if (ch == ch1) { p1Count += 1;}
-            else {p2Count += 1;}
+            if (ch == ch1) {
+                p1Count += 1;
+            } else {
+                p2Count += 1;
+            }
         }
         if (p1Count > 0) {
             bq.add(ch1);
