@@ -12,11 +12,6 @@ public class BattleScoreboard extends Scoreboard {
     private static int playerHpLost;
     private static int opponentHpLost;
 
-    /**
-     * The user's current score
-     */
-    private Score currentScore;
-
     public static void setUser(String user) {
         BattleScoreboard.user = user;
     }
@@ -31,15 +26,6 @@ public class BattleScoreboard extends Scoreboard {
 
     static void setOpponentHpLost(int opponentHpLost) {
         BattleScoreboard.opponentHpLost = opponentHpLost;
-    }
-
-    /**
-     * For testing only: set the player's current score
-     *
-     * @param currentScore the score for the game just played
-     */
-    void setCurrentScore(Score currentScore) {
-        this.currentScore = currentScore;
     }
 
     String getUserBestScore() {
