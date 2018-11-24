@@ -1,5 +1,10 @@
 package gamecentre.slidingtiles;
 
+/*
+Taken from:
+https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
+*/
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,13 +57,18 @@ class BoardManager implements Serializable {
         }
 
         Collections.shuffle(tiles);
-        while (!rightWrong(sum123(intList(tiles)), tiles)){
+        while (!solvable(numInversions(intList(tiles)), tiles)){
             Collections.shuffle(tiles);
         }
         this.board = new Board(tiles);
 
     }
 
+    /**
+     * Add the numbers of the whole tiles to a new list.
+     *
+     * @return the list which contains the whole numbers.
+     */
     private int[] intList(List<Tile> tiles) {
         Board board2;
         board2 = new Board(tiles);
@@ -82,7 +92,13 @@ class BoardManager implements Serializable {
         return myList;
     }
 
-    private int sum123(int[] intList) {
+    /**
+     * Return the number of inversions in the board.
+     *
+     * @param intList the list which contains the numbers of the whole tiles.
+     * @return the number of inversions in the board.
+     */
+    private int numInversions(int[] intList) {
         int a = 0;
         for (int i = 0; i < Board.numRows*Board.numRows-1; i++) {
             int b = 0;
@@ -96,6 +112,12 @@ class BoardManager implements Serializable {
         return a;
     }
 
+    /**
+     * Return the row of the blank which counting from the bottom.
+     *
+     * @param tiles which contains all of the tiles in the board.
+     * @return the row of the blank which counting from the bottom.
+     */
     private int findBlank(List<Tile> tiles) {
         Board board2 = new Board(tiles);
         int blankId = board2.numTiles();
@@ -109,7 +131,13 @@ class BoardManager implements Serializable {
         return 0;
     }
 
-    private Boolean rightWrong(int c, List<Tile> tiles){
+    /**
+     * Return whether the board is solvable.
+     *
+     * @param tiles which contains all of the tiles in the board.
+     * @return whether the board is solvable.
+     */
+    private Boolean solvable(int c, List<Tile> tiles){
         int a = Board.numRows;
         return ((a % 2 == 1 && c % 2 == 0)||(a % 2 == 0 && (findBlank(tiles)%2 == 0 && c % 2 == 1)));
     }
