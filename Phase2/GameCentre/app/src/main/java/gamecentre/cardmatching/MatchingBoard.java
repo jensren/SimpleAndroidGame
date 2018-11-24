@@ -63,18 +63,32 @@ public class MatchingBoard extends Observable implements Serializable {
         return unknownTiles[row][col];
     }
 
+    /**
+     * Flips over an unknown tile to show what image it has.
+     * @param row Row of tile to be flipped.
+     * @param col Column of tile to be flipped.
+     */
     public void flipTile(int row, int col){
         unknownTiles[row][col] = tiles[row][col];
         setChanged();
         notifyObservers();
     }
 
+    /**
+     * Flips back a flipped over tile.
+     * @param row Row of tile to be flipped.
+     * @param col Column of tile to be flipped.
+     */
     public void flipBack(int row, int col){
         unknownTiles[row][col] = new MatchingTile(16,R.drawable.card_unknown);
         setChanged();
         notifyObservers();
     }
 
+    /**
+     * Changes two tiles to be blank, indicating that they have been removed from the board.
+     * @param flippedTiles Array containing the row and column indices of the two tiles to be flipped to blank.
+     */
     public void flipBlank(int[] flippedTiles){
         unknownTiles[flippedTiles[0]][flippedTiles[1]] = new MatchingTile(17,R.drawable.tile_25);
         unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17,R.drawable.tile_25);
