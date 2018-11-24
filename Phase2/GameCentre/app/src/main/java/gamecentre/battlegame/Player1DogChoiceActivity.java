@@ -32,7 +32,7 @@ public class Player1DogChoiceActivity extends AppCompatActivity {
         sirShibeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToPlayer2CatChoiceActivity();
+                switchToPlayer2CatChoiceActivity("SirShibe");
             }
         });
     }
@@ -45,7 +45,7 @@ public class Player1DogChoiceActivity extends AppCompatActivity {
         detectiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToPlayer2CatChoiceActivity();
+                switchToPlayer2CatChoiceActivity("DetectiveShibe");
             }
         });
     }
@@ -58,7 +58,7 @@ public class Player1DogChoiceActivity extends AppCompatActivity {
         druidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToPlayer2CatChoiceActivity();
+                switchToPlayer2CatChoiceActivity("DruidShibe");
             }
         });
     }
@@ -66,8 +66,11 @@ public class Player1DogChoiceActivity extends AppCompatActivity {
     /**
      * Switch to the Player2CatChoiceActivity view.
      */
-    private void switchToPlayer2CatChoiceActivity() {
+    private void switchToPlayer2CatChoiceActivity(String character) {
         Intent tmp = new Intent(this, Player2CatChoiceActivity.class);
+        Bundle extras = new Bundle();
+        extras.putString("player1", character);
+        tmp.putExtras(extras);
         startActivity(tmp);
     }
 }

@@ -21,6 +21,10 @@ class NinjaCat extends Character {
 
     }
 
+    /**
+     * Reduce this character's magic points and the opponents health points. Then add in this
+     * charcter into the battle queue twice.
+     */
     @Override
     void specialMove() {
         reduceMp(specialMoveCost);
@@ -33,4 +37,10 @@ class NinjaCat extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    public String getType() {
+        return "cat";
+    }
+
 }

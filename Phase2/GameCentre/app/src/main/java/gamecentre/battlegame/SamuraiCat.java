@@ -17,6 +17,10 @@ public class SamuraiCat extends Character {
         getBattleQueue().add(this);
     }
 
+    /**
+     * Perform the Samurai Cat's special attack, reduce this character's MP and reduce the HP of
+     * opponent. Reset the battle queue so that each character appears once.
+     */
     @Override
     void specialMove() {
         Character ch1 = getBattleQueue().getNextCharacter();
@@ -47,4 +51,10 @@ public class SamuraiCat extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    public String getType() {
+        return "cat";
+    }
+
 }

@@ -8,20 +8,31 @@ abstract class Character {
     private Character opponent;
     private BattleQueue battleQueue;
 
-
+    /**
+     * Return whether this character has enough Health points to perform a special attack.
+     * @return True if this character has enough HP to perform an attack.
+     */
     abstract boolean hasAttackMp();
 
+    /**
+     * Return the Magic points for this character.
+     * @return The amount of magic points.
+     */
     int getMp() {
         return mp;
     }
 
+    /**
+     * Return the number of Health points this character has.
+     * @return The amount of magic points.
+     */
     int getHp() { return hp;
     }
 
     /**
      * Get an Array of the actions available for this character.
      *
-     * @return Array of attack
+     * @return Array of attacks
      */
     String[] getActions() {
         return new String[]{"A"};
@@ -37,7 +48,8 @@ abstract class Character {
     }
 
     /**
-     * Perform this character's regular attack on its enemy.
+     * Perform this character's regular attack on its enemy and add the Character at the end of the
+     * Battle Queue.
      */
     abstract void regularMove();
 
@@ -106,4 +118,6 @@ abstract class Character {
     public void increaseHp(int amountHp) {
         hp += amountHp;
     }
+
+    public abstract String getType();
 }

@@ -21,6 +21,11 @@ public class DetectiveShibe extends Character {
 
     }
 
+    /**
+     * Reduce this character's magic points and reduce the enemy's Health points by
+     * specialMoveDamage. Add this character into the battle queue twice so it can attack twice in
+     * the next round.
+     */
     @Override
     void specialMove() {
         reduceMp(specialMoveCost);
@@ -32,6 +37,10 @@ public class DetectiveShibe extends Character {
 
     @Override
     String getSprite() {
-        return null;
+        return "detective_shibe";
+    }
+
+    public String getType() {
+        return "dog";
     }
 }
