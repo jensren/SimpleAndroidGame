@@ -34,7 +34,7 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
         sirShibeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("SirShibe");
             }
         });
     }
@@ -47,7 +47,7 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
         detectiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("DetectiveShibe");
             }
         });
     }
@@ -60,7 +60,7 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
         druidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("DruidShibe");
             }
         });
     }
@@ -68,8 +68,14 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
     /**
      * Switch to the GameActivity view.
      */
-    private void switchToGameActivity() {
+    private void switchToGameActivity(String character) {
         Intent tmp = new Intent(this, BattleGameActivity.class);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            extras.putString("player2", character);
+        } else
+            throw new NullPointerException("Value of Bundle is null");
+        tmp.putExtras(extras);
         startActivity(tmp);
     }
 }

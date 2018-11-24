@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import gamecentre.GameChoiceActivity;
 import gamecentre.slidingtiles.R;
 
 /**
@@ -33,7 +34,7 @@ public class Player1CatChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                switchToPlayer2DogChoiceActivity();
+                switchToPlayer2DogChoiceActivity("ShamanCat");
             }
         });
     }
@@ -46,7 +47,7 @@ public class Player1CatChoiceActivity extends AppCompatActivity {
         samuraiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToPlayer2DogChoiceActivity();
+                switchToPlayer2DogChoiceActivity("SamuraiCat");
             }
         });
     }
@@ -59,7 +60,7 @@ public class Player1CatChoiceActivity extends AppCompatActivity {
         ninjaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToPlayer2DogChoiceActivity();
+                switchToPlayer2DogChoiceActivity("NinjaCat");
             }
         });
     }
@@ -67,8 +68,11 @@ public class Player1CatChoiceActivity extends AppCompatActivity {
     /**
      * Switch to the Player2DogChoiceActivity view.
      */
-    private void switchToPlayer2DogChoiceActivity() {
+    private void switchToPlayer2DogChoiceActivity(String character) {
         Intent tmp = new Intent(this, Player2DogChoiceActivity.class);
+        Bundle extras = new Bundle();
+        extras.putString("player1", character);
+        tmp.putExtras(extras);
         startActivity(tmp);
     }
 }
