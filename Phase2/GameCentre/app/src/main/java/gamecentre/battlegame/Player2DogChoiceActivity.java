@@ -1,10 +1,12 @@
 package gamecentre.battlegame;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import gamecentre.slidingtiles.R;
 
@@ -24,6 +26,31 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
         addDruidButtonListener();
         addSirShibeButtonListener();
 
+        startAnimations();
+
+    }
+
+    /**
+     * Start the animations in the activity.
+     */
+    private void startAnimations() {
+        AnimationDrawable druidAnimation;
+        ImageView ninjaImage = findViewById(R.id.animateddruid2);
+        ninjaImage.setBackgroundResource(R.drawable.druid_shibe_animated);
+        druidAnimation = (AnimationDrawable) ninjaImage.getBackground();
+        druidAnimation.start();
+
+        AnimationDrawable sirAnimation;
+        ImageView shamanImage = findViewById(R.id.animatedsir2);
+        shamanImage.setBackgroundResource(R.drawable.sir_shibe_animated);
+        sirAnimation = (AnimationDrawable) shamanImage.getBackground();
+        sirAnimation.start();
+
+        AnimationDrawable detectiveAnimation;
+        ImageView samuraiImage = findViewById(R.id.animateddetective2);
+        samuraiImage.setBackgroundResource(R.drawable.detective_shibe_animated);
+        detectiveAnimation = (AnimationDrawable) samuraiImage.getBackground();
+        detectiveAnimation.start();
     }
 
     /**
@@ -34,7 +61,7 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
         sirShibeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("SirShibe");
             }
         });
     }
@@ -47,7 +74,7 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
         detectiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("DetectiveShibe");
             }
         });
     }
@@ -60,7 +87,7 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
         druidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity();
+                switchToGameActivity("DruidShibe");
             }
         });
     }
@@ -68,8 +95,14 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
     /**
      * Switch to the GameActivity view.
      */
-    private void switchToGameActivity() {
+    private void switchToGameActivity(String character) {
         Intent tmp = new Intent(this, BattleGameActivity.class);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            extras.putString("player2", character);
+        } else
+            throw new NullPointerException("Value of Bundle is null");
+        tmp.putExtras(extras);
         startActivity(tmp);
     }
 }

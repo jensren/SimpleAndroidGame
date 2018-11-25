@@ -1,45 +1,51 @@
 package gamecentre.battlegame;
 
+import android.widget.ImageView;
+
+import gamecentre.slidingtiles.R;
+
 /**
  * Representation of the Detective Shibe character.
  */
 public class DetectiveShibe extends Character {
 
-    private int regularMoveDamage = 7;
-    private int specialMoveDamage = 12;
-    private int specialMoveCost = 15;
+    private static final int REGULAR_MOVE_DAMAGE = 7;
+    private static final int SPECIAL_MOVE_DAMAGE = 12;
+    private static final int SPECIAL_MOVE_COST = 15;
 
     @Override
     boolean hasAttackMp() {
-        return getMp() >= specialMoveCost;
+        return getMp() >= SPECIAL_MOVE_COST;
     }
 
     @Override
     void regularMove() {
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        this.getOpponent().reduceHp(regularMoveDamage);
+        this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
 
     }
 
     /**
      * Reduce this character's magic points and reduce the enemy's Health points by
-     * specialMoveDamage. Add this character into the battle queue twice so it can attack twice in
+     * SPECIAL_MOVE_DAMAGE. Add this character into the battle queue twice so it can attack twice in
      * the next round.
      */
     @Override
     void specialMove() {
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        reduceMp(specialMoveCost);
-        getOpponent().reduceHp(specialMoveDamage);
+        reduceMp(SPECIAL_MOVE_COST);
+        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
         getBattleQueue().add(this);
         getBattleQueue().add(this);
-
     }
 
     @Override
     String getSprite() {
-        return null;
+        return "detective_shibe";
     }
 
+    public String getType() {
+        return "dog";
+    }
 }

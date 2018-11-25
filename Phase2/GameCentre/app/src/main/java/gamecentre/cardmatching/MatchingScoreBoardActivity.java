@@ -20,7 +20,7 @@ import gamecentre.slidingtiles.R;
      */
     public class MatchingScoreBoardActivity extends AppCompatActivity {
 
-        TextView scoreBoard;
+        TextView scoreBoard; 
         public static String user;
         public static final String SCORE_FILENAME = "cardmatching_scoreboard_file.ser";
         MatchingScoreBoard scoreboard;

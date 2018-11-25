@@ -5,19 +5,19 @@ package gamecentre.battlegame;
  */
 class NinjaCat extends Character {
 
-    private int specialMoveCost = 9;
-    private int specialMoveDamage = 15;
-    private int regularMoveDamage = 5;
+    private static final int SPECIAL_MOVE_COST = 9;
+    private static final int SPECIAL_MOVE_DAMAGE = 15;
+    private static final int REGULAR_MOVE_DAMAGE = 5;
 
     @Override
     boolean hasAttackMp() {
-        return getMp() >= specialMoveCost;
+        return getMp() >= SPECIAL_MOVE_COST;
     }
 
     @Override
     void regularMove() {
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        this.getOpponent().reduceHp(regularMoveDamage);
+        this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
 
     }
@@ -28,9 +28,8 @@ class NinjaCat extends Character {
      */
     @Override
     void specialMove() {
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        reduceMp(specialMoveCost);
-        reduceHp(specialMoveDamage);
+        reduceMp(SPECIAL_MOVE_COST);
+        reduceHp(SPECIAL_MOVE_DAMAGE);
         getBattleQueue().add(this);
         getBattleQueue().add(this);
     }
@@ -39,4 +38,10 @@ class NinjaCat extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    public String getType() {
+        return "cat";
+    }
+
 }

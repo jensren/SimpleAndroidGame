@@ -46,33 +46,33 @@
         android:text="Druid" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/animatedsir1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/sir"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="-70dp"
         android:layout_marginEnd="29dp"
-        app:srcCompat="@drawable/sir_shibe_animated" />
+        android:background="@drawable/sir_shibe_animated" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/animateddruid1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/druid"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="-53dp"
-        app:srcCompat="@drawable/druid_shibe_animated" />
+        android:background="@drawable/druid_shibe_animated" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/animateddetective1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="25dp"
-        app:srcCompat="@drawable/detective_shibe_animated" />
+        android:background="@drawable/detective_shibe_animated" />
 
 </RelativeLayout>

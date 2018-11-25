@@ -4,8 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.Locale;
-
-import gamecentre.slidingtiles.SlidingtilesScore;
+import java.util.Objects;
 
 public class Score implements Comparable<Score>, Serializable {
     /**
@@ -61,5 +60,21 @@ public class Score implements Comparable<Score>, Serializable {
     @Override
     public String toString() {
         return String.format(Locale.getDefault(), "Player %s: %d points", username, points);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score = (Score) o;
+        return points == score.points &&
+                Objects.equals(username, score.username);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(username, points);
     }
 }

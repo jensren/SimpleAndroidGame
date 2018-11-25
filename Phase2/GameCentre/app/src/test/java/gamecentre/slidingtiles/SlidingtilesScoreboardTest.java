@@ -1,4 +1,4 @@
-package gamecentre.battlegame;
+package gamecentre.slidingtiles;
 
 import org.junit.Test;
 
@@ -10,12 +10,12 @@ import gamecentre.Scoreboard;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class BattleScoreboardTest {
+public class SlidingtilesScoreboardTest {
 
     /**
-     * The BattleScoreboard to test
+     * The SlidingtilesScoreboard to test
      */
-    private BattleScoreboard scoreboard = new BattleScoreboard();
+    private SlidingtilesScoreboard scoreboard = new SlidingtilesScoreboard();
 
     /**
      * Create a generic score list, where Player i is in ith place, with a score of i
@@ -61,10 +61,9 @@ public class BattleScoreboardTest {
     @Test
     public void testGetUserCurrentScoreWithScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("1");
-        BattleScoreboard.setNumMoves(1);
-        BattleScoreboard.setOpponentHpLost(1);
-        BattleScoreboard.setPlayerHpLost(1);
+        SlidingtilesScoreboard.setUser("1");
+        SlidingtilesScoreboard.setNumMoves(100);
+        SlidingtilesScoreboard.setBoardSize(1);
         // The player's score will be 100
         scoreboard.update();
         assertEquals("Your Score: 100", scoreboard.getUserCurrentScore());
@@ -76,7 +75,7 @@ public class BattleScoreboardTest {
     @Test
     public void testGetUserCurrentScoreWithoutScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("Unknown");
+        SlidingtilesScoreboard.setUser("Unknown");
         assertEquals("Your Score: None", scoreboard.getUserCurrentScore());
     }
 
@@ -86,7 +85,7 @@ public class BattleScoreboardTest {
     @Test
     public void getUserBestScoreWithScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("1");
+        SlidingtilesScoreboard.setUser("1");
         assertEquals("Best Score: 1", scoreboard.getUserBestScore());
     }
 
@@ -96,7 +95,7 @@ public class BattleScoreboardTest {
     @Test
     public void getUserBestScoreWithoutScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("Unknown");
+        SlidingtilesScoreboard.setUser("Unknown");
         assertEquals("Best Score: None", scoreboard.getUserBestScore());
     }
 
@@ -106,10 +105,9 @@ public class BattleScoreboardTest {
     @Test
     public void testUpdateNotHighScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("1");
-        BattleScoreboard.setNumMoves(1);
-        BattleScoreboard.setOpponentHpLost(1);
-        BattleScoreboard.setPlayerHpLost(1);
+        SlidingtilesScoreboard.setUser("1");
+        SlidingtilesScoreboard.setNumMoves(100);
+        SlidingtilesScoreboard.setBoardSize(1);
         // The player's score will be 100
         scoreboard.update();
         Score[] expectedGameHighScores = createScoreList();
@@ -127,10 +125,9 @@ public class BattleScoreboardTest {
     @Test
     public void testUpdateNewPlayer() {
         populateScoreboard();
-        BattleScoreboard.setUser("New Player");
-        BattleScoreboard.setNumMoves(1);
-        BattleScoreboard.setOpponentHpLost(1);
-        BattleScoreboard.setPlayerHpLost(1);
+        SlidingtilesScoreboard.setUser("New Player");
+        SlidingtilesScoreboard.setNumMoves(100);
+        SlidingtilesScoreboard.setBoardSize(1);
         // The player's score will be 100
         scoreboard.update();
 
@@ -152,16 +149,14 @@ public class BattleScoreboardTest {
     @Test
     public void testUpdateNewHighScore() {
         populateScoreboard();
-        BattleScoreboard.setUser("Underdog");
-        BattleScoreboard.setNumMoves(1);
-        BattleScoreboard.setOpponentHpLost(1);
-        BattleScoreboard.setPlayerHpLost(1);
+        SlidingtilesScoreboard.setUser("Underdog");
+        SlidingtilesScoreboard.setNumMoves(100);
+        SlidingtilesScoreboard.setBoardSize(1);
         // The player's score will be 100
         scoreboard.update();
         Score newScore = new Score("Underdog", 0);
-        BattleScoreboard.setNumMoves(1);
-        BattleScoreboard.setOpponentHpLost(100);
-        BattleScoreboard.setPlayerHpLost(0);
+        SlidingtilesScoreboard.setNumMoves(1);
+        SlidingtilesScoreboard.setBoardSize(100);
         // The player's score will be 0
         scoreboard.update();
 

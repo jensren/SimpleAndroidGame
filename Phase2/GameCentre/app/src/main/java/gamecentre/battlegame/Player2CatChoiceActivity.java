@@ -1,13 +1,16 @@
 package gamecentre.battlegame;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import gamecentre.GameChoiceActivity;
+import gamecentre.slidingtiles.GameActivity;
 import gamecentre.slidingtiles.R;
 
 /**
@@ -24,6 +27,31 @@ public class Player2CatChoiceActivity extends AppCompatActivity {
         addSamuraiButtonListener();
         addShamanButtonListener();
 
+        startAnimations();
+
+    }
+
+    /**
+     * Start the animations in the activity.
+     */
+    private void startAnimations() {
+        AnimationDrawable ninjaAnimation;
+        ImageView ninjaImage = findViewById(R.id.animatedninja2);
+        ninjaImage.setBackgroundResource(R.drawable.ninja_cat_animated);
+        ninjaAnimation = (AnimationDrawable) ninjaImage.getBackground();
+        ninjaAnimation.start();
+
+        AnimationDrawable shamanAnimation;
+        ImageView shamanImage = findViewById(R.id.animatedshaman2);
+        shamanImage.setBackgroundResource(R.drawable.shaman_cat_animated);
+        shamanAnimation = (AnimationDrawable) shamanImage.getBackground();
+        shamanAnimation.start();
+
+        AnimationDrawable samuraiAnimation;
+        ImageView samuraiImage = findViewById(R.id.animatedsamurai2);
+        samuraiImage.setBackgroundResource(R.drawable.samurai_cat_animated);
+        samuraiAnimation = (AnimationDrawable) samuraiImage.getBackground();
+        samuraiAnimation.start();
     }
 
     /**
@@ -34,7 +62,7 @@ public class Player2CatChoiceActivity extends AppCompatActivity {
         shamanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity("shaman");
+                switchToGameActivity("ShamanCat");
             }
         });
     }
@@ -47,7 +75,7 @@ public class Player2CatChoiceActivity extends AppCompatActivity {
         samuraiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity("samurai");
+                switchToGameActivity("SamuraiCat");
             }
         });
     }
@@ -60,7 +88,7 @@ public class Player2CatChoiceActivity extends AppCompatActivity {
         ninjaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGameActivity("ninja");
+                switchToGameActivity("NinjaCat");
             }
         });
     }
@@ -68,12 +96,15 @@ public class Player2CatChoiceActivity extends AppCompatActivity {
     /**
      * @param character The name of the character chosen
      */
-    @NonNull
     private void switchToGameActivity(String character) {
-        Intent tmp = new Intent(Player2CatChoiceActivity.this, GameChoiceActivity.class);
-        Bundle extras = tmp.getExtras();
-        extras.putString("cat", character);
+        Intent tmp = new Intent(this, BattleGameActivity.class);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            extras.putString("player2", character);
+        } else
+            throw new NullPointerException("Value of Bundle is null");
+        tmp.putExtras(extras);
         startActivity(tmp);
-
     }
 }
+

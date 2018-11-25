@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Locale;
 
+import gamecentre.Score;
 import gamecentre.Scoreboard;
 
 /**
@@ -21,7 +22,6 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
     /**
      * The user's current score
      */
-    private SlidingtilesScore currentScore;
 
     static void setUser(String user) {
         SlidingtilesScoreboard.user = user;
@@ -43,11 +43,11 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
         return super.getUserCurrentScore(currentScore);
     }
 
-    private void updateGameHighScore(SlidingtilesScore newScore) {
+    protected void updateGameHighScore(Score newScore) {
         super.updateGameHighScore(newScore);
     }
 
-    private void updateUserHighScore(SlidingtilesScore newScore) {
+    protected void updateUserHighScore(Score newScore) {
         super.updateUserHighScore(newScore);
     }
 
@@ -55,7 +55,7 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
     public void update() {
         if (numMoves != 0) {
             int points = numMoves / boardSize;
-            currentScore = new SlidingtilesScore(user, points);
+            currentScore = new Score(user, points);
             updateGameHighScore(currentScore);
             updateUserHighScore(currentScore);
         }

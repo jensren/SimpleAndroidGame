@@ -5,19 +5,19 @@ package gamecentre.battlegame;
  */
 public class SirShibe extends Character {
 
-    private int regularMoveDamage = 10;
-    private int specialMoveDamage = 13;
-    private int specialMoveCost = 12;
+    private static final int REGULAR_MOVE_DAMAGE = 10;
+    private static final int SPECIAL_MOVE_DAMAGE = 13;
+    private static final int SPECIAL_MOVE_COST = 12;
 
     @Override
     boolean hasAttackMp() {
-        return getMp() >= specialMoveCost;
+        return getMp() >= SPECIAL_MOVE_COST;
     }
 
     @Override
     void regularMove() {
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        this.getOpponent().reduceHp(regularMoveDamage);
+        this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
     }
 
@@ -32,8 +32,8 @@ public class SirShibe extends Character {
         BattleQueue bq = ch1.getBattleQueue();
         Character ch;
 
-        reduceMp(specialMoveCost);
-        this.getOpponent().reduceHp(specialMoveDamage);
+        reduceMp(SPECIAL_MOVE_COST);
+        this.getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
 
         int p1Count = 0;
         int p2Count = 0;
@@ -55,6 +55,11 @@ public class SirShibe extends Character {
     @Override
     String getSprite() {
         return null;
+    }
+
+    @Override
+    public String getType() {
+        return "dog";
     }
 
 }

@@ -8,20 +8,20 @@ package gamecentre.battlegame;
  */
 class DruidShibe extends Character {
 
-    private int regularMoveDamage = 8;
-    private int specialMoveDamage = 13;
-    private int specialMoveCost = 10;
+    private static final int REGULAR_MOVE_DAMAGE = 8;
+    private static final int SPECIAL_MOVE_DAMAGE = 13;
+    private static final int SPECIAL_MOVE_COST = 10;
 
 
     @Override
     boolean hasAttackMp() {
-        return getHp() >= specialMoveCost;
+        return getHp() >= SPECIAL_MOVE_COST;
     }
 
     @Override
     void regularMove() {
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        this.getOpponent().reduceHp(regularMoveDamage);
+        this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
     }
 
@@ -33,8 +33,8 @@ class DruidShibe extends Character {
     @Override
     void specialMove() {
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        reduceMp(specialMoveCost);
-        this.getOpponent().reduceHp(specialMoveDamage);
+        reduceMp(SPECIAL_MOVE_COST);
+        this.getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
         getBattleQueue().add(this);
         getBattleQueue().add(this);
     }
@@ -42,6 +42,11 @@ class DruidShibe extends Character {
     @Override
     String getSprite() {
         return null;
+    }
+
+    @Override
+    public String getType() {
+        return "dog";
     }
 
 }
