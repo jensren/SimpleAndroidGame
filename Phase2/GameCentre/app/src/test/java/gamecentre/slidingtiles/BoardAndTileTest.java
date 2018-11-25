@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class BoardAndTileTest {
 
     /** The board manager for testing. */
-    BoardManager boardManager;
+    private BoardManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -93,6 +93,36 @@ public class BoardAndTileTest {
         assertEquals(true, boardManager.isValidTap(11));
         assertEquals(true, boardManager.isValidTap(14));
         assertEquals(false, boardManager.isValidTap(10));
+    }
+
+    /**
+     * Test if number moves updates properly.
+     */
+    @Test
+    public void testNumMoves(){
+        setUpCorrect();
+        boardManager.updateMoves();
+        assertEquals(true, boardManager.getNumMoves() == 1);
+        boardManager.updateMoves();
+        assertEquals(false, boardManager.getNumMoves() == 1);
+    }
+
+    /**
+     * Tests if solvable function works.
+     */
+    @Test
+    public void testSolvable(){
+        setUpCorrect();
+        assertEquals(true, boardManager.solvable(makeTiles()));
+    }
+
+    /**
+     *  Tests if getBoardSize returns the correct board size.
+     */
+    @Test
+    public void testGetBoardSize(){
+        setUpCorrect();
+        assertEquals(true, boardManager.getBoardSize() == 4);
     }
 }
 
