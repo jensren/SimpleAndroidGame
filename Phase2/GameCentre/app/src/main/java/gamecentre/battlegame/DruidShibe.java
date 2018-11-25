@@ -42,4 +42,12 @@ class DruidShibe extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    Character copyCharacter() {
+        Character ch = new DruidShibe();
+        ch.setHp(this.getHp());
+        ch.setMp(this.getMp());
+        return ch;
+    }
 }

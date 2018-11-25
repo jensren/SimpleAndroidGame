@@ -39,4 +39,12 @@ public class DetectiveShibe extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    Character copyCharacter() {
+        Character ch = new DetectiveShibe();
+        ch.setHp(this.getHp());
+        ch.setMp(this.getMp());
+        return ch;
+    }
 }

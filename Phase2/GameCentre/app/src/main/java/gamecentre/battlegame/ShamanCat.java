@@ -41,5 +41,13 @@ public class ShamanCat extends Character {
         return null;
     }
 
+    @Override
+    Character copyCharacter() {
+        Character ch = new ShamanCat();
+        ch.setHp(this.getHp());
+        ch.setMp(this.getMp());
+        return ch;
+    }
+
 
 }

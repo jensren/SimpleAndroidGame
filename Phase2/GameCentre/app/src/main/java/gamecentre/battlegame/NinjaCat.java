@@ -37,4 +37,12 @@ class NinjaCat extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    Character copyCharacter() {
+        Character ch = new NinjaCat();
+        ch.setHp(this.getHp());
+        ch.setMp(this.getMp());
+        return ch;
+    }
 }

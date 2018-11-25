@@ -30,6 +30,22 @@ abstract class Character {
     }
 
     /**
+     * Set the Mp of this character to newMp.
+     * @param newMp
+     */
+    void setMp(int newMp) {
+        mp = newMp;
+    }
+
+    /**
+     * Set the Hp of this character to newHp.
+     * @param newHp
+     */
+    void setHp(int newHp) {
+        hp = newHp;
+    }
+
+    /**
      * Get an Array of the actions available for this character.
      *
      * @return Array of attack
@@ -118,4 +134,10 @@ abstract class Character {
     public void increaseHp(int amountHp) {
         hp += amountHp;
     }
+
+    /**
+     * Create and return a copy of this character which has the same HP and MP as this character
+     * @return A new character with the same attributes as this character.
+     */
+    abstract Character copyCharacter();
 }

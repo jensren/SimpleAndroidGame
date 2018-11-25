@@ -55,4 +55,12 @@ public class SirShibe extends Character {
     String getSprite() {
         return null;
     }
+
+    @Override
+    Character copyCharacter() {
+        Character ch = new SirShibe();
+        ch.setHp(this.getHp());
+        ch.setMp(this.getMp());
+        return ch;
+    }
 }
