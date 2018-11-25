@@ -13,7 +13,7 @@ class BoardManager implements Serializable {
     /**
      * The board being managed.
      */
-    private Board board;
+    Board board;
 
     /**
      * Manage a board that has been pre-populated.
@@ -52,7 +52,7 @@ class BoardManager implements Serializable {
         }
 
         Collections.shuffle(tiles);
-        while (!solvable(numInversions(intList(tiles)), tiles)){
+        while (!solvable(tiles)){
             Collections.shuffle(tiles);
         }
         this.board = new Board(tiles);
@@ -130,9 +130,10 @@ class BoardManager implements Serializable {
      *The formula below for finding out if a given board is solvable is taken from
      * https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
      */
-    private Boolean solvable(int Inversions, List<Tile> tiles){
+     Boolean solvable(List<Tile> tiles){
+         int inversions = numInversions(intList(tiles));
         int a = Board.numRows;
-        return ((a % 2 == 1 && Inversions % 2 == 0)||(a % 2 == 0 && (findBlank(tiles)%2 == 0 && Inversions % 2 == 1)));
+        return ((a % 2 == 1 && inversions % 2 == 0)||(a % 2 == 0 && (findBlank(tiles)%2 == 0 && inversions % 2 == 1)));
     }
 
 
