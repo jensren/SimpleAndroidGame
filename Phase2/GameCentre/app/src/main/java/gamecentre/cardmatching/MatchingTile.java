@@ -57,7 +57,6 @@ public class MatchingTile implements Comparable<MatchingTile>, Serializable {
      */
     MatchingTile(int backgroundId) {
         id = backgroundId + 1;
-        // This looks so ugly.
         switch (backgroundId + 1) {
             case 1:
                 background = R.drawable.card_1;

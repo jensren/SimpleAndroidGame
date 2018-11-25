@@ -91,7 +91,6 @@ public class MatchingBoardManager implements Serializable {
      * Processes a touch on the screen and flips tiles accordingly depending on how many tiles are currently flipped.
      * @param position the position you touched.
      */
-    //TODO: Bug:If player clicks something during the 0.5s time window it breaks things.
     void touchMove(int position){
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
@@ -107,7 +106,7 @@ public class MatchingBoardManager implements Serializable {
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
                 if (tilesMatched != 14){                         //This part runs as long as you're not about to win.
-                    new Handler().postDelayed(new Runnable() {   //Waits 0.3 second and then checks matching and flips over accordingly
+                    new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
                         @Override
                         public void run() {
                             checkMatching();
@@ -151,9 +150,5 @@ public class MatchingBoardManager implements Serializable {
 
     int getNumMoves() {
         return numMoves;
-    }
-
-    int getBoardSize() {
-        return MatchingBoard.numRows;
     }
 }
