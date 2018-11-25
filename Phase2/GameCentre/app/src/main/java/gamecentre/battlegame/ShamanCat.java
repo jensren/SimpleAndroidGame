@@ -17,6 +17,7 @@ public class ShamanCat extends Character {
 
     @Override
     void regularMove() {
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
 
@@ -28,6 +29,7 @@ public class ShamanCat extends Character {
      */
     @Override
     void specialMove() {
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(SPECIAL_MOVE_COST);
         getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
         increaseHp(SPECIAL_MOVE_DAMAGE);

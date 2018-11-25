@@ -33,7 +33,7 @@ public class BattleScoreboard extends Scoreboard {
     }
 
     protected String getUserCurrentScore() {
-        return super.getUserCurrentScore(currentScore);
+        return super.getUserCurrentScore();
     }
 
     protected void updateGameHighScore(Score newScore) {

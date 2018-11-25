@@ -33,6 +33,8 @@
 * Cats you can choose from: Shaman, Samurai and Ninja
 * Each round, you can choose to use your regular or your special move. Regular moves don't use up MP, but special moves do. 
 * The game ends once a player runs out of HP. The winner is the player with HP remaining. 
+* For the animations, image 0 and 1 are the standing animation, image 2 and 3 are the regular attack
+  animation, and image 4 and 5 are the special attack animation
  
 
 ## Card Matching Game Rules:

@@ -1,4 +1,4 @@
-package gamecentre.slidingtiles;
+package gamecentre.cardmatching;
 
 import org.junit.Test;
 
@@ -7,15 +7,13 @@ import java.util.HashMap;
 import gamecentre.Score;
 import gamecentre.Scoreboard;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-public class SlidingtilesScoreboardTest {
-
+public class MatchingScoreboardTest {
     /**
-     * The SlidingtilesScoreboard to test
+     * The MatchingScoreboard to test
      */
-    private SlidingtilesScoreboard scoreboard = new SlidingtilesScoreboard();
+    private MatchingScoreboard scoreboard = new MatchingScoreboard();
 
     /**
      * Create a generic score list, where Player i is in ith place, with a score of i
@@ -61,9 +59,8 @@ public class SlidingtilesScoreboardTest {
     @Test
     public void testGetUserCurrentScoreWithScore() {
         populateScoreboard();
-        SlidingtilesScoreboard.setUser("1");
-        SlidingtilesScoreboard.setNumMoves(100);
-        SlidingtilesScoreboard.setBoardSize(1);
+        MatchingScoreboard.setUser("1");
+        MatchingScoreboard.setNumMoves(100);
         // The player's score will be 100
         scoreboard.update();
         assertEquals("Your Score: 100", scoreboard.getUserCurrentScore());
@@ -75,7 +72,7 @@ public class SlidingtilesScoreboardTest {
     @Test
     public void testGetUserCurrentScoreWithoutScore() {
         populateScoreboard();
-        SlidingtilesScoreboard.setUser("Unknown");
+        MatchingScoreboard.setUser("Unknown");
         assertEquals("Your Score: None", scoreboard.getUserCurrentScore());
     }
 
@@ -85,7 +82,7 @@ public class SlidingtilesScoreboardTest {
     @Test
     public void getUserBestScoreWithScore() {
         populateScoreboard();
-        SlidingtilesScoreboard.setUser("1");
+        MatchingScoreboard.setUser("1");
         assertEquals("Best Score: 1", scoreboard.getUserBestScore());
     }
 
@@ -95,7 +92,7 @@ public class SlidingtilesScoreboardTest {
     @Test
     public void getUserBestScoreWithoutScore() {
         populateScoreboard();
-        SlidingtilesScoreboard.setUser("Unknown");
+        MatchingScoreboard.setUser("Unknown");
         assertEquals("Best Score: None", scoreboard.getUserBestScore());
     }
 
@@ -105,9 +102,8 @@ public class SlidingtilesScoreboardTest {
     @Test
     public void testUpdateNotHighScore() {
         populateScoreboard();
-        SlidingtilesScoreboard.setUser("1");
-        SlidingtilesScoreboard.setNumMoves(100);
-        SlidingtilesScoreboard.setBoardSize(1);
+        MatchingScoreboard.setUser("1");
+        MatchingScoreboard.setNumMoves(100);
         // The player's score will be 100
         scoreboard.update();
         Score[] expectedGameHighScores = createScoreList();
@@ -125,9 +121,8 @@ public class SlidingtilesScoreboardTest {
     @Test
     public void testUpdateNewPlayer() {
         populateScoreboard();
-        SlidingtilesScoreboard.setUser("New Player");
-        SlidingtilesScoreboard.setNumMoves(100);
-        SlidingtilesScoreboard.setBoardSize(1);
+        MatchingScoreboard.setUser("New Player");
+        MatchingScoreboard.setNumMoves(100);
         // The player's score will be 100
         scoreboard.update();
 
@@ -149,14 +144,12 @@ public class SlidingtilesScoreboardTest {
     @Test
     public void testUpdateNewHighScore() {
         populateScoreboard();
-        SlidingtilesScoreboard.setUser("Underdog");
-        SlidingtilesScoreboard.setNumMoves(100);
-        SlidingtilesScoreboard.setBoardSize(1);
+        MatchingScoreboard.setUser("Underdog");
+        MatchingScoreboard.setNumMoves(100);
         // The player's score will be 100
         scoreboard.update();
         Score newScore = new Score("Underdog", 0);
-        SlidingtilesScoreboard.setNumMoves(1);
-        SlidingtilesScoreboard.setBoardSize(100);
+        MatchingScoreboard.setNumMoves(0);
         // The player's score will be 0
         scoreboard.update();
 

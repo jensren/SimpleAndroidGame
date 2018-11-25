@@ -159,11 +159,18 @@ public class MatchingGameActivity extends AppCompatActivity implements Observer{
         display();
         saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
     }
+
+    /**
+     * Switches to the scoreboard activity.
+     */
     private void switchToScoreBoardActivity() {
-        Intent tmp = new Intent(this, MatchingScoreBoardActivity.class);
+        Intent tmp = new Intent(this, MatchingScoreboardActivity.class);
         startActivity(tmp);
     }
 
+    /**
+     * An observer class created to observe if the game has been won. If it does, it will update and call switchToScoreboard.
+     */
     private class WinObserver implements Observer {
         public void update(Observable o, Object arg) {
             switchToScoreBoardActivity();
