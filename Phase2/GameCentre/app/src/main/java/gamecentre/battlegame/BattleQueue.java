@@ -37,10 +37,14 @@ public class BattleQueue implements Serializable {
     /**
      * Remove and return the next character from the front of the battle queue.
      *
-     * @Return The rext character in this Battle Queue
+     * @return The next character in this Battle Queue
      */
     Character removeCharacter() {
-        return queue.remove(0);
+
+        if (queue.size() > 0) {
+            return queue.remove(0);
+        }
+        return null;
     }
 
 //    /**
@@ -96,7 +100,7 @@ public class BattleQueue implements Serializable {
      * the same order.
      * @return A copy of this battle queue.
      */
-    public BattleQueue copyBq() {
+    BattleQueue copyBq() {
         BattleQueue bq = new BattleQueue();
         for (Character ch : queue) {
             bq.add(ch);
@@ -110,6 +114,14 @@ public class BattleQueue implements Serializable {
      */
     public void updateUndoStack(BattleQueue bq) {
         undoStack.add(bq);
+    }
+
+    /**
+     * Return if the click to the undo button is invalid
+     * @return True if there are no moves to undo, else return false.
+     */
+    boolean isInValidUndo() {
+        return undoStack.size() == 0;
     }
 
     /**
