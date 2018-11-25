@@ -233,31 +233,14 @@ public class BattleGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Character character = battleQueue.getNextCharacter();
-                String sprite = character.getSprite() + "2";
 
                 if (character.hasAttackMp()) {
                     character.specialMove();
-                    final String sprite1 = character.getSprite() + "2";
+                    final String sprite1 = character.getSprite() + "5";
                     final String sprite2 = character.getSprite() + "0";
                     displayTurn(character);
 
-                    if (character.getType().equals("cat")) {
-                        catImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
-                        new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
-                            @Override
-                            public void run() {
-                                catImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
-                            }
-                        }, 350);
-                    } else {
-                        dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
-                        new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
-                            @Override
-                            public void run() {
-                                dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
-                            }
-                        }, 350);
-                    }
+                    displayAttackImage(character, sprite1, sprite2);
                     Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
                 battleQueue.removeCharacter();
@@ -269,10 +252,35 @@ public class BattleGameActivity extends AppCompatActivity {
                     Character nextCharacter = battleQueue.getNextCharacter();
                     displayTurn(nextCharacter);
                 }
-
-
             }
         });
+    }
+
+    /**
+     * Display the attack sprite for the character.
+     *
+     * @param character The character who is attacking
+     * @param sprite1   The attack image
+     * @param sprite2   The original image
+     */
+    private void displayAttackImage(Character character, String sprite1, final String sprite2) {
+        if (character.getType().equals("cat")) {
+            catImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    catImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
+                }
+            }, 350);
+        } else {
+            dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
+                }
+            }, 350);
+        }
     }
 
     /**
@@ -289,23 +297,7 @@ public class BattleGameActivity extends AppCompatActivity {
                 final String sprite2 = character.getSprite() + "0";
                 displayTurn(character);
 
-                if (character.getType().equals("cat")) {
-                    catImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
-                    new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
-                        @Override
-                        public void run() {
-                            catImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
-                        }
-                    }, 350);
-                } else {
-                    dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
-                    new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
-                        @Override
-                        public void run() {
-                            dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
-                        }
-                    }, 350);
-                }
+                displayAttackImage(character, sprite1, sprite2);
                 character.regularMove();
                 Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
                 if (!battleQueue.isEmpty()) {
