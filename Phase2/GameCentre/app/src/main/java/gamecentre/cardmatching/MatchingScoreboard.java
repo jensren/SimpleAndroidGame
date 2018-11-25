@@ -5,11 +5,10 @@ import gamecentre.Scoreboard;
 
 public class MatchingScoreboard extends Scoreboard {
     /**
-     * The current user, number of moves, and board size
+     * The current user, number of moves
      */
     private static String user;
     private static int numMoves;
-    private static int boardSize;
 
     /**
      * Sets scoreboard's user to the current player's username.
@@ -25,10 +24,6 @@ public class MatchingScoreboard extends Scoreboard {
      */
     static void setNumMoves(int numMoves) {
         MatchingScoreboard.numMoves = numMoves;
-    }
-
-    static void setBoardSize(int boardSize) {
-        MatchingScoreboard.boardSize = boardSize;
     }
 
     /**

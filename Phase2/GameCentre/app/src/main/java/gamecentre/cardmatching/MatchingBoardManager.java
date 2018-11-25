@@ -151,8 +151,4 @@ public class MatchingBoardManager implements Serializable {
     int getNumMoves() {
         return numMoves;
     }
-
-    int getBoardSize() {
-        return MatchingBoard.numRows;
-    }
 }
