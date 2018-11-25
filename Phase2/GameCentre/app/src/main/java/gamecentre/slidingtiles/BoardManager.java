@@ -1,10 +1,5 @@
 package gamecentre.slidingtiles;
 
-/*
-Our implementation of finding out if a generated board (includes 3 methods) is solvable is taken from:
-https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
-*/
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,12 +69,6 @@ class BoardManager implements Serializable {
         board2 = new Board(tiles);
         int blankId = board2.numTiles();
         int[] myList = new int[Board.numRows*Board.numRows - 1];
-        //Iterator<Tile> tile = tiles.iterator();
-        //for(int i = 0; i < myList.length; i++){
-            //Tile a = tile.;
-            //if (a.getId() != blankId) {
-                //myList[i] = a.getId();
-            //}
         int i = 0;
         for (int row = 0; row != Board.numRows; row++) {
             for (int col = 0; col != Board.numCols; col++) {
@@ -137,9 +126,13 @@ class BoardManager implements Serializable {
      * @param tiles which contains all of the tiles in the board.
      * @return whether the board is solvable.
      */
-    private Boolean solvable(int c, List<Tile> tiles){
+    /*
+     *The formula below for finding out if a given board is solvable is taken from
+     * https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
+     */
+    private Boolean solvable(int Inversions, List<Tile> tiles){
         int a = Board.numRows;
-        return ((a % 2 == 1 && c % 2 == 0)||(a % 2 == 0 && (findBlank(tiles)%2 == 0 && c % 2 == 1)));
+        return ((a % 2 == 1 && Inversions % 2 == 0)||(a % 2 == 0 && (findBlank(tiles)%2 == 0 && Inversions % 2 == 1)));
     }
 
 
