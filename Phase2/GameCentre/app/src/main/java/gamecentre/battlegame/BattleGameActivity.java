@@ -67,11 +67,6 @@ public class BattleGameActivity extends AppCompatActivity {
      * The ImageView for the dog's image
      */
     private ImageView dogImage;
-    /**
-     * The TextView for displaying whose turn it is
-     */
-    private TextView turnView;
-
 
     //TODO: save battle game to files
 
@@ -83,9 +78,6 @@ public class BattleGameActivity extends AppCompatActivity {
 
         catImage = findViewById(R.id.catimage);
         dogImage = findViewById(R.id.dogimage);
-        turnView = findViewById(R.id.turn);
-        String text = player1.getType() + "'s turn";
-        turnView.setText(text);
 
         addRegularMoveButtonListener();
         addSpecialMoveButtonListener();
@@ -97,6 +89,7 @@ public class BattleGameActivity extends AppCompatActivity {
         initializeHpMp();
         updateCharacterPoints();
         setSprites();
+        displayTurn(player1);
     }
 
     /**
@@ -236,8 +229,6 @@ public class BattleGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Character character = battleQueue.getNextCharacter();
-                String text = character.getType() + "'s turn";
-                turnView.setText(text);
 
                 if (character.hasAttackMp()) {
                     character.specialMove();
@@ -247,6 +238,13 @@ public class BattleGameActivity extends AppCompatActivity {
                     battleQueue.removeCharacter();
                 }
                 updateCharacterPoints();
+
+                if (battleQueue.getWinner() != null) {
+                    Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Character nextCharacter = battleQueue.getNextCharacter();
+                    displayTurn(nextCharacter);
+                }
 
 
             }
@@ -263,16 +261,34 @@ public class BattleGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Character character = battleQueue.getNextCharacter();
-                String text = character.getType() + "'s turn";
-                turnView.setText(text);
+                displayTurn(character);
+
                 character.regularMove();
                 Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
                 if (!battleQueue.isEmpty()) {
                     battleQueue.removeCharacter();
                 }
                 updateCharacterPoints();
+
+                if (battleQueue.getWinner() != null) {
+                    Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Character nextCharacter = battleQueue.getNextCharacter();
+                    displayTurn(nextCharacter);
+                }
             }
         });
+    }
+
+    /**
+     * Update the TextView to show that it is character's turn.
+     *
+     * @param character The character whose turn it is
+     */
+    private void displayTurn(Character character) {
+        TextView turnView = findViewById(R.id.turn);
+        String text = character.getType() + "'s turn";
+        turnView.setText(text);
     }
 
     /**
