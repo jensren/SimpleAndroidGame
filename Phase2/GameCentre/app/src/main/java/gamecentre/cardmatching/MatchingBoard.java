@@ -15,7 +15,7 @@ public class MatchingBoard extends Observable implements Serializable {
     final static int numRows = 4;
 
     /**
-     * The number of rows.
+     * The number of columns.
      */
     final static int numCols = 4;
 

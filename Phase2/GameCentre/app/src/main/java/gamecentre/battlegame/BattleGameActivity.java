@@ -2,6 +2,7 @@ package gamecentre.battlegame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.TimeUnit;
 
 import gamecentre.slidingtiles.R;
 
@@ -67,11 +69,6 @@ public class BattleGameActivity extends AppCompatActivity {
      * The ImageView for the dog's image
      */
     private ImageView dogImage;
-    /**
-     * The TextView for displaying whose turn it is
-     */
-    private TextView turnView;
-
 
     //TODO: save battle game to files
 
@@ -83,9 +80,6 @@ public class BattleGameActivity extends AppCompatActivity {
 
         catImage = findViewById(R.id.catimage);
         dogImage = findViewById(R.id.dogimage);
-        turnView = findViewById(R.id.turn);
-        String text = player1.getType() + "'s turn";
-        turnView.setText(text);
 
         addRegularMoveButtonListener();
         addSpecialMoveButtonListener();
@@ -97,6 +91,7 @@ public class BattleGameActivity extends AppCompatActivity {
         initializeHpMp();
         updateCharacterPoints();
         setSprites();
+        displayTurn(player1);
     }
 
     /**
@@ -236,17 +231,44 @@ public class BattleGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Character character = battleQueue.getNextCharacter();
-                String text = character.getType() + "'s turn";
-                turnView.setText(text);
+                String sprite = character.getSprite() + "2";
 
                 if (character.hasAttackMp()) {
                     character.specialMove();
+                    final String sprite1 = character.getSprite() + "2";
+                    final String sprite2 = character.getSprite() + "0";
+                    displayTurn(character);
+
+                    if (character.getType().equals("cat")) {
+                        catImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
+                        new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
+                            @Override
+                            public void run() {
+                                catImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
+                            }
+                        }, 350);
+                    } else {
+                        dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
+                        new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
+                            @Override
+                            public void run() {
+                                dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
+                            }
+                        }, 350);
+                    }
                     Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
                 if (character.hasAttackMp()) {
                     battleQueue.removeCharacter();
                 }
                 updateCharacterPoints();
+
+                if (battleQueue.getWinner() != null) {
+                    Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Character nextCharacter = battleQueue.getNextCharacter();
+                    displayTurn(nextCharacter);
+                }
 
 
             }
@@ -263,16 +285,53 @@ public class BattleGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Character character = battleQueue.getNextCharacter();
-                String text = character.getType() + "'s turn";
-                turnView.setText(text);
+                final String sprite1 = character.getSprite() + "2";
+                final String sprite2 = character.getSprite() + "0";
+                displayTurn(character);
+
+                if (character.getType().equals("cat")) {
+                    catImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
+                    new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
+                        @Override
+                        public void run() {
+                            catImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
+                        }
+                    }, 350);
+                } else {
+                    dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
+                    new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
+                        @Override
+                        public void run() {
+                            dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
+                        }
+                    }, 350);
+                }
                 character.regularMove();
                 Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
                 if (!battleQueue.isEmpty()) {
                     battleQueue.removeCharacter();
                 }
                 updateCharacterPoints();
+
+                if (battleQueue.getWinner() != null) {
+                    Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Character nextCharacter = battleQueue.getNextCharacter();
+                    displayTurn(nextCharacter);
+                }
             }
         });
+    }
+
+    /**
+     * Update the TextView to show that it is character's turn.
+     *
+     * @param character The character whose turn it is
+     */
+    private void displayTurn(Character character) {
+        TextView turnView = findViewById(R.id.turn);
+        String text = character.getType() + "'s turn";
+        turnView.setText(text);
     }
 
     /**
@@ -288,7 +347,6 @@ public class BattleGameActivity extends AppCompatActivity {
                 } else {
                     battleQueue.undo();
                 }
-
             }
         });
     }
@@ -306,6 +364,4 @@ public class BattleGameActivity extends AppCompatActivity {
         player2Mp.setText(p2Mp);
         player2Hp.setText(p2Hp);
     }
-
-
 }
