@@ -1,7 +1,7 @@
 package gamecentre.slidingtiles;
 
 /*
-Our implementation of finding out if a generated board is solvable is taken from:
+Our implementation of finding out if a generated board (includes 3 methods) is solvable is taken from:
 https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
 */
 
