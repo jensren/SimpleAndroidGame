@@ -90,5 +90,28 @@ public class BattleQueue implements Serializable {
         return queue.size() == 0;
     }
 
+    /**
+     * Create and return a copy of this battle queue which contains copies of all the characters in
+     * the same order.
+     * precondition: Assume there is at least one character in the battle queue.
+     * @return A copy of this battle queue.
+     */
+    public BattleQueue copyBq() {
+        BattleQueue bq = new BattleQueue();
+        Character p1Copy = player1.copyCharacter();
+        Character p2Copy = player2.copyCharacter();
+
+        bq.add(p1Copy);
+        if (!bq.isEmpty()) {
+            bq.removeCharacter();
+        }
+        for (Character ch : queue) {
+            if (ch == player1) {
+                bq.add(p1Copy);
+            } else { bq.add(p2Copy); }
+        }
+
+        return bq;
+    }
 
 }
