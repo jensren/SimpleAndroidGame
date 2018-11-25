@@ -13,6 +13,8 @@ import android.widget.Toast;
 import android.widget.TextView;
 
 
+import org.w3c.dom.Text;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,6 +67,10 @@ public class BattleGameActivity extends AppCompatActivity {
      * The ImageView for the dog's image
      */
     private ImageView dogImage;
+    /**
+     * The TextView for displaying whose turn it is
+     */
+    private TextView turnView;
 
 
     //TODO: save battle game to files
@@ -77,6 +83,9 @@ public class BattleGameActivity extends AppCompatActivity {
 
         catImage = findViewById(R.id.catimage);
         dogImage = findViewById(R.id.dogimage);
+        turnView = findViewById(R.id.turn);
+        String text = player1.getType() + "'s turn";
+        turnView.setText(text);
 
         addRegularMoveButtonListener();
         addSpecialMoveButtonListener();
@@ -226,15 +235,19 @@ public class BattleGameActivity extends AppCompatActivity {
         specialMoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Character p1 = battleQueue.getNextCharacter();
-                if (p1.hasAttackMp()) {
-                    p1.specialMove();
+                Character character = battleQueue.getNextCharacter();
+                String text = character.getType() + "'s turn";
+                turnView.setText(text);
+
+                if (character.hasAttackMp()) {
+                    character.specialMove();
                     Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
-                if (p1.hasAttackMp()) {
+                if (character.hasAttackMp()) {
                     battleQueue.removeCharacter();
                 }
                 updateCharacterPoints();
+
 
             }
         });
@@ -249,14 +262,15 @@ public class BattleGameActivity extends AppCompatActivity {
         regularMoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Character p1 = battleQueue.getNextCharacter();
-                p1.regularMove();
+                Character character = battleQueue.getNextCharacter();
+                String text = character.getType() + "'s turn";
+                turnView.setText(text);
+                character.regularMove();
                 Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
                 if (!battleQueue.isEmpty()) {
                     battleQueue.removeCharacter();
                 }
                 updateCharacterPoints();
-
             }
         });
     }
@@ -291,6 +305,7 @@ public class BattleGameActivity extends AppCompatActivity {
         player1Mp.setText(p1Mp);
         player2Mp.setText(p2Mp);
         player2Hp.setText(p2Hp);
-
     }
+
+
 }
