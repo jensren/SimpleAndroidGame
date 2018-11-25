@@ -38,7 +38,7 @@ public class ShamanCat extends Character {
 
     @Override
     String getSprite() {
-        return null;
+        return "shaman_cat";
     }
 
     @Override

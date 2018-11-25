@@ -53,7 +53,7 @@ public class SirShibe extends Character {
 
     @Override
     String getSprite() {
-        return null;
+        return "sir_shibe";
     }
 
     @Override

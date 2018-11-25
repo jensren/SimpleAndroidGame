@@ -35,7 +35,7 @@ class NinjaCat extends Character {
 
     @Override
     String getSprite() {
-        return null;
+        return "ninja_cat";
     }
 
     @Override
