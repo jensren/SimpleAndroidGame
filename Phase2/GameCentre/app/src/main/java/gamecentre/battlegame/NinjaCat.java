@@ -16,6 +16,7 @@ class NinjaCat extends Character {
 
     @Override
     void regularMove() {
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(regularMoveDamage);
         getBattleQueue().add(this);
 
@@ -27,6 +28,7 @@ class NinjaCat extends Character {
      */
     @Override
     void specialMove() {
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(specialMoveCost);
         reduceHp(specialMoveDamage);
         getBattleQueue().add(this);
@@ -36,13 +38,5 @@ class NinjaCat extends Character {
     @Override
     String getSprite() {
         return null;
-    }
-
-    @Override
-    Character copyCharacter() {
-        Character ch = new NinjaCat();
-        ch.setHp(this.getHp());
-        ch.setMp(this.getMp());
-        return ch;
     }
 }

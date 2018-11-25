@@ -135,9 +135,4 @@ abstract class Character {
         hp += amountHp;
     }
 
-    /**
-     * Create and return a copy of this character which has the same HP and MP as this character
-     * @return A new character with the same attributes as this character.
-     */
-    abstract Character copyCharacter();
 }

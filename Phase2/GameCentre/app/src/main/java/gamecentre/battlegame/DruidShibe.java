@@ -20,7 +20,7 @@ class DruidShibe extends Character {
 
     @Override
     void regularMove() {
-
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(regularMoveDamage);
         getBattleQueue().add(this);
     }
@@ -32,6 +32,7 @@ class DruidShibe extends Character {
      */
     @Override
     void specialMove() {
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(specialMoveCost);
         this.getOpponent().reduceHp(specialMoveDamage);
         getBattleQueue().add(this);
@@ -43,11 +44,4 @@ class DruidShibe extends Character {
         return null;
     }
 
-    @Override
-    Character copyCharacter() {
-        Character ch = new DruidShibe();
-        ch.setHp(this.getHp());
-        ch.setMp(this.getMp());
-        return ch;
-    }
 }
