@@ -94,5 +94,16 @@ public class BoardAndTileTest {
         assertEquals(true, boardManager.isValidTap(14));
         assertEquals(false, boardManager.isValidTap(10));
     }
+
+    @Test
+    public void testTouchMove() {
+        setUpCorrect();
+        assertEquals(15, boardManager.getBoard().getTile(3,2).getId());
+        boardManager.touchMove(14);
+        assertEquals(16, boardManager.getBoard().getTile(3,2).getId());
+        assertEquals(15, boardManager.getBoard().getTile(3,3).getId());
+    }
+
+
 }
 
