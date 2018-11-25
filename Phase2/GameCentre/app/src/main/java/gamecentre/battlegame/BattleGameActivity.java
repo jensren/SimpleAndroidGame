@@ -32,6 +32,12 @@ public class BattleGameActivity extends AppCompatActivity {
     private Character player1;
     private Character player2;
 
+    ImageView catImage;
+    ImageView dogImage;
+
+
+    //TODO: save battle game to files
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,55 +48,33 @@ public class BattleGameActivity extends AppCompatActivity {
         addSpecialMoveButtonListener();
         setCharacters();
 
-        ImageView catImage = findViewById(R.id.catimage);
-        ImageView dogImage = findViewById(R.id.dogimage);
+        catImage = findViewById(R.id.catimage);
+        dogImage = findViewById(R.id.dogimage);
 
+
+        setSprites();
+    }
+
+    /**
+     * Return the id of the image.
+     *
+     * @param context   The current context
+     * @param imageName The name of the image
+     * @return the id of the image
+     */
+    // Adapted from: https://stackoverflow.com/questions/6783327/setimageresource-from-a-string
+    public static int getImageId(Context context, String imageName) {
+        return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());
+    }
+
+    private void setSprites() {
         if (player1.getType().equals("cat")) {
-            switch (player1.getClass().getSimpleName()) {
-                case "NinjaCat":
-                    catImage.setImageResource(R.drawable.ninja_cat0);
-                    break;
-                case "SamuraiCat":
-                    catImage.setImageResource(R.drawable.samurai_cat0);
-                    break;
-                case "ShamanCat":
-                    catImage.setImageResource(R.drawable.shaman_cat0);
-                    break;
-            }
-            switch (player2.getClass().getSimpleName()) {
-                case "DetectiveShibe":
-                    dogImage.setImageResource(R.drawable.detective_shibe0);
-                    break;
-                case "SirShibe":
-                    dogImage.setImageResource(R.drawable.sir_shibe0);
-                    break;
-                case "DruidShibe":
-                    dogImage.setImageResource(R.drawable.druid_shibe0);
-                    break;
-            }
+            catImage.setImageResource(getImageId(this, player1.getSprite() + "0"));
+            dogImage.setImageResource(getImageId(this, player2.getSprite() + "0"));
+
         } else {
-            switch (player2.getClass().getSimpleName()) {
-                case "NinjaCat":
-                    catImage.setImageResource(R.drawable.ninja_cat0);
-                    break;
-                case "SamuraiCat":
-                    catImage.setImageResource(R.drawable.samurai_cat0);
-                    break;
-                case "ShamanCat":
-                    catImage.setImageResource(R.drawable.shaman_cat0);
-                    break;
-            }
-            switch (player1.getClass().getSimpleName()) {
-                case "DetectiveShibe":
-                    dogImage.setImageResource(R.drawable.detective_shibe0);
-                    break;
-                case "SirShibe":
-                    dogImage.setImageResource(R.drawable.sir_shibe0);
-                    break;
-                case "DruidShibe":
-                    dogImage.setImageResource(R.drawable.druid_shibe0);
-                    break;
-            }
+            dogImage.setImageResource(getImageId(this, player1.getSprite() + "0"));
+            catImage.setImageResource(getImageId(this, player2.getSprite() + "0"));
         }
     }
 
