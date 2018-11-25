@@ -5,6 +5,13 @@
 * Jenney: jenney.ren@mail.utoronto.ca
 * Ashas: ashas.memon@mail.utoronto.ca
 
+## Usernames that appear in the git log:
+* Yu Jie (Andrew) Jiang: Andrew Jiang
+* Cassidy Wang: cw
+* Jiaheng Li: jiahengli
+* Jenney Ren: Jenney
+* Ashas Memon: ashasmemon
+
 ## Communication Tools:
 * Facebook
 * Skype
