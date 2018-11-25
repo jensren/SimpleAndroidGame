@@ -138,10 +138,24 @@ public class BoardAndTileTest {
         assertEquals(true, boardManager.getBoardSize() == 4);
     }
 
+    /**
+     * Tests if boardmanager constructor works.
+     */
     @Test
     public void testCreateBoardManager(){
         boardManager = new BoardManager();
-  //      boardManager.solvable(getTilesList(boardManager));
+    }
+
+    /**
+     * Tests the creation of a 5x5 board.
+     */
+    @Test
+    public void test5x5Board(){
+        Board.numCols = 5;
+        Board.numRows = 5;
+        boardManager = new BoardManager();
+        Board.numRows = 4;
+        Board.numCols = 4;
     }
 }
 
