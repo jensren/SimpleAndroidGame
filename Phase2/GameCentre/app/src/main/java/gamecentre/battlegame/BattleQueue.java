@@ -10,6 +10,7 @@ public class BattleQueue implements Serializable {
 
     private ArrayList<Character> queue = new ArrayList<>();
     private ArrayList<BattleQueue> undoStack = new ArrayList<>();
+    private ArrayList<int[]> playerAttributesStack = new ArrayList<>();
 
     BattleQueue() {
 
@@ -62,7 +63,10 @@ public class BattleQueue implements Serializable {
      * @return the next character.
      */
     Character getNextCharacter() {
-        return queue.get(0);
+        if (queue.size() > 0 ) {
+            return queue.get(0);
+        }
+        else return player1;
     }
 
     /**
@@ -117,6 +121,21 @@ public class BattleQueue implements Serializable {
     }
 
     /**
+     * Store this character's HP, MP and this character's
+     *
+     * @param ch first character in the battle queue before attack is performed.
+     */
+    public void updatePlayerAttributesStack(Character ch) {
+        int[] attributeArray = new int[4];
+        attributeArray[0] = ch.getHp();
+        attributeArray[1] = ch.getMp();
+        attributeArray[2] = ch.getOpponent().getHp();
+        attributeArray[3] = ch.getOpponent().getMp();
+        playerAttributesStack.add(attributeArray);
+
+    }
+
+    /**
      * Return if the click to the undo button is invalid
      * @return True if there are no moves to undo, else return false.
      */
@@ -133,8 +152,19 @@ public class BattleQueue implements Serializable {
             while (!isEmpty()) {
                 removeCharacter();
             }
-            for (Character ch : bq.queue) {
-                this.add(ch);
+            queue.addAll(bq.queue);
+            if (getNextCharacter() == player1) {
+                int[] attributes = playerAttributesStack.get(playerAttributesStack.size() -1);
+                player1.setHp(attributes[0]);
+                player1.setMp(attributes[1]);
+                player2.setHp(attributes[2]);
+                player2.setMp(attributes[3]);
+            } else {
+                int[] attributes = playerAttributesStack.get(playerAttributesStack.size() -1);
+                player2.setHp(attributes[0]);
+                player2.setMp(attributes[1]);
+                player1.setHp(attributes[2]);
+                player1.setMp(attributes[3]);
             }
         }
     }
