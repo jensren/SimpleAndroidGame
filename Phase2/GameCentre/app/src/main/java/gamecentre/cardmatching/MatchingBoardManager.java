@@ -14,6 +14,11 @@ public class MatchingBoardManager implements Serializable {
     private MatchingBoard board;
 
     /**
+     * Number of moves made
+     */
+    private int numMoves = 0;
+
+    /**
      * Keeps track of number of cards flipped. Up to 2.
      */
     private int tilesCurrentlyFlipped = 0;
@@ -42,11 +47,6 @@ public class MatchingBoardManager implements Serializable {
     MatchingBoard getBoard() {
         return board;
     }
-
-    /**
-     * Number of moves made
-     */
-    private int numMoves = 0;
 
     /**
      * Manage a new shuffled board.
