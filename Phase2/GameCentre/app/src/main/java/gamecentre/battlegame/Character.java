@@ -30,6 +30,22 @@ abstract class Character {
     }
 
     /**
+     * Set the Mp of this character to newMp.
+     * @param newMp
+     */
+    void setMp(int newMp) {
+        mp = newMp;
+    }
+
+    /**
+     * Set the Hp of this character to newHp.
+     * @param newHp
+     */
+    void setHp(int newHp) {
+        hp = newHp;
+    }
+
+    /**
      * Get an Array of the actions available for this character.
      *
      * @return Array of attacks
@@ -120,4 +136,5 @@ abstract class Character {
     }
 
     public abstract String getType();
+
 }

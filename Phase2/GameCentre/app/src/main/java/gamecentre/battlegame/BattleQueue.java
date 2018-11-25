@@ -9,6 +9,7 @@ public class BattleQueue implements Serializable {
     private Character player2;
 
     private ArrayList<Character> queue = new ArrayList<>();
+    private ArrayList<BattleQueue> undoStack = new ArrayList<>();
 
     BattleQueue() {
 
@@ -90,5 +91,40 @@ public class BattleQueue implements Serializable {
         return queue.size() == 0;
     }
 
+    /**
+     * Create and return a copy of this battle queue which contains all the characters in
+     * the same order.
+     * @return A copy of this battle queue.
+     */
+    public BattleQueue copyBq() {
+        BattleQueue bq = new BattleQueue();
+        for (Character ch : queue) {
+            bq.add(ch);
+        }
+        return bq;
+    }
+
+    /**
+     * Update the undoStack by adding in a cpy of the battle queue bq
+     * @param bq The battle queue to add.
+     */
+    public void updateUndoStack(BattleQueue bq) {
+        undoStack.add(bq);
+    }
+
+    /**
+     * Undo the last move made in this Battle Queue.
+     */
+    public void undo() {
+        if (undoStack.size() > 0) {
+            BattleQueue bq = undoStack.get(undoStack.size() - 1);
+            while (!isEmpty()) {
+                removeCharacter();
+            }
+            for (Character ch : bq.queue) {
+                this.add(ch);
+            }
+        }
+    }
 
 }

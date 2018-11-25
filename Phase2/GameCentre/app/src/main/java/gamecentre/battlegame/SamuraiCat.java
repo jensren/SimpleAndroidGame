@@ -13,7 +13,7 @@ public class SamuraiCat extends Character {
 
     @Override
     void regularMove() {
-
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
     }
@@ -24,6 +24,7 @@ public class SamuraiCat extends Character {
      */
     @Override
     void specialMove() {
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         Character ch1 = getBattleQueue().getNextCharacter();
         BattleQueue bq = ch1.getBattleQueue();
         Character ch;

@@ -16,6 +16,7 @@ class NinjaCat extends Character {
 
     @Override
     void regularMove() {
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
 
