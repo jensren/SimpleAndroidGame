@@ -72,5 +72,6 @@ don't match, they flip back over.
 * Write more tests
 *Utility class for save and loading??
 *Add name of game to matching main layout
+* Ask colin about observable and activity tests.
 
 
