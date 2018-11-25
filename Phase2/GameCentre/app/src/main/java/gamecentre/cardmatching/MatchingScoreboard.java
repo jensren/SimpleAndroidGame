@@ -51,7 +51,7 @@ public class MatchingScoreboard extends Scoreboard {
      * Updates scoreboard's high score list.
      * @param newScore the score to be added to the list.
      */
-    private void updateGameHighScore(MatchingScore newScore) {
+    protected void updateGameHighScore(Score newScore) {
         super.updateGameHighScore(newScore);
     }
 
@@ -59,7 +59,7 @@ public class MatchingScoreboard extends Scoreboard {
      * Updates scoreboard's per-user specific high score.
      * @param newScore the score to be added.
      */
-    private void updateUserHighScore(MatchingScore newScore) {
+    protected void updateUserHighScore(Score newScore) {
         super.updateUserHighScore(newScore);
     }
 
