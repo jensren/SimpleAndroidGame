@@ -7,12 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//TODO: Write more javadoc
-//TODO: Fix code smells. Extract superclass?
-//TODO: Rename solvable board stuff
-//TODO: Unit tests
-//TODO: Improvements to matching game?
-
 public class MatchingBoardManager implements Serializable {
     /**
      * The board being managed.
@@ -67,6 +61,12 @@ public class MatchingBoardManager implements Serializable {
         Collections.shuffle(tiles);
         this.board = new MatchingBoard(tiles);
     }
+
+    /**
+     * Checks if a tap made by the player is valid.
+     * @param position the position the player touched
+     * @return whether or not the tap is valid
+     */
     boolean isValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
@@ -107,7 +107,7 @@ public class MatchingBoardManager implements Serializable {
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
                 if (tilesMatched != 14){                         //This part runs as long as you're not about to win.
-                    new Handler().postDelayed(new Runnable() {   //Waits 0.5 second and then checks matching and flips over accordingly
+                    new Handler().postDelayed(new Runnable() {   //Waits 0.3 second and then checks matching and flips over accordingly
                         @Override
                         public void run() {
                             checkMatching();
@@ -115,7 +115,7 @@ public class MatchingBoardManager implements Serializable {
                             flippedTiles = new int[]{-1,-1,-1,-1};
                         }
                     }, 350);
-                } else{                                          //This runs if you have only last two tiles left to match.
+                } else{                                          //This part runs if you have only last two tiles left to match.
                     checkMatching();
                     tilesCurrentlyFlipped = 0;
                     flippedTiles = new int[]{-1,-1,-1,-1};
