@@ -2,7 +2,6 @@ package gamecentre.battlegame;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,18 +29,42 @@ import gamecentre.slidingtiles.R;
  */
 public class BattleGameActivity extends AppCompatActivity {
 
-    private BattleQueue battleQueue = new  BattleQueue();
+    /**
+     * The battle queue
+     */
+    private BattleQueue battleQueue = new BattleQueue();
+    /**
+     * Player 1's character
+     */
     private Character player1;
+    /**
+     * Player 2's character
+     */
     private Character player2;
-    // References to TextView to update MP/HP
+    /**
+     * Player 1's MP
+     */
     private TextView player1Mp;
+    /**
+     * Player 1's HP
+     */
     private TextView player1Hp;
+    /**
+     * Player 2's MP
+     */
     private TextView player2Mp;
+    /**
+     * Player 2's HP
+     */
     private TextView player2Hp;
-
-
-    ImageView catImage;
-    ImageView dogImage;
+    /**
+     * The ImageView for the cat's image
+     */
+    private ImageView catImage;
+    /**
+     * The ImageView for the dog's image
+     */
+    private ImageView dogImage;
 
 
     //TODO: save battle game to files
@@ -52,16 +75,55 @@ public class BattleGameActivity extends AppCompatActivity {
         //loadFromFile();
         setContentView(R.layout.activity_battlegame_main);
 
-        addRegularMoveButtonListener();
-        addSpecialMoveButtonListener();
-        addUndoButtonListener();
-        setCharacters();
-
         catImage = findViewById(R.id.catimage);
         dogImage = findViewById(R.id.dogimage);
 
+        addRegularMoveButtonListener();
+        addSpecialMoveButtonListener();
+        addUndoButtonListener();
 
+        setCharacters();
+        setOpponent();
+        initializeBattleQueue();
+        initializeHpMp();
+        updateCharacterPoints();
         setSprites();
+    }
+
+    /**
+     * Initialize the HP and MP of player1 and player2.
+     */
+    private void initializeHpMp() {
+        if (player1.getType().equals("cat")) {
+            player1Mp = findViewById(R.id.catmp);
+            player1Hp = findViewById(R.id.cathp);
+            player2Mp = findViewById(R.id.dogmp);
+            player2Hp = findViewById(R.id.doghp);
+        } else {
+            player1Mp = findViewById(R.id.dogmp);
+            player1Hp = findViewById(R.id.doghp);
+            player2Mp = findViewById(R.id.catmp);
+            player2Hp = findViewById(R.id.cathp);
+        }
+    }
+
+    /**
+     * Add player1 and player2 to the battle queue, and set the battle queues of player1 and
+     * player2.
+     */
+    private void initializeBattleQueue() {
+        battleQueue.add(player1);
+        battleQueue.add(player2);
+        player1.setBattleQueue(battleQueue);
+        player2.setBattleQueue(battleQueue);
+    }
+
+    /**
+     * Set the opponent of player1 as player2, and the opponent of player2 as player1.
+     */
+    private void setOpponent() {
+        player1.setOpponent(player2);
+        player2.setOpponent(player1);
     }
 
     /**
@@ -73,17 +135,23 @@ public class BattleGameActivity extends AppCompatActivity {
      */
     // Adapted from: https://stackoverflow.com/questions/6783327/setimageresource-from-a-string
     public static int getImageId(Context context, String imageName) {
-        return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());
+        return context.getResources().getIdentifier("drawable/" + imageName, null,
+                context.getPackageName());
     }
 
+    /**
+     * Display the initial sprites.
+     */
     private void setSprites() {
-        if (player1.getType().equals("cat")) {
-            catImage.setImageResource(getImageId(this, player1.getSprite() + "0"));
-            dogImage.setImageResource(getImageId(this, player2.getSprite() + "0"));
+        String player1Sprite = player1.getSprite() + "0";
+        String player2Sprite = player2.getSprite() + "0";
 
+        if (player1.getType().equals("cat")) {
+            catImage.setImageResource(getImageId(this, player1Sprite));
+            dogImage.setImageResource(getImageId(this, player2Sprite));
         } else {
-            dogImage.setImageResource(getImageId(this, player1.getSprite() + "0"));
-            catImage.setImageResource(getImageId(this, player2.getSprite() + "0"));
+            dogImage.setImageResource(getImageId(this, player1Sprite));
+            catImage.setImageResource(getImageId(this, player2Sprite));
         }
     }
 
@@ -144,26 +212,6 @@ public class BattleGameActivity extends AppCompatActivity {
                         player2 = new DruidShibe();
                         break;
                 }
-                player1.setOpponent(player2);
-                player2.setOpponent(player1);
-                battleQueue.add(player1);
-                battleQueue.add(player2);
-                player1.setBattleQueue(battleQueue);
-                player2.setBattleQueue(battleQueue);
-
-                if (player1.getType().equals("cat")) {
-                    player1Mp = findViewById(R.id.catmp);
-                    player1Hp = findViewById(R.id.cathp);
-                    player2Mp = findViewById(R.id.dogmp);
-                    player2Hp = findViewById(R.id.doghp);
-                } else {
-                    player1Mp = findViewById(R.id.dogmp);
-                    player1Hp = findViewById(R.id.doghp);
-                    player2Mp = findViewById(R.id.catmp);
-                    player2Hp = findViewById(R.id.cathp);
-
-                }
-                updateCharacterPoints();
             } else {
                 throw new NullPointerException("Character is null");
             }
@@ -181,9 +229,11 @@ public class BattleGameActivity extends AppCompatActivity {
                 Character p1 = battleQueue.getNextCharacter();
                 if (p1.hasAttackMp()) {
                     p1.specialMove();
-                    Toast.makeText(getApplicationContext(),"SPECIAL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
-                if (p1.hasAttackMp()) { battleQueue.removeCharacter(); }
+                if (p1.hasAttackMp()) {
+                    battleQueue.removeCharacter();
+                }
                 updateCharacterPoints();
 
             }
@@ -201,8 +251,10 @@ public class BattleGameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Character p1 = battleQueue.getNextCharacter();
                 p1.regularMove();
-                Toast.makeText(getApplicationContext(),"Regular", Toast.LENGTH_SHORT).show();
-                if (!battleQueue.isEmpty()) { battleQueue.removeCharacter(); }
+                Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
+                if (!battleQueue.isEmpty()) {
+                    battleQueue.removeCharacter();
+                }
                 updateCharacterPoints();
 
             }
@@ -218,8 +270,10 @@ public class BattleGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (battleQueue.isInValidUndo()) {
-                    Toast.makeText(getApplicationContext(),"Invalid Undo", Toast.LENGTH_SHORT).show();
-                } else { battleQueue.undo(); }
+                    Toast.makeText(getApplicationContext(), "Invalid Undo", Toast.LENGTH_SHORT).show();
+                } else {
+                    battleQueue.undo();
+                }
 
             }
         });
