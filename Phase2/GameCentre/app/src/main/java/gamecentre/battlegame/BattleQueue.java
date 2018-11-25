@@ -9,6 +9,7 @@ public class BattleQueue implements Serializable {
     private Character player2;
 
     private ArrayList<Character> queue = new ArrayList<>();
+    private ArrayList<BattleQueue> undoStack = new ArrayList<>();
 
     BattleQueue() {
 
@@ -91,27 +92,39 @@ public class BattleQueue implements Serializable {
     }
 
     /**
-     * Create and return a copy of this battle queue which contains copies of all the characters in
+     * Create and return a copy of this battle queue which contains all the characters in
      * the same order.
-     * precondition: Assume there is at least one character in the battle queue.
      * @return A copy of this battle queue.
      */
     public BattleQueue copyBq() {
         BattleQueue bq = new BattleQueue();
-        Character p1Copy = player1.copyCharacter();
-        Character p2Copy = player2.copyCharacter();
-
-        bq.add(p1Copy);
-        if (!bq.isEmpty()) {
-            bq.removeCharacter();
-        }
         for (Character ch : queue) {
-            if (ch == player1) {
-                bq.add(p1Copy);
-            } else { bq.add(p2Copy); }
+            bq.add(ch);
         }
-
         return bq;
+    }
+
+    /**
+     * Update the undoStack by adding in a cpy of the battle queue bq
+     * @param bq The battle queue to add.
+     */
+    public void updateUndoStack(BattleQueue bq) {
+        undoStack.add(bq);
+    }
+
+    /**
+     * Undo the last move made in this Battle Queue.
+     */
+    public void undo() {
+        if (undoStack.size() > 0) {
+            BattleQueue bq = undoStack.get(undoStack.size() - 1);
+            while (!isEmpty()) {
+                removeCharacter();
+            }
+            for (Character ch : bq.queue) {
+                this.add(ch);
+            }
+        }
     }
 
 }
