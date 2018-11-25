@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class BoardAndTileTest {
 
     /** The board manager for testing. */
-    BoardManager boardManager;
+    private BoardManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -108,12 +108,21 @@ public class BoardAndTileTest {
     }
 
     /**
-     *
+     * Tests if solvable function works.
      */
     @Test
     public void testSolvable(){
         setUpCorrect();
         assertEquals(true, boardManager.solvable(makeTiles()));
+    }
+
+    /**
+     *  Tests if getBoardSize returns the correct board size.
+     */
+    @Test
+    public void testGetBoardSize(){
+        setUpCorrect();
+        assertEquals(true, boardManager.getBoardSize() == 4);
     }
 }
 
