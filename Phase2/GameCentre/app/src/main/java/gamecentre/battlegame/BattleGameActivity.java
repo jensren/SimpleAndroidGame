@@ -36,7 +36,7 @@ public class BattleGameActivity extends AppCompatActivity {
     /**
      * The battle queue
      */
-    private BattleQueue battleQueue = new BattleQueue();
+    private BattleQueue battleQueue;
     /**
      * Player 1's character
      */
@@ -77,7 +77,7 @@ public class BattleGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loadFromFile();
+        loadFromFile(BattleStartingActivity.tempSaveFileName);
         setContentView(R.layout.activity_battlegame_main);
 
         catImage = findViewById(R.id.catimage);
@@ -338,7 +338,7 @@ public class BattleGameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid Undo", Toast.LENGTH_SHORT).show();
                 } else {
                     battleQueue.undo();
-                    Toast.makeText(getApplicationContext(),"Undo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Undo", Toast.LENGTH_SHORT).show();
                     updateCharacterPoints();
                 }
             }
@@ -358,4 +358,54 @@ public class BattleGameActivity extends AppCompatActivity {
         player2Mp.setText(p2Mp);
         player2Hp.setText(p2Hp);
     }
+
+    /**
+     * Load the battle queue from fileName.
+     *
+     * @param fileName the name of the file
+     */
+    private void loadFromFile(String fileName) {
+
+        try {
+            InputStream inputStream = this.openFileInput(fileName);
+            if (inputStream != null) {
+                ObjectInputStream input = new ObjectInputStream(inputStream);
+                battleQueue = (BattleQueue) input.readObject();
+                inputStream.close();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        } catch (ClassNotFoundException e) {
+            Log.e("login activity", "File contained unexpected data type: " + e.toString());
+        }
+    }
+
+    /**
+     * Save the battle queue to fileName.
+     *
+     * @param fileName the name of the file
+     */
+    public void saveToFile(String fileName) {
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    this.openFileOutput(fileName, MODE_PRIVATE));
+            outputStream.writeObject(battleQueue);
+            outputStream.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    /**
+     * Dispatch onPause() to fragments.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveToFile(BattleStartingActivity.tempSaveFileName);
+        saveToFile(BattleStartingActivity.autoSaveFileName);
+    }
+
 }
