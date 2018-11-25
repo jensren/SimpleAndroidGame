@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/druid_shibe0"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/druid_shibe1"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/druid_shibe2"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/druid_shibe3"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/druid_shibe4"
+        android:duration="500" />
+    <item
+        android:drawable="@drawable/druid_shibe5"
+        android:duration="500" />
+</animation-list>
