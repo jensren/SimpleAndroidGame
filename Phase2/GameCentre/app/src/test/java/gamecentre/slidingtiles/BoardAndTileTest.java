@@ -94,5 +94,26 @@ public class BoardAndTileTest {
         assertEquals(true, boardManager.isValidTap(14));
         assertEquals(false, boardManager.isValidTap(10));
     }
+
+    /**
+     * Test if number moves updates properly.
+     */
+    @Test
+    public void testNumMoves(){
+        setUpCorrect();
+        boardManager.updateMoves();
+        assertEquals(true, boardManager.getNumMoves() == 1);
+        boardManager.updateMoves();
+        assertEquals(false, boardManager.getNumMoves() == 1);
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void testSolvable(){
+        setUpCorrect();
+        assertEquals(true, boardManager.solvable(makeTiles()));
+    }
 }
 

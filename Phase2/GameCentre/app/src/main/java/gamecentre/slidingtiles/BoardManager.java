@@ -52,7 +52,7 @@ class BoardManager implements Serializable {
         }
 
         Collections.shuffle(tiles);
-        while (!solvable(tiles)){
+        while (!solvable(tiles)) {
             Collections.shuffle(tiles);
         }
         this.board = new Board(tiles);
@@ -68,7 +68,7 @@ class BoardManager implements Serializable {
         Board board2;
         board2 = new Board(tiles);
         int blankId = board2.numTiles();
-        int[] myList = new int[Board.numRows*Board.numRows - 1];
+        int[] myList = new int[Board.numRows * Board.numRows - 1];
         int i = 0;
         for (int row = 0; row != Board.numRows; row++) {
             for (int col = 0; col != Board.numCols; col++) {
@@ -89,9 +89,9 @@ class BoardManager implements Serializable {
      */
     private int numInversions(int[] intList) {
         int a = 0;
-        for (int i = 0; i < Board.numRows*Board.numRows-1; i++) {
+        for (int i = 0; i < Board.numRows * Board.numRows - 1; i++) {
             int b = 0;
-            for (int j = i + 1; j < Board.numRows*Board.numRows-1; j++) {
+            for (int j = i + 1; j < Board.numRows * Board.numRows - 1; j++) {
                 if (intList[i] > intList[j]) {
                     b++;
                 }
@@ -130,10 +130,10 @@ class BoardManager implements Serializable {
      *The formula below for finding out if a given board is solvable is taken from
      * https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
      */
-     Boolean solvable(List<Tile> tiles){
-         int inversions = numInversions(intList(tiles));
+    Boolean solvable(List<Tile> tiles) {
+        int inversions = numInversions(intList(tiles));
         int a = Board.numRows;
-        return ((a % 2 == 1 && inversions % 2 == 0)||(a % 2 == 0 && (findBlank(tiles)%2 == 0 && inversions % 2 == 1)));
+        return ((a % 2 == 1 && inversions % 2 == 0) || (a % 2 == 0 && (findBlank(tiles) % 2 == 0 && inversions % 2 == 1)));
     }
 
 
