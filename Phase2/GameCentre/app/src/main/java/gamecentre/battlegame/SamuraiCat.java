@@ -5,6 +5,8 @@ public class SamuraiCat extends Character {
     private static final int REGULAR_MOVE_DAMAGE = 6;
     private static final int SPECIAL_MOVE_DAMAGE = 15;
     private static final int SPECIAL_MOVE_COST = 12;
+    //BattleQueue =
+
 
     @Override
     boolean hasAttackMp() {
@@ -26,29 +28,31 @@ public class SamuraiCat extends Character {
     void specialMove() {
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         Character ch1 = getBattleQueue().getNextCharacter();
-        BattleQueue bq = ch1.getBattleQueue();
-        Character ch;
+        BattleQueue bq = getBattleQueue();
 
         reduceMp(SPECIAL_MOVE_COST);
         this.getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
+        while (!bq.isEmpty()) { bq.removeCharacter(); }
+        bq.add(ch1);
+        bq.add(ch1.getOpponent());
 
-        int p1Count = 0;
-        int p2Count = 0;
-
-        while (!bq.isEmpty()) {
-            ch = bq.removeCharacter();
-            if (ch == ch1) {
-                p1Count += 1;
-            } else {
-                p2Count += 1;
-            }
-        }
-        if (p1Count > 0) {
-            bq.add(ch1);
-        }
-        if (p2Count > 0) {
-            bq.add(ch1.getOpponent());
-        }
+//        int p1Count = 0;
+//        int p2Count = 0;
+//
+//        while (!bq.isEmpty()) {
+//            ch = bq.removeCharacter();
+//            if (ch == ch1) {
+//                p1Count += 1;
+//            } else {
+//                p2Count += 1;
+//            }
+//        }
+//        if (p1Count > 0) {
+//            bq.add(ch1);
+//        }
+//        if (p2Count > 0) {
+//            bq.add(ch1.getOpponent());
+//        }
 
     }
 
