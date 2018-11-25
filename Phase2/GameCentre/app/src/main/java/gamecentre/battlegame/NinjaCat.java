@@ -24,15 +24,16 @@ class NinjaCat extends Character {
     }
 
     /**
-     * Reduce this character's magic points and the opponents health points. Then add in this
-     * charcter into the battle queue twice.
+     * Reduce this character's magic points and the opponents health points. Then add in the
+     * opponent and then this charcter into the battle queue twice.
      */
     @Override
     void specialMove() {
         getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(SPECIAL_MOVE_COST);
-        reduceHp(SPECIAL_MOVE_DAMAGE);
+        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
+        getBattleQueue().add(this.getOpponent());
         getBattleQueue().add(this);
         getBattleQueue().add(this);
     }

@@ -34,6 +34,7 @@ public class DetectiveShibe extends Character {
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(SPECIAL_MOVE_COST);
         getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
+        getBattleQueue().add(this.getOpponent());
         getBattleQueue().add(this);
         getBattleQueue().add(this);
     }

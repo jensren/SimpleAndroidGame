@@ -12,10 +12,6 @@ public class BattleQueue implements Serializable {
     private ArrayList<BattleQueue> undoStack = new ArrayList<>();
     private ArrayList<int[]> playerAttributesStack = new ArrayList<>();
 
-    BattleQueue() {
-
-    }
-
     /**
      * Add a character to the end of the battle queue.
      *
@@ -140,7 +136,7 @@ public class BattleQueue implements Serializable {
      * @return True if there are no moves to undo, else return false.
      */
     boolean isInValidUndo() {
-        return undoStack.size() == 0;
+        return undoStack.size() == 0 || playerAttributesStack.size() == 0;
     }
 
     /**
@@ -148,19 +144,23 @@ public class BattleQueue implements Serializable {
      */
     public void undo() {
         if (undoStack.size() > 0) {
-            BattleQueue bq = undoStack.get(undoStack.size() - 1);
+            BattleQueue bq = undoStack.remove(undoStack.size() - 1);
             while (!isEmpty()) {
                 removeCharacter();
             }
             queue.addAll(bq.queue);
             if (getNextCharacter() == player1) {
-                int[] attributes = playerAttributesStack.get(playerAttributesStack.size() -1);
-                player1.setHp(attributes[0]);
-                player1.setMp(attributes[1]);
-                player2.setHp(attributes[2]);
-                player2.setMp(attributes[3]);
+                if (playerAttributesStack.size() > 0) {
+                    int[] attributes = playerAttributesStack.remove(playerAttributesStack.size() - 1);
+                    player1.setHp(attributes[0]);
+                    player1.setMp(attributes[1]);
+                    player2.setHp(attributes[2]);
+                    player2.setMp(attributes[3]);
+                } else {
+                    throw new IndexOutOfBoundsException("Attribute stack empty!");
+                }
             } else {
-                int[] attributes = playerAttributesStack.get(playerAttributesStack.size() -1);
+                int[] attributes = playerAttributesStack.remove(playerAttributesStack.size() - 1);
                 player2.setHp(attributes[0]);
                 player2.setMp(attributes[1]);
                 player1.setHp(attributes[2]);
