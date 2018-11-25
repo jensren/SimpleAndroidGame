@@ -112,11 +112,11 @@ import gamecentre.slidingtiles.R;
          * Add the main button to go back to the main game screen.
          */
         private void addMainButtonListener() {
-            Button slidingTilesButton = findViewById(R.id.main);
-            slidingTilesButton.setOnClickListener(new View.OnClickListener() {
+            Button matchingButton = findViewById(R.id.main);
+            matchingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switchToSlidingTilesActivity();
+                    switchToMatchingStartingActivity();
                 }
             });
         }
@@ -124,7 +124,7 @@ import gamecentre.slidingtiles.R;
         /**
          * Display the game's starting activity.
          */
-        private void switchToSlidingTilesActivity() {
+        private void switchToMatchingStartingActivity() {
             Intent tmp = new Intent(this, MatchingStartingActivity.class);
             startActivity(tmp);
         }
