@@ -157,5 +157,26 @@ public class BoardAndTileTest {
         Board.numRows = 4;
         Board.numCols = 4;
     }
+
+    /**
+     * Tests the creation of a 3x3 board.
+     */
+    @Test
+    public void test3x3Board(){
+        Board.numCols = 3;
+        Board.numRows = 3;
+        boardManager = new BoardManager();
+        Board.numRows = 4;
+        Board.numCols = 4;
+    }
+
+    /**
+     * Test comparing tiles.
+     */
+    @Test
+    public void testCompareTiles(){
+        setUpCorrect();
+        assertEquals(1,boardManager.board.tiles[0][0].compareTo(boardManager.board.tiles[0][1]));
+    }
 }
 
