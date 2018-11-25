@@ -258,9 +258,7 @@ public class BattleGameActivity extends AppCompatActivity {
                     }
                     Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
-                if (character.hasAttackMp()) {
-                    battleQueue.removeCharacter();
-                }
+                battleQueue.removeCharacter();
                 updateCharacterPoints();
 
                 if (battleQueue.getWinner() != null) {
@@ -346,6 +344,8 @@ public class BattleGameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid Undo", Toast.LENGTH_SHORT).show();
                 } else {
                     battleQueue.undo();
+                    Toast.makeText(getApplicationContext(),"Undo", Toast.LENGTH_SHORT).show();
+                    updateCharacterPoints();
                 }
             }
         });
