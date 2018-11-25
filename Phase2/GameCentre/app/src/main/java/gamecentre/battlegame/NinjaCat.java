@@ -28,6 +28,7 @@ class NinjaCat extends Character {
      */
     @Override
     void specialMove() {
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(SPECIAL_MOVE_COST);
         reduceHp(SPECIAL_MOVE_DAMAGE);
         getBattleQueue().add(this);
