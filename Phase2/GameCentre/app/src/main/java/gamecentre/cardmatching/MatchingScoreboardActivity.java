@@ -24,7 +24,6 @@ import gamecentre.slidingtiles.R;
         public static String user;
         public static final String SCORE_FILENAME = "cardmatching_scoreboard_file.ser";
         MatchingScoreboard scoreboard;
-        static MatchingScore score;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {

@@ -1,5 +1,6 @@
 package gamecentre.cardmatching;
 
+import gamecentre.Score;
 import gamecentre.Scoreboard;
 
 public class MatchingScoreboard extends Scoreboard {
@@ -42,8 +43,8 @@ public class MatchingScoreboard extends Scoreboard {
      * Gets the user's score in his current game.
      * @return the user's current score.
      */
-    String getUserCurrentScore() {
-        return super.getUserCurrentScore(MatchingScoreboardActivity.score);
+    protected String getUserCurrentScore() {
+        return super.getUserCurrentScore();
     }
 
     /**
@@ -64,9 +65,9 @@ public class MatchingScoreboard extends Scoreboard {
 
     @Override
     public void update() {
-            int points = numMoves;
-        MatchingScoreboardActivity.score = new MatchingScore(user, points);
-        updateGameHighScore(MatchingScoreboardActivity.score);
-        updateUserHighScore(MatchingScoreboardActivity.score);
+        int points = numMoves;
+        currentScore = new Score(user, points);
+        updateGameHighScore(currentScore);
+        updateUserHighScore(currentScore);
     }
 }
