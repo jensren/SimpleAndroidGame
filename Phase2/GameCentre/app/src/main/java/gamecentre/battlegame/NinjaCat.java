@@ -32,7 +32,7 @@ class NinjaCat extends Character {
         getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(SPECIAL_MOVE_COST);
-        reduceHp(SPECIAL_MOVE_DAMAGE);
+        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
         getBattleQueue().add(this);
         getBattleQueue().add(this);
     }
