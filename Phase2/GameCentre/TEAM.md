@@ -69,9 +69,10 @@ don't match, they flip back over.
 
 ## To-do list:
 * Javadoc for matching game
-* Fix code smells
+* Fix code smells (extract superclasses)
 * Rename solvable baord functions
 * Write more tests
 * Delete unused layouts and dead code
+*Utility class for save and loading??
 
 
