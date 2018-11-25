@@ -11,6 +11,8 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.TextView;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,9 +30,15 @@ import gamecentre.slidingtiles.R;
  */
 public class BattleGameActivity extends AppCompatActivity {
 
-    private BattleQueue battleQueue;
+    private BattleQueue battleQueue = new  BattleQueue();
     private Character player1;
     private Character player2;
+    // References to TextView to update MP/HP
+    private TextView player1Mp;
+    private TextView player1Hp;
+    private TextView player2Mp;
+    private TextView player2Hp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,7 @@ public class BattleGameActivity extends AppCompatActivity {
 
         addRegularMoveButtonListener();
         addSpecialMoveButtonListener();
+        addUndoButtonListener();
         setCharacters();
 
         ImageView catImage = findViewById(R.id.catimage);
@@ -151,6 +160,26 @@ public class BattleGameActivity extends AppCompatActivity {
                         player2 = new DruidShibe();
                         break;
                 }
+                player1.setOpponent(player2);
+                player2.setOpponent(player1);
+                battleQueue.add(player1);
+                battleQueue.add(player2);
+                player1.setBattleQueue(battleQueue);
+                player2.setBattleQueue(battleQueue);
+
+                if (player1.getType().equals("cat")) {
+                    player1Mp = findViewById(R.id.catmp);
+                    player1Hp = findViewById(R.id.cathp);
+                    player2Mp = findViewById(R.id.dogmp);
+                    player2Hp = findViewById(R.id.doghp);
+                } else {
+                    player1Mp = findViewById(R.id.dogmp);
+                    player1Hp = findViewById(R.id.doghp);
+                    player2Mp = findViewById(R.id.catmp);
+                    player2Hp = findViewById(R.id.cathp);
+
+                }
+                updateCharacterPoints();
             } else {
                 throw new NullPointerException("Character is null");
             }
@@ -165,6 +194,13 @@ public class BattleGameActivity extends AppCompatActivity {
         specialMoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Character p1 = battleQueue.getNextCharacter();
+                if (p1.hasAttackMp()) {
+                    p1.specialMove();
+                    Toast.makeText(getApplicationContext(),"SPECIAL", Toast.LENGTH_SHORT).show();
+                }
+                if (p1.hasAttackMp()) { battleQueue.removeCharacter(); }
+                updateCharacterPoints();
 
             }
         });
@@ -175,11 +211,48 @@ public class BattleGameActivity extends AppCompatActivity {
      */
     private void addRegularMoveButtonListener() {
         Button regularMoveButton = findViewById(R.id.regularmove);
+
         regularMoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Character p1 = battleQueue.getNextCharacter();
+                p1.regularMove();
+                Toast.makeText(getApplicationContext(),"Regular", Toast.LENGTH_SHORT).show();
+                if (!battleQueue.isEmpty()) { battleQueue.removeCharacter(); }
+                updateCharacterPoints();
 
             }
         });
+    }
+
+    /**
+     * Add the undo button
+     */
+    private void addUndoButtonListener() {
+        Button undoButton = findViewById(R.id.undo_button);
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (battleQueue.isInValidUndo()) {
+                    Toast.makeText(getApplicationContext(),"Invalid Undo", Toast.LENGTH_SHORT).show();
+                } else { battleQueue.undo(); }
+
+            }
+        });
+    }
+
+    /**
+     * Update both character's MP and HP on the Main Activity after each attack is performed.
+     */
+    private void updateCharacterPoints() {
+        String p1Hp = "HP: " + player1.getHp();
+        String p1Mp = "MP: " + player1.getMp();
+        String p2Hp = "HP: " + player2.getHp();
+        String p2Mp = "MP: " + player2.getMp();
+        player1Hp.setText(p1Hp);
+        player1Mp.setText(p1Mp);
+        player2Mp.setText(p2Mp);
+        player2Hp.setText(p2Hp);
+
     }
 }
