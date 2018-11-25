@@ -133,7 +133,7 @@ class BoardManager implements Serializable {
     Boolean solvable(List<Tile> tiles) {
         int inversions = numInversions(intList(tiles));
         int a = Board.numRows;
-        return ((a % 2 == 1 && inversions % 2 == 0) || (a % 2 == 0 && (findBlank(tiles) % 2 == 0 && inversions % 2 == 1)));
+        return ((a % 2 == 1 && inversions % 2 == 0) || (a % 2 == 0 && ((findBlank(tiles) % 2 == 0) == (inversions % 2 == 1))));
     }
 
 
