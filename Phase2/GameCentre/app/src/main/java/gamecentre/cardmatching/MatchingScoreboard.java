@@ -1,8 +1,9 @@
 package gamecentre.cardmatching;
 
+import gamecentre.Score;
 import gamecentre.Scoreboard;
 
-public class MatchingScoreBoard extends Scoreboard {
+public class MatchingScoreboard extends Scoreboard {
     /**
      * The current user, number of moves, and board size
      */
@@ -15,7 +16,7 @@ public class MatchingScoreBoard extends Scoreboard {
      * @param user The username of the player
      */
     static void setUser(String user) {
-        MatchingScoreBoard.user = user;
+        MatchingScoreboard.user = user;
     }
 
     /**
@@ -23,11 +24,11 @@ public class MatchingScoreBoard extends Scoreboard {
      * @param numMoves Number of moves player took in the game.
      */
     static void setNumMoves(int numMoves) {
-        MatchingScoreBoard.numMoves = numMoves;
+        MatchingScoreboard.numMoves = numMoves;
     }
 
     static void setBoardSize(int boardSize) {
-        MatchingScoreBoard.boardSize = boardSize;
+        MatchingScoreboard.boardSize = boardSize;
     }
 
     /**
@@ -42,15 +43,15 @@ public class MatchingScoreBoard extends Scoreboard {
      * Gets the user's score in his current game.
      * @return the user's current score.
      */
-    String getUserCurrentScore() {
-        return super.getUserCurrentScore(MatchingScoreBoardActivity.score);
+    protected String getUserCurrentScore() {
+        return super.getUserCurrentScore();
     }
 
     /**
      * Updates scoreboard's high score list.
      * @param newScore the score to be added to the list.
      */
-    private void updateGameHighScore(MatchingScore newScore) {
+    protected void updateGameHighScore(Score newScore) {
         super.updateGameHighScore(newScore);
     }
 
@@ -58,15 +59,15 @@ public class MatchingScoreBoard extends Scoreboard {
      * Updates scoreboard's per-user specific high score.
      * @param newScore the score to be added.
      */
-    private void updateUserHighScore(MatchingScore newScore) {
+    protected void updateUserHighScore(Score newScore) {
         super.updateUserHighScore(newScore);
     }
 
     @Override
     public void update() {
-            int points = numMoves;
-            MatchingScoreBoardActivity.score = new MatchingScore(user, points);
-            updateGameHighScore(MatchingScoreBoardActivity.score);
-            updateUserHighScore(MatchingScoreBoardActivity.score);
+        int points = numMoves;
+        currentScore = new Score(user, points);
+        updateGameHighScore(currentScore);
+        updateUserHighScore(currentScore);
     }
 }

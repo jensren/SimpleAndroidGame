@@ -1,9 +1,5 @@
 package gamecentre.battlegame;
 
-import android.widget.ImageView;
-
-import gamecentre.slidingtiles.R;
-
 /**
  * Representation of the Detective Shibe character.
  */

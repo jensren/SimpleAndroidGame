@@ -29,12 +29,6 @@ public abstract class Scoreboard implements Serializable {
         return scoreList;
     }
 
-    /**
-     * For testing only: set the scorelist.
-     *
-     * @param scoreList A list of scores
-     */
-
     protected Score currentScore;
 
     public void setScoreList(Score[] scoreList) {
@@ -86,14 +80,13 @@ public abstract class Scoreboard implements Serializable {
     /**
      * Gets the user's current score
      *
-     * @param activityScore The user's current score, from the ScoreboardActivity
      * @return A string representation of the user's current score
      */
-    protected String getUserCurrentScore(Score activityScore) {
-        if (activityScore == null) {
+    protected String getUserCurrentScore() {
+        if (currentScore == null) {
             return "Your Score: None";
         } else {
-            return String.format(Locale.getDefault(), "Your Score: %d", activityScore.getPoints());
+            return String.format(Locale.getDefault(), "Your Score: %d", currentScore.getPoints());
         }
     }
 

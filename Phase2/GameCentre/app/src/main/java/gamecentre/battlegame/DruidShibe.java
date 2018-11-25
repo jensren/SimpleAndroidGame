@@ -41,7 +41,7 @@ class DruidShibe extends Character {
 
     @Override
     String getSprite() {
-        return null;
+        return "druid_shibe";
     }
 
     @Override

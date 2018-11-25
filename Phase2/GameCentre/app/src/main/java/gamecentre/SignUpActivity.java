@@ -16,7 +16,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import gamecentre.battlegame.BattleStartingActivity;
-import gamecentre.cardmatching.MatchingScoreBoardActivity;
+import gamecentre.cardmatching.MatchingScoreboardActivity;
 import gamecentre.cardmatching.MatchingStartingActivity;
 import gamecentre.slidingtiles.R;
 import gamecentre.slidingtiles.SlidingtilesScoreboardActivity;
@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
             setFileNames(username);
             saveToFile();
             SlidingtilesScoreboardActivity.user = username;
-            MatchingScoreBoardActivity.user = username;
+            MatchingScoreboardActivity.user = username;
             switchToGameChoiceActivity();
         } else {
             Toast.makeText(this, "Username taken", Toast.LENGTH_LONG).show();

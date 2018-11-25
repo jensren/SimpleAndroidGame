@@ -54,7 +54,7 @@ public class SamuraiCat extends Character {
 
     @Override
     String getSprite() {
-        return null;
+        return "samurai_cat";
     }
 
     @Override
