@@ -18,12 +18,12 @@ import gamecentre.slidingtiles.R;
     /**
      * Manage the scoreBoard layout during the game and save the current scoreBoard.
      */
-    public class MatchingScoreBoardActivity extends AppCompatActivity {
+    public class MatchingScoreboardActivity extends AppCompatActivity {
 
         TextView scoreBoard; 
         public static String user;
         public static final String SCORE_FILENAME = "cardmatching_scoreboard_file.ser";
-        MatchingScoreBoard scoreboard;
+        MatchingScoreboard scoreboard;
         static MatchingScore score;
 
         @Override
@@ -33,7 +33,7 @@ import gamecentre.slidingtiles.R;
             scoreBoard = findViewById(R.id.s_b);
             loadFromFile(SCORE_FILENAME);
             if (scoreboard == null) {
-                scoreboard = new MatchingScoreBoard();
+                scoreboard = new MatchingScoreboard();
             }
             scoreboard.update();
             saveToFile(SCORE_FILENAME);
@@ -65,7 +65,7 @@ import gamecentre.slidingtiles.R;
                 InputStream inputStream = this.openFileInput(fileName);
                 if (inputStream != null) {
                     ObjectInputStream input = new ObjectInputStream(inputStream);
-                    scoreboard = (MatchingScoreBoard) input.readObject();
+                    scoreboard = (MatchingScoreboard) input.readObject();
                     inputStream.close();
                 }
             } catch (FileNotFoundException e) {

@@ -2,7 +2,7 @@ package gamecentre.cardmatching;
 
 import gamecentre.Scoreboard;
 
-public class MatchingScoreBoard extends Scoreboard {
+public class MatchingScoreboard extends Scoreboard {
     /**
      * The current user, number of moves, and board size
      */
@@ -15,7 +15,7 @@ public class MatchingScoreBoard extends Scoreboard {
      * @param user The username of the player
      */
     static void setUser(String user) {
-        MatchingScoreBoard.user = user;
+        MatchingScoreboard.user = user;
     }
 
     /**
@@ -23,11 +23,11 @@ public class MatchingScoreBoard extends Scoreboard {
      * @param numMoves Number of moves player took in the game.
      */
     static void setNumMoves(int numMoves) {
-        MatchingScoreBoard.numMoves = numMoves;
+        MatchingScoreboard.numMoves = numMoves;
     }
 
     static void setBoardSize(int boardSize) {
-        MatchingScoreBoard.boardSize = boardSize;
+        MatchingScoreboard.boardSize = boardSize;
     }
 
     /**
@@ -43,7 +43,7 @@ public class MatchingScoreBoard extends Scoreboard {
      * @return the user's current score.
      */
     String getUserCurrentScore() {
-        return super.getUserCurrentScore(MatchingScoreBoardActivity.score);
+        return super.getUserCurrentScore(MatchingScoreboardActivity.score);
     }
 
     /**
@@ -65,8 +65,8 @@ public class MatchingScoreBoard extends Scoreboard {
     @Override
     public void update() {
             int points = numMoves;
-            MatchingScoreBoardActivity.score = new MatchingScore(user, points);
-            updateGameHighScore(MatchingScoreBoardActivity.score);
-            updateUserHighScore(MatchingScoreBoardActivity.score);
+        MatchingScoreboardActivity.score = new MatchingScore(user, points);
+        updateGameHighScore(MatchingScoreboardActivity.score);
+        updateUserHighScore(MatchingScoreboardActivity.score);
     }
 }

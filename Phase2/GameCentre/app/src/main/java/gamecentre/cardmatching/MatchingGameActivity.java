@@ -164,7 +164,7 @@ public class MatchingGameActivity extends AppCompatActivity implements Observer{
      * Switches to the scoreboard activity.
      */
     private void switchToScoreBoardActivity() {
-        Intent tmp = new Intent(this, MatchingScoreBoardActivity.class);
+        Intent tmp = new Intent(this, MatchingScoreboardActivity.class);
         startActivity(tmp);
     }
 
