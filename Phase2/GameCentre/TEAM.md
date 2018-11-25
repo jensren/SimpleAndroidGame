@@ -69,7 +69,6 @@ don't match, they flip back over.
 
 ## To-do list:
 * Fix code smells (extract superclasses)
-* Rename solvable baord functions
 * Write more tests
 *Utility class for save and loading??
 *Add name of game to matching main layout
