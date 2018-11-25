@@ -71,6 +71,8 @@ public class BattleGameActivity extends AppCompatActivity {
     private ImageView dogImage;
 
     //TODO: save battle game to files
+    //TODO: display scoreboard for battle game
+    //TODO: extract a class from BattleGameActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
