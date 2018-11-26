@@ -43,14 +43,6 @@ public class MatchingBoard extends Observable implements Serializable {
             }
         }
     }
-    /**
-     * Return the number of tiles on the board.
-     *
-     * @return the number of tiles on the board
-     */
-    int numTiles() {
-        return numCols * numRows;
-    }
 
     /**
      * Return the tile at (row, col)
