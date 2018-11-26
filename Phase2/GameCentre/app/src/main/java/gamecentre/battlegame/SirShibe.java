@@ -1,9 +1,11 @@
 package gamecentre.battlegame;
 
+import java.io.Serializable;
+
 /**
  * Class representing the Sir Shibe character.
  */
-public class SirShibe extends Character {
+public class SirShibe extends Character implements Serializable {
 
     private static final int REGULAR_MOVE_DAMAGE = 10;
     private static final int SPECIAL_MOVE_DAMAGE = 13;

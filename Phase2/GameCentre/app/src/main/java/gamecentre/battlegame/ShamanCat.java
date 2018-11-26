@@ -1,10 +1,12 @@
 package gamecentre.battlegame;
 
 
+import java.io.Serializable;
+
 /**
  * Representation of the Shaman Cat character.
  */
-public class ShamanCat extends Character {
+public class ShamanCat extends Character implements Serializable {
 
     private static final int REGULAR_MOVE_DAMAGE = 7;
     private static final int SPECIAL_MOVE_DAMAGE = 13;

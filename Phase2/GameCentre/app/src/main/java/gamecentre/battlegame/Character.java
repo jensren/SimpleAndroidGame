@@ -1,12 +1,14 @@
 package gamecentre.battlegame;
 
-abstract class Character {
+import java.io.Serializable;
+
+abstract class Character implements Serializable {
     // character's special attack deflects opponent's move back at them
 
     private int hp = 100;
     private int mp = 100;
     private Character opponent;
-    private BattleQueue battleQueue;
+    private BattleQueue battleQueue = new BattleQueue();
 
     /**
      * Return whether this character has enough Health points to perform a special attack.
