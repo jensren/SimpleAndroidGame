@@ -51,6 +51,13 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
         super.updateUserHighScore(newScore);
     }
 
+    /**
+     * Reset the score
+     */
+    static void reset() {
+        numMoves = 0;
+    }
+
     @Override
     public void update() {
         if (numMoves != 0) {
@@ -58,6 +65,8 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
             currentScore = new Score(user, points);
             updateGameHighScore(currentScore);
             updateUserHighScore(currentScore);
+        } else {
+            currentScore = null;
         }
     }
 }

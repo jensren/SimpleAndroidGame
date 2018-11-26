@@ -47,19 +47,6 @@ public class BoardAndTileTest {
         boardManager.getBoard().swapTiles(0, 0, 0, 1);
     }
 
-//    /**
-//     * Get list of tiles from a board manager.
-//     */
-//    private List<Tile> getTilesList(BoardManager boardManager){
-//        List<Tile> tiles = new ArrayList<>(4);
-//        for (int i=0; i<boardManager.board.numRows; i++){
-//            for (int j=0; j<boardManager.board.numCols; j++){
-//                tiles.set(4*i+j,boardManager.board.tiles[i][j]);
-//            }
-//        }
-//        return tiles;
-//    }
-
     /**
      * Test whether swapping two tiles makes a solved board unsolved.
      */
@@ -107,6 +94,17 @@ public class BoardAndTileTest {
         assertEquals(true, boardManager.isValidTap(14));
         assertEquals(false, boardManager.isValidTap(10));
     }
+
+    @Test
+    public void testTouchMove() {
+        setUpCorrect();
+        assertEquals(15, boardManager.getBoard().getTile(3,2).getId());
+        boardManager.touchMove(14);
+        assertEquals(16, boardManager.getBoard().getTile(3,2).getId());
+        assertEquals(15, boardManager.getBoard().getTile(3,3).getId());
+    }
+
+
 
     /**
      * Test if number moves updates properly.

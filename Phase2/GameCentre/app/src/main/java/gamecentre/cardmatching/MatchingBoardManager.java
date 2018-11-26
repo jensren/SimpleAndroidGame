@@ -26,7 +26,7 @@ public class MatchingBoardManager implements Serializable {
     /**
      * Keeps track of matched tiles.
      */
-    private int tilesMatched = 0;
+    int tilesMatched = 0;
     /**
      * Keeps track of the row and col indices of the two flipped tiles. Initialized as -1.
      */

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,6 +43,9 @@ public class MatchingGameActivity extends AppCompatActivity implements Observer{
     public void display() {
         updateTileButtons();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
+        TextView score = findViewById(R.id.moves);
+        String a = "Your moves: " + boardManager.getNumMoves();
+        score.setText(a);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState){
