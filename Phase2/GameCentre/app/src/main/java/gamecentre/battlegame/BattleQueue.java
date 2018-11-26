@@ -12,6 +12,7 @@ public class BattleQueue implements Serializable {
     private ArrayList<BattleQueue> undoStack = new ArrayList<>();
     private ArrayList<int[]> playerAttributesStack = new ArrayList<>();
 
+
     /**
      * Add a character to the end of the battle queue.
      *
@@ -25,6 +26,9 @@ public class BattleQueue implements Serializable {
         queue.add(character);
     }
 
+    /**
+     * Removes characters with no MP
+     */
     private void removeInvalidCharacters() {
         while (!getNextCharacter().hasAttackMp()) {
             removeCharacter();
@@ -32,12 +36,30 @@ public class BattleQueue implements Serializable {
     }
 
     /**
+     * Return player1
+     *
+     * @return player1
+     */
+    public Character getPlayer1() {
+        return player1;
+    }
+
+    /**
+     * Return player2
+     *
+     * @return player2
+     */
+    public Character getPlayer2() {
+        return player2;
+    }
+
+
+    /**
      * Remove and return the next character from the front of the battle queue.
      *
      * @return The next character in this Battle Queue
      */
     Character removeCharacter() {
-
         if (queue.size() > 0) {
             return queue.remove(0);
         }
