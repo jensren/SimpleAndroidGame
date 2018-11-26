@@ -47,6 +47,7 @@ public class BattleStartingActivity extends AppCompatActivity {
 
         battleQueue = new BattleQueue();
         saveToFile(tempSaveFileName);
+        BattleScoreboard.reset();
 
         setContentView(R.layout.activity_battlegame_starting);
         startAnimations();
@@ -54,6 +55,7 @@ public class BattleStartingActivity extends AppCompatActivity {
         addStartButtonListener();
         addLoadButtonListener();
         addSaveButtonListener();
+        addScoreboardButtonListener();
     }
 
     /**
@@ -103,6 +105,19 @@ public class BattleStartingActivity extends AppCompatActivity {
     }
 
     /**
+     * Activate the scoreboard button.
+     */
+    private void addScoreboardButtonListener() {
+        Button loadButton = findViewById(R.id.ScoreboardButton);
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToScoreboard();
+            }
+        });
+    }
+
+    /**
      * Display that a game was loaded successfully.
      */
     private void makeToastLoadedText() {
@@ -147,6 +162,14 @@ public class BattleStartingActivity extends AppCompatActivity {
         Intent tmp = new Intent(this, CatOrDogActivity.class);
         saveToFile(BattleStartingActivity.tempSaveFileName);
         startActivity(tmp);
+    }
+
+    /**
+     * Switch to the score board activity.
+     */
+    private void switchToScoreboard() {
+        Intent m = new Intent(this, BattleScoreboardActivity.class);
+        startActivity(m);
     }
 
     /**
