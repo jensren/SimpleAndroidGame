@@ -79,7 +79,6 @@ public class SignUpActivity extends AppCompatActivity {
         SlidingtilesStartingActivity.autoSaveFileName = username + "_slidingtiles_autosave.ser";
         SlidingtilesStartingActivity.tempSaveFileName = username + "_slidingtiles_tmp.ser";
         BattleStartingActivity.saveFileName = username + "_battlegame.ser";
-        BattleStartingActivity.autoSaveFileName = username + "_battlegame_autosave.ser";
         BattleStartingActivity.tempSaveFileName = username + "_battlegame_tmp.ser";
         MatchingStartingActivity.matchingSaveFileName = username + "_matching.ser";
         MatchingStartingActivity.matchingAutoSaveFileName = username + "_matching_autosave.ser";
