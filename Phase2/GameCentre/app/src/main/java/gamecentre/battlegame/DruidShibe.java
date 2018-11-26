@@ -20,6 +20,7 @@ class DruidShibe extends Character {
 
     @Override
     void regularMove() {
+        getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
@@ -32,6 +33,7 @@ class DruidShibe extends Character {
      */
     @Override
     void specialMove() {
+        getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(SPECIAL_MOVE_COST);
         this.getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);

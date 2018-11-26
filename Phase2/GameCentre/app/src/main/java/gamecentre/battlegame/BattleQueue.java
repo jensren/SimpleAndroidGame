@@ -10,10 +10,7 @@ public class BattleQueue implements Serializable {
 
     private ArrayList<Character> queue = new ArrayList<>();
     private ArrayList<BattleQueue> undoStack = new ArrayList<>();
-
-    BattleQueue() {
-
-    }
+    private ArrayList<int[]> playerAttributesStack = new ArrayList<>();
 
     /**
      * Add a character to the end of the battle queue.
@@ -62,7 +59,10 @@ public class BattleQueue implements Serializable {
      * @return the next character.
      */
     Character getNextCharacter() {
-        return queue.get(0);
+        if (queue.size() > 0 ) {
+            return queue.get(0);
+        }
+        else return player1;
     }
 
     /**
@@ -117,11 +117,26 @@ public class BattleQueue implements Serializable {
     }
 
     /**
+     * Store this character's HP, MP and this character's
+     *
+     * @param ch first character in the battle queue before attack is performed.
+     */
+    public void updatePlayerAttributesStack(Character ch) {
+        int[] attributeArray = new int[4];
+        attributeArray[0] = ch.getHp();
+        attributeArray[1] = ch.getMp();
+        attributeArray[2] = ch.getOpponent().getHp();
+        attributeArray[3] = ch.getOpponent().getMp();
+        playerAttributesStack.add(attributeArray);
+
+    }
+
+    /**
      * Return if the click to the undo button is invalid
      * @return True if there are no moves to undo, else return false.
      */
     boolean isInValidUndo() {
-        return undoStack.size() == 0;
+        return undoStack.size() == 0 || playerAttributesStack.size() == 0;
     }
 
     /**
@@ -129,12 +144,27 @@ public class BattleQueue implements Serializable {
      */
     public void undo() {
         if (undoStack.size() > 0) {
-            BattleQueue bq = undoStack.get(undoStack.size() - 1);
+            BattleQueue bq = undoStack.remove(undoStack.size() - 1);
             while (!isEmpty()) {
                 removeCharacter();
             }
-            for (Character ch : bq.queue) {
-                this.add(ch);
+            queue.addAll(bq.queue);
+            if (getNextCharacter() == player1) {
+                if (playerAttributesStack.size() > 0) {
+                    int[] attributes = playerAttributesStack.remove(playerAttributesStack.size() - 1);
+                    player1.setHp(attributes[0]);
+                    player1.setMp(attributes[1]);
+                    player2.setHp(attributes[2]);
+                    player2.setMp(attributes[3]);
+                } else {
+                    throw new IndexOutOfBoundsException("Attribute stack empty!");
+                }
+            } else {
+                int[] attributes = playerAttributesStack.remove(playerAttributesStack.size() - 1);
+                player2.setHp(attributes[0]);
+                player2.setMp(attributes[1]);
+                player1.setHp(attributes[2]);
+                player1.setMp(attributes[3]);
             }
         }
     }

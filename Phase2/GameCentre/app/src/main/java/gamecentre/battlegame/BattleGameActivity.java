@@ -36,7 +36,7 @@ public class BattleGameActivity extends AppCompatActivity {
     /**
      * The battle queue
      */
-    private BattleQueue battleQueue = new BattleQueue();
+    private BattleQueue battleQueue;
     /**
      * Player 1's character
      */
@@ -71,11 +71,13 @@ public class BattleGameActivity extends AppCompatActivity {
     private ImageView dogImage;
 
     //TODO: save battle game to files
+    //TODO: display scoreboard for battle game
+    //TODO: extract a class from BattleGameActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //loadFromFile();
+        loadFromFile(BattleStartingActivity.tempSaveFileName);
         setContentView(R.layout.activity_battlegame_main);
 
         catImage = findViewById(R.id.catimage);
@@ -231,36 +233,17 @@ public class BattleGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Character character = battleQueue.getNextCharacter();
-                String sprite = character.getSprite() + "2";
 
                 if (character.hasAttackMp()) {
                     character.specialMove();
-                    final String sprite1 = character.getSprite() + "2";
+                    final String sprite1 = character.getSprite() + "5";
                     final String sprite2 = character.getSprite() + "0";
                     displayTurn(character);
 
-                    if (character.getType().equals("cat")) {
-                        catImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
-                        new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
-                            @Override
-                            public void run() {
-                                catImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
-                            }
-                        }, 350);
-                    } else {
-                        dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
-                        new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
-                            @Override
-                            public void run() {
-                                dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
-                            }
-                        }, 350);
-                    }
+                    displayAttackImage(character, sprite1, sprite2);
                     Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
-                if (character.hasAttackMp()) {
-                    battleQueue.removeCharacter();
-                }
+                battleQueue.removeCharacter();
                 updateCharacterPoints();
 
                 if (battleQueue.getWinner() != null) {
@@ -269,10 +252,35 @@ public class BattleGameActivity extends AppCompatActivity {
                     Character nextCharacter = battleQueue.getNextCharacter();
                     displayTurn(nextCharacter);
                 }
-
-
             }
         });
+    }
+
+    /**
+     * Display the attack sprite for the character.
+     *
+     * @param character The character who is attacking
+     * @param sprite1   The attack image
+     * @param sprite2   The original image
+     */
+    private void displayAttackImage(Character character, String sprite1, final String sprite2) {
+        if (character.getType().equals("cat")) {
+            catImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    catImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
+                }
+            }, 350);
+        } else {
+            dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
+                }
+            }, 350);
+        }
     }
 
     /**
@@ -289,23 +297,7 @@ public class BattleGameActivity extends AppCompatActivity {
                 final String sprite2 = character.getSprite() + "0";
                 displayTurn(character);
 
-                if (character.getType().equals("cat")) {
-                    catImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
-                    new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
-                        @Override
-                        public void run() {
-                            catImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
-                        }
-                    }, 350);
-                } else {
-                    dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite1));
-                    new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
-                        @Override
-                        public void run() {
-                            dogImage.setImageResource(getImageId(BattleGameActivity.this, sprite2));
-                        }
-                    }, 350);
-                }
+                displayAttackImage(character, sprite1, sprite2);
                 character.regularMove();
                 Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
                 if (!battleQueue.isEmpty()) {
@@ -346,6 +338,8 @@ public class BattleGameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid Undo", Toast.LENGTH_SHORT).show();
                 } else {
                     battleQueue.undo();
+                    Toast.makeText(getApplicationContext(), "Undo", Toast.LENGTH_SHORT).show();
+                    updateCharacterPoints();
                 }
             }
         });
@@ -364,4 +358,54 @@ public class BattleGameActivity extends AppCompatActivity {
         player2Mp.setText(p2Mp);
         player2Hp.setText(p2Hp);
     }
+
+    /**
+     * Load the battle queue from fileName.
+     *
+     * @param fileName the name of the file
+     */
+    private void loadFromFile(String fileName) {
+
+        try {
+            InputStream inputStream = this.openFileInput(fileName);
+            if (inputStream != null) {
+                ObjectInputStream input = new ObjectInputStream(inputStream);
+                battleQueue = (BattleQueue) input.readObject();
+                inputStream.close();
+            }
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        } catch (ClassNotFoundException e) {
+            Log.e("login activity", "File contained unexpected data type: " + e.toString());
+        }
+    }
+
+    /**
+     * Save the battle queue to fileName.
+     *
+     * @param fileName the name of the file
+     */
+    public void saveToFile(String fileName) {
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    this.openFileOutput(fileName, MODE_PRIVATE));
+            outputStream.writeObject(battleQueue);
+            outputStream.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    /**
+     * Dispatch onPause() to fragments.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveToFile(BattleStartingActivity.tempSaveFileName);
+        saveToFile(BattleStartingActivity.autoSaveFileName);
+    }
+
 }

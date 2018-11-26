@@ -36,23 +36,7 @@ public class SamuraiCat extends Character {
         bq.add(ch1);
         bq.add(ch1.getOpponent());
 
-//        int p1Count = 0;
-//        int p2Count = 0;
-//
-//        while (!bq.isEmpty()) {
-//            ch = bq.removeCharacter();
-//            if (ch == ch1) {
-//                p1Count += 1;
-//            } else {
-//                p2Count += 1;
-//            }
-//        }
-//        if (p1Count > 0) {
-//            bq.add(ch1);
-//        }
-//        if (p2Count > 0) {
-//            bq.add(ch1.getOpponent());
-//        }
+
 
     }
 

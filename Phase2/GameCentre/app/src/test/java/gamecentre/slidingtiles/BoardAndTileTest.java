@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class BoardAndTileTest {
 
     /** The board manager for testing. */
-    BoardManager boardManager;
+    private BoardManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -105,5 +105,76 @@ public class BoardAndTileTest {
     }
 
 
+
+    /**
+     * Test if number moves updates properly.
+     */
+    @Test
+    public void testNumMoves(){
+        setUpCorrect();
+        boardManager.updateMoves();
+        assertEquals(true, boardManager.getNumMoves() == 1);
+        boardManager.updateMoves();
+        assertEquals(false, boardManager.getNumMoves() == 1);
+    }
+
+    /**
+     * Tests if solvable function works.
+     */
+    @Test
+    public void testSolvable(){
+        setUpCorrect();
+        assertEquals(true, boardManager.solvable(makeTiles()));
+    }
+
+    /**
+     *  Tests if getBoardSize returns the correct board size.
+     */
+    @Test
+    public void testGetBoardSize(){
+        setUpCorrect();
+        assertEquals(true, boardManager.getBoardSize() == 4);
+    }
+
+    /**
+     * Tests if boardmanager constructor works.
+     */
+    @Test
+    public void testCreateBoardManager(){
+        boardManager = new BoardManager();
+    }
+
+    /**
+     * Tests the creation of a 5x5 board.
+     */
+    @Test
+    public void test5x5Board(){
+        Board.numCols = 5;
+        Board.numRows = 5;
+        boardManager = new BoardManager();
+        Board.numRows = 4;
+        Board.numCols = 4;
+    }
+
+    /**
+     * Tests the creation of a 3x3 board.
+     */
+    @Test
+    public void test3x3Board(){
+        Board.numCols = 3;
+        Board.numRows = 3;
+        boardManager = new BoardManager();
+        Board.numRows = 4;
+        Board.numCols = 4;
+    }
+
+    /**
+     * Test comparing tiles.
+     */
+    @Test
+    public void testCompareTiles(){
+        setUpCorrect();
+        assertEquals(1,boardManager.board.tiles[0][0].compareTo(boardManager.board.tiles[0][1]));
+    }
 }
 

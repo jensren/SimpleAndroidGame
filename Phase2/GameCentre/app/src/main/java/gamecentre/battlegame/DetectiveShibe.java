@@ -16,6 +16,7 @@ public class DetectiveShibe extends Character {
 
     @Override
     void regularMove() {
+        getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
@@ -29,9 +30,11 @@ public class DetectiveShibe extends Character {
      */
     @Override
     void specialMove() {
+        getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(SPECIAL_MOVE_COST);
         getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
+        getBattleQueue().add(this.getOpponent());
         getBattleQueue().add(this);
         getBattleQueue().add(this);
     }
