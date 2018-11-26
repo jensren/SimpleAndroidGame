@@ -68,10 +68,9 @@ don't match, they flip back over.
 *
 
 ## To-do list:
-* Fix code smells (extract superclasses)
-* Write more tests
-*Utility class for save and loading??
-*Add name of game to matching main layout
-* Ask colin about observable and activity tests.
+* Fix code smells (extract superclasses)- create listener interface to replace observable
+* Testing: make controllers for activities to test them
+* Utility class for save and loading??
+* Add name of game to matching main layout
 
 
