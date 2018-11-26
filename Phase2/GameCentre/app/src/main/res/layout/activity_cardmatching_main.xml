@@ -13,4 +13,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         tools:context="gamecentre.cardmatching.MatchingGameActivity" />
+
+    <TextView
+        android:id="@+id/moves"
+        android:layout_width="271dp"
+        android:layout_height="59dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text=""
+        android:textSize="30sp" />
 </RelativeLayout>

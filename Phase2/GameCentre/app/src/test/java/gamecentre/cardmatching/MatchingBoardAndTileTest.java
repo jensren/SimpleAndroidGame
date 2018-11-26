@@ -10,20 +10,20 @@ import gamecentre.slidingtiles.R;
 import static org.junit.Assert.*;
 
 public class MatchingBoardAndTileTest {
-    MatchingBoardManager boardManager;
+    private MatchingBoardManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
+     *
      * @return a set of tiles that are in order
      */
     private List<MatchingTile> makeTiles() {
         List<MatchingTile> tiles = new ArrayList<>();
-        List<MatchingTile> unknownTiles = new ArrayList<>();
         final int numTiles = MatchingBoard.numRows * MatchingBoard.numCols;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            if(tileNum >= 8){
+            if (tileNum >= 8) {
                 tiles.add(new MatchingTile(tileNum - 8 + 1, tileNum - 8));
-            }else{
+            } else {
                 tiles.add(new MatchingTile(tileNum + 1, tileNum));
             }
         }
@@ -46,7 +46,7 @@ public class MatchingBoardAndTileTest {
     private void changeToBlank() {
         for (int row = 0; row != MatchingBoard.numRows; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
-                boardManager.getBoard().unknownTiles[row][col] = new MatchingTile(17,R.drawable.tile_25);
+                boardManager.getBoard().unknownTiles[row][col] = new MatchingTile(17, R.drawable.tile_25);
             }
         }
         boardManager.tilesMatched = 16;
@@ -63,11 +63,11 @@ public class MatchingBoardAndTileTest {
         assertEquals(true, boardManager.isWin());
     }
 
-    public void flipFirstTile(){
+    public void flipFirstTile() {
         boardManager.touchMove(0);
     }
 
-    public void flipLastTile(){
+    public void flipLastTile() {
         boardManager.touchMove(15);
     }
 
@@ -84,7 +84,7 @@ public class MatchingBoardAndTileTest {
         assertEquals(false, boardManager.isValidTap(9));
         assertEquals(false, boardManager.isValidTap(10));
         assertEquals(false, boardManager.isValidTap(11));
-        }
+    }
 
     @Test
     public void testMatchingFlipFirst() {
@@ -94,6 +94,7 @@ public class MatchingBoardAndTileTest {
         flipFirstTile();
         assertEquals(1, boardManager.getBoard().getTile(0, 0).getId());
     }
+
     @Test
     public void testMatchingSwapLast() {
         setUpCorrect();
@@ -114,6 +115,7 @@ public class MatchingBoardAndTileTest {
         boardManager.touchMove(7);
         boardManager.touchMove(15);
     }
+
     @Test
     public void testMatchingFlipBlankLastTwo() {
         setUpCorrect();
@@ -124,7 +126,7 @@ public class MatchingBoardAndTileTest {
         assertEquals(17, boardManager.getBoard().getTile(3, 3).getId());
     }
 
-    public void updateMove(){
+    public void updateMove() {
         boardManager.updateMoves();
     }
 
@@ -137,17 +139,59 @@ public class MatchingBoardAndTileTest {
         updateMove();
         assertEquals(2, boardManager.getNumMoves());
     }
-    public void touchMoveFirstTile(){
+
+    public void touchMoveFirstTile() {
         boardManager.touchMove(0);
     }
+
     @Test
-    public void testMatchingTouchMove(){
+    public void testMatchingTouchMove() {
         setUpCorrect();
         assertEquals(16, boardManager.getBoard().getTile(0, 0).getId());
         touchMoveFirstTile();
         assertEquals(1, boardManager.getBoard().getTile(0, 0).getId());
     }
 
+    @Test
+    public void testCompareTiles(){
+        setUpCorrect();
+        assertEquals(1,boardManager.getBoard().tiles[0][0].compareTo(boardManager.getBoard().tiles[0][1]));
+    }
+
+    private List<MatchingTile> makeOtherTiles() {
+        List<MatchingTile> tiles = new ArrayList<>();
+        final int numTiles = MatchingBoard.numRows * MatchingBoard.numCols;
+        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
+                tiles.add(new MatchingTile(tileNum));
+        }
+
+        return tiles;
+    }
+
+    @Test
+    public void testMatchingTilesGetId() {
+        List<MatchingTile> tiles = makeOtherTiles();
+        MatchingBoard board = new MatchingBoard(tiles);
+        boardManager = new MatchingBoardManager(board);
+        assertEquals(1, boardManager.getBoard().tiles[0][0].getId());
+        assertEquals(8, boardManager.getBoard().tiles[1][3].getId());
+        assertEquals(1, boardManager.getBoard().tiles[2][0].getId());
+        assertEquals(8, boardManager.getBoard().tiles[3][3].getId());
+    }
+
+    @Test
+    public void testMatchingTilesGetBackgound(){
+        setUpCorrect();
+        assertEquals(0, boardManager.getBoard().tiles[0][0].getBackground());
+        assertEquals(7, boardManager.getBoard().tiles[1][3].getBackground());
+        assertEquals(0, boardManager.getBoard().tiles[2][0].getBackground());
+        assertEquals(7, boardManager.getBoard().tiles[3][3].getBackground());
+    }
+
+    @Test
+    public void testCreateBoardManager(){
+        boardManager = new MatchingBoardManager();
+    }
 
 }
 
