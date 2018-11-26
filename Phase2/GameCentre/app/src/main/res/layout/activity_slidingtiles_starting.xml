@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fall2018.csc2017.gamecentre.slidingtiles.StartingActivity">
+    tools:context="gamecentre.slidingtiles.SlidingtilesStartingActivity">
 
     <TextView
         android:id="@+id/GameText"
@@ -39,6 +39,17 @@
         android:layout_below="@+id/GameText"
         android:layout_toEndOf="@+id/StartButton"
         android:text="Save Game" />
+
+    <Button
+        android:id="@+id/ScoreboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/StartButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginBottom="105dp"
+        android:gravity="center"
+        android:text="Scoreboard" />
 
     <RadioGroup
         android:id="@+id/Radio_Group"
