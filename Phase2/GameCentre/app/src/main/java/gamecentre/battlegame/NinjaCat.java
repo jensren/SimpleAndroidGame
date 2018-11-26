@@ -1,9 +1,11 @@
 package gamecentre.battlegame;
 
+import java.io.Serializable;
+
 /**
  * The Ninja Cat character class. Represents the Ninja Cat character.
  */
-class NinjaCat extends Character {
+class NinjaCat extends Character implements Serializable {
 
     private static final int SPECIAL_MOVE_COST = 9;
     private static final int SPECIAL_MOVE_DAMAGE = 15;

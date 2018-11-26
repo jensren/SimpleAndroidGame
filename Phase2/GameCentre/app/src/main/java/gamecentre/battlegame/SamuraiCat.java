@@ -1,6 +1,8 @@
 package gamecentre.battlegame;
 
-public class SamuraiCat extends Character {
+import java.io.Serializable;
+
+public class SamuraiCat extends Character implements Serializable {
 
     private static final int REGULAR_MOVE_DAMAGE = 6;
     private static final int SPECIAL_MOVE_DAMAGE = 15;

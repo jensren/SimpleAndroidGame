@@ -36,7 +36,7 @@ public class BattleGameActivity extends AppCompatActivity {
     /**
      * The battle queue
      */
-    private BattleQueue battleQueue;
+    private BattleQueue battleQueue = new BattleQueue();
     /**
      * Player 1's character
      */
@@ -77,6 +77,7 @@ public class BattleGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         loadFromFile(BattleStartingActivity.tempSaveFileName);
         setContentView(R.layout.activity_battlegame_main);
 
@@ -87,9 +88,19 @@ public class BattleGameActivity extends AppCompatActivity {
         addSpecialMoveButtonListener();
         addUndoButtonListener();
 
-        setCharacters();
-        setOpponent();
-        initializeBattleQueue();
+        if (battleQueue.getPlayer1() == null || battleQueue.getPlayer2() == null) {
+            setCharacters();
+            setOpponent();
+            initializeBattleQueue();
+        } else {
+            player1.setOpponent(player2);
+            player2.setOpponent(player1);
+            player1 = battleQueue.getPlayer1();
+            player2 = battleQueue.getPlayer2();
+            player1.setBattleQueue(battleQueue);
+            player2.setBattleQueue(battleQueue);
+        }
+
         initializeHpMp();
         updateCharacterPoints();
         setSprites();
@@ -118,10 +129,10 @@ public class BattleGameActivity extends AppCompatActivity {
      * player2.
      */
     private void initializeBattleQueue() {
-        battleQueue.add(player1);
-        battleQueue.add(player2);
         player1.setBattleQueue(battleQueue);
         player2.setBattleQueue(battleQueue);
+        battleQueue.add(player1);
+        battleQueue.add(player2);
     }
 
     /**
@@ -338,6 +349,9 @@ public class BattleGameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid Undo", Toast.LENGTH_SHORT).show();
                 } else {
                     battleQueue.undo();
+                    Character nextCharacter = battleQueue.getNextCharacter();
+                    displayTurn(nextCharacter);
+
                     Toast.makeText(getApplicationContext(), "Undo", Toast.LENGTH_SHORT).show();
                     updateCharacterPoints();
                 }
@@ -405,7 +419,6 @@ public class BattleGameActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         saveToFile(BattleStartingActivity.tempSaveFileName);
-        saveToFile(BattleStartingActivity.autoSaveFileName);
     }
 
 }

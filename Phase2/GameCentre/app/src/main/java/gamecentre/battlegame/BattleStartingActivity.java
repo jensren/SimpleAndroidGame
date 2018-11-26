@@ -32,10 +32,6 @@ public class BattleStartingActivity extends AppCompatActivity {
      */
     public static String tempSaveFileName;
     /**
-     * The auto saved file.
-     */
-    public static String autoSaveFileName;
-    /**
      * The battle queue.
      */
     private BattleQueue battleQueue;
@@ -97,7 +93,6 @@ public class BattleStartingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadFromFile(saveFileName);
                 saveToFile(tempSaveFileName);
-                saveToFile(autoSaveFileName);
                 makeToastLoadedText();
                 switchToGameActivity();
             }
@@ -151,7 +146,7 @@ public class BattleStartingActivity extends AppCompatActivity {
      */
     private void switchToCatChoiceActivity() {
         Intent tmp = new Intent(this, CatOrDogActivity.class);
-        //saveToFile(SlidingtilesStartingActivity.tempSaveFileName);
+        saveToFile(BattleStartingActivity.tempSaveFileName);
         startActivity(tmp);
     }
 
@@ -159,7 +154,7 @@ public class BattleStartingActivity extends AppCompatActivity {
      * Switch to the BattleGame view.
      */
     private void switchToGameActivity() {
-        Intent tmp = new Intent(this, CatOrDogActivity.class);
+        Intent tmp = new Intent(this, BattleGameActivity.class);
         saveToFile(BattleStartingActivity.tempSaveFileName);
         startActivity(tmp);
     }
