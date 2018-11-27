@@ -39,11 +39,13 @@ public class MatchingStartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         matchingBoardManager = new MatchingBoardManager();
         saveToFile(matchingTempSaveFileName);
+        MatchingScoreboard.reset();
 
         setContentView(R.layout.activity_cardmatching_starting);
         addStartButtonListener();
         addLoadButtonListener();
         addSaveButtonListener();
+        addScoreboardButtonListener();
     }
 
     /**
@@ -77,10 +79,31 @@ public class MatchingStartingActivity extends AppCompatActivity {
     }
 
     /**
+     * Activate the scoreboard button
+     */
+    private void addScoreboardButtonListener() {
+        Button loadButton = findViewById(R.id.ScoreboardButton);
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToScoreboard();
+            }
+        });
+    }
+
+    /**
      * Display that a game was loaded successfully.
      */
     private void makeToastLoadedText() {
         Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Switch to the score board activity.
+     */
+    private void switchToScoreboard() {
+        Intent m = new Intent(this, MatchingScoreboardActivity.class);
+        startActivity(m);
     }
 
     /**

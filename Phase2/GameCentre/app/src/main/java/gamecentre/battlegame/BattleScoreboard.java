@@ -44,13 +44,22 @@ public class BattleScoreboard extends Scoreboard {
         super.updateUserHighScore(newScore);
     }
 
+    /**
+     * Reset the score
+     */
+    static void reset() {
+        numMoves = 0;
+    }
+
     @Override
     protected void update() {
         if (numMoves != 0) {
-            int points = (100 + (playerHpLost - opponentHpLost)) * numMoves;
+            int points = ((100 + playerHpLost - opponentHpLost) * numMoves) / 10;
             currentScore = new Score(user, points);
             updateGameHighScore(currentScore);
             updateUserHighScore(currentScore);
+        } else {
+            currentScore = null;
         }
     }
 }

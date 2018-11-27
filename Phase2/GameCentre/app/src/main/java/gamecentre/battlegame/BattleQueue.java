@@ -7,10 +7,12 @@ public class BattleQueue implements Serializable {
 
     private Character player1;
     private Character player2;
+    private int numMoves;
 
     private ArrayList<Character> queue = new ArrayList<>();
     private ArrayList<BattleQueue> undoStack = new ArrayList<>();
     private ArrayList<int[]> playerAttributesStack = new ArrayList<>();
+
 
     /**
      * Add a character to the end of the battle queue.
@@ -25,23 +27,57 @@ public class BattleQueue implements Serializable {
         queue.add(character);
     }
 
-    private void removeInvalidCharacters() {
-        while (!getNextCharacter().hasAttackMp()) {
-            removeCharacter();
-        }
+//    /**
+//     * Removes characters with no MP
+//     */
+//    private void removeInvalidCharacters() {
+//        while (!getNextCharacter().hasAttackMp()) {
+//            removeCharacter();
+//        }
+//    }
+
+    /**
+     * Count how many total moves are made in this battle queue.
+     */
+    public void makeMove() {
+        numMoves++;
     }
+
+    /**
+     * Return the total number of moves performed in the battle queue.
+     * @return Total number of moves performed in this battle queue.
+     */
+    public int getNumMoves() {
+        return numMoves;
+    }
+
+    /**
+     * Return player1
+     *
+     * @return player1
+     */
+    public Character getPlayer1() {
+        return player1;
+    }
+
+    /**
+     * Return player2
+     *
+     * @return player2
+     */
+    public Character getPlayer2() {
+        return player2;
+    }
+
 
     /**
      * Remove and return the next character from the front of the battle queue.
      *
-     * @return The next character in this Battle Queue
      */
-    Character removeCharacter() {
-
+    void removeCharacter() {
         if (queue.size() > 0) {
-            return queue.remove(0);
+            queue.remove(0);
         }
-        return null;
     }
 
 //    /**
@@ -71,10 +107,16 @@ public class BattleQueue implements Serializable {
      * @return the winner of the game if there is one, null otherwise.
      */
     Character getWinner() {
-
-        if (player1.getHp() > 0 && player2.getHp() == 0) {
+        int initialHP = Character.getInitialHp();
+        int player1HP = player1.getHp();
+        int player2HP = player2.getHp();
+        BattleScoreboard.setPlayerHpLost(initialHP - player1HP);
+        BattleScoreboard.setOpponentHpLost(initialHP - player2HP);
+        if (player1HP > 0 && player2HP == 0) {
+            BattleScoreboard.setNumMoves(numMoves);
             return player1;
-        } else if (player1.getHp() == 0 && player2.getHp() > 0) {
+        } else if (player1HP == 0 && player2HP > 0) {
+            BattleScoreboard.setNumMoves(numMoves);
             return player2;
         } else {
             return null;
@@ -91,7 +133,7 @@ public class BattleQueue implements Serializable {
      * @return true if this Battle Queue is empty, false otherwise.
      */
     boolean isEmpty() {
-        removeInvalidCharacters();
+        //removeInvalidCharacters();
         return queue.size() == 0;
     }
 
@@ -144,6 +186,7 @@ public class BattleQueue implements Serializable {
      */
     public void undo() {
         if (undoStack.size() > 0) {
+            makeMove();
             BattleQueue bq = undoStack.remove(undoStack.size() - 1);
             while (!isEmpty()) {
                 removeCharacter();

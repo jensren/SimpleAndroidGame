@@ -58,11 +58,21 @@ public class MatchingScoreboard extends Scoreboard {
         super.updateUserHighScore(newScore);
     }
 
+    /**
+     * Reset the score
+     */
+    static void reset() {
+        numMoves = 0;
+    }
+
     @Override
     public void update() {
-        int points = numMoves;
-        currentScore = new Score(user, points);
-        updateGameHighScore(currentScore);
-        updateUserHighScore(currentScore);
+        if (numMoves > 0) {
+            currentScore = new Score(user, numMoves);
+            updateGameHighScore(currentScore);
+            updateUserHighScore(currentScore);
+        } else {
+            currentScore = null;
+        }
     }
 }

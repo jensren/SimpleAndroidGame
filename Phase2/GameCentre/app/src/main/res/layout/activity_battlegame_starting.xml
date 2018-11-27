@@ -44,7 +44,7 @@
         android:text="Save" />
 
     <Button
-        android:id="@+id/battlescoreboard"
+        android:id="@+id/ScoreboardButton"
         android:layout_width="124dp"
         android:layout_height="59dp"
         android:layout_alignParentEnd="true"

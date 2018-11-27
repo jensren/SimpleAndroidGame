@@ -36,7 +36,7 @@ public class BattleGameActivity extends AppCompatActivity {
     /**
      * The battle queue
      */
-    private BattleQueue battleQueue;
+    private BattleQueue battleQueue = new BattleQueue();
     /**
      * Player 1's character
      */
@@ -70,14 +70,12 @@ public class BattleGameActivity extends AppCompatActivity {
      */
     private ImageView dogImage;
 
-    //TODO: save battle game to files
-    //TODO: display scoreboard for battle game
     //TODO: extract a class from BattleGameActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadFromFile(BattleStartingActivity.tempSaveFileName);
+
         setContentView(R.layout.activity_battlegame_main);
 
         catImage = findViewById(R.id.catimage);
@@ -87,9 +85,19 @@ public class BattleGameActivity extends AppCompatActivity {
         addSpecialMoveButtonListener();
         addUndoButtonListener();
 
-        setCharacters();
-        setOpponent();
-        initializeBattleQueue();
+        if (battleQueue.getPlayer1() == null || battleQueue.getPlayer2() == null) {
+            setCharacters();
+            setOpponent();
+            initializeBattleQueue();
+        } else {
+            setCharacters();
+            setOpponent();
+            player1 = battleQueue.getPlayer1();
+            player2 = battleQueue.getPlayer2();
+            player1.setBattleQueue(battleQueue);
+            player2.setBattleQueue(battleQueue);
+        }
+
         initializeHpMp();
         updateCharacterPoints();
         setSprites();
@@ -118,10 +126,10 @@ public class BattleGameActivity extends AppCompatActivity {
      * player2.
      */
     private void initializeBattleQueue() {
-        battleQueue.add(player1);
-        battleQueue.add(player2);
         player1.setBattleQueue(battleQueue);
         player2.setBattleQueue(battleQueue);
+        battleQueue.add(player1);
+        battleQueue.add(player2);
     }
 
     /**
@@ -243,11 +251,11 @@ public class BattleGameActivity extends AppCompatActivity {
                     displayAttackImage(character, sprite1, sprite2);
                     Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
-                battleQueue.removeCharacter();
                 updateCharacterPoints();
 
                 if (battleQueue.getWinner() != null) {
                     Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
+                    switchToScoreBoardActivity();
                 } else {
                     Character nextCharacter = battleQueue.getNextCharacter();
                     displayTurn(nextCharacter);
@@ -300,13 +308,11 @@ public class BattleGameActivity extends AppCompatActivity {
                 displayAttackImage(character, sprite1, sprite2);
                 character.regularMove();
                 Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
-                if (!battleQueue.isEmpty()) {
-                    battleQueue.removeCharacter();
-                }
                 updateCharacterPoints();
 
                 if (battleQueue.getWinner() != null) {
                     Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
+                    switchToScoreBoardActivity();
                 } else {
                     Character nextCharacter = battleQueue.getNextCharacter();
                     displayTurn(nextCharacter);
@@ -338,6 +344,9 @@ public class BattleGameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid Undo", Toast.LENGTH_SHORT).show();
                 } else {
                     battleQueue.undo();
+                    Character nextCharacter = battleQueue.getNextCharacter();
+                    displayTurn(nextCharacter);
+
                     Toast.makeText(getApplicationContext(), "Undo", Toast.LENGTH_SHORT).show();
                     updateCharacterPoints();
                 }
@@ -360,52 +369,10 @@ public class BattleGameActivity extends AppCompatActivity {
     }
 
     /**
-     * Load the battle queue from fileName.
-     *
-     * @param fileName the name of the file
+     * Switches to the scoreboard activity.
      */
-    private void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                battleQueue = (BattleQueue) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
+    private void switchToScoreBoardActivity() {
+        Intent tmp = new Intent(this, BattleScoreboardActivity.class);
+        startActivity(tmp);
     }
-
-    /**
-     * Save the battle queue to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(battleQueue);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
-
-    /**
-     * Dispatch onPause() to fragments.
-     */
-    @Override
-    protected void onPause() {
-        super.onPause();
-        saveToFile(BattleStartingActivity.tempSaveFileName);
-        saveToFile(BattleStartingActivity.autoSaveFileName);
-    }
-
 }

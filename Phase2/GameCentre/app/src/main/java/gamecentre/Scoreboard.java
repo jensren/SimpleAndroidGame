@@ -54,15 +54,6 @@ public abstract class Scoreboard implements Serializable {
     }
 
     /**
-     * For testing only: set the current score.
-     *
-     * @param currentScore the score
-     */
-    public void setCurrentScore(Score currentScore) {
-        this.currentScore = currentScore;
-    }
-
-    /**
      * Gets the user's best score
      *
      * @param user The user

@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import gamecentre.battlegame.BattleScoreboard;
 import gamecentre.battlegame.BattleStartingActivity;
 import gamecentre.cardmatching.MatchingScoreboardActivity;
 import gamecentre.cardmatching.MatchingStartingActivity;
@@ -63,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
             saveToFile();
             SlidingtilesScoreboardActivity.user = username;
             MatchingScoreboardActivity.user = username;
+            BattleScoreboard.setUser(username);
             switchToGameChoiceActivity();
         } else {
             Toast.makeText(this, "Username taken", Toast.LENGTH_LONG).show();
@@ -79,7 +81,6 @@ public class SignUpActivity extends AppCompatActivity {
         SlidingtilesStartingActivity.autoSaveFileName = username + "_slidingtiles_autosave.ser";
         SlidingtilesStartingActivity.tempSaveFileName = username + "_slidingtiles_tmp.ser";
         BattleStartingActivity.saveFileName = username + "_battlegame.ser";
-        BattleStartingActivity.autoSaveFileName = username + "_battlegame_autosave.ser";
         BattleStartingActivity.tempSaveFileName = username + "_battlegame_tmp.ser";
         MatchingStartingActivity.matchingSaveFileName = username + "_matching.ser";
         MatchingStartingActivity.matchingAutoSaveFileName = username + "_matching_autosave.ser";

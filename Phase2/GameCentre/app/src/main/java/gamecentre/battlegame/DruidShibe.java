@@ -1,12 +1,14 @@
 package gamecentre.battlegame;
 
 
+import java.io.Serializable;
+
 /**
  * DruidShibe character class. Able to perform Regular Move costing 5 Magic points to dealing 8
  * health points damage to its opponent, adds  and a Special Move costing 10 Magic points to
  * dealing 13 Health points damage to its opponent.
  */
-class DruidShibe extends Character {
+class DruidShibe extends Character implements Serializable {
 
     private static final int REGULAR_MOVE_DAMAGE = 8;
     private static final int SPECIAL_MOVE_DAMAGE = 13;
@@ -15,30 +17,18 @@ class DruidShibe extends Character {
 
     @Override
     boolean hasAttackMp() {
-        return getHp() >= SPECIAL_MOVE_COST;
+        return super.hasAttackMpHelper(SPECIAL_MOVE_COST);
     }
 
     @Override
     void regularMove() {
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
-        getBattleQueue().add(this);
+        super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Perform the special move of the Druid Shibe. Reduce this character's MP adn reduce the
-     * opponent's HP. Add this character into the battle queue twice so it can attack twice next
-     * round.
-     */
     @Override
     void specialMove() {
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        reduceMp(SPECIAL_MOVE_COST);
-        this.getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
-        getBattleQueue().add(this);
-        getBattleQueue().add(this);
+        super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
+        super.healerCharacterSpecial(SPECIAL_MOVE_DAMAGE);
     }
 
     @Override

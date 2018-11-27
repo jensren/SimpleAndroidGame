@@ -42,12 +42,14 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         boardManager = new BoardManager();
         saveToFile(tempSaveFileName);
+        SlidingtilesScoreboard.reset();
 
         setContentView(R.layout.activity_slidingtiles_starting);
         addStartButtonListener();
         addLoadButtonListener();
         addSaveButtonListener();
         addBoardSizeListener();
+        addScoreboardButtonListener();
     }
 
     /**
@@ -79,6 +81,19 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
                 saveToFile(autoSaveFileName);
                 makeToastLoadedText();
                 switchToGame();
+            }
+        });
+    }
+
+    /**
+     * Activate the scoreboard button.
+     */
+    private void addScoreboardButtonListener() {
+        Button loadButton = findViewById(R.id.ScoreboardButton);
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToScoreboard();
             }
         });
     }
@@ -140,7 +155,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     /**
      * Switch to the score board activity.
      */
-    private void switchToScoreBoard() {
+    private void switchToScoreboard() {
         Intent m = new Intent(this, SlidingtilesScoreboardActivity.class);
         startActivity(m);
     }
