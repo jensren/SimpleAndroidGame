@@ -319,6 +319,7 @@ public class BattleGameActivity extends AppCompatActivity {
 
                 if (battleQueue.getWinner() != null) {
                     Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
+                    switchToScoreBoardActivity();
                 } else {
                     Character nextCharacter = battleQueue.getNextCharacter();
                     displayTurn(nextCharacter);
