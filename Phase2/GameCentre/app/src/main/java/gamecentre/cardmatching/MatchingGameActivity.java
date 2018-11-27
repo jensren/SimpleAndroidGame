@@ -165,12 +165,6 @@ public class MatchingGameActivity extends AppCompatActivity{
         }
     }
 
-//    @Override
-//    public void onBoardChanged() {
-//        display();
-//        saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
-//    }
-
     /**
      * Switches to the scoreboard activity.
      */

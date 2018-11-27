@@ -9,7 +9,7 @@ import gamecentre.BoardUpdateListener;
 import gamecentre.slidingtiles.R;
 
 public class MatchingBoard implements Serializable {
-    private BoardUpdateListener boardUpdateListener;
+    private BoardUpdateListener boardUpdateListener = null;
 
     public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
         this.boardUpdateListener = boardUpdateListener;
@@ -67,7 +67,7 @@ public class MatchingBoard implements Serializable {
      */
     public void flipTile(int row, int col){
         unknownTiles[row][col] = tiles[row][col];
-        boardUpdateListener.onBoardChanged();
+        listenerUpdate();
     }
 
     /**
@@ -77,7 +77,7 @@ public class MatchingBoard implements Serializable {
      */
     public void flipBack(int row, int col){
         unknownTiles[row][col] = new MatchingTile(16,R.drawable.card_unknown);
-        boardUpdateListener.onBoardChanged();
+        listenerUpdate();
     }
 
     /**
@@ -87,7 +87,13 @@ public class MatchingBoard implements Serializable {
     public void flipBlank(int[] flippedTiles){
         unknownTiles[flippedTiles[0]][flippedTiles[1]] = new MatchingTile(17,R.drawable.tile_25);
         unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17,R.drawable.tile_25);
-        boardUpdateListener.onBoardChanged();
+        listenerUpdate();
+    }
+
+    private void listenerUpdate(){
+        if (boardUpdateListener != null){
+            boardUpdateListener.onBoardChanged();
+        }
     }
 
     @Override
