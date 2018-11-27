@@ -5,26 +5,11 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.TextView;
-
-
-import org.w3c.dom.Text;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.concurrent.TimeUnit;
 
 import gamecentre.slidingtiles.R;
 
@@ -36,15 +21,7 @@ public class BattleGameActivity extends AppCompatActivity {
     /**
      * The battle queue
      */
-    private BattleQueue battleQueue = new BattleQueue();
-    /**
-     * Player 1's character
-     */
-    private Character player1;
-    /**
-     * Player 2's character
-     */
-    private Character player2;
+    private BattleQueueManager battleQueueManager = new BattleQueueManager();
     /**
      * Player 1's MP
      */
@@ -85,30 +62,19 @@ public class BattleGameActivity extends AppCompatActivity {
         addSpecialMoveButtonListener();
         addUndoButtonListener();
 
-        if (battleQueue.getPlayer1() == null || battleQueue.getPlayer2() == null) {
-            setCharacters();
-            setOpponent();
-            initializeBattleQueue();
-        } else {
-            setCharacters();
-            setOpponent();
-            player1 = battleQueue.getPlayer1();
-            player2 = battleQueue.getPlayer2();
-            player1.setBattleQueue(battleQueue);
-            player2.setBattleQueue(battleQueue);
-        }
-
-        initializeHpMp();
-        updateCharacterPoints();
+        setCharacters();
+        battleQueueManager.initializeBattleQueue();
+        initializeHpMpView();
+        updateCharacterPointsView();
         setSprites();
-        displayTurn(player1);
+        displayTurn(battleQueueManager.getPlayer1());
     }
 
     /**
-     * Initialize the HP and MP of player1 and player2.
+     * Initialize the HP and MP views of player1 and player2.
      */
-    private void initializeHpMp() {
-        if (player1.getType().equals("cat")) {
+    private void initializeHpMpView() {
+        if (battleQueueManager.getPlayer1().getType().equals("cat")) {
             player1Mp = findViewById(R.id.catmp);
             player1Hp = findViewById(R.id.cathp);
             player2Mp = findViewById(R.id.dogmp);
@@ -119,25 +85,6 @@ public class BattleGameActivity extends AppCompatActivity {
             player2Mp = findViewById(R.id.catmp);
             player2Hp = findViewById(R.id.cathp);
         }
-    }
-
-    /**
-     * Add player1 and player2 to the battle queue, and set the battle queues of player1 and
-     * player2.
-     */
-    private void initializeBattleQueue() {
-        player1.setBattleQueue(battleQueue);
-        player2.setBattleQueue(battleQueue);
-        battleQueue.add(player1);
-        battleQueue.add(player2);
-    }
-
-    /**
-     * Set the opponent of player1 as player2, and the opponent of player2 as player1.
-     */
-    private void setOpponent() {
-        player1.setOpponent(player2);
-        player2.setOpponent(player1);
     }
 
     /**
@@ -157,10 +104,10 @@ public class BattleGameActivity extends AppCompatActivity {
      * Display the initial sprites.
      */
     private void setSprites() {
-        String player1Sprite = player1.getSprite() + "0";
-        String player2Sprite = player2.getSprite() + "0";
+        String player1Sprite = battleQueueManager.getPlayer1().getSprite() + "0";
+        String player2Sprite = battleQueueManager.getPlayer2().getSprite() + "0";
 
-        if (player1.getType().equals("cat")) {
+        if (battleQueueManager.getPlayer1().getType().equals("cat")) {
             catImage.setImageResource(getImageId(this, player1Sprite));
             dogImage.setImageResource(getImageId(this, player2Sprite));
         } else {
@@ -168,14 +115,6 @@ public class BattleGameActivity extends AppCompatActivity {
             catImage.setImageResource(getImageId(this, player2Sprite));
         }
     }
-
-//    public Character getPlayer1() {
-//        return player1;
-//    }
-//
-//    public Character getPlayer2() {
-//        return player2;
-//    }
 
     /**
      * Set player1 and player2 as their respective characters.
@@ -186,49 +125,10 @@ public class BattleGameActivity extends AppCompatActivity {
             String p1Class = extras.getString("player1");
             String p2Class = extras.getString("player2");
             if (p1Class != null && p2Class != null) {
-                switch (p1Class) {
-                    case "NinjaCat":
-                        player1 = new NinjaCat();
-                        break;
-                    case "SamuraiCat":
-                        player1 = new SamuraiCat();
-                        break;
-                    case "ShamanCat":
-                        player1 = new ShamanCat();
-                        break;
-                    case "DetectiveShibe":
-                        player1 = new DetectiveShibe();
-                        break;
-                    case "SirShibe":
-                        player1 = new SirShibe();
-                        break;
-                    case "DruidShibe":
-                        player1 = new DruidShibe();
-                        break;
-                }
-                switch (p2Class) {
-                    case "NinjaCat":
-                        player2 = new NinjaCat();
-                        break;
-                    case "SamuraiCat":
-                        player2 = new SamuraiCat();
-                        break;
-                    case "ShamanCat":
-                        player2 = new ShamanCat();
-                        break;
-                    case "DetectiveShibe":
-                        player2 = new DetectiveShibe();
-                        break;
-                    case "SirShibe":
-                        player2 = new SirShibe();
-                        break;
-                    case "DruidShibe":
-                        player2 = new DruidShibe();
-                        break;
-                }
-            } else {
-                throw new NullPointerException("Character is null");
+                battleQueueManager.setCharacters(p1Class, p2Class);
             }
+        } else {
+            throw new NullPointerException("Character is null");
         }
     }
 
@@ -240,24 +140,20 @@ public class BattleGameActivity extends AppCompatActivity {
         specialMoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Character character = battleQueue.getNextCharacter();
-
+                Character character = battleQueueManager.getBattleQueue().getNextCharacter();
                 if (character.hasAttackMp()) {
                     character.specialMove();
                     final String sprite1 = character.getSprite() + "5";
                     final String sprite2 = character.getSprite() + "0";
-                    displayTurn(character);
-
                     displayAttackImage(character, sprite1, sprite2);
                     Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
-                updateCharacterPoints();
-
-                if (battleQueue.getWinner() != null) {
+                updateCharacterPointsView();
+                if (battleQueueManager.getBattleQueue().getWinner() != null) {
                     Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
                     switchToScoreBoardActivity();
                 } else {
-                    Character nextCharacter = battleQueue.getNextCharacter();
+                    Character nextCharacter = battleQueueManager.getBattleQueue().getNextCharacter();
                     displayTurn(nextCharacter);
                 }
             }
@@ -296,11 +192,10 @@ public class BattleGameActivity extends AppCompatActivity {
      */
     private void addRegularMoveButtonListener() {
         Button regularMoveButton = findViewById(R.id.regularmove);
-
         regularMoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Character character = battleQueue.getNextCharacter();
+                Character character = battleQueueManager.getBattleQueue().getNextCharacter();
                 final String sprite1 = character.getSprite() + "2";
                 final String sprite2 = character.getSprite() + "0";
                 displayTurn(character);
@@ -308,13 +203,13 @@ public class BattleGameActivity extends AppCompatActivity {
                 displayAttackImage(character, sprite1, sprite2);
                 character.regularMove();
                 Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
-                updateCharacterPoints();
+                updateCharacterPointsView();
 
-                if (battleQueue.getWinner() != null) {
+                if (battleQueueManager.getBattleQueue().getWinner() != null) {
                     Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
                     switchToScoreBoardActivity();
                 } else {
-                    Character nextCharacter = battleQueue.getNextCharacter();
+                    Character nextCharacter = battleQueueManager.getBattleQueue().getNextCharacter();
                     displayTurn(nextCharacter);
                 }
             }
@@ -340,15 +235,15 @@ public class BattleGameActivity extends AppCompatActivity {
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (battleQueue.isInValidUndo()) {
+                if (battleQueueManager.getBattleQueue().isInValidUndo()) {
                     Toast.makeText(getApplicationContext(), "Invalid Undo", Toast.LENGTH_SHORT).show();
                 } else {
-                    battleQueue.undo();
-                    Character nextCharacter = battleQueue.getNextCharacter();
+                    battleQueueManager.getBattleQueue().undo();
+                    Character nextCharacter = battleQueueManager.getBattleQueue().getNextCharacter();
                     displayTurn(nextCharacter);
 
                     Toast.makeText(getApplicationContext(), "Undo", Toast.LENGTH_SHORT).show();
-                    updateCharacterPoints();
+                    updateCharacterPointsView();
                 }
             }
         });
@@ -357,11 +252,11 @@ public class BattleGameActivity extends AppCompatActivity {
     /**
      * Update both character's MP and HP on the Main Activity after each attack is performed.
      */
-    private void updateCharacterPoints() {
-        String p1Hp = "HP: " + player1.getHp();
-        String p1Mp = "MP: " + player1.getMp();
-        String p2Hp = "HP: " + player2.getHp();
-        String p2Mp = "MP: " + player2.getMp();
+    private void updateCharacterPointsView() {
+        String p1Hp = "HP: " + battleQueueManager.getPlayer1().getHp();
+        String p1Mp = "MP: " + battleQueueManager.getPlayer1().getMp();
+        String p2Hp = "HP: " + battleQueueManager.getPlayer2().getHp();
+        String p2Mp = "MP: " + battleQueueManager.getPlayer2().getMp();
         player1Hp.setText(p1Hp);
         player1Mp.setText(p1Mp);
         player2Mp.setText(p2Mp);
