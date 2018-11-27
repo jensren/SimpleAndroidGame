@@ -30,16 +30,18 @@ public class SamuraiCat extends Character implements Serializable {
      */
     @Override
     void specialMove() {
+
         getBattleQueue().makeMove();
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        Character ch1 = getBattleQueue().getNextCharacter();
         BattleQueue bq = getBattleQueue();
 
         reduceMp(SPECIAL_MOVE_COST);
         getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
-        while (!bq.isEmpty()) { bq.removeCharacter(); }
-        bq.add(ch1);
-        bq.add(ch1.getOpponent());
+        while (!bq.isEmpty()) {
+            bq.removeCharacter();
+        }
+        bq.add(bq.getPlayer1());
+        bq.add(bq.getPlayer2());
         bq.add(this);
 
 
