@@ -27,20 +27,28 @@ public class BattleQueue implements Serializable {
         queue.add(character);
     }
 
-    /**
-     * Removes characters with no MP
-     */
-    private void removeInvalidCharacters() {
-        while (!getNextCharacter().hasAttackMp()) {
-            removeCharacter();
-        }
-    }
+//    /**
+//     * Removes characters with no MP
+//     */
+//    private void removeInvalidCharacters() {
+//        while (!getNextCharacter().hasAttackMp()) {
+//            removeCharacter();
+//        }
+//    }
 
     /**
      * Count how many total moves are made in this battle queue.
      */
     public void makeMove() {
         numMoves++;
+    }
+
+    /**
+     * Return the total number of moves performed in the battle queue.
+     * @return Total number of moves performed in this battle queue.
+     */
+    public int getNumMoves() {
+        return numMoves;
     }
 
     /**
@@ -65,13 +73,11 @@ public class BattleQueue implements Serializable {
     /**
      * Remove and return the next character from the front of the battle queue.
      *
-     * @return The next character in this Battle Queue
      */
-    Character removeCharacter() {
+    void removeCharacter() {
         if (queue.size() > 0) {
-            return queue.remove(0);
+            queue.remove(0);
         }
-        return null;
     }
 
 //    /**
@@ -127,7 +133,7 @@ public class BattleQueue implements Serializable {
      * @return true if this Battle Queue is empty, false otherwise.
      */
     boolean isEmpty() {
-        removeInvalidCharacters();
+        //removeInvalidCharacters();
         return queue.size() == 0;
     }
 
