@@ -14,7 +14,7 @@ public class ShamanCat extends Character implements Serializable {
 
     @Override
     boolean hasAttackMp() {
-        return getMp() >= SPECIAL_MOVE_COST;
+        return super.hasAttackMpHelper(SPECIAL_MOVE_COST);
     }
 
     @Override

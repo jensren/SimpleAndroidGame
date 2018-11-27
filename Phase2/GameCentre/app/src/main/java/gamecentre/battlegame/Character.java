@@ -18,6 +18,16 @@ abstract class Character implements Serializable {
     abstract boolean hasAttackMp();
 
     /**
+     * A helper for the hasAttackMp used in child classes
+     *
+     * @param specialMoveCost the Mp cost of the special move
+     * @return true if character has enough Mp to do a special attack, false otherwise
+     */
+    boolean hasAttackMpHelper(int specialMoveCost) {
+        return getMp() >= specialMoveCost;
+    }
+
+    /**
      * Return the Magic points for this character.
      * @return The amount of magic points.
      */
