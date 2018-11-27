@@ -4,17 +4,9 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import gamecentre.slidingtiles.R;
 
@@ -33,6 +25,20 @@ public class BattleStartingActivity extends AppCompatActivity {
         startAnimations();
 
         addStartButtonListener();
+        addScoreboardButtonListener();
+    }
+
+    /**
+     * Activate the scoreboard button.
+     */
+    private void addScoreboardButtonListener() {
+        Button startButton = findViewById(R.id.ScoreboardButton);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToScoreboard();
+            }
+        });
     }
 
     /**
@@ -59,15 +65,15 @@ public class BattleStartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToCatChoiceActivity();
+                switchToCatOrDogActivity();
             }
         });
     }
 
     /**
-     * Switch to the CatChoiceActivity view.
+     * Switch to the CatOrDogActivity view.
      */
-    private void switchToCatChoiceActivity() {
+    private void switchToCatOrDogActivity() {
         Intent tmp = new Intent(this, CatOrDogActivity.class);
         startActivity(tmp);
     }
