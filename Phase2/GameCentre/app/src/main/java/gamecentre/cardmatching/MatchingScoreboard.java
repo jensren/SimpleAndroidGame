@@ -14,7 +14,7 @@ public class MatchingScoreboard extends Scoreboard {
      * Sets scoreboard's user to the current player's username.
      * @param user The username of the player
      */
-    static void setUser(String user) {
+    public static void setUser(String user) {
         MatchingScoreboard.user = user;
     }
 
