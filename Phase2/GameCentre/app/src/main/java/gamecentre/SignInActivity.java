@@ -17,9 +17,11 @@ import java.io.ObjectOutputStream;
 
 import gamecentre.battlegame.BattleScoreboard;
 import gamecentre.battlegame.BattleStartingActivity;
+import gamecentre.cardmatching.MatchingScoreboard;
 import gamecentre.cardmatching.MatchingScoreboardActivity;
 import gamecentre.cardmatching.MatchingStartingActivity;
 import gamecentre.slidingtiles.R;
+import gamecentre.slidingtiles.SlidingtilesScoreboard;
 import gamecentre.slidingtiles.SlidingtilesScoreboardActivity;
 import gamecentre.slidingtiles.SlidingtilesStartingActivity;
 
@@ -63,8 +65,8 @@ public class SignInActivity extends AppCompatActivity {
         } else if (userManager.getPassword(username).equals(password)) {
             setFileNames(username);
             saveToFile(USER_FILENAME);
-            SlidingtilesScoreboardActivity.user = username;
-            MatchingScoreboardActivity.user = username;
+            SlidingtilesScoreboard.setUser(username);
+            MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
             switchToGameChoiceActivity();
         } else {

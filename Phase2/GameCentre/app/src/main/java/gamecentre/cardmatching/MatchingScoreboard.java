@@ -14,7 +14,7 @@ public class MatchingScoreboard extends Scoreboard {
      * Sets scoreboard's user to the current player's username.
      * @param user The username of the player
      */
-    static void setUser(String user) {
+    public static void setUser(String user) {
         MatchingScoreboard.user = user;
     }
 
@@ -32,6 +32,15 @@ public class MatchingScoreboard extends Scoreboard {
      */
     String getUserBestScore() {
         return super.getUserBestScore(user);
+    }
+
+    /**
+     * Get the number of moves when the game ends
+     *
+     * @return the number of moves
+     */
+    public static int getNumMoves() {
+        return numMoves;
     }
 
     /**
