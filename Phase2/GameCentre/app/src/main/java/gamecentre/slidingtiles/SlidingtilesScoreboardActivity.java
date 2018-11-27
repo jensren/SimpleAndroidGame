@@ -19,6 +19,7 @@ import java.io.ObjectOutputStream;
  */
 
 public class SlidingtilesScoreboardActivity extends AppCompatActivity {
+    // TODO delete unnecessary variable user
 
     TextView scoreBoard;
     public static String user;

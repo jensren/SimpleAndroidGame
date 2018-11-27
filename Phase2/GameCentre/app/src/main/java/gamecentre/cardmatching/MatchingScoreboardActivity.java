@@ -19,6 +19,7 @@ import gamecentre.slidingtiles.R;
      * Manage the scoreBoard layout during the game and save the current scoreBoard.
      */
     public class MatchingScoreboardActivity extends AppCompatActivity {
+        // TODO delete unnecessary variable user
 
         TextView scoreBoard; 
         public static String user;

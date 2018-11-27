@@ -18,6 +18,7 @@ import gamecentre.Score;
 import gamecentre.slidingtiles.R;
 
 public class BattleScoreboardActivity extends AppCompatActivity {
+    // TODO delete unnecessary variable user
 
     public static final String SCORE_FILENAME = "battle_scoreboard_file.ser";
     public static String user;
