@@ -37,7 +37,7 @@ public class SamuraiCat extends Character implements Serializable {
         while (!bq.isEmpty()) { bq.removeCharacter(); }
         bq.add(ch1);
         bq.add(ch1.getOpponent());
-
+        bq.add(this);
 
 
     }
