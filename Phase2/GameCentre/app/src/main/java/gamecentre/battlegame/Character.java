@@ -149,8 +149,8 @@ abstract class Character implements Serializable {
         while (!bq.isEmpty()) {
             bq.removeCharacter();
         }
-        bq.add(ch1);
-        bq.add(ch1.getOpponent());
+        bq.add(bq.getNextCharacter());
+        bq.add(bq.getNextCharacter().getOpponent());
         bq.add(this);
     }
 

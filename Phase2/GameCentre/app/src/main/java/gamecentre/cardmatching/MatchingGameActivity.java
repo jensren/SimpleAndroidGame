@@ -18,10 +18,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import gamecentre.BoardUpdateListener;
 import gamecentre.slidingtiles.CustomAdapter;
 import gamecentre.slidingtiles.R;
 
-public class MatchingGameActivity extends AppCompatActivity implements Observer{
+public class MatchingGameActivity extends AppCompatActivity{
     /**
      * The board manager.
      */
@@ -58,7 +59,13 @@ public class MatchingGameActivity extends AppCompatActivity implements Observer{
         gridView = findViewById(R.id.matching_grid);
         gridView.setNumColumns(MatchingBoard.numCols);
         gridView.setBoardManager(boardManager);
-        boardManager.getBoard().addObserver(this);
+        boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {
+            @Override
+            public void onBoardChanged() {
+                display();
+                saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
+            }
+        });
         gridView.mController.addObserver(new WinObserver());
 
         // Observer sets up desired dimensions as well as calls our display function
@@ -158,11 +165,11 @@ public class MatchingGameActivity extends AppCompatActivity implements Observer{
         }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        display();
-        saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
-    }
+//    @Override
+//    public void onBoardChanged() {
+//        display();
+//        saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
+//    }
 
     /**
      * Switches to the scoreboard activity.

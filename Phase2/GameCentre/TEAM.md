@@ -65,7 +65,6 @@ don't match, they flip back over.
 * TBD
 
 ## Current bugs that need fixing:
-* Sir Shibe sometimes attacks continuously after using his special
 * If you keep using special attack, sometimes the game freezes
 
 ## To-do list:
