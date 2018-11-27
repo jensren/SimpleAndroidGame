@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import gamecentre.battlegame.BattleScoreboard;
 import gamecentre.battlegame.BattleStartingActivity;
 import gamecentre.cardmatching.MatchingScoreboardActivity;
 import gamecentre.cardmatching.MatchingStartingActivity;
@@ -64,6 +65,7 @@ public class SignInActivity extends AppCompatActivity {
             saveToFile(USER_FILENAME);
             SlidingtilesScoreboardActivity.user = username;
             MatchingScoreboardActivity.user = username;
+            BattleScoreboard.setUser(username);
             switchToGameChoiceActivity();
         } else {
             Toast.makeText(this, "Invalid password", Toast.LENGTH_LONG).show();

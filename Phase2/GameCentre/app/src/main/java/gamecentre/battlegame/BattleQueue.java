@@ -44,14 +44,6 @@ public class BattleQueue implements Serializable {
     }
 
     /**
-     * Return the total number of moves performed in the battle queue.
-     * @return
-     */
-    public int getNumMoves() {
-        return numMoves;
-    }
-
-    /**
      * Return player1
      *
      * @return player1
@@ -109,15 +101,16 @@ public class BattleQueue implements Serializable {
      * @return the winner of the game if there is one, null otherwise.
      */
     Character getWinner() {
-        // TODO get the number of moves and set it for the BattleScoreboard
         int initialHP = Character.getInitialHp();
         int player1HP = player1.getHp();
         int player2HP = player2.getHp();
         BattleScoreboard.setPlayerHpLost(initialHP - player1HP);
         BattleScoreboard.setOpponentHpLost(initialHP - player2HP);
         if (player1HP > 0 && player2HP == 0) {
+            BattleScoreboard.setNumMoves(numMoves);
             return player1;
         } else if (player1HP == 0 && player2HP > 0) {
+            BattleScoreboard.setNumMoves(numMoves);
             return player2;
         } else {
             return null;
