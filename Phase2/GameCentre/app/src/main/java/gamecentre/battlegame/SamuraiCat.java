@@ -17,11 +17,7 @@ public class SamuraiCat extends Character implements Serializable {
 
     @Override
     void regularMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        getBattleQueue().removeCharacter();
-        getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
-        getBattleQueue().add(this);
+        super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
     /**

@@ -82,6 +82,20 @@ abstract class Character implements Serializable {
     abstract void regularMove();
 
     /**
+     * A helper function called in the child classes that processes a regular attack
+     *
+     * @param regularMoveDamage the damage done by a regular move
+     */
+    void regularMoveHelper(int regularMoveDamage) {
+        getBattleQueue().makeMove();
+        getBattleQueue().updatePlayerAttributesStack(this);
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
+        getBattleQueue().removeCharacter();
+        getOpponent().reduceHp(regularMoveDamage);
+        getBattleQueue().add(this);
+    }
+
+    /**
      * Perform this character's special move on its opponent.
      */
     abstract void specialMove();
