@@ -23,7 +23,7 @@ public class MatchingScoreboardTest {
     private Score[] createScoreList() {
         Score[] gameHighScores = new Score[Scoreboard.LENGTH];
         for (int i = 0; i < Scoreboard.LENGTH; i++) {
-            Score s = new Score(String.format("%d", i + 1), i + 1);
+            Score s = new Score(String.format("%d", i + 2), i + 2);
             gameHighScores[i] = s;
         }
         return gameHighScores;
@@ -59,7 +59,7 @@ public class MatchingScoreboardTest {
     @Test
     public void testGetUserCurrentScoreWithScore() {
         populateScoreboard();
-        MatchingScoreboard.setUser("1");
+        MatchingScoreboard.setUser("2");
         MatchingScoreboard.setNumMoves(100);
         // The player's score will be 100
         scoreboard.update();
@@ -82,8 +82,8 @@ public class MatchingScoreboardTest {
     @Test
     public void getUserBestScoreWithScore() {
         populateScoreboard();
-        MatchingScoreboard.setUser("1");
-        assertEquals("Best Score: 1", scoreboard.getUserBestScore());
+        MatchingScoreboard.setUser("2");
+        assertEquals("Best Score: 2", scoreboard.getUserBestScore());
     }
 
     /**
@@ -102,7 +102,7 @@ public class MatchingScoreboardTest {
     @Test
     public void testUpdateNotHighScore() {
         populateScoreboard();
-        MatchingScoreboard.setUser("1");
+        MatchingScoreboard.setUser("2");
         MatchingScoreboard.setNumMoves(100);
         // The player's score will be 100
         scoreboard.update();
@@ -148,9 +148,9 @@ public class MatchingScoreboardTest {
         MatchingScoreboard.setNumMoves(100);
         // The player's score will be 100
         scoreboard.update();
-        Score newScore = new Score("Underdog", 0);
-        MatchingScoreboard.setNumMoves(0);
-        // The player's score will be 0
+        Score newScore = new Score("Underdog", 1);
+        MatchingScoreboard.setNumMoves(1);
+        // The player's score will be 1
         scoreboard.update();
 
         Score[] s = createScoreList();
