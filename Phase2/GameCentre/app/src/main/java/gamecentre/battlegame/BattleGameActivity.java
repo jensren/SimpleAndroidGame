@@ -254,7 +254,8 @@ public class BattleGameActivity extends AppCompatActivity {
                     displayAttackImage(character, sprite1, sprite2);
                     Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
                 }
-                battleQueue.removeCharacter();
+//                if (!battleQueue.isEmpty()) {
+//                battleQueue.removeCharacter(); }
                 updateCharacterPoints();
 
                 if (battleQueue.getWinner() != null) {
@@ -312,9 +313,9 @@ public class BattleGameActivity extends AppCompatActivity {
                 displayAttackImage(character, sprite1, sprite2);
                 character.regularMove();
                 Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
-                if (!battleQueue.isEmpty()) {
-                    battleQueue.removeCharacter();
-                }
+//                if (!battleQueue.isEmpty()) {
+//                    battleQueue.removeCharacter();
+//                }
                 updateCharacterPoints();
 
                 if (battleQueue.getWinner() != null) {
