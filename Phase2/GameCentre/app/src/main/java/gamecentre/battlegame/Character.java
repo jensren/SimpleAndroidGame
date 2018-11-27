@@ -37,13 +37,13 @@ abstract class Character implements Serializable {
      *
      * @return the initial HP
      */
-    public static int getInitialHp() {
+    static int getInitialHp() {
         return INITIAL_HP;
     }
 
     /**
      * Set the Mp of this character to newMp.
-     * @param newMp
+     * @param newMp the MP
      */
     void setMp(int newMp) {
         mp = newMp;
@@ -51,7 +51,7 @@ abstract class Character implements Serializable {
 
     /**
      * Set the Hp of this character to newHp.
-     * @param newHp
+     * @param newHp the HP
      */
     void setHp(int newHp) {
         hp = newHp;
@@ -109,7 +109,7 @@ abstract class Character implements Serializable {
 
     /**
      * Reduce this character's MP by damage if they have enough MP, else 0.
-     * @param amount
+     * @param amount the amount to reduce the MP by
      */
     void reduceMp(int amount) {
         if (mp >= amount) { mp = mp - amount; }
@@ -133,7 +133,7 @@ abstract class Character implements Serializable {
      * Return this character's BattleQueue.
      * @return Character's Battle Queue
      */
-    public BattleQueue getBattleQueue() {
+    BattleQueue getBattleQueue() {
         return battleQueue;
     }
 
@@ -141,7 +141,7 @@ abstract class Character implements Serializable {
      * Set this character's Battle Queue.
      * @param battleQueue The Battle Queue this character and its Opponent will use.
      */
-    public void setBattleQueue(BattleQueue battleQueue) {
+    void setBattleQueue(BattleQueue battleQueue) {
         this.battleQueue = battleQueue;
     }
 
@@ -157,7 +157,7 @@ abstract class Character implements Serializable {
      * Increase the character's Hp.
      * @param amountHp Amount by which to increase the Hp.
      */
-    public void increaseHp(int amountHp) {
+    void increaseHp(int amountHp) {
         hp += amountHp;
     }
 
