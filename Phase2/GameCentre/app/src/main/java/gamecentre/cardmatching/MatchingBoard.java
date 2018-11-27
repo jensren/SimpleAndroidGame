@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Observable;
 
+import gamecentre.BoardUpdateListener;
 import gamecentre.slidingtiles.R;
 
-public class MatchingBoard extends Observable implements Serializable {
+public class MatchingBoard implements Serializable {
+    private BoardUpdateListener boardUpdateListener;
+
+    public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
+        this.boardUpdateListener = boardUpdateListener;
+    }
     /**
      * The number of rows.
      */
@@ -62,8 +67,7 @@ public class MatchingBoard extends Observable implements Serializable {
      */
     public void flipTile(int row, int col){
         unknownTiles[row][col] = tiles[row][col];
-        setChanged();
-        notifyObservers();
+        boardUpdateListener.onBoardChanged();
     }
 
     /**
@@ -73,8 +77,7 @@ public class MatchingBoard extends Observable implements Serializable {
      */
     public void flipBack(int row, int col){
         unknownTiles[row][col] = new MatchingTile(16,R.drawable.card_unknown);
-        setChanged();
-        notifyObservers();
+        boardUpdateListener.onBoardChanged();
     }
 
     /**
@@ -84,8 +87,7 @@ public class MatchingBoard extends Observable implements Serializable {
     public void flipBlank(int[] flippedTiles){
         unknownTiles[flippedTiles[0]][flippedTiles[1]] = new MatchingTile(17,R.drawable.tile_25);
         unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17,R.drawable.tile_25);
-        setChanged();
-        notifyObservers();
+        boardUpdateListener.onBoardChanged();
     }
 
     @Override

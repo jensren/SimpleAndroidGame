@@ -23,35 +23,16 @@ import gamecentre.slidingtiles.R;
  */
 public class BattleStartingActivity extends AppCompatActivity {
 
-    /**
-     * The main save file.
-     */
-    public static String saveFileName;
-    /**
-     * A temporary save file.
-     */
-    public static String tempSaveFileName;
-    /**
-     * The battle queue.
-     */
-    private BattleQueue battleQueue;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        battleQueue = new BattleQueue();
-        saveToFile(tempSaveFileName);
         BattleScoreboard.reset();
 
         setContentView(R.layout.activity_battlegame_starting);
         startAnimations();
 
         addStartButtonListener();
-        addLoadButtonListener();
-        addSaveButtonListener();
-        addScoreboardButtonListener();
     }
 
     /**
@@ -84,80 +65,13 @@ public class BattleStartingActivity extends AppCompatActivity {
     }
 
     /**
-     * Activate the load button.
-     */
-    private void addLoadButtonListener() {
-        Button loadButton = findViewById(R.id.battleload);
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFromFile(saveFileName);
-                saveToFile(tempSaveFileName);
-                makeToastLoadedText();
-                switchToGameActivity();
-            }
-        });
-    }
-
-    /**
-     * Activate the scoreboard button.
-     */
-    private void addScoreboardButtonListener() {
-        Button loadButton = findViewById(R.id.ScoreboardButton);
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToScoreboard();
-            }
-        });
-    }
-
-    /**
-     * Display that a game was loaded successfully.
-     */
-    private void makeToastLoadedText() {
-        Toast.makeText(this, "Loaded Game", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Activate the save button.
-     */
-    private void addSaveButtonListener() {
-        Button saveButton = findViewById(R.id.battlesave);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveToFile(saveFileName);
-                saveToFile(tempSaveFileName);
-                makeToastSavedText();
-            }
-        });
-    }
-
-    /**
-     * Display that a game was saved successfully.
-     */
-    private void makeToastSavedText() {
-        Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
-    }
-
-    /**
      * Switch to the CatChoiceActivity view.
      */
     private void switchToCatChoiceActivity() {
         Intent tmp = new Intent(this, CatOrDogActivity.class);
-        saveToFile(BattleStartingActivity.tempSaveFileName);
         startActivity(tmp);
     }
 
-    /**
-     * Switch to the BattleGame view.
-     */
-    private void switchToGameActivity() {
-        Intent tmp = new Intent(this, BattleGameActivity.class);
-        saveToFile(BattleStartingActivity.tempSaveFileName);
-        startActivity(tmp);
-    }
 
     /**
      * Switch to the score board activity.
@@ -167,51 +81,4 @@ public class BattleStartingActivity extends AppCompatActivity {
         startActivity(m);
     }
 
-    /**
-     * Read the temporary board from disk.
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadFromFile(tempSaveFileName);
-    }
-
-    /**
-     * Load the battle queue from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                battleQueue = (BattleQueue) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the battle queue to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(battleQueue);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
 }
