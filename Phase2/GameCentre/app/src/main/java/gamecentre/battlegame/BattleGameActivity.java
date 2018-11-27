@@ -93,6 +93,7 @@ public class BattleGameActivity extends AppCompatActivity {
             setOpponent();
             initializeBattleQueue();
         } else {
+            setCharacters();
             player1.setOpponent(player2);
             player2.setOpponent(player1);
             player1 = battleQueue.getPlayer1();
