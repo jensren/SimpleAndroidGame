@@ -65,7 +65,7 @@ don't match, they flip back over.
 * TBD
 
 ## Current bugs that need fixing:
-*
+* Sir Shibe attacks continuously after using his special
 
 ## To-do list:
 * Fix code smells (extract superclasses)- create listener interface to replace observable
