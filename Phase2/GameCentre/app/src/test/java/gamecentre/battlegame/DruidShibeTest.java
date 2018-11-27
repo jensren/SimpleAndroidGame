@@ -19,7 +19,6 @@ public class DruidShibeTest {
         player2.setBattleQueue(bq);
         bq.add(player1);
         bq.add(player2);
-
     }
 
     /**
@@ -35,13 +34,16 @@ public class DruidShibeTest {
     @Test
     public void testRegularMoveDruidVsShaman() {
         setUpBattleQueue();
-        Character firstCharacter = bq.getNextCharacter();
-        firstCharacter.regularMove();
-        assertEquals(player2, firstCharacter);
+        bq.getNextCharacter().regularMove();
+        assertEquals(player2, bq.getNextCharacter());
 
     }
 
     @Test
     public void specialMove() {
+        setUpBattleQueue();
+        bq.getNextCharacter().specialMove();
+        assertEquals(player2, bq.getNextCharacter());
+        assertEquals(player2, bq.getNextCharacter());
     }
 }

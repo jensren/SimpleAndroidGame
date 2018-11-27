@@ -36,6 +36,8 @@ public class CharacterTest {
         setUpBattleQueue();
         bq.getNextCharacter().regularMove();
         assertEquals(player2, bq.getNextCharacter());
+        bq.getNextCharacter().regularMove();
+        assertEquals(player1, bq.getNextCharacter());
     }
 
     @Test
@@ -44,9 +46,7 @@ public class CharacterTest {
         bq.getNextCharacter().specialMove();
         assertEquals(player2, bq.getNextCharacter());
         bq.getNextCharacter().specialMove();
-        //bq.removeCharacter();
         assertEquals(player1, bq.getNextCharacter());
-        //bq.removeCharacter();
         assertEquals(player1, bq.getNextCharacter());
     }
 
@@ -66,5 +66,12 @@ public class CharacterTest {
         assertEquals("dog", player1Type);
         String player2Type = bq.getNextCharacter().getOpponent().getType();
         assertEquals("cat", player2Type);
+    }
+
+    @Test
+    public void testDruidAndShamanHasMp() {
+        setUpBattleQueue();
+        assertTrue(bq.getNextCharacter().hasAttackMp());
+        assertTrue(bq.getNextCharacter().getOpponent().hasAttackMp());
     }
 }
