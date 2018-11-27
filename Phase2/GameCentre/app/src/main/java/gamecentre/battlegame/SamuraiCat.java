@@ -19,7 +19,8 @@ public class SamuraiCat extends Character implements Serializable {
     void regularMove() {
         getBattleQueue().makeMove();
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
+        getBattleQueue().removeCharacter();
+        getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
     }
 
@@ -35,7 +36,7 @@ public class SamuraiCat extends Character implements Serializable {
         BattleQueue bq = getBattleQueue();
 
         reduceMp(SPECIAL_MOVE_COST);
-        this.getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
+        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
         while (!bq.isEmpty()) { bq.removeCharacter(); }
         bq.add(ch1);
         bq.add(ch1.getOpponent());
