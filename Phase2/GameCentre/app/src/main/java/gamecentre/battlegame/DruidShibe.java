@@ -17,34 +17,18 @@ class DruidShibe extends Character implements Serializable {
 
     @Override
     boolean hasAttackMp() {
-        return getHp() >= SPECIAL_MOVE_COST;
+        return super.hasAttackMpHelper(SPECIAL_MOVE_COST);
     }
 
     @Override
     void regularMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        getBattleQueue().removeCharacter();
-        getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
-        getBattleQueue().add(this);
+        super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Perform the special move of the Druid Shibe. Reduce this character's MP, reduce the
-     * opponent's HP and heal this Shibe's HP by the amount of damage the opponent took.
-     * Add this character into the battle queue twice so it can attack twice next round.
-     */
     @Override
     void specialMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        getBattleQueue().removeCharacter();
-        reduceMp(SPECIAL_MOVE_COST);
-        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
-        increaseHp(SPECIAL_MOVE_DAMAGE);
-        getBattleQueue().add(this);
+        super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
+        super.healerCharacterSpecial(SPECIAL_MOVE_DAMAGE);
     }
 
     @Override
