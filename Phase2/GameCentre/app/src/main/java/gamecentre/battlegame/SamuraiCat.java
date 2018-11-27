@@ -12,39 +12,18 @@ public class SamuraiCat extends Character implements Serializable {
 
     @Override
     boolean hasAttackMp() {
-        return getHp() >= SPECIAL_MOVE_COST;
+        return super.hasAttackMpHelper(SPECIAL_MOVE_COST);
     }
 
     @Override
     void regularMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        getBattleQueue().removeCharacter();
-        getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
-        getBattleQueue().add(this);
+        super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Perform the Samurai Cat's special attack, reduce this character's MP and reduce the HP of
-     * opponent. Reset the battle queue so that each character appears once.
-     */
     @Override
     void specialMove() {
-
-        getBattleQueue().makeMove();
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        BattleQueue bq = getBattleQueue();
-
-        reduceMp(SPECIAL_MOVE_COST);
-        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
-        while (!bq.isEmpty()) {
-            bq.removeCharacter();
-        }
-        bq.add(bq.getPlayer1());
-        bq.add(bq.getPlayer2());
-        bq.add(this);
-
-
+        super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
+        super.fighterCharacterSpecial();
     }
 
     @Override

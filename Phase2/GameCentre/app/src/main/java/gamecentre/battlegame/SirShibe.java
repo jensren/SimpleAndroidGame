@@ -13,40 +13,18 @@ public class SirShibe extends Character implements Serializable {
 
     @Override
     boolean hasAttackMp() {
-        return getMp() >= SPECIAL_MOVE_COST;
+        return super.hasAttackMpHelper(SPECIAL_MOVE_COST);
     }
 
     @Override
     void regularMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        getBattleQueue().removeCharacter();
-        getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
-        getBattleQueue().add(this);
+        super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Perform the special move of Sir Shibe with reduces this character's MP, reduces the
-     * opponent's HP and resets the battle queue so that there is only one copy of each character.
-     */
     @Override
     void specialMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        Character ch1 = getBattleQueue().getNextCharacter();
-        BattleQueue bq = ch1.getBattleQueue();
-
-        reduceMp(SPECIAL_MOVE_COST);
-        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
-
-        while (!bq.isEmpty()) {
-            bq.removeCharacter();
-        }
-        bq.add(bq.getPlayer1());
-        bq.add(bq.getPlayer2());
-        bq.add(this);
+        super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
+        super.fighterCharacterSpecial();
     }
 
     @Override

@@ -18,6 +18,16 @@ abstract class Character implements Serializable {
     abstract boolean hasAttackMp();
 
     /**
+     * A helper for the hasAttackMp used in child classes
+     *
+     * @param specialMoveCost the Mp cost of the special move
+     * @return true if character has enough Mp to do a special attack, false otherwise
+     */
+    boolean hasAttackMpHelper(int specialMoveCost) {
+        return getMp() >= specialMoveCost;
+    }
+
+    /**
      * Return the Magic points for this character.
      * @return The amount of magic points.
      */
@@ -37,13 +47,13 @@ abstract class Character implements Serializable {
      *
      * @return the initial HP
      */
-    public static int getInitialHp() {
+    static int getInitialHp() {
         return INITIAL_HP;
     }
 
     /**
      * Set the Mp of this character to newMp.
-     * @param newMp
+     * @param newMp the MP
      */
     void setMp(int newMp) {
         mp = newMp;
@@ -51,7 +61,7 @@ abstract class Character implements Serializable {
 
     /**
      * Set the Hp of this character to newHp.
-     * @param newHp
+     * @param newHp the HP
      */
     void setHp(int newHp) {
         hp = newHp;
@@ -82,10 +92,79 @@ abstract class Character implements Serializable {
     abstract void regularMove();
 
     /**
+     * A helper function called in the child classes that processes a regular attack
+     *
+     * @param regularMoveDamage the damage done by a regular move
+     */
+    void regularMoveHelper(int regularMoveDamage) {
+        getBattleQueue().makeMove();
+        getBattleQueue().updatePlayerAttributesStack(this);
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
+        getBattleQueue().removeCharacter();
+        getOpponent().reduceHp(regularMoveDamage);
+        getBattleQueue().add(this);
+    }
+
+    /**
      * Perform this character's special move on its opponent.
      */
     abstract void specialMove();
 
+    /**
+     * A helper function called in the child classes that processes a special attack
+     *
+     * @param specialMoveCost   the MP cost of the special move
+     * @param specialMoveDamage the damage done by the special move
+     */
+    void specialMoveHelper(int specialMoveCost, int specialMoveDamage) {
+        getBattleQueue().makeMove();
+        getBattleQueue().updatePlayerAttributesStack(this);
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
+        getBattleQueue().removeCharacter();
+        reduceMp(specialMoveCost);
+        getOpponent().reduceHp(specialMoveDamage);
+    }
+
+    /**
+     * Process the unique special attack for a stealth character.
+     *
+     * Unique effect: reduce this character's magic points and reduce the enemy's Health points by
+     * SPECIAL_MOVE_DAMAGE. Add this character into the battle queue twice so it can attack twice in
+     * the next round.
+     */
+    void stealthCharacterSpecial() {
+        getBattleQueue().add(this.getOpponent());
+        getBattleQueue().add(this);
+        getBattleQueue().add(this);
+    }
+
+    /**
+     * Process the unique special attack for a fighter character.
+     *
+     * Unique effect: reset the battle queue so that each character appears once.
+     */
+    void fighterCharacterSpecial() {
+        Character ch1 = getBattleQueue().getNextCharacter();
+        BattleQueue bq = getBattleQueue();
+        while (!bq.isEmpty()) {
+            bq.removeCharacter();
+        }
+        bq.add(bq.getNextCharacter());
+        bq.add(bq.getNextCharacter().getOpponent());
+        bq.add(this);
+    }
+
+    /**
+     * Process the unique special attack for a healer character.
+     * <p>
+     * Unique effect: heal the healer by specialMoveDamage HP points
+     *
+     * @param specialMoveDamage the damage done by a special move
+     */
+    void healerCharacterSpecial(int specialMoveDamage) {
+        increaseHp(specialMoveDamage);
+        getBattleQueue().add(this);
+    }
 
     /**
      * Get the next sprite for the character to display.
@@ -95,7 +174,7 @@ abstract class Character implements Serializable {
 
     /**
      * Reduce this character's MP by damage if they have enough MP, else 0.
-     * @param amount
+     * @param amount the amount to reduce the MP by
      */
     void reduceMp(int amount) {
         if (mp >= amount) { mp = mp - amount; }
@@ -119,7 +198,7 @@ abstract class Character implements Serializable {
      * Return this character's BattleQueue.
      * @return Character's Battle Queue
      */
-    public BattleQueue getBattleQueue() {
+    BattleQueue getBattleQueue() {
         return battleQueue;
     }
 
@@ -127,7 +206,7 @@ abstract class Character implements Serializable {
      * Set this character's Battle Queue.
      * @param battleQueue The Battle Queue this character and its Opponent will use.
      */
-    public void setBattleQueue(BattleQueue battleQueue) {
+    void setBattleQueue(BattleQueue battleQueue) {
         this.battleQueue = battleQueue;
     }
 
@@ -143,7 +222,7 @@ abstract class Character implements Serializable {
      * Increase the character's Hp.
      * @param amountHp Amount by which to increase the Hp.
      */
-    public void increaseHp(int amountHp) {
+    void increaseHp(int amountHp) {
         hp += amountHp;
     }
 
