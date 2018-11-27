@@ -10,11 +10,18 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import gamecentre.BoardUpdateListener;
+
 /**
  * The sliding tiles board.
  */
-public class Board extends Observable implements Serializable, Iterable<Tile> {
+public class Board implements Serializable, Iterable<Tile> {
 
+    private BoardUpdateListener boardUpdateListener = null;
+
+    public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
+        this.boardUpdateListener = boardUpdateListener;
+    }
     /**
      * The number of rows.
      */
@@ -86,8 +93,9 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         tiles[row1][col1] = tempTile2;
         tiles[row2][col2] = tempTile1;
 
-        setChanged();
-        notifyObservers();
+        if (boardUpdateListener != null){
+            boardUpdateListener.onBoardChanged();
+        }
     }
 
     @Override
