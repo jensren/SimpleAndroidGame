@@ -19,6 +19,7 @@ public class ShamanCat extends Character implements Serializable {
 
     @Override
     void regularMove() {
+        getBattleQueue().makeMove();
         getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
@@ -32,6 +33,7 @@ public class ShamanCat extends Character implements Serializable {
      */
     @Override
     void specialMove() {
+        getBattleQueue().makeMove();
         getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         reduceMp(SPECIAL_MOVE_COST);

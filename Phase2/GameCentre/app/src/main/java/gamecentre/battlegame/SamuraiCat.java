@@ -17,6 +17,7 @@ public class SamuraiCat extends Character implements Serializable {
 
     @Override
     void regularMove() {
+        getBattleQueue().makeMove();
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         this.getOpponent().reduceHp(REGULAR_MOVE_DAMAGE);
         getBattleQueue().add(this);
@@ -28,6 +29,7 @@ public class SamuraiCat extends Character implements Serializable {
      */
     @Override
     void specialMove() {
+        getBattleQueue().makeMove();
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
         Character ch1 = getBattleQueue().getNextCharacter();
         BattleQueue bq = getBattleQueue();
