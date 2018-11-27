@@ -90,13 +90,6 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         notifyObservers();
     }
 
-    @Override
-    public String toString() {
-        return "Board{" +
-                "tiles=" + Arrays.toString(tiles) +
-                '}';
-    }
-
     @NonNull
     public Iterator<Tile> iterator() {
         return new BoardIterator();
