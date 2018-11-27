@@ -27,15 +27,6 @@ public class BattleQueue implements Serializable {
         queue.add(character);
     }
 
-//    /**
-//     * Removes characters with no MP
-//     */
-//    private void removeInvalidCharacters() {
-//        while (!getNextCharacter().hasAttackMp()) {
-//            removeCharacter();
-//        }
-//    }
-
     /**
      * Count how many total moves are made in this battle queue.
      */
