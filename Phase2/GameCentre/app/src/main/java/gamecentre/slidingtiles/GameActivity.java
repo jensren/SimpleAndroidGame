@@ -20,6 +20,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import gamecentre.BoardUpdateListener;
+import gamecentre.OnWinListener;
 
 /**
  * The game activity.
@@ -69,7 +70,12 @@ public class GameActivity extends AppCompatActivity {
                 saveToFile(SlidingtilesStartingActivity.autoSaveFileName);
             }
         });
-        gridView.mController.addObserver(new WinObserver());
+        gridView.mController.setOnWinListener(new OnWinListener() {
+            @Override
+            public void onWin() {
+                switchToScoreBoardActivity();
+            }
+        });
 
         undoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,9 +190,9 @@ public class GameActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
-    private class WinObserver implements Observer {
-        public void update(Observable o, Object arg) {
-            switchToScoreBoardActivity();
-        }
-    }
+//    private class WinObserver implements Observer {
+//        public void update(Observable o, Object arg) {
+//            switchToScoreBoardActivity();
+//        }
+//    }
 }
