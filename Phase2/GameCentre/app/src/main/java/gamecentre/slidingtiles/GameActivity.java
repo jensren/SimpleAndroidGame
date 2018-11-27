@@ -19,10 +19,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import gamecentre.BoardUpdateListener;
+
 /**
  * The game activity.
  */
-public class GameActivity extends AppCompatActivity implements Observer {
+public class GameActivity extends AppCompatActivity {
 
     /**
      * The board manager.
@@ -60,7 +62,13 @@ public class GameActivity extends AppCompatActivity implements Observer {
         gridView = findViewById(R.id.grid);
         gridView.setNumColumns(Board.numCols);
         gridView.setBoardManager(boardManager);
-        boardManager.getBoard().addObserver(this);
+        boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {
+            @Override
+            public void onBoardChanged() {
+                display();
+                saveToFile(SlidingtilesStartingActivity.autoSaveFileName);
+            }
+        });
         gridView.mController.addObserver(new WinObserver());
 
         undoButton.setOnClickListener(new View.OnClickListener() {
@@ -169,12 +177,6 @@ public class GameActivity extends AppCompatActivity implements Observer {
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
         }
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        display();
-        saveToFile(SlidingtilesStartingActivity.autoSaveFileName);
     }
 
     private void switchToScoreBoardActivity() {
