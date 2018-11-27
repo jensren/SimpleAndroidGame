@@ -5,13 +5,20 @@ import android.widget.Toast;
 
 import java.util.Observable;
 
+import gamecentre.OnWinListener;
+
 /**
  * Process taps of tiles and undo throughout game play.
  */
-class MovementController extends Observable {
+class MovementController {
 
     private BoardManager boardManager = null;
 
+    private OnWinListener onWinListener = null;
+
+    public void setOnWinListener(OnWinListener onWinListener){
+        this.onWinListener = onWinListener;
+    }
     /**
      * The MovementController for this activity.
      */
@@ -44,8 +51,9 @@ class MovementController extends Observable {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 SlidingtilesScoreboard.setNumMoves(boardManager.getNumMoves());
                 SlidingtilesScoreboard.setBoardSize(boardManager.getBoardSize());
-                setChanged();
-                notifyObservers();
+                if (onWinListener != null){
+                    onWinListener.onWin();
+                }
             }
         } else {
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
