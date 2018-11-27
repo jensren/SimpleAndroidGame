@@ -45,7 +45,7 @@ public class BattleQueue implements Serializable {
 
     /**
      * Return the total number of moves performed in the battle queue.
-     * @return
+     * @return Total number of moves performed in this battle queue.
      */
     public int getNumMoves() {
         return numMoves;
