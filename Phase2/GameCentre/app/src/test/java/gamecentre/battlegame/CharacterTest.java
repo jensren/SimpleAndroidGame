@@ -51,11 +51,20 @@ public class CharacterTest {
     }
 
     @Test
-    public void testDruidVsShamanType() {
+    public void testDruidVsShamanGetSprites() {
         setUpBattleQueue();
-        String player1Type = bq.getNextCharacter().getSprite();
-        assertEquals("druid_shibe", player1Type);
-        String player2Type = bq.getNextCharacter().getOpponent().getSprite();
-        assertEquals("shaman_cat", player2Type);
+        String player1Sprite = bq.getNextCharacter().getSprite();
+        assertEquals("druid_shibe", player1Sprite);
+        String player2Sprite = bq.getNextCharacter().getOpponent().getSprite();
+        assertEquals("shaman_cat", player2Sprite);
+    }
+
+    @Test
+    public void testDruidVsShamanGetType() {
+        setUpBattleQueue();
+        String player1Type = bq.getNextCharacter().getType();
+        assertEquals("dog", player1Type);
+        String player2Type = bq.getNextCharacter().getOpponent().getType();
+        assertEquals("cat", player2Type);
     }
 }
