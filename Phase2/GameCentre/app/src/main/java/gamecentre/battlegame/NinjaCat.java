@@ -27,15 +27,8 @@ class NinjaCat extends Character implements Serializable {
      */
     @Override
     void specialMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        getBattleQueue().removeCharacter();
-        reduceMp(SPECIAL_MOVE_COST);
-        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
-        getBattleQueue().add(this.getOpponent());
-        getBattleQueue().add(this);
-        getBattleQueue().add(this);
+        super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
+        super.stealthCharacterSpecial();
     }
 
     @Override

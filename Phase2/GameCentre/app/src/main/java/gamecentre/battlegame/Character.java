@@ -110,6 +110,48 @@ abstract class Character implements Serializable {
      */
     abstract void specialMove();
 
+    /**
+     * A helper function called in the child classes that processes a special attack
+     *
+     * @param specialMoveCost   the MP cost of the special move
+     * @param specialMoveDamage the damage done by the special move
+     */
+    void specialMoveHelper(int specialMoveCost, int specialMoveDamage) {
+        getBattleQueue().makeMove();
+        getBattleQueue().updatePlayerAttributesStack(this);
+        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
+        getBattleQueue().removeCharacter();
+        reduceMp(specialMoveCost);
+        getOpponent().reduceHp(specialMoveDamage);
+    }
+
+    /**
+     * Process the unique special attack for a stealth character
+     */
+    void stealthCharacterSpecial() {
+        getBattleQueue().add(this.getOpponent());
+        getBattleQueue().add(this);
+        getBattleQueue().add(this);
+    }
+
+    /**
+     * Process the unique special attack for a fighter character
+     */
+    void fighterCharacterSpecial() {
+        Character ch1 = getBattleQueue().getNextCharacter();
+        BattleQueue bq = getBattleQueue();
+        while (!bq.isEmpty()) {
+            bq.removeCharacter();
+        }
+        bq.add(ch1);
+        bq.add(ch1.getOpponent());
+        bq.add(this);
+    }
+
+    void healerCharacterSpecial(int specialMoveDamage) {
+        increaseHp(specialMoveDamage);
+        getBattleQueue().add(this);
+    }
 
     /**
      * Get the next sprite for the character to display.

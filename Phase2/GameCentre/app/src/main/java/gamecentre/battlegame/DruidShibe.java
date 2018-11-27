@@ -32,14 +32,8 @@ class DruidShibe extends Character implements Serializable {
      */
     @Override
     void specialMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        getBattleQueue().removeCharacter();
-        reduceMp(SPECIAL_MOVE_COST);
-        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
-        increaseHp(SPECIAL_MOVE_DAMAGE);
-        getBattleQueue().add(this);
+        super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
+        super.healerCharacterSpecial(SPECIAL_MOVE_DAMAGE);
     }
 
     @Override

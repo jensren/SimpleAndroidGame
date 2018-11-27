@@ -27,21 +27,8 @@ public class SirShibe extends Character implements Serializable {
      */
     @Override
     void specialMove() {
-        getBattleQueue().makeMove();
-        getBattleQueue().updatePlayerAttributesStack(this);
-        getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        Character ch1 = getBattleQueue().getNextCharacter();
-        BattleQueue bq = ch1.getBattleQueue();
-
-        reduceMp(SPECIAL_MOVE_COST);
-        getOpponent().reduceHp(SPECIAL_MOVE_DAMAGE);
-
-        while (!bq.isEmpty()) {
-            bq.removeCharacter();
-        }
-        bq.add(bq.getPlayer1());
-        bq.add(bq.getPlayer2());
-        bq.add(this);
+        super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
+        super.fighterCharacterSpecial();
     }
 
     @Override
