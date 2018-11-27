@@ -35,6 +35,15 @@ public class MatchingScoreboard extends Scoreboard {
     }
 
     /**
+     * Get the number of moves when the game ends
+     *
+     * @return the number of moves
+     */
+    public static int getNumMoves() {
+        return numMoves;
+    }
+
+    /**
      * Gets the user's score in his current game.
      * @return the user's current score.
      */

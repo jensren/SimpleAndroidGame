@@ -43,6 +43,10 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
         return super.getUserCurrentScore();
     }
 
+    public static int getNumMoves() {
+        return numMoves;
+    }
+
     protected void updateGameHighScore(Score newScore) {
         super.updateGameHighScore(newScore);
     }

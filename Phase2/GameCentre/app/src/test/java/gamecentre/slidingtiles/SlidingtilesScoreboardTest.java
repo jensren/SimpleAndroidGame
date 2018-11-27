@@ -173,4 +173,42 @@ public class SlidingtilesScoreboardTest {
         }
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
+
+    @Test
+    public void testUpdateWithNoScore() {
+        populateScoreboard();
+        SlidingtilesScoreboard.setUser("New Player");
+        SlidingtilesScoreboard.setNumMoves(0);
+        scoreboard.update();
+        Score[] expectedGameHighScores = createScoreList();
+        HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(expectedGameHighScores);
+        Score[] actualGameHighScores = scoreboard.getScoreList();
+        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+            assertEquals(expectedGameHighScores[i].compareTo(actualGameHighScores[i]), 0);
+        }
+        assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
+    }
+
+    @Test
+    public void testReset() {
+        SlidingtilesScoreboard.setNumMoves(1);
+        SlidingtilesScoreboard.reset();
+        assertEquals(0, SlidingtilesScoreboard.getNumMoves());
+    }
+
+    @Test
+    public void testEmptyScoreboardToString() {
+        String expected = "SCORE BOARD\n\n1.\n2.\n3.\n4.\n5.\n6.\n7.\n8.\n9.\n10.\n";
+        assertEquals(expected, scoreboard.toString());
+    }
+
+    @Test
+    public void testPopulatedScoreboardToString() {
+        populateScoreboard();
+        StringBuilder expected = new StringBuilder("SCORE BOARD\n\n");
+        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+            expected.append(String.format("%d. Player %d: %d points\n", i + 1, i + 1, i + 1));
+        }
+        assertEquals(expected.toString(), scoreboard.toString());
+    }
 }
