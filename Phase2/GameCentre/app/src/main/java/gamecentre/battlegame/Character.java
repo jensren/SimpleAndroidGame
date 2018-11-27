@@ -5,7 +5,8 @@ import java.io.Serializable;
 abstract class Character implements Serializable {
     // character's special attack deflects opponent's move back at them
 
-    private int hp = 100;
+    private static final int INITIAL_HP = 100;
+    private int hp = INITIAL_HP;
     private int mp = 100;
     private Character opponent;
     private BattleQueue battleQueue = new BattleQueue();
@@ -29,6 +30,15 @@ abstract class Character implements Serializable {
      * @return The amount of magic points.
      */
     int getHp() { return hp;
+    }
+
+    /**
+     * Get the initial HP
+     *
+     * @return the initial HP
+     */
+    public static int getInitialHp() {
+        return INITIAL_HP;
     }
 
     /**

@@ -93,10 +93,15 @@ public class BattleQueue implements Serializable {
      * @return the winner of the game if there is one, null otherwise.
      */
     Character getWinner() {
-
-        if (player1.getHp() > 0 && player2.getHp() == 0) {
+        // TODO get the number of moves and set it for the BattleScoreboard
+        int initialHP = Character.getInitialHp();
+        int player1HP = player1.getHp();
+        int player2HP = player2.getHp();
+        BattleScoreboard.setPlayerHpLost(initialHP - player1HP);
+        BattleScoreboard.setOpponentHpLost(initialHP - player2HP);
+        if (player1HP > 0 && player2HP == 0) {
             return player1;
-        } else if (player1.getHp() == 0 && player2.getHp() > 0) {
+        } else if (player1HP == 0 && player2HP > 0) {
             return player2;
         } else {
             return null;
