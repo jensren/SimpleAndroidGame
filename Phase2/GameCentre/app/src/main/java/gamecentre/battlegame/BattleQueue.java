@@ -7,6 +7,7 @@ public class BattleQueue implements Serializable {
 
     private Character player1;
     private Character player2;
+    private int numMoves;
 
     private ArrayList<Character> queue = new ArrayList<>();
     private ArrayList<BattleQueue> undoStack = new ArrayList<>();
@@ -33,6 +34,21 @@ public class BattleQueue implements Serializable {
         while (!getNextCharacter().hasAttackMp()) {
             removeCharacter();
         }
+    }
+
+    /**
+     * Count how many total moves are made in this battle queue.
+     */
+    public void makeMove() {
+        numMoves++;
+    }
+
+    /**
+     * Return the total number of moves performed in the battle queue.
+     * @return
+     */
+    public int getNumMoves() {
+        return numMoves;
     }
 
     /**
@@ -171,6 +187,7 @@ public class BattleQueue implements Serializable {
      */
     public void undo() {
         if (undoStack.size() > 0) {
+            makeMove();
             BattleQueue bq = undoStack.remove(undoStack.size() - 1);
             while (!isEmpty()) {
                 removeCharacter();
