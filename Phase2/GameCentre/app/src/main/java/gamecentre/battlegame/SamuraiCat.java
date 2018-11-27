@@ -20,10 +20,6 @@ public class SamuraiCat extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Perform the Samurai Cat's special attack, reduce this character's MP and reduce the HP of
-     * opponent. Reset the battle queue so that each character appears once.
-     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);

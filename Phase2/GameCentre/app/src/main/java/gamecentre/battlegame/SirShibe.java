@@ -21,10 +21,6 @@ public class SirShibe extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Perform the special move of Sir Shibe with reduces this character's MP, reduces the
-     * opponent's HP and resets the battle queue so that there is only one copy of each character.
-     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);

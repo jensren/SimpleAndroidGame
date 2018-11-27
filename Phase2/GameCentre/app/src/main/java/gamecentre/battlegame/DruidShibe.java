@@ -25,11 +25,6 @@ class DruidShibe extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Perform the special move of the Druid Shibe. Reduce this character's MP, reduce the
-     * opponent's HP and heal this Shibe's HP by the amount of damage the opponent took.
-     * Add this character into the battle queue twice so it can attack twice next round.
-     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);

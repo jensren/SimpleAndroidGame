@@ -22,10 +22,6 @@ public class ShamanCat extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Perform the Shaman Cat's special move by reducing this character's MP, reduce the opponent's
-     * HP and heal this character by the amount of damage it's opponent takes.
-     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);

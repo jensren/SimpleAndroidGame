@@ -21,10 +21,6 @@ class NinjaCat extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Reduce this character's magic points and the opponents health points. Then add in the
-     * opponent and then this charcter into the battle queue twice.
-     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);

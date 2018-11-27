@@ -21,11 +21,6 @@ public class DetectiveShibe extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
-    /**
-     * Reduce this character's magic points and reduce the enemy's Health points by
-     * SPECIAL_MOVE_DAMAGE. Add this character into the battle queue twice so it can attack twice in
-     * the next round.
-     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);

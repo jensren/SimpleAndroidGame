@@ -126,7 +126,11 @@ abstract class Character implements Serializable {
     }
 
     /**
-     * Process the unique special attack for a stealth character
+     * Process the unique special attack for a stealth character.
+     *
+     * Unique effect: reduce this character's magic points and reduce the enemy's Health points by
+     * SPECIAL_MOVE_DAMAGE. Add this character into the battle queue twice so it can attack twice in
+     * the next round.
      */
     void stealthCharacterSpecial() {
         getBattleQueue().add(this.getOpponent());
@@ -135,7 +139,9 @@ abstract class Character implements Serializable {
     }
 
     /**
-     * Process the unique special attack for a fighter character
+     * Process the unique special attack for a fighter character.
+     *
+     * Unique effect: reset the battle queue so that each character appears once.
      */
     void fighterCharacterSpecial() {
         Character ch1 = getBattleQueue().getNextCharacter();
@@ -148,6 +154,13 @@ abstract class Character implements Serializable {
         bq.add(this);
     }
 
+    /**
+     * Process the unique special attack for a healer character.
+     * <p>
+     * Unique effect: heal the healer by specialMoveDamage HP points
+     *
+     * @param specialMoveDamage the damage done by a special move
+     */
     void healerCharacterSpecial(int specialMoveDamage) {
         increaseHp(specialMoveDamage);
         getBattleQueue().add(this);
