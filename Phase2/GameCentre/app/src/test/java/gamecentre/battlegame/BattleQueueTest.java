@@ -32,13 +32,6 @@ public class BattleQueueTest {
         player2.setOpponent(player1);
     }
 
-//    @Test
-//    public void add() {
-//    }
-//
-//    @Test
-//    public void removeCharacter() {
-//    }
 
     @Test
     public void testGetNextCharacterEmptyBattleQueue() {
@@ -62,15 +55,43 @@ public class BattleQueueTest {
 
     }
 
-//    @Test
-//    public void updateUndoStack() {
-//    }
-//
-//    @Test
-//    public void updatePlayerAttributesStack() {
-//    }
-//
-//    @Test
-//    public void undo() {
-//    }
+    @Test
+    public void testGetPlayers() {
+        setUpBattleQueue();
+        assertEquals(player1, bq.getPlayer1());
+        bq.getNextCharacter().regularMove();
+        assertEquals(player2, bq.getPlayer2());
+    }
+
+    @Test
+    public void testWinner() {
+        setUpBattleQueue();
+        player1.setHp(0);
+        assertEquals(player2, bq.getWinner());
+        player1.setHp(100);
+        player2.setHp(0);
+        assertEquals(player1, bq.getWinner());
+    }
+
+    @Test
+    public void testInValidUndo() {
+        setUpBattleQueue();
+        assertTrue(bq.isInValidUndo());
+        assertEquals(0, bq.getNumMoves());
+    }
+
+    @Test
+    public void testPlayer1Undo() {
+        setUpBattleQueue();
+        bq.getNextCharacter().regularMove();
+        bq.undo();
+        assertEquals(player1, bq.getNextCharacter());
+        assertEquals(100, player1.getHp());
+        bq.getNextCharacter().regularMove();
+        bq.getNextCharacter().regularMove();
+        bq.undo();
+        assertEquals(100, player1.getMp());
+
+    }
+
 }
