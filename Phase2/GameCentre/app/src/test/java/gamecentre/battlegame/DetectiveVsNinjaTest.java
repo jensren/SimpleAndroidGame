@@ -50,7 +50,7 @@ public class DetectiveVsNinjaTest {
     }
 
     @Test
-    public void testDruidVsShamanGetSprites() {
+    public void testDetectiveVsNinjaGetSprites() {
         setUpBattleQueue();
         String player1Sprite = bq.getNextCharacter().getSprite();
         assertEquals("detective_shibe", player1Sprite);
@@ -59,7 +59,7 @@ public class DetectiveVsNinjaTest {
     }
 
     @Test
-    public void testDruidVsShamanGetType() {
+    public void testDetectiveVsNinjaGetType() {
         setUpBattleQueue();
         String player1Type = bq.getNextCharacter().getType();
         assertEquals("dog", player1Type);
@@ -68,7 +68,7 @@ public class DetectiveVsNinjaTest {
     }
 
     @Test
-    public void testDruidAndShamanHasMp() {
+    public void testDetectiveVsNinjaHasMp() {
         setUpBattleQueue();
         assertTrue(bq.getNextCharacter().hasAttackMp());
         assertTrue(bq.getNextCharacter().getOpponent().hasAttackMp());

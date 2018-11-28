@@ -47,7 +47,6 @@ public class DruidAndShamanTest {
         assertEquals(player2, bq.getNextCharacter());
         bq.getNextCharacter().specialMove();
         assertEquals(player1, bq.getNextCharacter());
-        assertEquals(player1, bq.getNextCharacter());
     }
 
     @Test
