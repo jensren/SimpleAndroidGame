@@ -154,6 +154,9 @@ abstract class Character implements Serializable {
     void healerCharacterSpecial(int specialMoveDamage) {
         increaseHp(specialMoveDamage);
         getBattleQueue().add(this);
+        if (hp > INITIAL_HP) {
+            hp = INITIAL_HP;
+        }
     }
 
     /**
@@ -166,7 +169,7 @@ abstract class Character implements Serializable {
      * Reduce this character's MP by damage if they have enough MP, else 0.
      * @param amount the amount to reduce the MP by
      */
-    void reduceMp(int amount) {
+    private void reduceMp(int amount) {
         if (mp >= amount) { mp = mp - amount; }
         else { mp = 0; }
     }
@@ -175,7 +178,7 @@ abstract class Character implements Serializable {
      * Reduce the Hp of this character by damage.
      * @param damage Amount to reduce HP
      */
-    void reduceHp(int damage) {
+    private void reduceHp(int damage) {
 
         if (hp >= damage) {
             hp -= damage;
@@ -188,7 +191,7 @@ abstract class Character implements Serializable {
      * Return this character's BattleQueue.
      * @return Character's Battle Queue
      */
-    BattleQueue getBattleQueue() {
+    private BattleQueue getBattleQueue() {
         return battleQueue;
     }
 
@@ -204,7 +207,7 @@ abstract class Character implements Serializable {
      * Return this Character's opponent
      * @return Opponent
      */
-    public Character getOpponent() {
+    Character getOpponent() {
         return opponent;
     }
 
@@ -212,7 +215,7 @@ abstract class Character implements Serializable {
      * Increase the character's Hp.
      * @param amountHp Amount by which to increase the Hp.
      */
-    void increaseHp(int amountHp) {
+    private void increaseHp(int amountHp) {
         hp += amountHp;
     }
 
