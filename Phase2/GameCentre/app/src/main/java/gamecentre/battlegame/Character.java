@@ -216,6 +216,10 @@ abstract class Character implements Serializable {
         hp += amountHp;
     }
 
+    /**
+     * Return whether this character is a dog or a cat.
+     * @return dog if this character is a dog or cat if this character is a cat.
+     */
     public abstract String getType();
 
 }
