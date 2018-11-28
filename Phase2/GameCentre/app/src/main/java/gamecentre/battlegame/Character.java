@@ -67,15 +67,6 @@ abstract class Character implements Serializable {
         hp = newHp;
     }
 
-//    /**
-//     * Get an Array of the actions available for this character.
-//     *
-//     * @return Array of attacks
-//     */
-//    String[] getActions() {
-//        return new String[]{"A"};
-//    }
-
     /**
      * Add the opponent for this character.
      *
