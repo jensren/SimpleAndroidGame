@@ -3,10 +3,8 @@ package gamecentre.slidingtiles;
 import android.support.annotation.NonNull;
 
 import java.util.NoSuchElementException;
-import java.util.Observable;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
