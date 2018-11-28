@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CharacterTest {
+public class DruidAndShamanTest {
 
     private BattleQueue bq = new BattleQueue();
     private Character player1;
