@@ -144,13 +144,12 @@ abstract class Character implements Serializable {
      * Unique effect: reset the battle queue so that each character appears once.
      */
     void fighterCharacterSpecial() {
-        Character ch1 = getBattleQueue().getNextCharacter();
         BattleQueue bq = getBattleQueue();
         while (!bq.isEmpty()) {
             bq.removeCharacter();
         }
-        bq.add(bq.getNextCharacter());
-        bq.add(bq.getNextCharacter().getOpponent());
+        bq.add(this.getOpponent());
+        bq.add(this);
         bq.add(this);
     }
 
