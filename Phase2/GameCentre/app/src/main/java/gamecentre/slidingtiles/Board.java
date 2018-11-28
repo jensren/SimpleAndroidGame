@@ -17,7 +17,7 @@ import gamecentre.BoardUpdateListener;
  */
 public class Board implements Serializable, Iterable<Tile> {
 
-    private BoardUpdateListener boardUpdateListener = null;
+    transient private BoardUpdateListener boardUpdateListener = null;
 
     public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
         this.boardUpdateListener = boardUpdateListener;
