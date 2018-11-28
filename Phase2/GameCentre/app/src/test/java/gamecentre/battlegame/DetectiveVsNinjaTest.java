@@ -73,4 +73,16 @@ public class DetectiveVsNinjaTest {
         assertTrue(bq.getNextCharacter().hasAttackMp());
         assertTrue(bq.getNextCharacter().getOpponent().hasAttackMp());
     }
+
+    @Test
+    public void testReducedHpAndMp() {
+        setUpBattleQueue();
+        bq.getNextCharacter().setHp(0);
+        bq.getNextCharacter().getOpponent().setHp(0);
+        assertEquals(0, bq.getNextCharacter().getHp());
+        assertEquals(0, bq.getNextCharacter().getOpponent().getHp());
+        assertEquals(100, bq.getNextCharacter().getInitialHp());
+        bq.getNextCharacter().setMp(0);
+        assertEquals(0, bq.getNextCharacter().getMp());
+    }
 }
