@@ -178,4 +178,26 @@ public class BattleScoreboardTest {
         }
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
+
+    @Test
+    public void testUpdateWithNoScore() {
+        populateScoreboard();
+        BattleScoreboard.setUser("New Player");
+        BattleScoreboard.setNumMoves(0);
+        scoreboard.update();
+        Score[] expectedGameHighScores = createScoreList();
+        HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(expectedGameHighScores);
+        Score[] actualGameHighScores = scoreboard.getScoreList();
+        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+            assertEquals(expectedGameHighScores[i].compareTo(actualGameHighScores[i]), 0);
+        }
+        assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
+    }
+
+    @Test
+    public void testReset() {
+        BattleScoreboard.setNumMoves(1);
+        BattleScoreboard.reset();
+        assertEquals(0, BattleScoreboard.getNumMoves());
+    }
 }

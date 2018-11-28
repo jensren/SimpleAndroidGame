@@ -16,8 +16,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 import gamecentre.BoardUpdateListener;
 import gamecentre.OnWinListener;

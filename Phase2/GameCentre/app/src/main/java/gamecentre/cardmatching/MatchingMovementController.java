@@ -3,14 +3,20 @@ package gamecentre.cardmatching;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.util.Observable;
+import gamecentre.OnWinListener;
 
 /**
  * Process taps of tiles and undo throughout game play.
  */
-class MatchingMovementController extends Observable {
+class MatchingMovementController {
 
     private MatchingBoardManager boardManager = null;
+
+    private OnWinListener onWinListener = null;
+
+    public void setOnWinListener(OnWinListener onWinListener){
+        this.onWinListener = onWinListener;
+    }
 
     /**
      * The MovementController for this activity.
@@ -40,10 +46,10 @@ class MatchingMovementController extends Observable {
             boardManager.touchMove(position);
             if (boardManager.isWin()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
-                MatchingScoreboard.setUser(MatchingScoreboardActivity.user);
                 MatchingScoreboard.setNumMoves(boardManager.getNumMoves());
-                setChanged();
-                notifyObservers();
+                if (onWinListener != null){
+                    onWinListener.onWin();
+                }
             }
         } else {
             Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();

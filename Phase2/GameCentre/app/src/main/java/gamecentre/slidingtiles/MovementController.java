@@ -3,8 +3,6 @@ package gamecentre.slidingtiles;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.util.Observable;
-
 import gamecentre.OnWinListener;
 
 /**
@@ -49,7 +47,6 @@ class MovementController {
             boardManager.touchMove(position);
             if (boardManager.puzzleSolved()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
-                SlidingtilesScoreboard.setUser(SlidingtilesScoreboardActivity.user);
                 SlidingtilesScoreboard.setNumMoves(boardManager.getNumMoves());
                 SlidingtilesScoreboard.setBoardSize(boardManager.getBoardSize());
                 if (onWinListener != null){

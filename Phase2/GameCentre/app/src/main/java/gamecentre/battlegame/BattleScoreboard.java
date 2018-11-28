@@ -32,6 +32,10 @@ public class BattleScoreboard extends Scoreboard {
         return super.getUserBestScore(user);
     }
 
+    public static int getNumMoves() {
+        return numMoves;
+    }
+
     protected String getUserCurrentScore() {
         return super.getUserCurrentScore();
     }
