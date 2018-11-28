@@ -15,10 +15,9 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 import gamecentre.BoardUpdateListener;
+import gamecentre.OnWinListener;
 import gamecentre.slidingtiles.CustomAdapter;
 import gamecentre.slidingtiles.R;
 
@@ -66,7 +65,12 @@ public class MatchingGameActivity extends AppCompatActivity{
                 saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
             }
         });
-        gridView.mController.addObserver(new WinObserver());
+        gridView.mController.setOnWinListener(new OnWinListener() {
+            @Override
+            public void onWin() {
+                switchToScoreBoardActivity();
+            }
+        });
 
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -171,14 +175,5 @@ public class MatchingGameActivity extends AppCompatActivity{
     private void switchToScoreBoardActivity() {
         Intent tmp = new Intent(this, MatchingScoreboardActivity.class);
         startActivity(tmp);
-    }
-
-    /**
-     * An observer class created to observe if the game has been won. If it does, it will update and call switchToScoreboard.
-     */
-    private class WinObserver implements Observer {
-        public void update(Observable o, Object arg) {
-            switchToScoreBoardActivity();
-        }
     }
 }
