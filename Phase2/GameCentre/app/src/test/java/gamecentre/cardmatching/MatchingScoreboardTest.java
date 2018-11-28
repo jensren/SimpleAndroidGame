@@ -166,4 +166,26 @@ public class MatchingScoreboardTest {
         }
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
+
+    @Test
+    public void testUpdateWithNoScore() {
+        populateScoreboard();
+        MatchingScoreboard.setUser("New Player");
+        MatchingScoreboard.setNumMoves(0);
+        scoreboard.update();
+        Score[] expectedGameHighScores = createScoreList();
+        HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(expectedGameHighScores);
+        Score[] actualGameHighScores = scoreboard.getScoreList();
+        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+            assertEquals(expectedGameHighScores[i].compareTo(actualGameHighScores[i]), 0);
+        }
+        assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
+    }
+
+    @Test
+    public void testReset() {
+        MatchingScoreboard.setNumMoves(1);
+        MatchingScoreboard.reset();
+        assertEquals(0, MatchingScoreboard.getNumMoves());
+    }
 }

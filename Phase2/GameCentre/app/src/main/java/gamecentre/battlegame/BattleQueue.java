@@ -30,7 +30,7 @@ public class BattleQueue implements Serializable {
     /**
      * Count how many total moves are made in this battle queue.
      */
-    public void makeMove() {
+    void makeMove() {
         numMoves++;
     }
 
@@ -47,7 +47,7 @@ public class BattleQueue implements Serializable {
      *
      * @return player1
      */
-    public Character getPlayer1() {
+    Character getPlayer1() {
         return player1;
     }
 
@@ -56,7 +56,7 @@ public class BattleQueue implements Serializable {
      *
      * @return player2
      */
-    public Character getPlayer2() {
+    Character getPlayer2() {
         return player2;
     }
 
@@ -114,11 +114,6 @@ public class BattleQueue implements Serializable {
         }
     }
 
-    @Override
-    public String toString() {
-        return "";
-    }
-
     /**
      * Return whether or not this Battle Queue is empty.
      * @return true if this Battle Queue is empty, false otherwise.
@@ -145,7 +140,7 @@ public class BattleQueue implements Serializable {
      * Update the undoStack by adding in a cpy of the battle queue bq
      * @param bq The battle queue to add.
      */
-    public void updateUndoStack(BattleQueue bq) {
+    void updateUndoStack(BattleQueue bq) {
         undoStack.add(bq);
     }
 
@@ -154,7 +149,7 @@ public class BattleQueue implements Serializable {
      *
      * @param ch first character in the battle queue before attack is performed.
      */
-    public void updatePlayerAttributesStack(Character ch) {
+    void updatePlayerAttributesStack(Character ch) {
         int[] attributeArray = new int[4];
         attributeArray[0] = ch.getHp();
         attributeArray[1] = ch.getMp();

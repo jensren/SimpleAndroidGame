@@ -23,7 +23,7 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
      * The user's current score
      */
 
-    static void setUser(String user) {
+    public static void setUser(String user) {
         SlidingtilesScoreboard.user = user;
     }
 
@@ -41,6 +41,10 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     protected String getUserCurrentScore() {
         return super.getUserCurrentScore();
+    }
+
+    public static int getNumMoves() {
+        return numMoves;
     }
 
     protected void updateGameHighScore(Score newScore) {

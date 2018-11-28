@@ -42,7 +42,7 @@ public class Score implements Comparable<Score>, Serializable {
      *
      * @return the points
      */
-    public int getPoints() {
+    int getPoints() {
         return points;
     }
 
@@ -74,7 +74,6 @@ public class Score implements Comparable<Score>, Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(username, points);
     }
 }

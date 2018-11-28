@@ -17,6 +17,7 @@ import java.io.ObjectOutputStream;
 
 import gamecentre.battlegame.BattleScoreboard;
 import gamecentre.battlegame.BattleStartingActivity;
+import gamecentre.cardmatching.MatchingScoreboard;
 import gamecentre.cardmatching.MatchingScoreboardActivity;
 import gamecentre.cardmatching.MatchingStartingActivity;
 import gamecentre.slidingtiles.R;
@@ -62,8 +63,8 @@ public class SignUpActivity extends AppCompatActivity {
             userManager.addUser(username, password);
             setFileNames(username);
             saveToFile();
-            SlidingtilesScoreboardActivity.user = username;
-            MatchingScoreboardActivity.user = username;
+            MatchingScoreboard.setUser(username);
+            BattleScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
             switchToGameChoiceActivity();
         } else {

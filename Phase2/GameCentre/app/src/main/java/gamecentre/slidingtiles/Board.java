@@ -98,13 +98,6 @@ public class Board implements Serializable, Iterable<Tile> {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Board{" +
-                "tiles=" + Arrays.toString(tiles) +
-                '}';
-    }
-
     @NonNull
     public Iterator<Tile> iterator() {
         return new BoardIterator();
