@@ -68,15 +68,6 @@ abstract class Character implements Serializable {
     }
 
     /**
-     * Get an Array of the actions available for this character.
-     *
-     * @return Array of attacks
-     */
-    String[] getActions() {
-        return new String[]{"A"};
-    }
-
-    /**
      * Add the opponent for this character.
      *
      * @param character the opponent for this character
@@ -144,13 +135,12 @@ abstract class Character implements Serializable {
      * Unique effect: reset the battle queue so that each character appears once.
      */
     void fighterCharacterSpecial() {
-        Character ch1 = getBattleQueue().getNextCharacter();
         BattleQueue bq = getBattleQueue();
         while (!bq.isEmpty()) {
             bq.removeCharacter();
         }
-        bq.add(bq.getNextCharacter());
-        bq.add(bq.getNextCharacter().getOpponent());
+        bq.add(this.getOpponent());
+        bq.add(this);
         bq.add(this);
     }
 
@@ -164,6 +154,9 @@ abstract class Character implements Serializable {
     void healerCharacterSpecial(int specialMoveDamage) {
         increaseHp(specialMoveDamage);
         getBattleQueue().add(this);
+        if (hp > INITIAL_HP) {
+            hp = INITIAL_HP;
+        }
     }
 
     /**
@@ -176,7 +169,7 @@ abstract class Character implements Serializable {
      * Reduce this character's MP by damage if they have enough MP, else 0.
      * @param amount the amount to reduce the MP by
      */
-    void reduceMp(int amount) {
+    private void reduceMp(int amount) {
         if (mp >= amount) { mp = mp - amount; }
         else { mp = 0; }
     }
@@ -185,7 +178,7 @@ abstract class Character implements Serializable {
      * Reduce the Hp of this character by damage.
      * @param damage Amount to reduce HP
      */
-    void reduceHp(int damage) {
+    private void reduceHp(int damage) {
 
         if (hp >= damage) {
             hp -= damage;
@@ -198,7 +191,7 @@ abstract class Character implements Serializable {
      * Return this character's BattleQueue.
      * @return Character's Battle Queue
      */
-    BattleQueue getBattleQueue() {
+    private BattleQueue getBattleQueue() {
         return battleQueue;
     }
 
@@ -214,7 +207,7 @@ abstract class Character implements Serializable {
      * Return this Character's opponent
      * @return Opponent
      */
-    public Character getOpponent() {
+    Character getOpponent() {
         return opponent;
     }
 
@@ -222,10 +215,14 @@ abstract class Character implements Serializable {
      * Increase the character's Hp.
      * @param amountHp Amount by which to increase the Hp.
      */
-    void increaseHp(int amountHp) {
+    private void increaseHp(int amountHp) {
         hp += amountHp;
     }
 
+    /**
+     * Return whether this character is a dog or a cat.
+     * @return dog if this character is a dog or cat if this character is a cat.
+     */
     public abstract String getType();
 
 }

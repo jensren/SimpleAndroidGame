@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CharacterTest {
+public class DruidAndShamanTest {
 
     private BattleQueue bq = new BattleQueue();
     private Character player1;
@@ -46,7 +46,6 @@ public class CharacterTest {
         bq.getNextCharacter().specialMove();
         assertEquals(player2, bq.getNextCharacter());
         bq.getNextCharacter().specialMove();
-        assertEquals(player1, bq.getNextCharacter());
         assertEquals(player1, bq.getNextCharacter());
     }
 

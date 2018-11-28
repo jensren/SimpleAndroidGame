@@ -68,9 +68,9 @@ don't match, they flip back over.
 * If you keep using special attack, sometimes the game freezes
 
 ## To-do list:
-* Fix code smells (extract superclasses)- create listener interface to replace observable
+* Fix code smells (extract superclasses)
+* javadoc for listeners
 * Testing: make controllers for activities to test them
-* Utility class for save and loading??
-* Add name of game to matching main layout
+* Utility class for save and loading
 
 

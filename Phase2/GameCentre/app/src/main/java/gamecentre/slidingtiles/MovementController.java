@@ -3,8 +3,6 @@ package gamecentre.slidingtiles;
 import android.content.Context;
 import android.widget.Toast;
 
-import java.util.Observable;
-
 import gamecentre.OnWinListener;
 
 /**
