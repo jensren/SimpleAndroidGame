@@ -44,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userManager = new UserManager();
-
+        //  serializer.saveUserManagerToFile(USER_FILENAME,userManager);
         setContentView(R.layout.activity_signup);
         addSignUpButtonListener();
     }
@@ -63,7 +63,8 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (userManager.getPassword(username) == null) {
             userManager.addUser(username, password);
             setFileNames(username);
-            serializer.saveUserManagerToFile(USER_FILENAME, userManager);
+            Serializer.saveUserManagerToFile(USER_FILENAME, userManager);
+            Serializer.saveUserManagerToFile(USER_FILENAME, userManager);
             MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
@@ -95,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serializer.loadUserManagerFromFile(USER_FILENAME);
+                Serializer.loadUserManagerFromFile(USER_FILENAME);
                 createUser();
             }
         });
