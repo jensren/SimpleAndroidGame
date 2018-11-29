@@ -10,10 +10,20 @@ import gamecentre.OnWinListener;
  */
 class MatchingMovementController {
 
+    /**
+     * The current board manager.
+     */
     private MatchingBoardManager boardManager = null;
 
+    /**
+     * The on win listener, will notify when the game is won.
+     */
     private OnWinListener onWinListener = null;
 
+    /**
+     * Sets the on win listener.
+     * @param onWinListener The on win listener to be set.
+     */
     public void setOnWinListener(OnWinListener onWinListener){
         this.onWinListener = onWinListener;
     }

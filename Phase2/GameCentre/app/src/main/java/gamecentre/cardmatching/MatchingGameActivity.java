@@ -42,7 +42,7 @@ public class MatchingGameActivity extends AppCompatActivity{
 
     /**
      * Set up the background image for each button based on the master list
-     * of positions, and then call the adapter to set the view.
+     * of positions, updates the display for user's number of moves, and then call the adapter to set the view.
      */
     public void display() {
         updateTileButtons();
@@ -64,14 +64,14 @@ public class MatchingGameActivity extends AppCompatActivity{
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {
             @Override
-            public void onBoardChanged() {
+            public void onBoardChanged() {   //Sets the board update listener. Will update display when board updates.
                 display();
                 serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager, MatchingGameActivity.this);
             }
         });
         gridView.mController.setOnWinListener(new OnWinListener() {
             @Override
-            public void onWin() {
+            public void onWin() {  //Sets the win listener. Will switch to scoreboard when the game is won.
                 switchToScoreBoardActivity();
             }
         });
