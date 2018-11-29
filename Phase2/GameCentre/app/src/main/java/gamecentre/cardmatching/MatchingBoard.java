@@ -16,6 +16,7 @@ public class MatchingBoard implements Serializable {
 
     /**
      * Sets the board update listener.
+     *
      * @param boardUpdateListener the board update listener being set.
      */
     public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){

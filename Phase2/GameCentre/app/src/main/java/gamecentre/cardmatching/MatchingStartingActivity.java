@@ -67,6 +67,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
             }
         });
     }
+
     /**
      * Activate the load button.
      */

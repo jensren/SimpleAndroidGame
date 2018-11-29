@@ -21,11 +21,13 @@ public class Board implements Serializable, Iterable<Tile> {
 
     /**
      * Sets the board update listener.
+     *
      * @param boardUpdateListener the board update listener being set.
      */
-    public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
+    public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener) {
         this.boardUpdateListener = boardUpdateListener;
     }
+
     /**
      * The number of rows.
      */
@@ -45,7 +47,7 @@ public class Board implements Serializable, Iterable<Tile> {
     /**
      * The tiles on the board in row-major order.
      */
-     Tile[][] tiles = new Tile[numRows][numCols];
+    Tile[][] tiles = new Tile[numRows][numCols];
 
     /**
      * A new board of tiles in row-major order.
@@ -97,7 +99,7 @@ public class Board implements Serializable, Iterable<Tile> {
         tiles[row1][col1] = tempTile2;
         tiles[row2][col2] = tempTile1;
 
-        if (boardUpdateListener != null){
+        if (boardUpdateListener != null) {
             boardUpdateListener.onBoardChanged();
         }
     }
