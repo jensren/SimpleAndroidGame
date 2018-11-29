@@ -45,6 +45,7 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userManager = new UserManager();
+        //Serializer.saveUserManagerToFile(USER_FILENAME,userManager);
 
         setContentView(R.layout.activity_signin);
         addSignInButtonListener();
@@ -59,13 +60,13 @@ public class SignInActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        serializer.loadUserManagerFromFile(USER_FILENAME);
+        userManager = Serializer.loadUserManagerFromFile(USER_FILENAME);
 
         if (userManager.getPassword(username) == null) {
             Toast.makeText(this, "Username does not exist", Toast.LENGTH_LONG).show();
         } else if (userManager.getPassword(username).equals(password)) {
             setFileNames(username);
-            serializer.saveUserManagerToFile(USER_FILENAME, userManager);
+            Serializer.saveUserManagerToFile(USER_FILENAME, userManager);
             SlidingtilesScoreboard.setUser(username);
             MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
@@ -97,7 +98,7 @@ public class SignInActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serializer.loadUserManagerFromFile(USER_FILENAME);
+                userManager = Serializer.loadUserManagerFromFile(USER_FILENAME);
                 signIn();
             }
         });

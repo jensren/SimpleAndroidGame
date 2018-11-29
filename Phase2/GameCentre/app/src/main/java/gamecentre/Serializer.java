@@ -1,16 +1,15 @@
 package gamecentre;
 
-import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import gamecentre.cardmatching.MatchingBoard;
 import gamecentre.cardmatching.MatchingBoardManager;
 import gamecentre.slidingtiles.BoardManager;
 
@@ -18,8 +17,7 @@ import gamecentre.slidingtiles.BoardManager;
 /**
  * Saves and loads (serializes) files.
  */
-@SuppressLint("Registered")
-public class Serializer extends AppCompatActivity {
+public class Serializer {
 
     /**
      * Load the board manager from fileName.
@@ -28,12 +26,12 @@ public class Serializer extends AppCompatActivity {
      */
     public BoardManager loadBoardManagerFromFile(String fileName) {
         try {
-            InputStream inputStream = this.openFileInput(fileName);
+            InputStream inputStream = new FileInputStream(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 BoardManager tmpBoardManager = (BoardManager) input.readObject();
                 inputStream.close();
-                return tmpBoardManager;
+
             }
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
@@ -48,13 +46,14 @@ public class Serializer extends AppCompatActivity {
     /**
      * Save the board manager to fileName.
      *
-     * @param fileName the name of the file
+     * @param filename the name of the file
      */
-    public void saveBoardManagerToFile(String fileName, BoardManager boardManager) {
+    public void saveBoardManagerToFile(String filename, BoardManager boardManager) {
         try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
+            FileOutputStream fileOutputStream = new FileOutputStream(filename);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
             outputStream.writeObject(boardManager);
+            fileOutputStream.close();
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
@@ -86,13 +85,14 @@ public class Serializer extends AppCompatActivity {
     /**
      * Save the current scoreBoard to file for later access.
      *
-     * @param fileName name of the file to save
+     * @param filename name of the file to save
      */
-    public void saveScoreboardToFile(String fileName, Scoreboard scoreboard) {
+    public void saveScoreboardToFile(String filename, Scoreboard scoreboard) {
         try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
+            FileOutputStream fileOutputStream = new FileOutputStream(filename);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
             outputStream.writeObject(scoreboard);
+            fileOutputStream.close();
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
@@ -106,7 +106,7 @@ public class Serializer extends AppCompatActivity {
      */
     public MatchingBoardManager loadMatchingBoardManagerFromFile(String fileName) {
         try {
-            InputStream inputStream = this.openFileInput(fileName);
+            InputStream inputStream = new FileInputStream(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 MatchingBoardManager tmpBoardManager = (MatchingBoardManager) input.readObject();
@@ -130,8 +130,8 @@ public class Serializer extends AppCompatActivity {
      */
     public void saveMatchingBoardManagerToFile(String fileName, MatchingBoardManager matchingBoardManager) {
         try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
+            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
             outputStream.writeObject(matchingBoardManager);
             outputStream.close();
         } catch (IOException e) {
@@ -142,17 +142,15 @@ public class Serializer extends AppCompatActivity {
     /**
      * Load the user manager from USER_FILENAME.
      */
-    public UserManager loadUserManagerFromFile(String filename) {
+    public static UserManager loadUserManagerFromFile(String filename) {
+        UserManager tmpUserManager = new UserManager();
         try {
-            InputStream inputStream = this.openFileInput(filename);
+            InputStream inputStream = new FileInputStream(filename);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                UserManager tmpUserManager = (UserManager) input.readObject();
-                if (tmpUserManager == null) {
-                    tmpUserManager = new UserManager();
-                }
+                tmpUserManager = (UserManager) input.readObject();
                 inputStream.close();
-                return tmpUserManager;
+                input.close();
             }
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
@@ -161,17 +159,18 @@ public class Serializer extends AppCompatActivity {
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
         }
-        return null;
+        return tmpUserManager;
     }
 
     /**
      * Save the user manager to USER_FILENAME.
      */
-    public void saveUserManagerToFile(String filename, UserManager userManager) {
+    public static void saveUserManagerToFile(String filename, UserManager userManager) {
         try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(filename, MODE_PRIVATE));
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(filename));
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
             outputStream.writeObject(userManager);
+            fileOutputStream.close();
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
