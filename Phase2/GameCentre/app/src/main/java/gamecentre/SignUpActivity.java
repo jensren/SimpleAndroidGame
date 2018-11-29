@@ -2,6 +2,7 @@ package gamecentre;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -110,6 +111,9 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
+    }
 }
 

@@ -2,6 +2,7 @@ package gamecentre.slidingtiles;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -155,4 +156,8 @@ public class GameActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
+    }
 }

@@ -3,6 +3,7 @@ package gamecentre.battlegame;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -104,5 +105,10 @@ public class Player2DogChoiceActivity extends AppCompatActivity {
             throw new NullPointerException("Value of Bundle is null");
         tmp.putExtras(extras);
         startActivity(tmp);
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
     }
 }

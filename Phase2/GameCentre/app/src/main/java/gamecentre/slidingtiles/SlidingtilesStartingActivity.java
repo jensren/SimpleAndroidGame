@@ -1,6 +1,7 @@
 package gamecentre.slidingtiles;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -175,6 +176,11 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         serializer.loadBoardManagerFromFile(tempSaveFileName);
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
     }
 }
 

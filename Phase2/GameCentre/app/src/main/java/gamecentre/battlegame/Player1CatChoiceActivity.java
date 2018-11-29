@@ -3,6 +3,7 @@ package gamecentre.battlegame;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -96,5 +97,10 @@ public class Player1CatChoiceActivity extends AppCompatActivity {
         extras.putString("player1", character);
         tmp.putExtras(extras);
         startActivity(tmp);
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
     }
 }

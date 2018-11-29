@@ -78,6 +78,8 @@ public class BattleScoreboard extends Scoreboard {
             updateUserHighScore(currentScore);
         } else {
             currentScore = null;
+            playerHpLost = 0;
+            opponentHpLost = 0;
         }
     }
 }
