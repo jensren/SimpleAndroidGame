@@ -16,12 +16,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import gamecentre.battlegame.BattleScoreboard;
-import gamecentre.battlegame.BattleStartingActivity;
 import gamecentre.cardmatching.MatchingScoreboard;
-import gamecentre.cardmatching.MatchingScoreboardActivity;
 import gamecentre.cardmatching.MatchingStartingActivity;
 import gamecentre.slidingtiles.R;
-import gamecentre.slidingtiles.SlidingtilesScoreboardActivity;
 import gamecentre.slidingtiles.SlidingtilesStartingActivity;
 
 /**
@@ -38,6 +35,10 @@ public class SignUpActivity extends AppCompatActivity {
      * The user manager.
      */
     private UserManager userManager;
+    /**
+     * The serializer for this activity.
+     */
+    Serializer serializer = new Serializer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (userManager.getPassword(username) == null) {
             userManager.addUser(username, password);
             setFileNames(username);
-            saveToFile();
+            serializer.saveUserManagerToFile(USER_FILENAME, userManager);
             MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
@@ -89,12 +90,12 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * Activate the ok button.
      */
-    private void addSignUpButtonListener() {
+    public void addSignUpButtonListener() {
         Button startButton = findViewById(R.id.okup);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile();
+                serializer.loadUserManagerFromFile(USER_FILENAME);
                 createUser();
             }
         });
@@ -103,46 +104,11 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * Display the game choice activity.
      */
-    private void switchToGameChoiceActivity() {
+    public void switchToGameChoiceActivity() {
         Intent tmp = new Intent(this, GameChoiceActivity.class);
         startActivity(tmp);
     }
 
-    /**
-     * Load the user manager from USER_FILENAME.
-     */
-    private void loadFromFile() {
-        try {
-            InputStream inputStream = this.openFileInput(USER_FILENAME);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                userManager = (UserManager) input.readObject();
-                if (userManager == null) {
-                    userManager = new UserManager();
-                }
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
 
-    /**
-     * Save the user manager to USER_FILENAME.
-     */
-    public void saveToFile() {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(USER_FILENAME, MODE_PRIVATE));
-            outputStream.writeObject(userManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
 }
 

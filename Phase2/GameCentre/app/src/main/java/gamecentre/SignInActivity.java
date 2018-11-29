@@ -16,13 +16,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import gamecentre.battlegame.BattleScoreboard;
-import gamecentre.battlegame.BattleStartingActivity;
 import gamecentre.cardmatching.MatchingScoreboard;
-import gamecentre.cardmatching.MatchingScoreboardActivity;
 import gamecentre.cardmatching.MatchingStartingActivity;
 import gamecentre.slidingtiles.R;
 import gamecentre.slidingtiles.SlidingtilesScoreboard;
-import gamecentre.slidingtiles.SlidingtilesScoreboardActivity;
 import gamecentre.slidingtiles.SlidingtilesStartingActivity;
 
 /**
@@ -39,6 +36,10 @@ public class SignInActivity extends AppCompatActivity {
      * The user manager.
      */
     private UserManager userManager;
+    /**
+     * The serializer for this activity.
+     */
+    Serializer serializer = new Serializer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +59,13 @@ public class SignInActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        loadFromFile(USER_FILENAME);
+        serializer.loadUserManagerFromFile(USER_FILENAME);
 
         if (userManager.getPassword(username) == null) {
             Toast.makeText(this, "Username does not exist", Toast.LENGTH_LONG).show();
         } else if (userManager.getPassword(username).equals(password)) {
             setFileNames(username);
-            saveToFile(USER_FILENAME);
+            serializer.saveUserManagerToFile(USER_FILENAME, userManager);
             SlidingtilesScoreboard.setUser(username);
             MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
@@ -96,7 +97,7 @@ public class SignInActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile(USER_FILENAME);
+                serializer.loadUserManagerFromFile(USER_FILENAME);
                 signIn();
             }
         });
@@ -108,47 +109,6 @@ public class SignInActivity extends AppCompatActivity {
     private void switchToGameChoiceActivity() {
         Intent tmp = new Intent(this, GameChoiceActivity.class);
         startActivity(tmp);
-    }
-
-    /**
-     * Load the user manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                userManager = (UserManager) input.readObject();
-                inputStream.close();
-                if (userManager == null) {
-                    userManager = new UserManager();
-                }
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the user manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(userManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
     }
 }
 
