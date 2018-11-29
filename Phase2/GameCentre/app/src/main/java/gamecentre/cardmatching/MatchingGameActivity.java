@@ -54,7 +54,7 @@ public class MatchingGameActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        boardManager = serializer.loadMatchingBoardManagerFromFile(MatchingStartingActivity.matchingTempSaveFileName);
+        boardManager = serializer.loadMatchingBoardManagerFromFile(MatchingStartingActivity.matchingTempSaveFileName, this);
         createTileButtons(this);
         setContentView(R.layout.activity_cardmatching_main);
 

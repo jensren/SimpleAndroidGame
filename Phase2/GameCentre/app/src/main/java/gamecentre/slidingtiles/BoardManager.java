@@ -44,7 +44,7 @@ public class BoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    BoardManager() {
+    public BoardManager() {
         List<Tile> tiles = new ArrayList<>();
         final int numTiles = Board.numRows * Board.numCols;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {

@@ -160,7 +160,7 @@ public class Serializer extends AppCompatActivity {
      * @param context the context of the activity
      * @return the user manager
      */
-    public static UserManager loadUserManagerFromFile(String filename, Context context) {
+    public UserManager loadUserManagerFromFile(String filename, Context context) {
         UserManager tmpUserManager = new UserManager();
         try {
             InputStream inputStream = context.openFileInput(filename);
@@ -186,7 +186,7 @@ public class Serializer extends AppCompatActivity {
      * @param userManager the userrmanager to save
      * @param context the context of the activity
      */
-    public static void saveUserManagerToFile(String filename, UserManager userManager, Context context) {
+    public void saveUserManagerToFile(String filename, UserManager userManager, Context context) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     context.openFileOutput(filename, MODE_PRIVATE));

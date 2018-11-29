@@ -54,13 +54,13 @@ public class SignInActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        userManager = Serializer.loadUserManagerFromFile(USER_FILENAME, this);
+        userManager = serializer.loadUserManagerFromFile(USER_FILENAME, this);
 
         if (userManager.getPassword(username) == null) {
             Toast.makeText(this, "Username does not exist", Toast.LENGTH_LONG).show();
         } else if (userManager.getPassword(username).equals(password)) {
             setFileNames(username);
-            Serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
+            serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
             SlidingtilesScoreboard.setUser(username);
             MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
@@ -92,7 +92,7 @@ public class SignInActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userManager = Serializer.loadUserManagerFromFile(USER_FILENAME, SignInActivity.this);
+                userManager = serializer.loadUserManagerFromFile(USER_FILENAME, SignInActivity.this);
                 signIn();
             }
         });

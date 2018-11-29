@@ -224,5 +224,4 @@ abstract class Character implements Serializable {
      * @return dog if this character is a dog or cat if this character is a cat.
      */
     public abstract String getType();
-
 }

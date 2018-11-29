@@ -14,26 +14,26 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import gamecentre.Score;
 import gamecentre.slidingtiles.R;
 
 public class BattleScoreboardActivity extends AppCompatActivity {
     public static final String SCORE_FILENAME = "battle_scoreboard_file.ser";
-    TextView scoreBoard;
+    TextView scoreBoardView;
     BattleScoreboard scoreboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scoreboard);
-        scoreBoard = findViewById(R.id.s_b);
+        scoreBoardView = findViewById(R.id.s_b);
+
         loadFromFile(SCORE_FILENAME);
         if (scoreboard == null) {
             scoreboard = new BattleScoreboard();
         }
         scoreboard.update();
         saveToFile(SCORE_FILENAME);
-        scoreBoard.setText(scoreboard.toString());
+        scoreBoardView.setText(scoreboard.toString());
         displayScore();
         displayBestScore();
         displayWinner();
@@ -76,7 +76,7 @@ public class BattleScoreboardActivity extends AppCompatActivity {
     }
 
     /**
-     * Save the current scoreBoard to file for later access.
+     * Save the current scoreBoardView to file for later access.
      *
      * @param fileName name of the file to save
      */

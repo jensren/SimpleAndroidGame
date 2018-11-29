@@ -51,7 +51,7 @@ public class MatchingBoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    MatchingBoardManager() {
+    public MatchingBoardManager() {
         List<MatchingTile> tiles = new ArrayList<>();
         final int numTiles = MatchingBoard.numRows * MatchingBoard.numCols;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {

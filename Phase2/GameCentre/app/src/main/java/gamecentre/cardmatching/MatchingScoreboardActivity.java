@@ -2,7 +2,6 @@ package gamecentre.cardmatching;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -36,12 +35,12 @@ import gamecentre.slidingtiles.R;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.scoreboard);
             scoreboardView = findViewById(R.id.s_b);
-            scoreboard = (MatchingScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME);
+            scoreboard = (MatchingScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME, this);
             if (scoreboard == null) {
                 scoreboard = new MatchingScoreboard();
             }
             scoreboard.update();
-            serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard);
+            serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard, this);
             scoreboardView.setText(scoreboard.toString());
             displayScore();
             displayBestScore();
@@ -58,7 +57,7 @@ import gamecentre.slidingtiles.R;
         @Override
         public void onPause() {
             super.onPause();
-            serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard);
+            serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard, this);
         }
 
         /**

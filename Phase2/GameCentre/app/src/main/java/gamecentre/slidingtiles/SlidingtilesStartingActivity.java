@@ -41,7 +41,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boardManager = new BoardManager();
-        serializer.saveBoardManagerToFile(tempSaveFileName, boardManager);
+        serializer.saveBoardManagerToFile(tempSaveFileName, boardManager, this);
         SlidingtilesScoreboard.reset();
 
         setContentView(R.layout.activity_slidingtiles_starting);
@@ -76,9 +76,9 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serializer.loadBoardManagerFromFile(autoSaveFileName);
-                serializer.saveBoardManagerToFile(tempSaveFileName, boardManager);
-                serializer.saveBoardManagerToFile(autoSaveFileName, boardManager);
+                serializer.loadBoardManagerFromFile(autoSaveFileName, SlidingtilesStartingActivity.this);
+                serializer.saveBoardManagerToFile(tempSaveFileName, boardManager, SlidingtilesStartingActivity.this);
+                serializer.saveBoardManagerToFile(autoSaveFileName, boardManager, SlidingtilesStartingActivity.this);
                 makeToastLoadedText();
                 switchToGame();
             }
@@ -113,8 +113,8 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serializer.saveBoardManagerToFile(saveFileName, boardManager);
-                serializer.saveBoardManagerToFile(tempSaveFileName, boardManager);
+                serializer.saveBoardManagerToFile(saveFileName, boardManager, SlidingtilesStartingActivity.this);
+                serializer.saveBoardManagerToFile(tempSaveFileName, boardManager, SlidingtilesStartingActivity.this);
                 makeToastSavedText();
             }
         });
@@ -165,7 +165,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity.class);
-        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.tempSaveFileName, boardManager);
+        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.tempSaveFileName, boardManager, this);
         startActivity(tmp);
     }
 
@@ -175,7 +175,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        serializer.loadBoardManagerFromFile(tempSaveFileName);
+        serializer.loadBoardManagerFromFile(tempSaveFileName, this);
     }
 
     @Override

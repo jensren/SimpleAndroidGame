@@ -57,7 +57,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = serializer.loadBoardManagerFromFile(SlidingtilesStartingActivity.tempSaveFileName);
+        boardManager = serializer.loadBoardManagerFromFile(SlidingtilesStartingActivity.tempSaveFileName, this);
         createTileButtons(this);
         setContentView(R.layout.activity_slidingtiles_main);
         Button undoButton = findViewById(R.id.Undo);
@@ -71,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onBoardChanged() {
                 display();
-                serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager);
+                serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager, GameActivity.this);
             }
         });
         gridView.mController.setOnWinListener(new OnWinListener() {
@@ -146,8 +146,8 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.tempSaveFileName, boardManager);
-        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager);
+        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.tempSaveFileName, boardManager, this);
+        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager, this);
     }
 
 

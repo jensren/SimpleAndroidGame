@@ -1,7 +1,6 @@
 package gamecentre.slidingtiles;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,12 +39,12 @@ public class SlidingtilesScoreboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scoreboard);
         scoreboardView = findViewById(R.id.s_b);
-        scoreboard = (SlidingtilesScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME);
+        scoreboard = (SlidingtilesScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME, this);
         if (scoreboard == null) {
             scoreboard = new SlidingtilesScoreboard();
         }
         scoreboard.update();
-        serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard);
+        serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard, this);
         scoreboardView.setText(scoreboard.toString());
         displayScore();
         displayBestScore();
@@ -62,7 +61,7 @@ public class SlidingtilesScoreboardActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard);
+        serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard, this);
     }
 
     /**

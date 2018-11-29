@@ -57,8 +57,8 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (userManager.getPassword(username) == null) {
             userManager.addUser(username, password);
             setFileNames(username);
-            Serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
-            Serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
+            serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
+            serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
             MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
@@ -90,7 +90,7 @@ public class SignUpActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Serializer.loadUserManagerFromFile(USER_FILENAME, SignUpActivity.this);
+                serializer.loadUserManagerFromFile(USER_FILENAME, SignUpActivity.this);
                 createUser();
             }
         });
