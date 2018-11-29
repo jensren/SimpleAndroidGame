@@ -183,7 +183,7 @@ public class Serializer extends AppCompatActivity {
      * Save the user manager to filename
      *
      * @param filename the name of hte file
-     * @param userManager the userrmanager to save
+     * @param userManager the usermanager to save
      * @param context the context of the activity
      */
     public void saveUserManagerToFile(String filename, UserManager userManager, Context context) {
