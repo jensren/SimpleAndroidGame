@@ -13,7 +13,7 @@ import gamecentre.BoardUpdateListener;
 /**
  * The sliding tiles board.
  */
-public class Board implements Serializable, Iterable<Tile> {
+public class SlidingtilesBoard implements Serializable, Iterable<Tile> {
     /**
      * The listener that will notify when the board got updated.
      */
@@ -55,11 +55,11 @@ public class Board implements Serializable, Iterable<Tile> {
      *
      * @param tiles the tiles for the board
      */
-    Board(List<Tile> tiles) {
+    SlidingtilesBoard(List<Tile> tiles) {
         Iterator<Tile> iter = tiles.iterator();
 
-        for (int row = 0; row != Board.numRows; row++) {
-            for (int col = 0; col != Board.numCols; col++) {
+        for (int row = 0; row != SlidingtilesBoard.numRows; row++) {
+            for (int col = 0; col != SlidingtilesBoard.numCols; col++) {
                 this.tiles[row][col] = iter.next();
             }
         }

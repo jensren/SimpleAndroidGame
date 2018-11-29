@@ -32,7 +32,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Make a solved Board.
+     * Make a solved board.
      */
     private void setUpCorrect() {
         List<MatchingTile> tiles = makeTiles();
