@@ -30,7 +30,7 @@ public class MatchingBoardManager implements Serializable {
     /**
      * Keeps track of the row and col indices of the two flipped tiles. Initialized as -1.
      */
-    private int[] flippedTiles = new int[]{-1,-1,-1,-1};
+    private int[] flippedTiles = new int[]{-1, -1, -1, -1};
 
     /**
      * Manage a board that has been pre-populated.
@@ -81,6 +81,7 @@ public class MatchingBoardManager implements Serializable {
 
     /**
      * Checks if you won the game by seeing if there are 16 tiles matched.
+     *
      * @return Whether you have won or not.
      */
     boolean isWin() {
@@ -89,9 +90,10 @@ public class MatchingBoardManager implements Serializable {
 
     /**
      * Processes a touch on the screen and flips tiles accordingly depending on how many tiles are currently flipped.
+     *
      * @param position the position you touched.
      */
-    void touchMove(int position){
+    void touchMove(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
 
@@ -101,23 +103,23 @@ public class MatchingBoardManager implements Serializable {
                 flippedTiles[0] = row;
                 flippedTiles[1] = col;
                 tilesCurrentlyFlipped++;
-            } else if(tilesCurrentlyFlipped == 1){
-                board.flipTile(row,col);
+            } else if (tilesCurrentlyFlipped == 1) {
+                board.flipTile(row, col);
                 flippedTiles[2] = row;
                 flippedTiles[3] = col;
-                if (tilesMatched != 14){                         //This part runs as long as you're not about to win.
+                if (tilesMatched != 14) {                         //This part runs as long as you're not about to win.
                     new Handler().postDelayed(new Runnable() {   //Waits 0.35 second and then checks matching and flips over accordingly
                         @Override
                         public void run() {
                             checkMatching();
                             tilesCurrentlyFlipped = 0;
-                            flippedTiles = new int[]{-1,-1,-1,-1};
+                            flippedTiles = new int[]{-1, -1, -1, -1};
                         }
                     }, 350);
-                } else{                                          //This part runs if you have only last two tiles left to match.
+                } else {                                          //This part runs if you have only last two tiles left to match.
                     checkMatching();
                     tilesCurrentlyFlipped = 0;
-                    flippedTiles = new int[]{-1,-1,-1,-1};
+                    flippedTiles = new int[]{-1, -1, -1, -1};
                 }
             }
         }

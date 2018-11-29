@@ -37,7 +37,7 @@ class MatchingMovementController {
     /**
      * Set the boardManager for this MovementController to manage.
      *
-     * @param boardManager The current BoardManager
+     * @param boardManager The current board Manager
      */
     void setBoardManager(MatchingBoardManager boardManager) {
         this.boardManager = boardManager;

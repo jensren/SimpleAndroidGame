@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private SlidingtilesBoardManager boardManager;
 
     /**
      * The buttons to display.
@@ -65,7 +65,7 @@ public class GameActivity extends AppCompatActivity {
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(Board.numCols);
+        gridView.setNumColumns(SlidingtilesBoard.numCols);
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {  //Sets the board update listener. Will update display when board updates.
             @Override
@@ -101,8 +101,8 @@ public class GameActivity extends AppCompatActivity {
                         int displayWidth = gridView.getMeasuredWidth();
                         int displayHeight = gridView.getMeasuredHeight();
 
-                        columnWidth = displayWidth / Board.numCols;
-                        columnHeight = displayHeight / Board.numRows;
+                        columnWidth = displayWidth / SlidingtilesBoard.numCols;
+                        columnHeight = displayHeight / SlidingtilesBoard.numRows;
 
                         display();
                     }
@@ -115,10 +115,10 @@ public class GameActivity extends AppCompatActivity {
      * @param context the context
      */
     private void createTileButtons(Context context) {
-        Board board = boardManager.getBoard();
+        SlidingtilesBoard board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
-        for (int row = 0; row != Board.numRows; row++) {
-            for (int col = 0; col != Board.numCols; col++) {
+        for (int row = 0; row != SlidingtilesBoard.numRows; row++) {
+            for (int col = 0; col != SlidingtilesBoard.numCols; col++) {
                 Button tmp = new Button(context);
                 tmp.setBackgroundResource(board.getTile(row, col).getBackground());
                 this.tileButtons.add(tmp);
@@ -130,11 +130,11 @@ public class GameActivity extends AppCompatActivity {
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons() {
-        Board board = boardManager.getBoard();
+        SlidingtilesBoard board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
-            int row = nextPos / Board.numRows;
-            int col = nextPos % Board.numCols;
+            int row = nextPos / SlidingtilesBoard.numRows;
+            int col = nextPos % SlidingtilesBoard.numCols;
             b.setBackgroundResource(board.getTile(row, col).getBackground());
             nextPos++;
         }

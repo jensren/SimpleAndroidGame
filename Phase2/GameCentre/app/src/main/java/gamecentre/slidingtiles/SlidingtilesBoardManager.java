@@ -8,26 +8,26 @@ import java.util.List;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class BoardManager implements Serializable {
+public class SlidingtilesBoardManager implements Serializable {
 
     /**
      * The board being managed.
      */
-    Board board;
+    SlidingtilesBoard board;
 
     /**
      * Manage a board that has been pre-populated.
      *
      * @param board the board
      */
-    BoardManager(Board board) {
+    SlidingtilesBoardManager(SlidingtilesBoard board) {
         this.board = board;
     }
 
     /**
      * Return the current board.
      */
-    Board getBoard() {
+    SlidingtilesBoard getBoard() {
         return board;
     }
 
@@ -44,9 +44,9 @@ public class BoardManager implements Serializable {
     /**
      * Manage a new shuffled board.
      */
-    public BoardManager() {
+    public SlidingtilesBoardManager() {
         List<Tile> tiles = new ArrayList<>();
-        final int numTiles = Board.numRows * Board.numCols;
+        final int numTiles = SlidingtilesBoard.numRows * SlidingtilesBoard.numCols;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
             tiles.add(new Tile(tileNum));
         }
@@ -55,7 +55,7 @@ public class BoardManager implements Serializable {
         while (!solvable(tiles)) {
             Collections.shuffle(tiles);
         }
-        this.board = new Board(tiles);
+        this.board = new SlidingtilesBoard(tiles);
 
     }
 
@@ -65,13 +65,13 @@ public class BoardManager implements Serializable {
      * @return the list which contains the whole numbers.
      */
     private int[] intList(List<Tile> tiles) {
-        Board board2;
-        board2 = new Board(tiles);
+        SlidingtilesBoard board2;
+        board2 = new SlidingtilesBoard(tiles);
         int blankId = board2.numTiles();
-        int[] myList = new int[Board.numRows * Board.numRows - 1];
+        int[] myList = new int[SlidingtilesBoard.numRows * SlidingtilesBoard.numRows - 1];
         int i = 0;
-        for (int row = 0; row != Board.numRows; row++) {
-            for (int col = 0; col != Board.numCols; col++) {
+        for (int row = 0; row != SlidingtilesBoard.numRows; row++) {
+            for (int col = 0; col != SlidingtilesBoard.numCols; col++) {
                 if (board2.tiles[row][col].getId() != blankId) {
                     myList[i] = board2.tiles[row][col].getId();
                     i++;
@@ -89,9 +89,9 @@ public class BoardManager implements Serializable {
      */
     private int numInversions(int[] intList) {
         int a = 0;
-        for (int i = 0; i < Board.numRows * Board.numRows - 1; i++) {
+        for (int i = 0; i < SlidingtilesBoard.numRows * SlidingtilesBoard.numRows - 1; i++) {
             int b = 0;
-            for (int j = i + 1; j < Board.numRows * Board.numRows - 1; j++) {
+            for (int j = i + 1; j < SlidingtilesBoard.numRows * SlidingtilesBoard.numRows - 1; j++) {
                 if (intList[i] > intList[j]) {
                     b++;
                 }
@@ -108,10 +108,10 @@ public class BoardManager implements Serializable {
      * @return the row of the blank which counting from the bottom.
      */
     private int findBlank(List<Tile> tiles) {
-        Board board2 = new Board(tiles);
+        SlidingtilesBoard board2 = new SlidingtilesBoard(tiles);
         int blankId = board2.numTiles();
-        for (int row = 0; row != Board.numRows; row++) {
-            for (int col = 0; col != Board.numCols; col++) {
+        for (int row = 0; row != SlidingtilesBoard.numRows; row++) {
+            for (int col = 0; col != SlidingtilesBoard.numCols; col++) {
                 if (board2.tiles[row][col].getId() == blankId) {
                     return 4 - row;
                 }
@@ -132,7 +132,7 @@ public class BoardManager implements Serializable {
      */
     Boolean solvable(List<Tile> tiles) {
         int inversions = numInversions(intList(tiles));
-        int a = Board.numRows;
+        int a = SlidingtilesBoard.numRows;
         return ((a % 2 == 1 && inversions % 2 == 0) || (a % 2 == 0 && ((findBlank(tiles) % 2 == 0) == (inversions % 2 == 1))));
     }
 
@@ -161,14 +161,14 @@ public class BoardManager implements Serializable {
      * @return the position of the surrounding blank tile
      */
     private int[] blankTilePosition(int position) {
-        int row = position / Board.numCols;
-        int col = position % Board.numCols;
+        int row = position / SlidingtilesBoard.numCols;
+        int col = position % SlidingtilesBoard.numCols;
         int blankId = board.numTiles();
 
         Tile above = row == 0 ? null : board.getTile(row - 1, col);
-        Tile below = row == Board.numRows - 1 ? null : board.getTile(row + 1, col);
+        Tile below = row == SlidingtilesBoard.numRows - 1 ? null : board.getTile(row + 1, col);
         Tile left = col == 0 ? null : board.getTile(row, col - 1);
-        Tile right = col == Board.numCols - 1 ? null : board.getTile(row, col + 1);
+        Tile right = col == SlidingtilesBoard.numCols - 1 ? null : board.getTile(row, col + 1);
 
         if (above != null && above.getId() == blankId) {
             return new int[]{row - 1, col, row, col};
@@ -202,8 +202,8 @@ public class BoardManager implements Serializable {
      * @param position the position
      */
     void touchMove(int position) {
-        int row = position / Board.numCols;
-        int col = position % Board.numCols;
+        int row = position / SlidingtilesBoard.numCols;
+        int col = position % SlidingtilesBoard.numCols;
 
         if (isValidTap(position)) {
             int[] toSwap = blankTilePosition(position);
@@ -259,7 +259,7 @@ public class BoardManager implements Serializable {
      * @return the number of rows of the current board
      */
     int getBoardSize() {
-        return Board.numRows;
+        return SlidingtilesBoard.numRows;
     }
 
 }

@@ -8,33 +8,13 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import gamecentre.BoardUpdateListener;
+import gamecentre.Board;
+
 
 /**
  * The sliding tiles board.
  */
-public class Board implements Serializable, Iterable<Tile> {
-    /**
-     * The listener that will notify when the board got updated.
-     */
-    transient private BoardUpdateListener boardUpdateListener = null;
-
-    /**
-     * Sets the board update listener.
-     * @param boardUpdateListener the board update listener being set.
-     */
-    public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
-        this.boardUpdateListener = boardUpdateListener;
-    }
-    /**
-     * The number of rows.
-     */
-    static int numRows = 4;
-
-    /**
-     * The number of rows.
-     */
-    static int numCols = 4;
+public class SlidingtilesBoard extends Board implements Serializable, Iterable<Tile> {
 
     /**
      * Variable to handle user's desired board size input. Used to change numRows and numCols
@@ -45,7 +25,7 @@ public class Board implements Serializable, Iterable<Tile> {
     /**
      * The tiles on the board in row-major order.
      */
-     Tile[][] tiles = new Tile[numRows][numCols];
+    Tile[][] tiles = new Tile[numRows][numCols];
 
     /**
      * A new board of tiles in row-major order.
@@ -53,23 +33,14 @@ public class Board implements Serializable, Iterable<Tile> {
      *
      * @param tiles the tiles for the board
      */
-    Board(List<Tile> tiles) {
+    SlidingtilesBoard(List<Tile> tiles) {
         Iterator<Tile> iter = tiles.iterator();
 
-        for (int row = 0; row != Board.numRows; row++) {
-            for (int col = 0; col != Board.numCols; col++) {
+        for (int row = 0; row != SlidingtilesBoard.numRows; row++) {
+            for (int col = 0; col != SlidingtilesBoard.numCols; col++) {
                 this.tiles[row][col] = iter.next();
             }
         }
-    }
-
-    /**
-     * Return the number of tiles on the board.
-     *
-     * @return the number of tiles on the board
-     */
-    int numTiles() {
-        return numCols * numRows;
     }
 
     /**
@@ -84,7 +55,7 @@ public class Board implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Swap the tiles at (row1, col1) and (row2, col2)
+     * Swap the tiles at (row1, col1) and (row2, col2) then calls to update board.
      *
      * @param row1 the first tile row
      * @param col1 the first tile col
@@ -97,9 +68,7 @@ public class Board implements Serializable, Iterable<Tile> {
         tiles[row1][col1] = tempTile2;
         tiles[row2][col2] = tempTile1;
 
-        if (boardUpdateListener != null){
-            boardUpdateListener.onBoardChanged();
-        }
+        listenerUpdate();
     }
 
     @NonNull

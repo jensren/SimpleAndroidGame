@@ -128,6 +128,7 @@ public class MatchingTile implements Comparable<MatchingTile>, Serializable {
                 background = R.drawable.tile_25;
         }
     }
+
     @Override
     public int compareTo(@NonNull MatchingTile o) {
         return o.id - this.id;

@@ -31,7 +31,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private SlidingtilesBoardManager boardManager;
     /**
      * The serializer for this activity
      */
@@ -40,7 +40,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new BoardManager();
+        boardManager = new SlidingtilesBoardManager();
         serializer.saveBoardManagerToFile(tempSaveFileName, boardManager, this);
         SlidingtilesScoreboard.reset();
 
@@ -60,9 +60,9 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Board.numCols = Board.size;
-                Board.numRows = Board.size;
-                boardManager = new BoardManager();
+                SlidingtilesBoard.numCols = SlidingtilesBoard.size;
+                SlidingtilesBoard.numRows = SlidingtilesBoard.size;
+                boardManager = new SlidingtilesBoardManager();
                 switchToGame();
             }
         });
@@ -132,13 +132,13 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
 
                 switch (index) {
                     case 0: // 3x3 case
-                        Board.size = 3;
+                        SlidingtilesBoard.size = 3;
                         break;
                     case 1: // 4x4 case
-                        Board.size = 4;
+                        SlidingtilesBoard.size = 4;
                         break;
                     case 2: // 5x5 case
-                        Board.size = 5;
+                        SlidingtilesBoard.size = 5;
                         break;
                 }
             }

@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import gamecentre.cardmatching.MatchingBoardManager;
-import gamecentre.slidingtiles.BoardManager;
+import gamecentre.slidingtiles.SlidingtilesBoardManager;
 
 
 /**
@@ -26,13 +26,13 @@ public class Serializer extends AppCompatActivity {
      * @param context the context of the activity
      * @return the board manager
      */
-    public BoardManager loadBoardManagerFromFile(String filename, Context context) {
-        BoardManager tmpBoardManager = new BoardManager();
+    public SlidingtilesBoardManager loadBoardManagerFromFile(String filename, Context context) {
+        SlidingtilesBoardManager tmpBoardManager = new SlidingtilesBoardManager();
         try {
             InputStream inputStream = context.openFileInput(filename);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                tmpBoardManager = (BoardManager) input.readObject();
+                tmpBoardManager = (SlidingtilesBoardManager) input.readObject();
                 inputStream.close();
             }
         } catch (FileNotFoundException e) {
@@ -52,7 +52,7 @@ public class Serializer extends AppCompatActivity {
      * @param context the context of the activity
      * @param boardManager the board manager
      */
-    public void saveBoardManagerToFile(String filename, BoardManager boardManager, Context context) {
+    public void saveBoardManagerToFile(String filename, SlidingtilesBoardManager boardManager, Context context) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     context.openFileOutput(filename, MODE_PRIVATE));

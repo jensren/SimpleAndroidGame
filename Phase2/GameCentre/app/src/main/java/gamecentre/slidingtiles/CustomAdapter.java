@@ -27,8 +27,9 @@ public class CustomAdapter extends BaseAdapter {
 
     /**
      * Customize the dimentions of the buttons with width columnWidth and height columnHeight
-     * @param buttons An Array of Buttons for this game
-     * @param columnWidth Width of the column
+     *
+     * @param buttons      An Array of Buttons for this game
+     * @param columnWidth  Width of the column
      * @param columnHeight Height of the Column
      */
 
