@@ -15,10 +15,10 @@ import gamecentre.slidingtiles.BoardManager;
 
 
 /**
- * Saves and loads files.
+ * Saves and loads (serializes) files.
  */
 @SuppressLint("Registered")
-public class SaveAndLoad extends AppCompatActivity {
+public class Serializer extends AppCompatActivity {
 
     /**
      * Load the board manager from fileName.
