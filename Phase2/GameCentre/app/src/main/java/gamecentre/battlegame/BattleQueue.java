@@ -71,15 +71,6 @@ public class BattleQueue implements Serializable {
         }
     }
 
-//    /**
-//     * Return whether the game is over (i.e. there are no more moves left).
-//     *
-//     * @return true iff the game is over.
-//     */
-//    boolean isOver() {
-//        return queue.isEmpty();
-//    }
-
     /**
      * Return the next character to make a move.
      *
@@ -119,7 +110,6 @@ public class BattleQueue implements Serializable {
      * @return true if this Battle Queue is empty, false otherwise.
      */
     boolean isEmpty() {
-        //removeInvalidCharacters();
         return queue.size() == 0;
     }
 
@@ -197,5 +187,4 @@ public class BattleQueue implements Serializable {
             }
         }
     }
-
 }
