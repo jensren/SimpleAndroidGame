@@ -4,22 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import gamecentre.BoardUpdateListener;
 import gamecentre.OnWinListener;
-import gamecentre.SaveAndLoad;
+import gamecentre.Serializer;
 
 /**
  * The game activity.
@@ -39,7 +33,7 @@ public class GameActivity extends AppCompatActivity {
     /**
      * The saver and loader.
      */
-    SaveAndLoad saveAndLoad = new SaveAndLoad();
+    Serializer serializer = new Serializer();
 
     /**
      * The gridview for the game
@@ -62,7 +56,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = saveAndLoad.loadBoardManagerFromFile(SlidingtilesStartingActivity.tempSaveFileName);
+        boardManager = serializer.loadBoardManagerFromFile(SlidingtilesStartingActivity.tempSaveFileName);
         createTileButtons(this);
         setContentView(R.layout.activity_slidingtiles_main);
         Button undoButton = findViewById(R.id.Undo);
@@ -76,7 +70,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onBoardChanged() {
                 display();
-                saveAndLoad.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager);
+                serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager);
             }
         });
         gridView.mController.setOnWinListener(new OnWinListener() {
@@ -151,8 +145,8 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        saveAndLoad.saveBoardManagerToFile(SlidingtilesStartingActivity.tempSaveFileName, boardManager);
-        saveAndLoad.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager);
+        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.tempSaveFileName, boardManager);
+        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager);
     }
 
 
