@@ -5,16 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import gamecentre.BoardUpdateListener;
@@ -72,7 +66,7 @@ public class MatchingGameActivity extends AppCompatActivity{
             @Override
             public void onBoardChanged() {
                 display();
-                serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager);
+                serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager, MatchingGameActivity.this);
             }
         });
         gridView.mController.setOnWinListener(new OnWinListener() {
@@ -136,8 +130,8 @@ public class MatchingGameActivity extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName, boardManager);
-        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager);
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName, boardManager, this);
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager, this);
     }
 
     /**

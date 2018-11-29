@@ -4,17 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import gamecentre.battlegame.BattleScoreboard;
 import gamecentre.cardmatching.MatchingScoreboard;
@@ -61,13 +54,13 @@ public class SignInActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        userManager = Serializer.loadUserManagerFromFile(USER_FILENAME);
+        userManager = Serializer.loadUserManagerFromFile(USER_FILENAME, this);
 
         if (userManager.getPassword(username) == null) {
             Toast.makeText(this, "Username does not exist", Toast.LENGTH_LONG).show();
         } else if (userManager.getPassword(username).equals(password)) {
             setFileNames(username);
-            Serializer.saveUserManagerToFile(USER_FILENAME, userManager);
+            Serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
             SlidingtilesScoreboard.setUser(username);
             MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
@@ -99,7 +92,7 @@ public class SignInActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userManager = Serializer.loadUserManagerFromFile(USER_FILENAME);
+                userManager = Serializer.loadUserManagerFromFile(USER_FILENAME, SignInActivity.this);
                 signIn();
             }
         });

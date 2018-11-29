@@ -4,17 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 import gamecentre.battlegame.BattleScoreboard;
 import gamecentre.cardmatching.MatchingScoreboard;
@@ -64,8 +57,8 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (userManager.getPassword(username) == null) {
             userManager.addUser(username, password);
             setFileNames(username);
-            Serializer.saveUserManagerToFile(USER_FILENAME, userManager);
-            Serializer.saveUserManagerToFile(USER_FILENAME, userManager);
+            Serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
+            Serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
             MatchingScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
             BattleScoreboard.setUser(username);
@@ -97,7 +90,7 @@ public class SignUpActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Serializer.loadUserManagerFromFile(USER_FILENAME);
+                Serializer.loadUserManagerFromFile(USER_FILENAME, SignUpActivity.this);
                 createUser();
             }
         });

@@ -1,8 +1,9 @@
 package gamecentre;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,7 +18,7 @@ import gamecentre.slidingtiles.BoardManager;
 /**
  * Saves and loads (serializes) files.
  */
-public class Serializer {
+public class Serializer extends AppCompatActivity {
 
     /**
      * Load the board manager from fileName.
@@ -127,8 +128,9 @@ public class Serializer {
      * Save the board manager to fileName.
      *
      * @param fileName the name of the file
+     * @param context
      */
-    public void saveMatchingBoardManagerToFile(String fileName, MatchingBoardManager matchingBoardManager) {
+    public void saveMatchingBoardManagerToFile(String fileName, MatchingBoardManager matchingBoardManager, Context context) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(fileName);
             ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
@@ -142,15 +144,14 @@ public class Serializer {
     /**
      * Load the user manager from USER_FILENAME.
      */
-    public static UserManager loadUserManagerFromFile(String filename) {
+    public static UserManager loadUserManagerFromFile(String filename, Context context) {
         UserManager tmpUserManager = new UserManager();
         try {
-            InputStream inputStream = new FileInputStream(filename);
+            InputStream inputStream = context.openFileInput(filename);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
                 tmpUserManager = (UserManager) input.readObject();
                 inputStream.close();
-                input.close();
             }
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
@@ -165,12 +166,11 @@ public class Serializer {
     /**
      * Save the user manager to USER_FILENAME.
      */
-    public static void saveUserManagerToFile(String filename, UserManager userManager) {
+    public static void saveUserManagerToFile(String filename, UserManager userManager, Context context) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(filename));
-            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    context.openFileOutput(filename, MODE_PRIVATE));
             outputStream.writeObject(userManager);
-            fileOutputStream.close();
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
