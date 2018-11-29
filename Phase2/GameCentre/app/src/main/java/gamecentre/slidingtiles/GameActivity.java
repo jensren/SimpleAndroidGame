@@ -67,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
         gridView = findViewById(R.id.grid);
         gridView.setNumColumns(Board.numCols);
         gridView.setBoardManager(boardManager);
-        boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {
+        boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {  //Sets the board update listener. Will update display when board updates.
             @Override
             public void onBoardChanged() {
                 display();
@@ -76,7 +76,7 @@ public class GameActivity extends AppCompatActivity {
         });
         gridView.mController.setOnWinListener(new OnWinListener() {
             @Override
-            public void onWin() {
+            public void onWin() {  //Sets the win listener. Will switch to scoreboard when the game is won.
                 switchToScoreBoardActivity();
             }
         });

@@ -9,14 +9,24 @@ import gamecentre.OnWinListener;
  * Process taps of tiles and undo throughout game play.
  */
 class MovementController {
-
+    /**
+     * The current board manager.
+     */
     private BoardManager boardManager = null;
-
+    /**
+     * The on win listener, will notify when the game is won.
+     */
     private OnWinListener onWinListener = null;
 
-    public void setOnWinListener(OnWinListener onWinListener){
+    /**
+     * Sets the on win listener.
+     *
+     * @param onWinListener The on win listener to be set.
+     */
+    public void setOnWinListener(OnWinListener onWinListener) {
         this.onWinListener = onWinListener;
     }
+
     /**
      * The MovementController for this activity.
      */
@@ -49,7 +59,7 @@ class MovementController {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 SlidingtilesScoreboard.setNumMoves(boardManager.getNumMoves());
                 SlidingtilesScoreboard.setBoardSize(boardManager.getBoardSize());
-                if (onWinListener != null){
+                if (onWinListener != null) {
                     onWinListener.onWin();
                 }
             }

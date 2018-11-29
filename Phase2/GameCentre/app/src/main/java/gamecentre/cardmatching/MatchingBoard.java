@@ -9,8 +9,15 @@ import gamecentre.BoardUpdateListener;
 import gamecentre.slidingtiles.R;
 
 public class MatchingBoard implements Serializable {
+    /**
+     * The listener that will notify when the board got updated.
+     */
     transient private BoardUpdateListener boardUpdateListener = null;
 
+    /**
+     * Sets the board update listener.
+     * @param boardUpdateListener the board update listener being set.
+     */
     public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
         this.boardUpdateListener = boardUpdateListener;
     }

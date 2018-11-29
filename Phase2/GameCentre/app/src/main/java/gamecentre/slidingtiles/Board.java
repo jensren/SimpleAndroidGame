@@ -14,9 +14,15 @@ import gamecentre.BoardUpdateListener;
  * The sliding tiles board.
  */
 public class Board implements Serializable, Iterable<Tile> {
-
+    /**
+     * The listener that will notify when the board got updated.
+     */
     transient private BoardUpdateListener boardUpdateListener = null;
 
+    /**
+     * Sets the board update listener.
+     * @param boardUpdateListener the board update listener being set.
+     */
     public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
         this.boardUpdateListener = boardUpdateListener;
     }
