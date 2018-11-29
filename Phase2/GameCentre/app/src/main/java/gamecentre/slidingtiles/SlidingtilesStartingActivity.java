@@ -75,7 +75,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serializer.loadBoardManagerFromFile(saveFileName);
+                serializer.loadBoardManagerFromFile(autoSaveFileName);
                 serializer.saveBoardManagerToFile(tempSaveFileName, boardManager);
                 serializer.saveBoardManagerToFile(autoSaveFileName, boardManager);
                 makeToastLoadedText();

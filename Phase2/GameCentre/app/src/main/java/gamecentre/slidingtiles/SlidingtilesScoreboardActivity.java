@@ -10,7 +10,7 @@ import android.widget.TextView;
 import gamecentre.Serializer;
 
 /**
- * Manage the scoreBoard layout during the game and save the current scoreBoard.
+ * Manage the scoreboardView layout during the game and save the current scoreboardView.
  */
 
 public class SlidingtilesScoreboardActivity extends AppCompatActivity {
@@ -18,7 +18,7 @@ public class SlidingtilesScoreboardActivity extends AppCompatActivity {
     /**
      * The textview for the scoreboard.
      */
-    TextView scoreBoard;
+    TextView scoreboardView;
     /**
      * The file to save scoreboard to.
      */
@@ -38,14 +38,14 @@ public class SlidingtilesScoreboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scoreboard);
-        scoreBoard = findViewById(R.id.s_b);
+        scoreboardView = findViewById(R.id.s_b);
         scoreboard = (SlidingtilesScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME);
         if (scoreboard == null) {
             scoreboard = new SlidingtilesScoreboard();
         }
         scoreboard.update();
         serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard);
-        scoreBoard.setText(scoreboard.toString());
+        scoreboardView.setText(scoreboard.toString());
         displayScore();
         displayBestScore();
         addMainButtonListener();
