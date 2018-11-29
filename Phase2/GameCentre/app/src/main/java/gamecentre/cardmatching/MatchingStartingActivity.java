@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import gamecentre.Serializer;
 import gamecentre.slidingtiles.R;
 
 public class MatchingStartingActivity extends AppCompatActivity {
@@ -33,12 +34,16 @@ public class MatchingStartingActivity extends AppCompatActivity {
      * The board manager.
      */
     private MatchingBoardManager matchingBoardManager;
+    /**
+     * The serializer for this activity.
+     */
+    Serializer serializer = new Serializer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         matchingBoardManager = new MatchingBoardManager();
-        saveToFile(matchingTempSaveFileName);
+        saveMatchingBoardManagerToFile(matchingTempSaveFileName);
         MatchingScoreboard.reset();
 
         setContentView(R.layout.activity_cardmatching_starting);
@@ -69,9 +74,9 @@ public class MatchingStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile(matchingSaveFileName);
-                saveToFile(matchingTempSaveFileName);
-                saveToFile(matchingAutoSaveFileName);
+                loadMatchingBoardManagerFromFile(matchingSaveFileName);
+                saveMatchingBoardManagerToFile(matchingTempSaveFileName);
+                saveMatchingBoardManagerToFile(matchingAutoSaveFileName);
                 makeToastLoadedText();
                 switchToGame();
             }
@@ -114,8 +119,8 @@ public class MatchingStartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(matchingSaveFileName);
-                saveToFile(matchingTempSaveFileName);
+                saveMatchingBoardManagerToFile(matchingSaveFileName);
+                saveMatchingBoardManagerToFile(matchingTempSaveFileName);
                 makeToastSavedText();
             }
         });
@@ -133,7 +138,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, MatchingGameActivity.class);
-        saveToFile(MatchingStartingActivity.matchingTempSaveFileName);
+        saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName);
         startActivity(tmp);
     }
 
@@ -143,7 +148,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadFromFile(matchingTempSaveFileName);
+        loadMatchingBoardManagerFromFile(matchingTempSaveFileName);
     }
 
     /**
@@ -151,7 +156,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
      *
      * @param fileName the name of the file
      */
-    private void loadFromFile(String fileName) {
+    private void loadMatchingBoardManagerFromFile(String fileName) {
         try {
             InputStream inputStream = this.openFileInput(fileName);
             InputStream autoInputStream = this.openFileInput(matchingAutoSaveFileName);
@@ -180,7 +185,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
      *
      * @param fileName the name of the file
      */
-    public void saveToFile(String fileName) {
+    public void saveMatchingBoardManagerToFile(String fileName) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
