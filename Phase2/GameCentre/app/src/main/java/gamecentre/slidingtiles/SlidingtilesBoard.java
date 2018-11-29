@@ -8,35 +8,13 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import gamecentre.BoardUpdateListener;
+import gamecentre.Board;
+
 
 /**
  * The sliding tiles board.
  */
-public class SlidingtilesBoard implements Serializable, Iterable<Tile> {
-    /**
-     * The listener that will notify when the board got updated.
-     */
-    transient private BoardUpdateListener boardUpdateListener = null;
-
-    /**
-     * Sets the board update listener.
-     *
-     * @param boardUpdateListener the board update listener being set.
-     */
-    public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener) {
-        this.boardUpdateListener = boardUpdateListener;
-    }
-
-    /**
-     * The number of rows.
-     */
-    static int numRows = 4;
-
-    /**
-     * The number of rows.
-     */
-    static int numCols = 4;
+public class SlidingtilesBoard extends Board implements Serializable, Iterable<Tile> {
 
     /**
      * Variable to handle user's desired board size input. Used to change numRows and numCols
@@ -66,15 +44,6 @@ public class SlidingtilesBoard implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Return the number of tiles on the board.
-     *
-     * @return the number of tiles on the board
-     */
-    int numTiles() {
-        return numCols * numRows;
-    }
-
-    /**
      * Return the tile at (row, col)
      *
      * @param row the tile row
@@ -86,7 +55,7 @@ public class SlidingtilesBoard implements Serializable, Iterable<Tile> {
     }
 
     /**
-     * Swap the tiles at (row1, col1) and (row2, col2)
+     * Swap the tiles at (row1, col1) and (row2, col2) then calls to update board.
      *
      * @param row1 the first tile row
      * @param col1 the first tile col
@@ -99,9 +68,7 @@ public class SlidingtilesBoard implements Serializable, Iterable<Tile> {
         tiles[row1][col1] = tempTile2;
         tiles[row2][col2] = tempTile1;
 
-        if (boardUpdateListener != null) {
-            boardUpdateListener.onBoardChanged();
-        }
+        listenerUpdate();
     }
 
     @NonNull
