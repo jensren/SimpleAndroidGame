@@ -69,9 +69,9 @@ public class MatchingGameActivity extends AppCompatActivity{
                 serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager, MatchingGameActivity.this);
             }
         });
-        gridView.mController.setOnWinListener(new OnWinListener() {
+        gridView.mController.setOnWinListener(new OnWinListener() {  //Sets the win listener. Will switch to scoreboard when the game is won.
             @Override
-            public void onWin() {  //Sets the win listener. Will switch to scoreboard when the game is won.
+            public void onWin() {
                 switchToScoreBoardActivity();
             }
         });
