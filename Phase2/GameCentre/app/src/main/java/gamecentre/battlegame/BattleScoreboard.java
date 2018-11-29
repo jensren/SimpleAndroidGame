@@ -36,6 +36,20 @@ public class BattleScoreboard extends Scoreboard {
         return numMoves;
     }
 
+    /**
+     * Get the winner of the game
+     *
+     * @return a String saying player 1 won or player 2 won
+     */
+    String getWinner() {
+        if (playerHpLost == Character.getInitialHp()) {
+            return "Player 2 is the winner!";
+        } else if (opponentHpLost == Character.getInitialHp()) {
+            return "Player 1 is the winner!";
+        }
+        return "";
+    }
+
     protected String getUserCurrentScore() {
         return super.getUserCurrentScore();
     }

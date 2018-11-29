@@ -36,6 +36,7 @@ public class BattleScoreboardActivity extends AppCompatActivity {
         scoreBoard.setText(scoreboard.toString());
         displayScore();
         displayBestScore();
+        displayWinner();
         addMainButtonListener();
     }
 
@@ -105,6 +106,14 @@ public class BattleScoreboardActivity extends AppCompatActivity {
     private void displayBestScore() {
         TextView highScore = findViewById(R.id.highScore);
         highScore.setText(scoreboard.getUserBestScore());
+    }
+
+    /**
+     * Display the winner of the game
+     */
+    private void displayWinner() {
+        TextView winText = findViewById(R.id.winText);
+        winText.setText(scoreboard.getWinner());
     }
 
     /**
