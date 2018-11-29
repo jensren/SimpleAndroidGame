@@ -29,9 +29,11 @@
 * Battle Game: Jenney, Ashas, Cassidy
 
 ## Responsibilities:
-* Art for the battle game sprites: Jenney
+* Art for the battle game sprites, scoreboard: Jenney
 * Sliding Tiles only creates solvable boards: Jiaheng
-* 
+* Activities and animations for battle game, BattleQueueManager: Cassidy
+* BattleQueue, attack mechanisms for battle game, undo: Ashas
+
 
 ## Battle Game Rules:
 * HP = health points, MP = mana points
@@ -65,7 +67,6 @@ don't match, they flip back over.
 * TBD
 
 ## Current bugs that need fixing:
-* If you keep using special attack, sometimes the game freezes
 
 ## To-do list:
 * Fix code smells (extract superclasses)
