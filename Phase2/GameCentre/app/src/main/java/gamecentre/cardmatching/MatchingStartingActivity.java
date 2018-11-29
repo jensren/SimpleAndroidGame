@@ -177,7 +177,8 @@ public class MatchingStartingActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
         } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
+            Log.e("login activity", "File contained unexpected data type: " +
+                    e.toString());
         }
     }
 

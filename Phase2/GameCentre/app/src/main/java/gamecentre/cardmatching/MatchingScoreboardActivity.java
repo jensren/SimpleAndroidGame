@@ -35,7 +35,8 @@ import gamecentre.slidingtiles.R;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.scoreboard);
             scoreboardView = findViewById(R.id.s_b);
-            scoreboard = (MatchingScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME, this);
+            scoreboard = (MatchingScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME,
+                    this);
             if (scoreboard == null) {
                 scoreboard = new MatchingScoreboard();
             }

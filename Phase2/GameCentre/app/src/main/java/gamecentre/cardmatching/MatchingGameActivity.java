@@ -42,19 +42,21 @@ public class MatchingGameActivity extends AppCompatActivity{
 
     /**
      * Set up the background image for each button based on the master list
-     * of positions, updates the display for user's number of moves, and then call the adapter to set the view.
+     * of positions, updates the display for user's number of moves, and then call the adapter to
+     * set the view.
      */
     public void display() {
         updateTileButtons();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
         TextView score = findViewById(R.id.moves);
-        String a = "Your moves: " + boardManager.getNumMoves();
+        String a = "Your moves: " + boardManager.matchingGetNumMoves();
         score.setText(a);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        boardManager = serializer.loadMatchingBoardManagerFromFile(MatchingStartingActivity.matchingTempSaveFileName, this);
+        boardManager = serializer.loadMatchingBoardManagerFromFile(
+                MatchingStartingActivity.matchingTempSaveFileName, this);
         createTileButtons(this);
         setContentView(R.layout.activity_cardmatching_main);
 
@@ -66,7 +68,9 @@ public class MatchingGameActivity extends AppCompatActivity{
             @Override
             public void onBoardChanged() {   //Sets the board update listener. Will update display when board updates.
                 display();
-                serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager, MatchingGameActivity.this);
+                serializer.saveMatchingBoardManagerToFile(
+                        MatchingStartingActivity.matchingAutoSaveFileName, boardManager,
+                        MatchingGameActivity.this);
             }
         });
         gridView.mController.setOnWinListener(new OnWinListener() {  //Sets the win listener. Will switch to scoreboard when the game is won.
@@ -104,7 +108,7 @@ public class MatchingGameActivity extends AppCompatActivity{
         for (int row = 0; row != MatchingBoard.numRows; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
                 Button tmp = new Button(context);
-                tmp.setBackgroundResource(board.getTile(row, col).getBackground());
+                tmp.setBackgroundResource(board.matchingGetTile(row, col).getBackground());
                 this.tileButtons.add(tmp);
             }
         }
@@ -119,7 +123,7 @@ public class MatchingGameActivity extends AppCompatActivity{
         for (Button b : tileButtons) {
             int row = nextPos / MatchingBoard.numRows;
             int col = nextPos % MatchingBoard.numCols;
-            b.setBackgroundResource(board.getTile(row, col).getBackground());
+            b.setBackgroundResource(board.matchingGetTile(row, col).getBackground());
             nextPos++;
         }
     }
@@ -130,8 +134,10 @@ public class MatchingGameActivity extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName, boardManager, this);
-        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager, this);
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName,
+                boardManager, this);
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName,
+                boardManager, this);
     }
 
     /**

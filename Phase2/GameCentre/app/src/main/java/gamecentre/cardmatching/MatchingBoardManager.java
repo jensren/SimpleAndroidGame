@@ -67,7 +67,7 @@ public class MatchingBoardManager implements Serializable {
      * @param position the position the player touched
      * @return whether or not the tap is valid
      */
-    boolean isValidTap(int position) {
+    boolean matchingIsValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
         if (flippedTiles[0] != -1) {
@@ -76,7 +76,7 @@ public class MatchingBoardManager implements Serializable {
             }
         }
         int blankId = 17;
-        return board.getTile(row, col).getId() != blankId;
+        return board.matchingGetTile(row, col).getId() != blankId;
     }
 
     /**
@@ -95,7 +95,7 @@ public class MatchingBoardManager implements Serializable {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
 
-        if (isValidTap(position)) {
+        if (matchingIsValidTap(position)) {
             if (tilesCurrentlyFlipped == 0){
                 board.flipTile(row,col);
                 flippedTiles[0] = row;
@@ -128,7 +128,8 @@ public class MatchingBoardManager implements Serializable {
      * tilesMatched by 2. If they don't match, flip both back to question mark tiles.
      */
     private void checkMatching() {
-        if (board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]][flippedTiles[3]]) == 0) {
+        if (board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]]
+                [flippedTiles[3]]) == 0) {
             board.flipBlank(flippedTiles);
             tilesMatched += 2;
         } else {
@@ -140,7 +141,7 @@ public class MatchingBoardManager implements Serializable {
     /**
      * count the number of total moves made
      */
-    void updateMoves() {
+    void matchingUpdateMoves() {
         numMoves += 1;
     }
 
@@ -148,7 +149,7 @@ public class MatchingBoardManager implements Serializable {
      * @return the number of moves so far.
      */
 
-    int getNumMoves() {
+    int matchingGetNumMoves() {
         return numMoves;
     }
 }

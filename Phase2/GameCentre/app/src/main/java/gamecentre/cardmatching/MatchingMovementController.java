@@ -50,13 +50,13 @@ class MatchingMovementController {
      * @param position position of the tap
      */
     void processTapMovement(Context context, int position) {
-        if (boardManager.isValidTap(position)) {
-            boardManager.updateMoves();
+        if (boardManager.matchingIsValidTap(position)) {
+            boardManager.matchingUpdateMoves();
 
             boardManager.touchMove(position);
             if (boardManager.isWin()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
-                MatchingScoreboard.setNumMoves(boardManager.getNumMoves());
+                MatchingScoreboard.setNumMoves(boardManager.matchingGetNumMoves());
                 if (onWinListener != null){
                     onWinListener.onWin();
                 }
