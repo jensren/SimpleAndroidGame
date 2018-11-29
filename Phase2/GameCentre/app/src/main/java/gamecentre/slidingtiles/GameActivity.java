@@ -188,9 +188,4 @@ public class GameActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
-//    private class WinObserver implements Observer {
-//        public void update(Observable o, Object arg) {
-//            switchToScoreBoardActivity();
-//        }
-//    }
 }
