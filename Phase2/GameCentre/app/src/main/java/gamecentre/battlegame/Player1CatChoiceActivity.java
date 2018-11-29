@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import gamecentre.GameChoiceActivity;
 import gamecentre.slidingtiles.R;
 
 /**
@@ -25,7 +23,6 @@ public class Player1CatChoiceActivity extends AppCompatActivity {
         addSamuraiButtonListener();
         addShamanButtonListener();
         startAnimations();
-
     }
 
     /**
@@ -59,7 +56,6 @@ public class Player1CatChoiceActivity extends AppCompatActivity {
         shamanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 switchToPlayer2DogChoiceActivity("ShamanCat");
             }
         });
