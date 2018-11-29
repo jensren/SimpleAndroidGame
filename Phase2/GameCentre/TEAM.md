@@ -70,7 +70,7 @@ don't match, they flip back over.
 ## To-do list:
 * Fix code smells (extract superclasses)
 * javadoc for listeners
-* Testing: make controllers for activities to test them
 * Utility class for save and loading
+* Finish typing readme and team.md
 
 
