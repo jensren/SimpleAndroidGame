@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import gamecentre.BoardUpdateListener;
 import gamecentre.OnWinListener;
+import gamecentre.Serializer;
 import gamecentre.slidingtiles.CustomAdapter;
 import gamecentre.slidingtiles.R;
 
@@ -31,10 +32,18 @@ public class MatchingGameActivity extends AppCompatActivity{
      * The buttons to display.
      */
     private ArrayList<Button> tileButtons;
-
-    // Grid View and calculated column height and width based on device size
+    /**
+     * The gridview for this game
+     */
     private MatchingGestureDetectGridView gridView;
+    /**
+     * Calculated column height and width based on device size
+     */
     private static int columnWidth, columnHeight;
+    /**
+     * The serializer for this activity.
+     */
+    Serializer serializer = new Serializer();
 
     /**
      * Set up the background image for each button based on the master list
@@ -50,7 +59,7 @@ public class MatchingGameActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        loadFromFile(MatchingStartingActivity.matchingTempSaveFileName);
+        boardManager = serializer.loadMatchingBoardManagerFromFile(MatchingStartingActivity.matchingTempSaveFileName);
         createTileButtons(this);
         setContentView(R.layout.activity_cardmatching_main);
 
@@ -62,7 +71,7 @@ public class MatchingGameActivity extends AppCompatActivity{
             @Override
             public void onBoardChanged() {
                 display();
-                saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
+                serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager);
             }
         });
         gridView.mController.setOnWinListener(new OnWinListener() {
@@ -126,47 +135,8 @@ public class MatchingGameActivity extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(MatchingStartingActivity.matchingTempSaveFileName);
-        saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
-    }
-
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (MatchingBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName, boardManager);
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName, boardManager);
     }
 
     /**
