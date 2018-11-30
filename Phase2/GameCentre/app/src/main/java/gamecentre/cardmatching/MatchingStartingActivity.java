@@ -10,6 +10,10 @@ import android.widget.Toast;
 import gamecentre.Serializer;
 import gamecentre.slidingtiles.R;
 
+/* background for this activity is taken from https://hipwallpaper.com/backgrounds-view/
+ */
+
+
 /**
  * The starting activity for the matching game.
  */

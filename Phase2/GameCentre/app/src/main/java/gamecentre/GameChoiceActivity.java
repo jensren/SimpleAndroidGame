@@ -13,6 +13,9 @@ import gamecentre.cardmatching.MatchingStartingActivity;
 import gamecentre.slidingtiles.R;
 import gamecentre.slidingtiles.SlidingtilesStartingActivity;
 
+/* background for this activity is taken from https://hipwallpaper.com/backgrounds-view/
+*/
+
 /**
  * The activity for choosing a game.
  */
