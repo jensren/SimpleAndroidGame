@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unittest class to test the functions of DetectiveShibe and NinjaCat characters in a BattleQueue.
+ */
 public class DetectiveVsNinjaTest {
 
     private BattleQueue bq = new BattleQueue();
