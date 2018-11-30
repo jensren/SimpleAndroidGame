@@ -207,8 +207,11 @@ public class SlidingtilesScoreboardTest {
      */
     @Test
     public void testEmptyScoreboardToString() {
-        String expected = "SCORE BOARD\n\n1.\n2.\n3.\n4.\n5.\n6.\n7.\n8.\n9.\n10.\n";
-        assertEquals(expected, scoreboard.toString());
+        StringBuilder expected = new StringBuilder("SCORE BOARD\n\n");
+        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+            expected.append(String.format("%d.\n", i + 1));
+        }
+        assertEquals(expected.toString(), scoreboard.toString());
     }
 
     /**
