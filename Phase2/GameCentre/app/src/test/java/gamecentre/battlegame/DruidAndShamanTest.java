@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unittest class to test the functions of DruidShibe and ShamanCat characters in a BattleQueue.
+ */
 public class DruidAndShamanTest {
 
     private BattleQueue bq = new BattleQueue();

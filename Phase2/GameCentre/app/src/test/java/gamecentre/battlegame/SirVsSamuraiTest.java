@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unittest class to test the functions of SirShibe and SamuraiCat characters in a BattleQueue.
+ */
 public class SirVsSamuraiTest {
 
     private BattleQueue bq = new BattleQueue();
