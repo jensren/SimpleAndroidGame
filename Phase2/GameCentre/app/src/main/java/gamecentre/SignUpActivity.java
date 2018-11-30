@@ -88,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serializer.loadUserManagerFromFile(USER_FILENAME, SignUpActivity.this);
+                userManager = serializer.loadUserManagerFromFile(USER_FILENAME, SignUpActivity.this);
                 createUser();
             }
         });
