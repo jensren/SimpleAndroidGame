@@ -20,6 +20,17 @@ public abstract class Scoreboard implements Serializable {
      */
     private HashMap<String, Score> userToBestScore = new HashMap<>();
 
+    private static String user;
+    /**
+     * The current score after the player wins a game. If the player did not just win a game,
+     * currentScore will be null.
+     */
+    protected Score currentScore;
+
+    public static String getUser() {
+        return user;
+    }
+
     /**
      * For testing only: get the scoreList
      *
@@ -29,7 +40,9 @@ public abstract class Scoreboard implements Serializable {
         return scoreList;
     }
 
-    protected Score currentScore;
+    public static void setUser(String user) {
+        Scoreboard.user = user;
+    }
 
     public void setScoreList(Score[] scoreList) {
         this.scoreList = scoreList;
@@ -56,10 +69,9 @@ public abstract class Scoreboard implements Serializable {
     /**
      * Gets the user's best score
      *
-     * @param user The user
      * @return A string representation of the user's best score
      */
-    protected String getUserBestScore(String user) {
+    protected String getUserBestScore() {
         if (userToBestScore.get(user) == null) {
             return "Best Score: None";
         } else {
@@ -122,10 +134,9 @@ public abstract class Scoreboard implements Serializable {
      * @param newScore the newest score
      */
     protected void updateUserHighScore(Score newScore) {
-        String username = newScore.getUsername();
-        if ((userToBestScore.get(username) == null) ||
-                (userToBestScore.get(username).compareTo(newScore) > 0)) {
-            userToBestScore.put(username, newScore);
+        if ((userToBestScore.get(user) == null) ||
+                (userToBestScore.get(user).compareTo(newScore) > 0)) {
+            userToBestScore.put(user, newScore);
         }
     }
 

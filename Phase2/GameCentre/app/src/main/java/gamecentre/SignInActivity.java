@@ -61,9 +61,7 @@ public class SignInActivity extends AppCompatActivity {
         } else if (userManager.getPassword(username).equals(password)) {
             setFileNames(username);
             serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
-            SlidingtilesScoreboard.setUser(username);
-            MatchingScoreboard.setUser(username);
-            BattleScoreboard.setUser(username);
+            Scoreboard.setUser(username);
             switchToGameChoiceActivity();
         } else {
             Toast.makeText(this, "Invalid password", Toast.LENGTH_LONG).show();
