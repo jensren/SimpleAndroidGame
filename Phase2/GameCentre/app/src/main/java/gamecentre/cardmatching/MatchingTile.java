@@ -6,6 +6,15 @@ import java.io.Serializable;
 
 import gamecentre.slidingtiles.R;
 
+/*
+ *The images below are taken from
+ * https://openclipart.org/collection/collection-detail/papapishu/631
+ * http://www.myfreephotoshop.com/colorful-cartoon-animals-graphics-collection-3.html
+ * https://www.wpclipart.com/cartoon/animals/penguin/baby_Tux.png.html
+ * https://www.pinterest.ca/pin/129267451778131882/
+ * http://designatprinting.com/cute-cartoon-animals/cute-cartoon-animals-drawing-52-13/
+ * https://www.publicdomainpictures.net/en/view-image.php?image=34596&picture=question-mark
+ */
 /**
  * A Tile in a sliding tiles puzzle.
  */
