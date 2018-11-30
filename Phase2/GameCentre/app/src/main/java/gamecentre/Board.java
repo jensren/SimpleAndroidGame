@@ -29,4 +29,10 @@ public abstract class Board implements Serializable {
             boardUpdateListener.onBoardChanged();
         }
     }
+
+    /**
+     * Returns number of tiles on the board
+     * @return number of tiles
+     */
+    public abstract int numTiles();
 }

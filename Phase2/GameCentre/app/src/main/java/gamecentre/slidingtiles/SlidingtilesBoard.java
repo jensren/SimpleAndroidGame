@@ -84,6 +84,7 @@ public class SlidingtilesBoard extends Board implements Serializable, Iterable<T
      *
      * @return the number of tiles on the board
      */
+    @Override
     public int numTiles() {
         return numCols * numRows;
     }

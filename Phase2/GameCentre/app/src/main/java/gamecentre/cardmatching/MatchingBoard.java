@@ -87,6 +87,15 @@ public class MatchingBoard extends Board implements Serializable {
         unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17,R.drawable.tile_25);
         listenerUpdate();
     }
+    /**
+     * Return the number of tiles on the board.
+     *
+     * @return the number of tiles on the board
+     */
+    @Override
+    public int numTiles() {
+        return numCols * numRows;
+    }
 
     /**
      * Sets a tile in unknown tile to be a given tile.
