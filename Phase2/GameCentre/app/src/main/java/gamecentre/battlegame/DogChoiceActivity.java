@@ -92,7 +92,7 @@ public class DogChoiceActivity extends AppCompatActivity {
     }
 
     /**
-     * Switch to the DogChoiceActivity if second player needs to pick a dog, or switch to
+     * Switch to the CatChoiceActivity if second player needs to pick a dog, or switch to
      * BattleGameActivity if both players have chosen their characters
      */
     private void switchToNextActivity(String character) {

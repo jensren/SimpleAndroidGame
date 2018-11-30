@@ -41,7 +41,7 @@ public class BattleScoreboardActivity extends AppCompatActivity {
         setContentView(R.layout.scoreboard);
         scoreBoardView = findViewById(R.id.s_b);
 
-        serializer.loadScoreboardFromFile(SCORE_FILENAME, this);
+        scoreboard = (BattleScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME, this);
         if (scoreboard == null) {
             scoreboard = new BattleScoreboard();
         }

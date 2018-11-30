@@ -45,7 +45,6 @@ public class CatOrDogActivity extends AppCompatActivity {
         catButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 switchToCatChoiceActivity();
             }
         });
