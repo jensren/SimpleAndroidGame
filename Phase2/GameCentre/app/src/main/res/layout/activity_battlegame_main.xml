@@ -31,82 +31,104 @@
         android:id="@+id/regularmove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="200dp"
         android:text="Regular Move"
-        app:layout_constraintBottom_toTopOf="@+id/undo_button"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/specialmove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="197dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="200dp"
         android:text="Special Move"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/cathp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="HP: "
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/regularmove"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
 
     <TextView
         android:id="@+id/catmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
         android:text="MP:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toTopOf="@+id/regularmove"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cathp" />
+        app:layout_constraintTop_toBottomOf="@+id/cathp"
+        app:layout_constraintVertical_bias="0.875" />
 
     <TextView
         android:id="@+id/doghp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="111dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="8dp"
         android:text="HP:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/specialmove"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021" />
 
     <TextView
         android:id="@+id/dogmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="MP:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/turn"
-        app:layout_constraintStart_toStartOf="@+id/doghp" />
+        app:layout_constraintBottom_toTopOf="@+id/specialmove"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doghp" />
 
     <TextView
         android:id="@+id/turn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Player's Turn"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        app:layout_constraintBottom_toTopOf="@+id/regularmove"
-        app:layout_constraintStart_toEndOf="@+id/regularmove" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.015" />
 
     <Button
         android:id="@+id/undo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="276dp"
+        android:layout_marginEnd="8dp"
         android:text="Undo"
-        app:layout_constraintEnd_toStartOf="@+id/specialmove"
-        app:layout_constraintTop_toBottomOf="@+id/specialmove" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
