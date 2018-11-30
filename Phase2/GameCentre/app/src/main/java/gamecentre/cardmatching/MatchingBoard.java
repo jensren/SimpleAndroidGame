@@ -85,6 +85,12 @@ public class MatchingBoard extends Board implements Serializable {
         listenerUpdate();
     }
 
+    /**
+     * Sets a tile in unknown tile to be a given tile.
+     * @param row row of tile to be set
+     * @param col column of tile to be set
+     * @param tile the tile we want to set as
+     */
     void setTiles(int row, int col, MatchingTile tile){
         unknownTiles[row][col] = tile;
     }

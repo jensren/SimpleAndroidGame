@@ -73,7 +73,7 @@ don't match, they flip back over.
 * We used a Handler to introduce a delay between flipping cards, so the user has time to view what card he flipped.
 * There are two sets of tiles. One of the question mark tiles that the user views on the screen, and another of the actual images to be matched.
 * Tiles are flipped by changing the background of the tile in question, in the question mark tile array.
-* Your win condition is determined by an interger (numTilesMatched) which tracks how many tiles you've correctly matched so far.
+* Your win condition is determined by an integer (tilesMatched) which tracks how many tiles you've correctly matched so far.
 
 ## Current bugs that need fixing:
 

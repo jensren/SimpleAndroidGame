@@ -15,7 +15,7 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
      */
     private MatchingBoard board;
     /**
-     * Keeps track of number of cards flipped. Up to 2.
+     * Keeps track of number of cards flipped.
      */
     private int tilesCurrentlyFlipped = 0;
 
