@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/druid_shibe0" />
@@ -22,27 +23,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/shaman_cat0" />
 
     <Button
         android:id="@+id/regularmove"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:layout_marginBottom="14dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Regular Move"
         app:layout_constraintBottom_toTopOf="@+id/undo_button"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/specialmove"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="197dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginEnd="2dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Special Move"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
-        android:layout_marginEnd="111dp"
+        android:layout_marginEnd="110dp"
         android:text="HP:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +99,7 @@
         android:id="@+id/turn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="8dp"
         android:text="Player's Turn"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         app:layout_constraintBottom_toTopOf="@+id/regularmove"
@@ -102,10 +107,12 @@
 
     <Button
         android:id="@+id/undo_button"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="13dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Undo"
         app:layout_constraintEnd_toStartOf="@+id/specialmove"
         app:layout_constraintTop_toBottomOf="@+id/specialmove" />
