@@ -1,79 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="25dp">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/askchoose_cat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
         android:text="Player 1: Choose your fighter!"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toEndOf="@+id/animatedninja1"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/ninja"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginBottom="57dp"
-        android:text="ninja"
-        app:layout_constraintBottom_toBottomOf="@+id/animatedninja1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/askchoose_cat" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <Button
         android:id="@+id/samurai"
-        android:layout_width="wrap_content"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginBottom="54dp"
-        android:text="samurai"
-        app:layout_constraintBottom_toBottomOf="@+id/animatedsamurai1"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="254dp"
+        android:layout_marginBottom="391dp"
+        android:text="Samurai" />
+
+    <Button
+        android:id="@+id/ninja"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="257dp"
+        android:layout_marginBottom="84dp"
+        android:text="Ninja" />
 
     <Button
         android:id="@+id/shaman"
-        android:layout_width="wrap_content"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginBottom="96dp"
-        android:text="shaman"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/samurai" />
-
-    <ImageView
-        android:id="@+id/animatedninja1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/ninja_cat_animated"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/askchoose_cat" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="251dp"
+        android:layout_marginBottom="237dp"
+        android:text="Shaman" />
 
     <ImageView
         android:id="@+id/animatedsamurai1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/samurai_cat_animated"
-        app:layout_constraintStart_toStartOf="@+id/animatedninja1"
-        app:layout_constraintTop_toBottomOf="@+id/animatedninja1" />
+        android:layout_alignTop="@+id/samurai"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-70dp"
+        android:layout_marginEnd="29dp"
+        android:background="@drawable/samurai_cat_animated" />
 
     <ImageView
         android:id="@+id/animatedshaman1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shaman_cat_animated"
-        app:layout_constraintStart_toStartOf="@+id/animatedsamurai1"
-        app:layout_constraintTop_toBottomOf="@+id/animatedsamurai1" />
+        android:layout_alignBottom="@+id/shaman"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="-53dp"
+        android:background="@drawable/shaman_cat_animated" />
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/animatedninja1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/ninja_cat_animated" />
+
+</RelativeLayout>
