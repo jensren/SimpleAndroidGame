@@ -17,5 +17,6 @@ public class UserManagerTest {
         assertEquals("rew",userManager.getPassword("and"));
         userManager.addUser("a","a");
         assertEquals("a",userManager.getPassword("a"));
+        assertEquals("rew",userManager.getPassword("and"));
     }
 }
