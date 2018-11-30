@@ -63,8 +63,8 @@ public class BattleScoreboardTest {
         populateScoreboard();
         BattleScoreboard.setUser("2");
         BattleScoreboard.setNumMoves(2);
-        BattleScoreboard.setOpponentHpLost(1);
-        BattleScoreboard.setPlayerHpLost(1);
+        BattleScoreboard.setPlayer2HpLost(1);
+        BattleScoreboard.setPlayer1HpLost(1);
         // The player's score will be 20
         scoreboard.update();
         assertEquals("Your Score: 20", scoreboard.getUserCurrentScore());
@@ -108,8 +108,8 @@ public class BattleScoreboardTest {
         populateScoreboard();
         BattleScoreboard.setUser("2");
         BattleScoreboard.setNumMoves(2);
-        BattleScoreboard.setOpponentHpLost(1);
-        BattleScoreboard.setPlayerHpLost(1);
+        BattleScoreboard.setPlayer2HpLost(1);
+        BattleScoreboard.setPlayer1HpLost(1);
         // The player's score will be 20
         scoreboard.update();
         Score[] expectedGameHighScores = createScoreList();
@@ -129,8 +129,8 @@ public class BattleScoreboardTest {
         populateScoreboard();
         BattleScoreboard.setUser("New Player");
         BattleScoreboard.setNumMoves(2);
-        BattleScoreboard.setOpponentHpLost(1);
-        BattleScoreboard.setPlayerHpLost(1);
+        BattleScoreboard.setPlayer2HpLost(1);
+        BattleScoreboard.setPlayer1HpLost(1);
         // The player's score will be 20
         scoreboard.update();
 
@@ -154,14 +154,14 @@ public class BattleScoreboardTest {
         populateScoreboard();
         BattleScoreboard.setUser("Underdog");
         BattleScoreboard.setNumMoves(1);
-        BattleScoreboard.setOpponentHpLost(1);
-        BattleScoreboard.setPlayerHpLost(1);
+        BattleScoreboard.setPlayer2HpLost(1);
+        BattleScoreboard.setPlayer1HpLost(1);
         // The player's score will be 100
         scoreboard.update();
         Score newScore = new Score("Underdog", 1);
         BattleScoreboard.setNumMoves(10);
-        BattleScoreboard.setOpponentHpLost(100);
-        BattleScoreboard.setPlayerHpLost(1);
+        BattleScoreboard.setPlayer2HpLost(100);
+        BattleScoreboard.setPlayer1HpLost(1);
         // The player's score will be 1
         scoreboard.update();
 
