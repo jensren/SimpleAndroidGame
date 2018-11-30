@@ -3,16 +3,28 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 abstract class Character implements Serializable {
-    // character's special attack deflects opponent's move back at them
 
+    /**
+     * The initial HP of the character.
+     */
     private static final int INITIAL_HP = 100;
     private int hp = INITIAL_HP;
+    /**
+     * The initial MP of the character.
+     */
     private int mp = 100;
+    /**
+     * The character's opponent.
+     */
     private Character opponent;
+    /**
+     * The character's battle queue.
+     */
     private BattleQueue battleQueue = new BattleQueue();
 
     /**
      * Return whether this character has enough Health points to perform a special attack.
+     *
      * @return True if this character has enough HP to perform an attack.
      */
     abstract boolean hasAttackMp();
@@ -29,6 +41,7 @@ abstract class Character implements Serializable {
 
     /**
      * Return the Magic points for this character.
+     *
      * @return The amount of magic points.
      */
     int getMp() {
@@ -37,9 +50,11 @@ abstract class Character implements Serializable {
 
     /**
      * Return the number of Health points this character has.
+     *
      * @return The amount of magic points.
      */
-    int getHp() { return hp;
+    int getHp() {
+        return hp;
     }
 
     /**
@@ -53,6 +68,7 @@ abstract class Character implements Serializable {
 
     /**
      * Set the Mp of this character to newMp.
+     *
      * @param newMp the MP
      */
     void setMp(int newMp) {
@@ -61,6 +77,7 @@ abstract class Character implements Serializable {
 
     /**
      * Set the Hp of this character to newHp.
+     *
      * @param newHp the HP
      */
     void setHp(int newHp) {
@@ -117,7 +134,7 @@ abstract class Character implements Serializable {
 
     /**
      * Process the unique special attack for a stealth character.
-     *
+     * <p>
      * Unique effect: reduce this character's magic points and reduce the enemy's Health points by
      * SPECIAL_MOVE_DAMAGE. Add this character into the battle queue twice so it can attack twice in
      * the next round.
@@ -131,7 +148,7 @@ abstract class Character implements Serializable {
 
     /**
      * Process the unique special attack for a fighter character.
-     *
+     * <p>
      * Unique effect: reset the battle queue so that each character appears once and then add
      * itself.
      */
@@ -165,25 +182,30 @@ abstract class Character implements Serializable {
 
     /**
      * Get the next sprite for the character to display.
+     *
      * @return The name of the next sprite.
      */
     abstract String getSprite();
 
     /**
      * Reduce this character's MP by damage if they have enough MP, else 0.
+     *
      * @param amount the amount to reduce the MP by
      */
     private void reduceMp(int amount) {
-        if (mp >= amount) { mp = mp - amount; }
-        else { mp = 0; }
+        if (mp >= amount) {
+            mp = mp - amount;
+        } else {
+            mp = 0;
+        }
     }
 
     /**
      * Reduce the Hp of this character by damage.
+     *
      * @param damage Amount to reduce HP
      */
     private void reduceHp(int damage) {
-
         if (hp >= damage) {
             hp -= damage;
         } else {
@@ -193,6 +215,7 @@ abstract class Character implements Serializable {
 
     /**
      * Return this character's BattleQueue.
+     *
      * @return Character's Battle Queue
      */
     private BattleQueue getBattleQueue() {
@@ -201,6 +224,7 @@ abstract class Character implements Serializable {
 
     /**
      * Set this character's Battle Queue.
+     *
      * @param battleQueue The Battle Queue this character and its Opponent will use.
      */
     void setBattleQueue(BattleQueue battleQueue) {
@@ -209,6 +233,7 @@ abstract class Character implements Serializable {
 
     /**
      * Return this Character's opponent
+     *
      * @return Opponent
      */
     Character getOpponent() {
@@ -217,6 +242,7 @@ abstract class Character implements Serializable {
 
     /**
      * Increase the character's Hp.
+     *
      * @param amountHp Amount by which to increase the Hp.
      */
     private void increaseHp(int amountHp) {
@@ -225,6 +251,7 @@ abstract class Character implements Serializable {
 
     /**
      * Return whether this character is a dog or a cat.
+     *
      * @return dog if this character is a dog or cat if this character is a cat.
      */
     public abstract String getType();

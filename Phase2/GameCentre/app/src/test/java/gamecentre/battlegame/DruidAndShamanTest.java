@@ -31,6 +31,9 @@ public class DruidAndShamanTest {
         player2.setOpponent(player1);
     }
 
+    /**
+     * Test whether the battle queue is updated correctly after a regular move.
+     */
     @Test
     public void testRegularMoveDruidVsShaman() {
         setUpBattleQueue();
@@ -40,6 +43,9 @@ public class DruidAndShamanTest {
         assertEquals(player1, bq.getNextCharacter());
     }
 
+    /**
+     * Test whether the battle queue is updated correctly after a special move.
+     */
     @Test
     public void testSpecialMoveDruidVsShaman() {
         setUpBattleQueue();
@@ -49,6 +55,9 @@ public class DruidAndShamanTest {
         assertEquals(player1, bq.getNextCharacter());
     }
 
+    /**
+     * Test whether the correct sprite name is returned.
+     */
     @Test
     public void testDruidVsShamanGetSprites() {
         setUpBattleQueue();
@@ -58,6 +67,9 @@ public class DruidAndShamanTest {
         assertEquals("shaman_cat", player2Sprite);
     }
 
+    /**
+     * Test whether the correct type is returned.
+     */
     @Test
     public void testDruidVsShamanGetType() {
         setUpBattleQueue();
@@ -67,6 +79,9 @@ public class DruidAndShamanTest {
         assertEquals("cat", player2Type);
     }
 
+    /**
+     * Test whether the characters have MP.
+     */
     @Test
     public void testDruidAndShamanHasMp() {
         setUpBattleQueue();

@@ -17,6 +17,11 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
     SlidingtilesBoard board;
 
     /**
+     * Number of moves made
+     */
+    private int numMoves = 0;
+
+    /**
      * Manage a board that has been pre-populated.
      *
      * @param board the board
@@ -56,20 +61,20 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
     }
 
     /**
-     * Add the numbers of the whole tiles to a new list.
+     * Creates a one dimensional list of tile numbers from a two dimensional list of tiles.
      *
      * @return the list which contains the whole numbers.
      */
     private int[] intList(List<Tile> tiles) {
-        SlidingtilesBoard board2;
-        board2 = new SlidingtilesBoard(tiles);
-        int blankId = board2.numTiles();
+        SlidingtilesBoard temporaryBoard;
+        temporaryBoard = new SlidingtilesBoard(tiles);
+        int blankId = temporaryBoard.numTiles();
         int[] myList = new int[SlidingtilesBoard.numRows * SlidingtilesBoard.numRows - 1];
         int i = 0;
         for (int row = 0; row != SlidingtilesBoard.numRows; row++) {
             for (int col = 0; col != SlidingtilesBoard.numCols; col++) {
-                if (board2.tiles[row][col].getId() != blankId) {
-                    myList[i] = board2.tiles[row][col].getId();
+                if (temporaryBoard.tiles[row][col].getId() != blankId) {
+                    myList[i] = temporaryBoard.tiles[row][col].getId();
                     i++;
                 }
             }
@@ -78,7 +83,7 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
     }
 
     /**
-     * Return the number of inversions in the board.
+     * Return the number of inversions in the board. An inversion being when a number precedes a smaller number.
      *
      * @param intList the list which contains the numbers of the whole tiles.
      * @return the number of inversions in the board.
@@ -98,17 +103,17 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
     }
 
     /**
-     * Return the row of the blank which counting from the bottom.
+     * Return the row of the blank, counting from the bottom.
      *
-     * @param tiles which contains all of the tiles in the board.
-     * @return the row of the blank which counting from the bottom.
+     * @param tiles list which contains all of the tiles in the board.
+     * @return the row of the blank, counting from the bottom.
      */
     private int findBlank(List<Tile> tiles) {
-        SlidingtilesBoard board2 = new SlidingtilesBoard(tiles);
-        int blankId = board2.numTiles();
+        SlidingtilesBoard tempBoard = new SlidingtilesBoard(tiles);
+        int blankId = tempBoard.numTiles();
         for (int row = 0; row != SlidingtilesBoard.numRows; row++) {
             for (int col = 0; col != SlidingtilesBoard.numCols; col++) {
-                if (board2.tiles[row][col].getId() == blankId) {
+                if (tempBoard.tiles[row][col].getId() == blankId) {
                     return 4 - row;
                 }
             }
@@ -119,7 +124,7 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
     /**
      * Return whether the board is solvable.
      *
-     * @param tiles which contains all of the tiles in the board.
+     * @param tiles list which contains all of the tiles in the board.
      * @return whether the board is solvable.
      */
     /*
@@ -240,10 +245,24 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
     }
 
     /**
-     * @return the number of rows of the current board
+     * @return the number of rows of the current board (ie. the board size)
      */
     int getBoardSize() {
         return SlidingtilesBoard.numRows;
+    }
+
+    /**
+     * Increment number of moves by 1
+     */
+    public void updateMoves() {
+        numMoves += 1;
+    }
+
+    /**
+     * @return the number of moves
+     */
+    public int getNumMoves() {
+        return numMoves;
     }
 
 }

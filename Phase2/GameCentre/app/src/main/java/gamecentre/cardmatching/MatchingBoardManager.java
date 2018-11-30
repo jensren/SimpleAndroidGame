@@ -15,7 +15,7 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
      */
     private MatchingBoard board;
     /**
-     * Keeps track of number of cards flipped. Up to 2.
+     * Keeps track of number of cards flipped.
      */
     private int tilesCurrentlyFlipped = 0;
 
@@ -27,6 +27,10 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
      * Keeps track of the row and col indices of the two flipped tiles. Initialized as -1.
      */
     private int[] flippedTiles = new int[]{-1, -1, -1, -1};
+    /**
+     * Number of moves made
+     */
+    private int numMoves = 0;
 
     /**
      * Manage a board that has been pre-populated.
@@ -138,5 +142,18 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
             board.flipBack(flippedTiles[0], flippedTiles[1]);
             board.flipBack(flippedTiles[2], flippedTiles[3]);
         }
+    }
+    /**
+     * Increments the number of moves by 1
+     */
+    public void updateMoves() {
+        numMoves += 1;
+    }
+
+    /**
+     * @return the number of moves
+     */
+    public int getNumMoves() {
+        return numMoves;
     }
 }

@@ -2,17 +2,37 @@ package gamecentre.battlegame;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * The battle queue.
+ */
 public class BattleQueue implements Serializable {
 
+    /**
+     * Player 1
+     */
     private Character player1;
+    /**
+     * Player 2
+     */
     private Character player2;
+    /**
+     * The number of moves made
+     */
     private int numMoves;
-
-    private ArrayList<Character> queue = new ArrayList<>();
-    private ArrayList<BattleQueue> undoStack = new ArrayList<>();
-    private ArrayList<int[]> playerAttributesStack = new ArrayList<>();
-
+    /**
+     * The queue for the game
+     */
+    private List<Character> queue = new ArrayList<>();
+    /**
+     * A stack of moves
+     */
+    private List<BattleQueue> undoStack = new ArrayList<>();
+    /**
+     * A stack of player attributes after each turn
+     */
+    private List<int[]> playerAttributesStack = new ArrayList<>();
 
     /**
      * Add a character to the end of the battle queue.
@@ -60,7 +80,6 @@ public class BattleQueue implements Serializable {
         return player2;
     }
 
-
     /**
      * Remove and return the next character from the front of the battle queue.
      *
@@ -79,8 +98,7 @@ public class BattleQueue implements Serializable {
     Character getNextCharacter() {
         if (queue.size() > 0 ) {
             return queue.get(0);
-        }
-        else return player1;
+        } else return player1;
     }
 
     /**
@@ -92,8 +110,8 @@ public class BattleQueue implements Serializable {
         int initialHP = Character.getInitialHp();
         int player1HP = player1.getHp();
         int player2HP = player2.getHp();
-        BattleScoreboard.setPlayerHpLost(initialHP - player1HP);
-        BattleScoreboard.setOpponentHpLost(initialHP - player2HP);
+        BattleScoreboard.setPlayer1HpLost(initialHP - player1HP);
+        BattleScoreboard.setPlayer2HpLost(initialHP - player2HP);
         if (player1HP > 0 && player2HP == 0) {
             BattleScoreboard.setNumMoves(numMoves);
             return player1;
@@ -146,7 +164,6 @@ public class BattleQueue implements Serializable {
         attributeArray[2] = ch.getOpponent().getHp();
         attributeArray[3] = ch.getOpponent().getMp();
         playerAttributesStack.add(attributeArray);
-
     }
 
     /**

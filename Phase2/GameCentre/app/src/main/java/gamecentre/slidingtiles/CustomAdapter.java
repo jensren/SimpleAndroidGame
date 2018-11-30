@@ -17,7 +17,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 /**
- * This class overrides  Base Adapter class used to aid setign up button size and positions
+ * This class overrides  Base Adapter class used to aid setting up button size and positions
  * in Grid view.
  */
 
@@ -26,7 +26,7 @@ public class CustomAdapter extends BaseAdapter {
     private int mColumnWidth, mColumnHeight;
 
     /**
-     * Customize the dimentions of the buttons with width columnWidth and height columnHeight
+     * Customize the dimensions of the buttons with width columnWidth and height columnHeight
      *
      * @param buttons      An Array of Buttons for this game
      * @param columnWidth  Width of the column

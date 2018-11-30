@@ -3,8 +3,7 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * Class representing the Samurai Cat character, a fighter character. Samurai Cat's special move
- * resets the battle queue that there is only one copy of each character and then its adds itself.
+ * Class representing the Samurai Cat character, a fighter character.
  */
 public class SamuraiCat extends Character implements Serializable {
 
@@ -23,6 +22,10 @@ public class SamuraiCat extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
+    /**
+     * Plays Samurai Cat's special move. Resets the battle queue that there is only one copy of each
+     * character and then its adds itself.
+     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);

@@ -16,7 +16,7 @@ import gamecentre.slidingtiles.R;
  * https://www.publicdomainpictures.net/en/view-image.php?image=34596&picture=question-mark
  */
 /**
- * A Tile in a sliding tiles puzzle.
+ * A tile in the matching game.
  */
 public class MatchingTile implements Comparable<MatchingTile>, Serializable {
 

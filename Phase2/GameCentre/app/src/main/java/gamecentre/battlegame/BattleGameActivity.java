@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import gamecentre.slidingtiles.R;
 
+/*
+ * The image for the background was taken from https://www.pinterest.ca/pin/374784000221729233/
+ */
+
 /**
  * The game activity.
  */
@@ -47,7 +51,7 @@ public class BattleGameActivity extends AppCompatActivity {
      * The ImageView for the dog's image
      */
     private ImageView dogImage;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

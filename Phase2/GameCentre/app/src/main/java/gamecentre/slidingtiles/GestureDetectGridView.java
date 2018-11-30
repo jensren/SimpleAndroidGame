@@ -24,29 +24,67 @@ import gamecentre.MovementController;
  */
 
 public class GestureDetectGridView extends GridView {
+    /**
+     * The minimum swipe distance
+     */
     public static final int SWIPE_MIN_DISTANCE = 100;
+    /**
+     * The gesture detector
+     */
     private GestureDetector gDetector;
+    /**
+     * The movement controller
+     */
     public SlidingtilesMovementController mController;
+    /**
+     * Whether fling is confirmed
+     */
     private boolean mFlingConfirmed = false;
+    /**
+     * The x coordinate of the touch
+     */
     private float mTouchX;
+    /**
+     * The y coordinate of the touch
+     */
     private float mTouchY;
     SlidingtilesBoardManager boardManager;
 
+    /**
+     * Constructor for GestureDetectGridView
+     *
+     * @param context the context
+     */
     public GestureDetectGridView(Context context) {
         super(context);
         init(context);
     }
 
+    /**
+     * Constructor for GestureDetectGridView
+     * @param context the context
+     * @param attrs the attributes set
+     */
     public GestureDetectGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
+    /**
+     * Constructor for GestureDetectGridView
+     * @param context the context
+     * @param attrs the attributes set
+     * @param defStyleAttr the style attribute
+     */
     public GestureDetectGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
+    /**
+     * Initialize the movement controller and the gesture detector
+     * @param context the context
+     */
     private void init(final Context context) {
         mController = new SlidingtilesMovementController();
         gDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
