@@ -33,10 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Regular Move"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/undo_button"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/specialmove"
@@ -45,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="228dp"
         android:layout_marginTop="200dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Special Move"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:backgroundTint="@android:color/background_dark"
         android:text="HP: "
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toTopOf="@+id/regularmove"
@@ -81,7 +83,6 @@
         android:id="@+id/doghp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="110dp"
         android:layout_marginStart="228dp"
         android:layout_marginTop="52dp"
         android:layout_marginBottom="8dp"
@@ -114,14 +115,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Player's Turn"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/undo_button"
@@ -131,6 +131,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="276dp"
         android:layout_marginEnd="8dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Undo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
