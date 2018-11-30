@@ -89,8 +89,8 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
      * Activate the scoreboard button.
      */
     private void addScoreboardButtonListener() {
-        Button loadButton = findViewById(R.id.ScoreboardButton);
-        loadButton.setOnClickListener(new View.OnClickListener() {
+        Button scoreboardButton = findViewById(R.id.ScoreboardButton);
+        scoreboardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchToScoreboard();
@@ -175,7 +175,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        serializer.loadBoardManagerFromFile(tempSaveFileName, this);
+        boardManager = serializer.loadBoardManagerFromFile(tempSaveFileName, this);
     }
 
     @Override
