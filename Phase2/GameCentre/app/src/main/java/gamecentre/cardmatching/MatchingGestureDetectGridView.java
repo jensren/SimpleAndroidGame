@@ -7,29 +7,70 @@ import android.view.MotionEvent;
 import android.widget.GridView;
 
 public class MatchingGestureDetectGridView extends GridView {
+    /**
+     * The minimum swipe distance
+     */
     public static final int SWIPE_MIN_DISTANCE = 100;
+    /**
+     * The gesture detector
+     */
     private GestureDetector gDetector;
+    /**
+     * The movement controller
+     */
     public MatchingMovementController mController;
+    /**
+     * Whether fling is confirmed.
+     */
     private boolean mFlingConfirmed = false;
+    /**
+     * The x coordinate of the touch.
+     */
     private float mTouchX;
+    /**
+     * The y coordinate of the touch.
+     */
     private float mTouchY;
+    /**
+     * The matching board manager.
+     */
     MatchingBoardManager boardManager;
 
+    /**
+     * Constructor for MatchingGestureDetectGridView
+     *
+     * @param context the context
+     */
     public MatchingGestureDetectGridView(Context context) {
         super(context);
         init(context);
     }
 
+    /**
+     * Constructor for MatchingGestureDetectGridView
+     * @param context the context
+     * @param attrs the attribute set
+     */
     public MatchingGestureDetectGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
+    /**
+     * Constructor for MatchingGestureDetectGridView
+     * @param context the context
+     * @param attrs the attribute set
+     * @param defStyleAttr the style attribute
+     */
     public MatchingGestureDetectGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
+    /**
+     * Initialize mController and gDetector
+     * @param context the context
+     */
     private void init(final Context context) {
         mController = new MatchingMovementController();
         gDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
