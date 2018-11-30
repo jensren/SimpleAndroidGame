@@ -17,32 +17,38 @@
 
     <Button
         android:id="@+id/sir"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="254dp"
         android:layout_marginBottom="391dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:text="Sir Shibe" />
 
     <Button
         android:id="@+id/detective"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="257dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginEnd="255dp"
+        android:layout_marginBottom="77dp"
+        android:backgroundTint="@android:color/holo_orange_light"
         android:text="Detective" />
 
     <Button
         android:id="@+id/druid"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="251dp"
+        android:layout_marginEnd="254dp"
         android:layout_marginBottom="237dp"
+        android:backgroundTint="@android:color/holo_green_light"
         android:text="Druid" />
 
     <ImageView

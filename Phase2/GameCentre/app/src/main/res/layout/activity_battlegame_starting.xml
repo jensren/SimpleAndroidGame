@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundbattle">
 
     <TextView
         android:id="@+id/textView10"
@@ -12,26 +12,30 @@
         android:gravity="center"
         android:layout_marginTop="57dp"
         android:text="Cats vs. Dogs"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
 
     <Button
         android:id="@+id/battlestart"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="232dp"
-        android:layout_marginBottom="151dp"
+        android:layout_marginEnd="229dp"
+        android:layout_marginBottom="367dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Start" />
 
     <Button
         android:id="@+id/ScoreboardButton"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="124dp"
         android:layout_height="59dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="143dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginBottom="247dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Scoreboard" />
 
     <ImageView
@@ -40,9 +44,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="159dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="388dp"
         android:background="@drawable/druid_shibe_animated" />
+
+    <Button
+        android:id="@+id/instruction"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="151dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="-76dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:text="Instructions" />
 
 </RelativeLayout>
 
