@@ -143,6 +143,7 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
             board.flipBack(flippedTiles[2], flippedTiles[3]);
         }
     }
+
     /**
      * count the number of total moves made
      */
