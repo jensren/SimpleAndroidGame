@@ -44,12 +44,56 @@ public class MatchingBoardAndTileTest {
      * Shuffle a few tiles.
      */
     private void changeToBlank() {
+        MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
         for (int row = 0; row != MatchingBoard.numRows; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
-                boardManager.getBoard().unknownTiles[row][col] = new MatchingTile(17, R.drawable.tile_25);
+                boardManager.getBoard().setTiles(row, col, tile);
             }
         }
         boardManager.tilesMatched = 16;
+    }
+
+    private void flipFirstTile() {
+        boardManager.touchMove(0);
+    }
+
+    private void flipLastTile() {
+        boardManager.touchMove(15);
+    }
+
+    private void FlipBlankLastTwo() {
+        MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
+        for (int row = 0; row != MatchingBoard.numRows; row++) {
+            for (int col = 0; col != MatchingBoard.numCols - 1; col++) {
+                boardManager.getBoard().setTiles(row, col, tile);
+            }
+        }
+        boardManager.getBoard().setTiles(0, 3, tile);
+        boardManager.getBoard().setTiles(2,3, tile);
+        boardManager.tilesMatched = 14;
+        boardManager.touchMove(7);
+        boardManager.touchMove(15);
+    }
+
+    private void FlipBlackLastTwo() {
+        MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
+        for (int row = 0; row != MatchingBoard.numRows - 1; row++) {
+            for (int col = 0; col != MatchingBoard.numCols; col++) {
+                boardManager.getBoard().setTiles(row, col, tile);
+            }
+        }
+        boardManager.getBoard().setTiles(3, 0, tile);
+        boardManager.getBoard().setTiles(3, 1, tile);
+        boardManager.tilesMatched = 14;
+        boardManager.touchMove(14);
+    }
+
+    private void updateMove() {
+        boardManager.updateMoves();
+    }
+
+    private void touchMoveFirstTile() {
+        boardManager.touchMove(0);
     }
 
     /**
@@ -61,14 +105,6 @@ public class MatchingBoardAndTileTest {
         assertEquals(false, boardManager.isWin());
         changeToBlank();
         assertEquals(true, boardManager.isWin());
-    }
-
-    public void flipFirstTile() {
-        boardManager.touchMove(0);
-    }
-
-    public void flipLastTile() {
-        boardManager.touchMove(15);
     }
 
     @Test
@@ -101,32 +137,6 @@ public class MatchingBoardAndTileTest {
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 3).getId());
         flipLastTile();
         assertEquals(8, boardManager.getBoard().matchingGetTile(3, 3).getId());
-    }
-
-    public void FlipBlankLastTwo() {
-        for (int row = 0; row != MatchingBoard.numRows; row++) {
-            for (int col = 0; col != MatchingBoard.numCols - 1; col++) {
-                boardManager.getBoard().unknownTiles[row][col] = new MatchingTile(17, R.drawable.tile_25);
-            }
-        }
-        boardManager.getBoard().unknownTiles[0][3] = new MatchingTile(17, R.drawable.tile_25);
-        boardManager.getBoard().unknownTiles[2][3] = new MatchingTile(17, R.drawable.tile_25);
-        boardManager.tilesMatched = 14;
-        boardManager.touchMove(7);
-        boardManager.touchMove(15);
-    }
-
-    public void FlipBlackLastTwo() {
-        for (int row = 0; row != MatchingBoard.numRows - 1; row++) {
-            for (int col = 0; col != MatchingBoard.numCols; col++) {
-                boardManager.getBoard().unknownTiles[row][col] = new MatchingTile(17, R.drawable.tile_25);
-            }
-        }
-        boardManager.getBoard().unknownTiles[3][0] = new MatchingTile(17, R.drawable.tile_25);
-        boardManager.getBoard().unknownTiles[3][1] = new MatchingTile(17, R.drawable.tile_25);
-        boardManager.tilesMatched = 14;
-        boardManager.touchMove(14);
-
     }
 
     @Test
@@ -164,10 +174,6 @@ public class MatchingBoardAndTileTest {
         assertEquals(17, boardManager.getBoard().matchingGetTile(3, 3).getId());
     }
 
-    public void updateMove() {
-        boardManager.updateMoves();
-    }
-
     @Test
     public void testMatchingUpdateMove() {
         setUpCorrect();
@@ -176,10 +182,6 @@ public class MatchingBoardAndTileTest {
         assertEquals(1, boardManager.getNumMoves());
         updateMove();
         assertEquals(2, boardManager.getNumMoves());
-    }
-
-    public void touchMoveFirstTile() {
-        boardManager.touchMove(0);
     }
 
     @Test

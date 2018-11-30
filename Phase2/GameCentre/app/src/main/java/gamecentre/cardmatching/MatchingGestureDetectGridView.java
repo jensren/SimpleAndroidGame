@@ -1,11 +1,4 @@
-package gamecentre.slidingtiles;
-
-/*
-Adapted from:
-https://github.com/DaveNOTDavid/sample-puzzle/blob/master/app/src/main/java/com/davenotdavid/samplepuzzle/GestureDetectGridView.java
-
-This extension of GridView contains built in logic for handling swipes between buttons
- */
+package gamecentre.cardmatching;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -13,47 +6,37 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
-import gamecentre.BoardManager;
-import gamecentre.MovementController;
-
-/**
- * An extension of GridView containing built in logic for handling swipes between buttons
- * Adapted from:
- * https://github.com/DaveNOTDavid/sample-puzzle/blob/master/app/src/main/java/com/davenotdavid/
- * samplepuzzle/GestureDetectGridView.java
- */
-
-public class GestureDetectGridView extends GridView {
+public class MatchingGestureDetectGridView extends GridView {
     public static final int SWIPE_MIN_DISTANCE = 100;
     private GestureDetector gDetector;
-    public SlidingtilesMovementController mController;
+    public MatchingMovementController mController;
     private boolean mFlingConfirmed = false;
     private float mTouchX;
     private float mTouchY;
-    SlidingtilesBoardManager boardManager;
+    MatchingBoardManager boardManager;
 
-    public GestureDetectGridView(Context context) {
+    public MatchingGestureDetectGridView(Context context) {
         super(context);
         init(context);
     }
 
-    public GestureDetectGridView(Context context, AttributeSet attrs) {
+    public MatchingGestureDetectGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public GestureDetectGridView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MatchingGestureDetectGridView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
     private void init(final Context context) {
-        mController = new SlidingtilesMovementController();
+        mController = new MatchingMovementController();
         gDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent event) {
-                int position = GestureDetectGridView.this.pointToPosition
+                int position = MatchingGestureDetectGridView.this.pointToPosition
                         (Math.round(event.getX()), Math.round(event.getY()));
 
                 mController.processTapMovement(context, position);
@@ -105,8 +88,9 @@ public class GestureDetectGridView extends GridView {
      *
      * @param boardManager the boardManager
      */
-    public void setBoardManager(SlidingtilesBoardManager boardManager) {
+    public void setBoardManager(MatchingBoardManager boardManager) {
         this.boardManager = boardManager;
         mController.setBoardManager(boardManager);
     }
 }
+
