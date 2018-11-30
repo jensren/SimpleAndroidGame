@@ -147,11 +147,11 @@ public class BattleGameActivity extends AppCompatActivity {
                     final String sprite1 = character.getSprite() + "5";
                     final String sprite2 = character.getSprite() + "0";
                     displayAttackImage(character, sprite1, sprite2);
-                    Toast.makeText(getApplicationContext(), "SPECIAL", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No more MP", Toast.LENGTH_SHORT).show();
                 }
                 updateCharacterPointsView();
                 if (battleQueueManager.getBattleQueue().getWinner() != null) {
-                    Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
                     switchToScoreBoardActivity();
                 } else {
                     Character nextCharacter = battleQueueManager.getBattleQueue().getNextCharacter();
@@ -203,11 +203,9 @@ public class BattleGameActivity extends AppCompatActivity {
 
                 displayAttackImage(character, sprite1, sprite2);
                 character.regularMove();
-                Toast.makeText(getApplicationContext(), "Regular", Toast.LENGTH_SHORT).show();
                 updateCharacterPointsView();
 
                 if (battleQueueManager.getBattleQueue().getWinner() != null) {
-                    Toast.makeText(getApplicationContext(), "Game over!", Toast.LENGTH_SHORT).show();
                     switchToScoreBoardActivity();
                 } else {
                     Character nextCharacter = battleQueueManager.getBattleQueue().getNextCharacter();
@@ -242,8 +240,6 @@ public class BattleGameActivity extends AppCompatActivity {
                     battleQueueManager.getBattleQueue().undo();
                     Character nextCharacter = battleQueueManager.getBattleQueue().getNextCharacter();
                     displayTurn(nextCharacter);
-
-                    Toast.makeText(getApplicationContext(), "Undo", Toast.LENGTH_SHORT).show();
                     updateCharacterPointsView();
                 }
             }
