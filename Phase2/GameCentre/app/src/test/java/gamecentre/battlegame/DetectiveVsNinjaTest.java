@@ -31,24 +31,41 @@ public class DetectiveVsNinjaTest {
         player2.setOpponent(player1);
     }
 
+    /**
+     * Test regularMove of DetectiveShibe and NinjaCat to make sure the opponents take the
+     * appropriate damage and the BattleQueue is in the correct order after each move.
+     */
     @Test
     public void testRegularMoveDetectiveVsNinja() {
         setUpBattleQueue();
         bq.getNextCharacter().regularMove();
         assertEquals(player2, bq.getNextCharacter());
+        assertEquals(93, bq.getNextCharacter().getHp());
         bq.getNextCharacter().regularMove();
         assertEquals(player1, bq.getNextCharacter());
+        assertEquals(95, bq.getNextCharacter().getHp());
     }
 
+    /**
+     * Test specialMove of DetectiveShibe and NinjaCat to make sure the opponents take the
+     * appropriate damage and the BattleQueue is in the correct order after each move
+     */
     @Test
     public void testSpecialMoveDetectiveVsNinja() {
         setUpBattleQueue();
         bq.getNextCharacter().specialMove();
+        assertEquals(88, bq.getNextCharacter().getHp());
+        assertEquals(85, bq.getNextCharacter().getOpponent().getMp());
         assertEquals(player2, bq.getNextCharacter());
         bq.getNextCharacter().specialMove();
+        assertEquals(91, bq.getNextCharacter().getMp());
+        assertEquals(85, bq.getNextCharacter().getOpponent().getMp());
         assertEquals(player2, bq.getNextCharacter());
     }
 
+    /**
+     * Test getSprite method to make sure it returns teh corresponding character's sprite name.
+     */
     @Test
     public void testDetectiveVsNinjaGetSprites() {
         setUpBattleQueue();
@@ -58,6 +75,9 @@ public class DetectiveVsNinjaTest {
         assertEquals("ninja_cat", player2Sprite);
     }
 
+    /**
+     * Test getType method to make sure all the Shibe's return dog and all the cats return cat.
+     */
     @Test
     public void testDetectiveVsNinjaGetType() {
         setUpBattleQueue();
@@ -67,6 +87,9 @@ public class DetectiveVsNinjaTest {
         assertEquals("cat", player2Type);
     }
 
+    /**
+     * Test HasMp method on DetectiveShibe and NinjaCat after the BattleQueue has characters in it.
+     */
     @Test
     public void testDetectiveVsNinjaHasMp() {
         setUpBattleQueue();
@@ -74,6 +97,9 @@ public class DetectiveVsNinjaTest {
         assertTrue(bq.getNextCharacter().getOpponent().hasAttackMp());
     }
 
+    /**
+     * Test setHp and setMp for DetectiveShibe and NinjaCat.
+     */
     @Test
     public void testReducedHpAndMp() {
         setUpBattleQueue();
