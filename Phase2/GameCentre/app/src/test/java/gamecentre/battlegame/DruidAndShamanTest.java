@@ -38,20 +38,26 @@ public class DruidAndShamanTest {
     public void testRegularMoveDruidVsShaman() {
         setUpBattleQueue();
         bq.getNextCharacter().regularMove();
+        assertEquals(92, bq.getNextCharacter().getHp());
         assertEquals(player2, bq.getNextCharacter());
         bq.getNextCharacter().regularMove();
+        assertEquals(93, bq.getNextCharacter().getHp());
         assertEquals(player1, bq.getNextCharacter());
     }
 
     /**
-     * Test whether the battle queue is updated correctly after a special move.
+     * Test whether the battle queue and character HP/MP is updated correctly after a special move.
      */
     @Test
     public void testSpecialMoveDruidVsShaman() {
         setUpBattleQueue();
         bq.getNextCharacter().specialMove();
+        assertEquals(87, bq.getNextCharacter().getHp());
+        assertEquals(90, bq.getNextCharacter().getOpponent().getMp());
         assertEquals(player2, bq.getNextCharacter());
         bq.getNextCharacter().specialMove();
+        assertEquals(87, bq.getNextCharacter().getHp());
+        assertEquals(78, bq.getNextCharacter().getOpponent().getMp());
         assertEquals(player1, bq.getNextCharacter());
     }
 

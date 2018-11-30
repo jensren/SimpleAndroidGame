@@ -15,7 +15,7 @@ public class SirVsSamuraiTest {
      * Create a new battle queue with SirShibe and its opponents to test attack functions.
      */
     @Before
-    private void setUpBattleQueue() {
+    public void setUpBattleQueue() {
         setUpCharacter();
         player1.setBattleQueue(bq);
         player2.setBattleQueue(bq);
@@ -27,32 +27,48 @@ public class SirVsSamuraiTest {
      * Set player1 and player2 as SirShibe and SamuraiCat to be used in the Battle Queue.
      */
     @Before
-    private void setUpCharacter() {
+    public void setUpCharacter() {
         player1 = new SirShibe();
         player2 = new SamuraiCat();
         player1.setOpponent(player2);
         player2.setOpponent(player1);
     }
 
+    /**
+     * Test whether the BattleQueue and character Hp/Mp are updated correctly after performing a
+     * regular move.
+     */
     @Test
     public void testRegularMoveSirVsSamurai() {
         setUpBattleQueue();
         bq.getNextCharacter().regularMove();
-        assertEquals(player2, bq.getNextCharacter());
+        assertEquals(90, bq.getNextCharacter().getHp());
+        assertEquals(bq.getPlayer2(), bq.getNextCharacter());
         bq.getNextCharacter().regularMove();
+        assertEquals(100, bq.getNextCharacter().getHp());
         assertEquals(player1, bq.getNextCharacter());
     }
 
+    /**
+     * Test specialMove on SirShibe and SamuraiCat to make sure the BattleQueue and character
+     * attributes are updated properly.
+     */
     @Test
     public void testSpecialMoveSirVsSamurai() {
         setUpBattleQueue();
         bq.getNextCharacter().specialMove();
-        assertEquals(player2, bq.getNextCharacter());
+        assertEquals(87, bq.getNextCharacter().getHp());
+        assertEquals(88, bq.getNextCharacter().getOpponent().getMp());
+        assertEquals(bq.getPlayer2(), bq.getNextCharacter());
         bq.getNextCharacter().specialMove();
-        //assertEquals(player2, bq.getNextCharacter());
-        assertEquals(player1, bq.getNextCharacter());
+        assertEquals(85, bq.getNextCharacter().getHp());
+        assertEquals(87, bq.getNextCharacter().getOpponent().getHp());
+        assertEquals(bq.getPlayer1(), bq.getNextCharacter());
     }
 
+    /**
+     * Test whether the correct sprite is returned.
+     */
     @Test
     public void testSirVsSamuraiGetSprites() {
         setUpBattleQueue();
@@ -62,6 +78,9 @@ public class SirVsSamuraiTest {
         assertEquals("samurai_cat", player2Sprite);
     }
 
+    /**
+     * Test whether the correct type is returned.
+     */
     @Test
     public void testSirVsSamuraiGetType() {
         setUpBattleQueue();
@@ -71,6 +90,9 @@ public class SirVsSamuraiTest {
         assertEquals("cat", player2Type);
     }
 
+    /**
+     * Test whether the the characters have Mp.
+     */
     @Test
     public void testSirVsSamuraiHasMp() {
         setUpBattleQueue();

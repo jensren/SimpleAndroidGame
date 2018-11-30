@@ -67,7 +67,7 @@ public class DetectiveVsNinjaTest {
     }
 
     /**
-     * Test getSprite method to make sure it returns teh corresponding character's sprite name.
+     * Test whether the correct sprite name is returned.
      */
     @Test
     public void testDetectiveVsNinjaGetSprites() {
@@ -79,7 +79,7 @@ public class DetectiveVsNinjaTest {
     }
 
     /**
-     * Test getType method to make sure all the Shibe's return dog and all the cats return cat.
+     * Test whether the correct type is returned.
      */
     @Test
     public void testDetectiveVsNinjaGetType() {
