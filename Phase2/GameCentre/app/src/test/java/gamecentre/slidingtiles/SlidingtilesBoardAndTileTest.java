@@ -95,6 +95,9 @@ public class SlidingtilesBoardAndTileTest {
         assertEquals(false, boardManager.isValidTap(10));
     }
 
+    /**
+     * Test whether the correct tile is moved after a touch.
+     */
     @Test
     public void testTouchMove() {
         setUpCorrect();
@@ -103,8 +106,6 @@ public class SlidingtilesBoardAndTileTest {
         assertEquals(16, boardManager.getBoard().getTile(3,2).getId());
         assertEquals(15, boardManager.getBoard().getTile(3,3).getId());
     }
-
-
 
     /**
      * Test if number moves updates properly.

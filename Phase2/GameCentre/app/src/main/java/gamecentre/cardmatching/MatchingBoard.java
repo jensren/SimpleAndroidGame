@@ -22,7 +22,7 @@ public class MatchingBoard extends Board implements Serializable {
     /**
      * The question mark cards.
      */
-    public MatchingTile[][] unknownTiles = new MatchingTile[numRows][numCols];
+    private MatchingTile[][] unknownTiles = new MatchingTile[numRows][numCols];
 
     /**
      * The actual image cards.
@@ -83,6 +83,16 @@ public class MatchingBoard extends Board implements Serializable {
         unknownTiles[flippedTiles[0]][flippedTiles[1]] = new MatchingTile(17,R.drawable.tile_25);
         unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17,R.drawable.tile_25);
         listenerUpdate();
+    }
+
+    /**
+     * Sets a tile in unknown tile to be a given tile.
+     * @param row row of tile to be set
+     * @param col column of tile to be set
+     * @param tile the tile we want to set as
+     */
+    void setTiles(int row, int col, MatchingTile tile){
+        unknownTiles[row][col] = tile;
     }
 
     @Override

@@ -4,8 +4,7 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * Representation of the Shaman Cat character, a healer character. Shaman Cat's special move
- * increases this character's Health Points by the amount of damage its opponent takes.
+ * Representation of the Shaman Cat character, a healer character.
  */
 public class ShamanCat extends Character implements Serializable {
 
@@ -23,6 +22,10 @@ public class ShamanCat extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
+    /**
+     * Plays Shaman Cat's special move. Increases this character's Health Points by the amount of
+     * damage its opponent takes.
+     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);

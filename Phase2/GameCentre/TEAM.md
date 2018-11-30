@@ -31,8 +31,9 @@
 ## Responsibilities:
 * Art for the battle game sprites, scoreboard: Jenney
 * Sliding Tiles only creates solvable boards: Jiaheng
-* Activities and animations for battle game, BattleQueueManager: Cassidy
+* Activities and animations for battle game, BattleQueueManager, serializer: Cassidy
 * BattleQueue, attack mechanisms for battle game, undo: Ashas
+* Replacing observers with listeners, serializer, extracting superclasses for board style games: Yu Jie
 
 
 ## Battle Game Rules:
@@ -68,13 +69,16 @@ don't match, they flip back over.
 * Undo: implemented using a stack by saving each character's HP, MP and BattleQueue before a move is performed so the current game state can ge reset to what it was like before the move was performed.
 
 ## Card Matching Game design decision:
-* TBD
+* Similar design to Sliding Tiles due to also being a board like game.
+* We extracted some superclasses from Sliding Tiles classes that this game, and other potential future board games can extend.
+* We used a Handler to introduce a delay between flipping cards, so the user has time to view what card he flipped.
+* There are two sets of tiles. One of the question mark tiles that the user views on the screen, and another of the actual images to be matched.
+* Tiles are flipped by changing the background of the tile in question, in the question mark tile array.
+* Your win condition is determined by an integer (tilesMatched) which tracks how many tiles you've correctly matched so far.
 
 ## Current bugs that need fixing:
 
 ## To-do list:
-* Finish extracting superclasses
-* Is board abstract class necessary?
 * Finish typing readme and team.md
 
 

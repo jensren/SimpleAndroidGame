@@ -16,7 +16,7 @@ class SlidingtilesMovementController extends MovementController {
     private SlidingtilesBoardManager boardManager = null;
 
     /**
-     * The MovementController for this activity.
+     * Creates a new sliding tiles movement controller.
      */
     SlidingtilesMovementController() {
     }

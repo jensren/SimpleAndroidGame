@@ -44,7 +44,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         matchingBoardManager = new MatchingBoardManager();
-        saveMatchingBoardManagerToFile(matchingTempSaveFileName);
+        serializer.saveMatchingBoardManagerToFile(matchingTempSaveFileName,matchingBoardManager,this);
         MatchingScoreboard.reset();
 
         setContentView(R.layout.activity_cardmatching_starting);
@@ -76,9 +76,9 @@ public class MatchingStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadMatchingBoardManagerFromFile(matchingSaveFileName);
-                saveMatchingBoardManagerToFile(matchingTempSaveFileName);
-                saveMatchingBoardManagerToFile(matchingAutoSaveFileName);
+                matchingBoardManager = serializer.loadMatchingBoardManagerFromFile(matchingAutoSaveFileName, MatchingStartingActivity.this);
+                serializer.saveMatchingBoardManagerToFile(matchingAutoSaveFileName, matchingBoardManager, MatchingStartingActivity.this);
+                serializer.saveMatchingBoardManagerToFile(matchingTempSaveFileName,matchingBoardManager,MatchingStartingActivity.this);
                 makeToastLoadedText();
                 switchToGame();
             }
@@ -121,8 +121,8 @@ public class MatchingStartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveMatchingBoardManagerToFile(matchingSaveFileName);
-                saveMatchingBoardManagerToFile(matchingTempSaveFileName);
+                serializer.saveMatchingBoardManagerToFile(matchingSaveFileName, matchingBoardManager, MatchingStartingActivity.this);
+                serializer.saveMatchingBoardManagerToFile(matchingTempSaveFileName,matchingBoardManager,MatchingStartingActivity.this);
                 makeToastSavedText();
             }
         });
@@ -140,63 +140,14 @@ public class MatchingStartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, MatchingGameActivity.class);
-        saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName);
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName, matchingBoardManager, this);
         startActivity(tmp);
     }
 
-    /**
-     * Read the temporary board from disk.
-     */
     @Override
     protected void onResume() {
         super.onResume();
-        loadMatchingBoardManagerFromFile(matchingTempSaveFileName);
-    }
-
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadMatchingBoardManagerFromFile(String fileName) {
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            InputStream autoInputStream = this.openFileInput(matchingAutoSaveFileName);
-            if (inputStream != null && inputStream == autoInputStream) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                matchingBoardManager = (MatchingBoardManager) input.readObject();
-                inputStream.close();
-            } else {
-                if (autoInputStream != null) {
-                    ObjectInputStream input = new ObjectInputStream(autoInputStream);
-                    matchingBoardManager = (MatchingBoardManager) input.readObject();
-                    autoInputStream.close();
-                }
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " +
-                    e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveMatchingBoardManagerToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(matchingBoardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+        matchingBoardManager = serializer.loadMatchingBoardManagerFromFile(matchingTempSaveFileName, this);
     }
 
     @Override

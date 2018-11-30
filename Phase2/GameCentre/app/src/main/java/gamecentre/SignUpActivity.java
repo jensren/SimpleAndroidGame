@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import gamecentre.battlegame.BattleScoreboard;
-import gamecentre.cardmatching.MatchingScoreboard;
 import gamecentre.cardmatching.MatchingStartingActivity;
 import gamecentre.slidingtiles.R;
 import gamecentre.slidingtiles.SlidingtilesStartingActivity;
@@ -38,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userManager = new UserManager();
-        //  serializer.saveUserManagerToFile(USER_FILENAME,userManager);
         setContentView(R.layout.activity_signup);
         addSignUpButtonListener();
     }
@@ -88,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serializer.loadUserManagerFromFile(USER_FILENAME, SignUpActivity.this);
+                userManager = serializer.loadUserManagerFromFile(USER_FILENAME, SignUpActivity.this);
                 createUser();
             }
         });

@@ -3,9 +3,7 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * A class representing the Ninja Cat character, a stealth character. Ninja cat's special move adds
- * its opponent to the battle queue and then itself twice so that this character can attack twice
- * in concession after its opponent attacks.
+ * A class representing the Ninja Cat character, a stealth character.
  */
 class NinjaCat extends Character implements Serializable {
 
@@ -23,6 +21,11 @@ class NinjaCat extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
+    /**
+     * Plays Ninja cat's special move.
+     * Adds its opponent to the battle queue and then itself twice so that this character can
+     * attack twice in concession after its opponent attacks.
+     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
