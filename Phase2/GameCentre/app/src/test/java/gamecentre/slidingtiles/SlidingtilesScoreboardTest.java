@@ -174,6 +174,9 @@ public class SlidingtilesScoreboardTest {
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
 
+    /**
+     * Test update() when there is no score
+     */
     @Test
     public void testUpdateWithNoScore() {
         populateScoreboard();
@@ -189,6 +192,9 @@ public class SlidingtilesScoreboardTest {
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
 
+    /**
+     * Test whether the scoreboard resets
+     */
     @Test
     public void testReset() {
         SlidingtilesScoreboard.setNumMoves(1);
@@ -196,12 +202,18 @@ public class SlidingtilesScoreboardTest {
         assertEquals(0, SlidingtilesScoreboard.getNumMoves());
     }
 
+    /**
+     * Test toString with an empty scoreboard
+     */
     @Test
     public void testEmptyScoreboardToString() {
         String expected = "SCORE BOARD\n\n1.\n2.\n3.\n4.\n5.\n6.\n7.\n8.\n9.\n10.\n";
         assertEquals(expected, scoreboard.toString());
     }
 
+    /**
+     * Test toString with a populated scoreboard
+     */
     @Test
     public void testPopulatedScoreboardToString() {
         populateScoreboard();

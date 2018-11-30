@@ -167,6 +167,9 @@ public class MatchingScoreboardTest {
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
 
+    /**
+     * Test update() with no score
+     */
     @Test
     public void testUpdateWithNoScore() {
         populateScoreboard();
@@ -182,6 +185,9 @@ public class MatchingScoreboardTest {
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
 
+    /**
+     * Test whether the scoreboard resets
+     */
     @Test
     public void testReset() {
         MatchingScoreboard.setNumMoves(1);

@@ -9,8 +9,17 @@ import static org.junit.Assert.*;
  */
 public class DetectiveVsNinjaTest {
 
+    /**
+     * The battle queue for testing
+     */
     private BattleQueue bq = new BattleQueue();
+    /**
+     * Player 1
+     */
     private Character player1;
+    /**
+     * Player 2
+     */
     private Character player2;
 
     /**
@@ -110,7 +119,7 @@ public class DetectiveVsNinjaTest {
         bq.getNextCharacter().getOpponent().setHp(0);
         assertEquals(0, bq.getNextCharacter().getHp());
         assertEquals(0, bq.getNextCharacter().getOpponent().getHp());
-        assertEquals(100, bq.getNextCharacter().getInitialHp());
+        assertEquals(100, Character.getInitialHp());
         bq.getNextCharacter().setMp(0);
         assertEquals(0, bq.getNextCharacter().getMp());
     }
