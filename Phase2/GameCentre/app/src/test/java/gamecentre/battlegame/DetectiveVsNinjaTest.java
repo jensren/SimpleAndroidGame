@@ -11,7 +11,7 @@ public class DetectiveVsNinjaTest {
     private Character player2;
 
     /**
-     * Create a new battle queue with DruidShibe and its opponents to test attack functions.
+     * Create a new battle queue with Detective Shibe and its opponents to test attack functions.
      */
     private void setUpBattleQueue() {
         setUpCharacter();
@@ -22,7 +22,7 @@ public class DetectiveVsNinjaTest {
     }
 
     /**
-     * Set player1 and player2 as DruidShibe and ShamanCat to be used in the Battle Queue.
+     * Set player1 and player2 as DetectiveShibe and NinjaCat to be used in the Battle Queue.
      */
     private void setUpCharacter() {
         player1 = new DetectiveShibe();

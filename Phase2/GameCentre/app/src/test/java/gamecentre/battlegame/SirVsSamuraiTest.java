@@ -1,5 +1,6 @@
 package gamecentre.battlegame;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,8 +12,9 @@ public class SirVsSamuraiTest {
     private Character player2;
 
     /**
-     * Create a new battle queue with DruidShibe and its opponents to test attack functions.
+     * Create a new battle queue with SirShibe and its opponents to test attack functions.
      */
+    @Before
     private void setUpBattleQueue() {
         setUpCharacter();
         player1.setBattleQueue(bq);
@@ -22,8 +24,9 @@ public class SirVsSamuraiTest {
     }
 
     /**
-     * Set player1 and player2 as DruidShibe and ShamanCat to be used in the Battle Queue.
+     * Set player1 and player2 as SirShibe and SamuraiCat to be used in the Battle Queue.
      */
+    @Before
     private void setUpCharacter() {
         player1 = new SirShibe();
         player2 = new SamuraiCat();
