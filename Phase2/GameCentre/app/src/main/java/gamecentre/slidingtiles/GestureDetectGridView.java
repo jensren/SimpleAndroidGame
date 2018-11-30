@@ -13,6 +13,9 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
+import gamecentre.BoardManager;
+import gamecentre.MovementController;
+
 /**
  * An extension of GridView containing built in logic for handling swipes between buttons
  * Adapted from:
@@ -27,7 +30,7 @@ public class GestureDetectGridView extends GridView {
     private boolean mFlingConfirmed = false;
     private float mTouchX;
     private float mTouchY;
-    SlidingtilesBoardManager boardManager;
+    BoardManager boardManager;
 
     public GestureDetectGridView(Context context) {
         super(context);
@@ -45,7 +48,7 @@ public class GestureDetectGridView extends GridView {
     }
 
     private void init(final Context context) {
-        mController = new MovementController();
+        mController = new SlidingtilesMovementController();
         gDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
 
             @Override
@@ -102,7 +105,7 @@ public class GestureDetectGridView extends GridView {
      *
      * @param boardManager the boardManager
      */
-    public void setBoardManager(SlidingtilesBoardManager boardManager) {
+    public void setBoardManager(BoardManager boardManager) {
         this.boardManager = boardManager;
         mController.setBoardManager(boardManager);
     }
