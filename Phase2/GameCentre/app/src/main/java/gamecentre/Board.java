@@ -2,6 +2,9 @@ package gamecentre;
 
 import java.io.Serializable;
 
+/**
+ * An abstract representation of a game board.
+ */
 public abstract class Board implements Serializable {
 
     /**

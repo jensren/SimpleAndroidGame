@@ -8,6 +8,9 @@ public class UserManagerTest {
 
     private UserManager userManager = new UserManager();
 
+    /**
+     * Test whether UserManager correctly adds usernames and passwords.
+     */
     @Test
     public void testUserManager(){
         userManager.addUser("and","rew");

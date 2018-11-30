@@ -1,6 +1,5 @@
 package gamecentre.battlegame;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,6 +11,9 @@ public class BattleQueueManagerTest {
      */
     private BattleQueueManager battleQueueManager = new BattleQueueManager();
 
+    /**
+     * Test whether the battle queue is correctly initialized.
+     */
     @Test
     public void testInitializeBattleQueue() {
         battleQueueManager.setCharacters("NinjaCat", "DetectiveShibe");
@@ -25,6 +27,9 @@ public class BattleQueueManagerTest {
         assertEquals(battleQueue1, battleQueue2);
     }
 
+    /**
+     * Test whether the characters are set properly.
+     */
     @Test
     public void testSetCharacters() {
         battleQueueManager.setCharacters("DetectiveShibe", "NinjaCat");

@@ -40,7 +40,7 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
     /**
      * Stack to store moves made
      */
-    private ArrayList<int[]> previousMoves = new ArrayList<>();
+    private List<int[]> previousMoves = new ArrayList<>();
 
     /**
      * Manage a new shuffled board.

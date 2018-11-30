@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * A score for a game.
+ */
 public class Score implements Comparable<Score>, Serializable {
     /**
      * The user.
