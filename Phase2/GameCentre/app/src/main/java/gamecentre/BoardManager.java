@@ -1,5 +1,8 @@
 package gamecentre;
 
+/**
+ * An abstract board manager.
+ */
 public abstract class BoardManager {
 
     protected abstract boolean isValidTap(int position);

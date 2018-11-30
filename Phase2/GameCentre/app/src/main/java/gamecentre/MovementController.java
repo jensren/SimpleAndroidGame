@@ -2,6 +2,9 @@ package gamecentre;
 
 import android.content.Context;
 
+/**
+ * An abstract movement controller.
+ */
 public abstract class MovementController {
     /**
      * The on win listener, will notify when the game is won.
@@ -16,6 +19,7 @@ public abstract class MovementController {
     public void setOnWinListener(OnWinListener onWinListener) {
         this.onWinListener = onWinListener;
     }
+
     abstract public void processTapMovement(Context context, int position);
 
     abstract public void setBoardManager(BoardManager boardManager);

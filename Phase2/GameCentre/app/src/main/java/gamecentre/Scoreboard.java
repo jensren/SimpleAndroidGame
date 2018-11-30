@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * An abstract scoreboard.
+ */
 public abstract class Scoreboard implements Serializable {
     /**
      * Size of scoreboard (ie. how many top scores are stored and displayed).

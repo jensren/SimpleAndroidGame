@@ -22,7 +22,13 @@ import java.util.ArrayList;
  */
 
 public class CustomAdapter extends BaseAdapter {
+    /**
+     * The buttons
+     */
     private ArrayList<Button> mButtons;
+    /**
+     * The column width and height
+     */
     private int mColumnWidth, mColumnHeight;
 
     /**

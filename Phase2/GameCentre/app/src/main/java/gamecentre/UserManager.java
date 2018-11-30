@@ -2,6 +2,7 @@ package gamecentre;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Manage users.
@@ -10,7 +11,7 @@ class UserManager implements Serializable {
     /**
      * HashMap of users, with key username and value password
      */
-    private HashMap<String, String> users = new HashMap<>();
+    private Map<String, String> users = new HashMap<>();
 
     /**
      * Adds a user with username and password to users
