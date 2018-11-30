@@ -15,6 +15,7 @@ import gamecentre.BoardUpdateListener;
 import gamecentre.OnWinListener;
 import gamecentre.Serializer;
 import gamecentre.slidingtiles.CustomAdapter;
+import gamecentre.slidingtiles.GestureDetectGridView;
 import gamecentre.slidingtiles.R;
 
 public class MatchingGameActivity extends AppCompatActivity{
@@ -30,7 +31,7 @@ public class MatchingGameActivity extends AppCompatActivity{
     /**
      * The gridview for this game
      */
-    private MatchingGestureDetectGridView gridView;
+    private GestureDetectGridView gridView;
     /**
      * Calculated column height and width based on device size
      */
