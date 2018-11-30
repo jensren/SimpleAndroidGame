@@ -13,7 +13,7 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
     /**
      * The board being managed.
      */
-    MatchingBoard board;
+    private MatchingBoard board;
     /**
      * Keeps track of number of cards flipped. Up to 2.
      */
