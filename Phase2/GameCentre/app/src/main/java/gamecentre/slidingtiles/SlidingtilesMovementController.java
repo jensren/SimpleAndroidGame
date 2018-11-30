@@ -3,43 +3,32 @@ package gamecentre.slidingtiles;
 import android.content.Context;
 import android.widget.Toast;
 
-import gamecentre.OnWinListener;
+import gamecentre.BoardManager;
+import gamecentre.MovementController;
 
 /**
  * Process taps of tiles and undo throughout game play.
  */
-class MovementController {
+class SlidingtilesMovementController extends MovementController {
     /**
      * The current board manager.
      */
     private SlidingtilesBoardManager boardManager = null;
-    /**
-     * The on win listener, will notify when the game is won.
-     */
-    private OnWinListener onWinListener = null;
-
-    /**
-     * Sets the on win listener.
-     *
-     * @param onWinListener The on win listener to be set.
-     */
-    public void setOnWinListener(OnWinListener onWinListener) {
-        this.onWinListener = onWinListener;
-    }
 
     /**
      * The MovementController for this activity.
      */
-    MovementController() {
+    SlidingtilesMovementController() {
     }
 
     /**
      * Set the boardManager for this MovementController to manage.
      *
-     * @param boardManager The current SlidingtilesBoardManager
+     * @param boardManager The current BoardManager
      */
-    void setBoardManager(SlidingtilesBoardManager boardManager) {
-        this.boardManager = boardManager;
+    @Override
+    public void setBoardManager(BoardManager boardManager) {
+        this.boardManager = (SlidingtilesBoardManager) boardManager;
     }
 
     /**
@@ -48,7 +37,8 @@ class MovementController {
      * @param context  used to make a Toast
      * @param position position of the tap
      */
-    void processTapMovement(Context context, int position) {
+    @Override
+    public void processTapMovement(Context context, int position) {
         if (boardManager.isValidTap(position)) {
 
             boardManager.updateUndoStack(position);

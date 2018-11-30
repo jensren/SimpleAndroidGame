@@ -3,30 +3,18 @@ package gamecentre.cardmatching;
 import android.content.Context;
 import android.widget.Toast;
 
-import gamecentre.OnWinListener;
+import gamecentre.BoardManager;
+import gamecentre.MovementController;
 
 /**
- * Process taps of tiles and undo throughout game play.
+ * Process taps of tiles throughout game play.
  */
-class MatchingMovementController {
+class MatchingMovementController extends MovementController {
 
     /**
      * The current board manager.
      */
     private MatchingBoardManager boardManager = null;
-
-    /**
-     * The on win listener, will notify when the game is won.
-     */
-    private OnWinListener onWinListener = null;
-
-    /**
-     * Sets the on win listener.
-     * @param onWinListener The on win listener to be set.
-     */
-    public void setOnWinListener(OnWinListener onWinListener){
-        this.onWinListener = onWinListener;
-    }
 
     /**
      * The MovementController for this activity.
@@ -39,8 +27,9 @@ class MatchingMovementController {
      *
      * @param boardManager The current board Manager
      */
-    void setBoardManager(MatchingBoardManager boardManager) {
-        this.boardManager = boardManager;
+    @Override
+    public void setBoardManager(BoardManager boardManager) {
+        this.boardManager = (MatchingBoardManager) boardManager;
     }
 
     /**
@@ -49,7 +38,8 @@ class MatchingMovementController {
      * @param context  used to make a Toast
      * @param position position of the tap
      */
-    void processTapMovement(Context context, int position) {
+    @Override
+    public void processTapMovement(Context context, int position) {
         if (boardManager.isValidTap(position)) {
             boardManager.updateMoves();
 
