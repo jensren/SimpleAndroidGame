@@ -9,6 +9,9 @@ import java.util.List;
 
 import gamecentre.BoardManager;
 
+/**
+ * Manager for the matching board.
+ */
 public class MatchingBoardManager extends BoardManager implements Serializable {
     /**
      * The board being managed.
@@ -143,15 +146,16 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
             board.flipBack(flippedTiles[2], flippedTiles[3]);
         }
     }
+
     /**
-     * count the number of total moves made
+     * Increments the number of moves by 1
      */
     public void updateMoves() {
         numMoves += 1;
     }
 
     /**
-     * @return the highest score
+     * @return the number of moves
      */
     public int getNumMoves() {
         return numMoves;

@@ -32,7 +32,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Make a solved board.
+     * Make a solved board. (All images flipped over)
      */
     private void setUpCorrect() {
         List<MatchingTile> tiles = makeTiles();
@@ -41,7 +41,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Shuffle a few tiles.
+     * Sets board to a won state: All tiles flipped to blank and tiles matched set to 16.
      */
     private void changeToBlank() {
         MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
@@ -53,14 +53,23 @@ public class MatchingBoardAndTileTest {
         boardManager.tilesMatched = 16;
     }
 
+    /**
+     * Flips the first tile
+     */
     private void flipFirstTile() {
         boardManager.touchMove(0);
     }
 
+    /**
+     * Flips the last tile
+     */
     private void flipLastTile() {
         boardManager.touchMove(15);
     }
 
+    /**
+     * Sets board to have 14 tiles matched, and you flip over the last two remaining tiles on the board.
+     */
     private void FlipBlankLastTwo() {
         MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
         for (int row = 0; row != MatchingBoard.numRows; row++) {
@@ -75,7 +84,11 @@ public class MatchingBoardAndTileTest {
         boardManager.touchMove(15);
     }
 
-    private void FlipBlackLastTwo() {
+    /**
+     * Set up board of all tile images. Flip all of the tiles to blank except last two tiles
+     * and then touch the 14th tile to flip it back.
+     */
+    private void flipBack14th() {
         MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
         for (int row = 0; row != MatchingBoard.numRows - 1; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
@@ -88,16 +101,38 @@ public class MatchingBoardAndTileTest {
         boardManager.touchMove(14);
     }
 
+    /**
+     * Update number of moves.
+     */
     private void updateMove() {
         boardManager.updateMoves();
     }
 
+    /**
+     * Tap the first tile.
+     */
     private void touchMoveFirstTile() {
         boardManager.touchMove(0);
     }
 
     /**
-     * Test whether swapping two tiles makes a solved board unsolved.
+     * Make another set of tiles that are in order by using different way.
+     *
+     * @return a set of tiles that are in order
+     */
+
+    private List<MatchingTile> makeOtherTiles() {
+        List<MatchingTile> tiles = new ArrayList<>();
+        final int numTiles = MatchingBoard.numRows * MatchingBoard.numCols;
+        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
+            tiles.add(new MatchingTile(tileNum));
+        }
+
+        return tiles;
+    }
+
+    /**
+     * Test if board manager correctly detects when the game is solved.
      */
     @Test
     public void testIsSolved() {
@@ -107,6 +142,9 @@ public class MatchingBoardAndTileTest {
         assertEquals(true, boardManager.isWin());
     }
 
+    /**
+     * Test whether method IsValidTap works.
+     */
     @Test
     public void testIsValidTap() {
         setUpCorrect();
@@ -122,6 +160,9 @@ public class MatchingBoardAndTileTest {
         assertEquals(false, boardManager.isValidTap(11));
     }
 
+    /**
+     * Test whether method flipTile works by flipping first tile and then seeing if it returns the correct tile.
+     */
     @Test
     public void testMatchingFlipFirst() {
         setUpCorrect();
@@ -131,39 +172,44 @@ public class MatchingBoardAndTileTest {
         assertEquals(1, boardManager.getBoard().matchingGetTile(0, 0).getId());
     }
 
+    /**
+     * Test whether method flipTile works by flipping last tile.
+     */
     @Test
-    public void testMatchingSwapLast() {
+    public void testMatchingFlipLast() {
         setUpCorrect();
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 3).getId());
         flipLastTile();
         assertEquals(8, boardManager.getBoard().matchingGetTile(3, 3).getId());
     }
 
+    /**
+     * Test whether method flipTile works by flipping last tile.
+     */
     @Test
-    public void testMatchingFlipBlackLastTwo() {
+    public void testMatchingFlipBack() {
         setUpCorrect();
-        FlipBlackLastTwo();
+        flipBack14th();
         assertEquals(7, boardManager.getBoard().matchingGetTile(3, 2).getId());
         boardManager.getBoard().flipBack(3,2);
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 2).getId());
     }
 
+    /**
+     * Test whether two tiles will flip back to question marks when these two tiles does not match.
+     */
     @Test
     public void testTilesMatching() {
         setUpCorrect();
-        FlipBlackLastTwo();
+        flipBack14th();
         boardManager.touchMove(15);
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 2).getId());
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 3).getId());
     }
 
-    @Test
-    public void testMatchingCheckMatching(){
-        setUpCorrect();
-        FlipBlackLastTwo();
-
-    }
-
+    /**
+     * Test whether method flipBlank works.
+     */
     @Test
     public void testMatchingFlipBlankLastTwo() {
         setUpCorrect();
@@ -174,6 +220,9 @@ public class MatchingBoardAndTileTest {
         assertEquals(17, boardManager.getBoard().matchingGetTile(3, 3).getId());
     }
 
+    /**
+     * Test whether method updateMove works.
+     */
     @Test
     public void testMatchingUpdateMove() {
         setUpCorrect();
@@ -184,6 +233,9 @@ public class MatchingBoardAndTileTest {
         assertEquals(2, boardManager.getNumMoves());
     }
 
+    /**
+     * Test whether method touchMove works by touch the first tile.
+     */
     @Test
     public void testMatchingTouchMove() {
         setUpCorrect();
@@ -192,22 +244,18 @@ public class MatchingBoardAndTileTest {
         assertEquals(1, boardManager.getBoard().matchingGetTile(0, 0).getId());
     }
 
+    /**
+     * Test comparing tiles
+     */
     @Test
     public void testCompareTiles(){
         setUpCorrect();
         assertEquals(1,boardManager.getBoard().tiles[0][0].compareTo(boardManager.getBoard().tiles[0][1]));
     }
 
-    private List<MatchingTile> makeOtherTiles() {
-        List<MatchingTile> tiles = new ArrayList<>();
-        final int numTiles = MatchingBoard.numRows * MatchingBoard.numCols;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-                tiles.add(new MatchingTile(tileNum));
-        }
-
-        return tiles;
-    }
-
+    /**
+     * Test whether each tiles get the correct ID by using class MatchingTile.
+     */
     @Test
     public void testMatchingTilesGetId() {
         List<MatchingTile> tiles = makeOtherTiles();
@@ -223,8 +271,11 @@ public class MatchingBoardAndTileTest {
         assertEquals(18, boardManager.getBoard().tiles[0][1].getId());
     }
 
+    /**
+     * Test whether method getBackground can return the correct background.
+     */
     @Test
-    public void testMatchingTilesGetBackgound(){
+    public void testMatchingTilesGetBackground(){
         setUpCorrect();
         assertEquals(0, boardManager.getBoard().tiles[0][0].getBackground());
         assertEquals(7, boardManager.getBoard().tiles[1][3].getBackground());
@@ -232,6 +283,9 @@ public class MatchingBoardAndTileTest {
         assertEquals(7, boardManager.getBoard().tiles[3][3].getBackground());
     }
 
+    /**
+     * Test whether constructor of MatchingBoardManager works.
+     */
     @Test
     public void testCreateBoardManager(){
         boardManager = new MatchingBoardManager();

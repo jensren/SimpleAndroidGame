@@ -8,6 +8,9 @@ import java.util.List;
 import gamecentre.Board;
 import gamecentre.slidingtiles.R;
 
+/**
+ * The board for the matching game.
+ */
 public class MatchingBoard extends Board implements Serializable {
 
     /**

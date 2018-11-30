@@ -4,20 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import gamecentre.Serializer;
 import gamecentre.slidingtiles.R;
 
+/**
+ * The starting activity for the matching game.
+ */
 public class MatchingStartingActivity extends AppCompatActivity {
     /**
      * The main save file.
@@ -144,6 +139,9 @@ public class MatchingStartingActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
+    /**
+     * Read the temporary board from disk.
+     */
     @Override
     protected void onResume() {
         super.onResume();
