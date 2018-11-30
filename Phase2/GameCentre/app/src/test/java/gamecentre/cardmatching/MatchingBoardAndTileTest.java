@@ -87,7 +87,7 @@ public class MatchingBoardAndTileTest {
     /**
      * Flip all of the tiles to blank except last two tiles and then touch the 14th tile.
      */
-    private void FlipBlackLastTwo() {
+    private void FlipBackLastTwo() {
         MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
         for (int row = 0; row != MatchingBoard.numRows - 1; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
@@ -101,7 +101,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Update current move.
+     * Update number of moves.
      */
     private void updateMove() {
         boardManager.updateMoves();
@@ -160,7 +160,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Test whether method flipTile works by flipping first tile.
+     * Test whether method flipTile works by flipping first tile and then seeing if it returns the correct tile.
      */
     @Test
     public void testMatchingFlipFirst() {
@@ -188,19 +188,19 @@ public class MatchingBoardAndTileTest {
     @Test
     public void testMatchingFlipBlackLastTwo() {
         setUpCorrect();
-        FlipBlackLastTwo();
+        FlipBackLastTwo();
         assertEquals(7, boardManager.getBoard().matchingGetTile(3, 2).getId());
         boardManager.getBoard().flipBack(3,2);
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 2).getId());
     }
 
     /**
-     * Test whether two tiles will flip back when these two tiles does not match.
+     * Test whether two tiles will flip back to question marks when these two tiles does not match.
      */
     @Test
     public void testTilesMatching() {
         setUpCorrect();
-        FlipBlackLastTwo();
+        FlipBackLastTwo();
         boardManager.touchMove(15);
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 2).getId());
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 3).getId());
@@ -244,7 +244,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Test whether method touchMove works by touch the first tile.
+     * Test comparing tiles
      */
     @Test
     public void testCompareTiles(){
@@ -283,7 +283,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Test whether class MatchingBoardManager works.
+     * Test whether constructor of MatchingBoardManager works.
      */
     @Test
     public void testCreateBoardManager(){
