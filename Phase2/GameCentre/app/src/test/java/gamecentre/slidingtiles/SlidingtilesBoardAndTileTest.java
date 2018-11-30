@@ -12,10 +12,10 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class BoardAndTileTest {
+public class SlidingtilesBoardAndTileTest {
 
     /** The board manager for testing. */
-    private BoardManager boardManager;
+    private SlidingtilesBoardManager boardManager;
 
     /**
      * Make a set of tiles that are in order.
@@ -23,7 +23,7 @@ public class BoardAndTileTest {
      */
     private List<Tile> makeTiles() {
         List<Tile> tiles = new ArrayList<>();
-        final int numTiles = Board.numRows * Board.numCols;
+        final int numTiles = SlidingtilesBoard.numRows * SlidingtilesBoard.numCols;
         for (int tileNum = 0; tileNum != numTiles; tileNum++) {
             tiles.add(new Tile(tileNum + 1, tileNum));
         }
@@ -32,12 +32,12 @@ public class BoardAndTileTest {
     }
 
     /**
-     * Make a solved Board.
+     * Make a solved SlidingtilesBoard.
      */
     private void setUpCorrect() {
         List<Tile> tiles = makeTiles();
-        Board board = new Board(tiles);
-        boardManager = new BoardManager(board);
+        SlidingtilesBoard board = new SlidingtilesBoard(tiles);
+        boardManager = new SlidingtilesBoardManager(board);
     }
 
     /**
@@ -53,9 +53,9 @@ public class BoardAndTileTest {
     @Test
     public void testIsSolved() {
         setUpCorrect();
-        assertEquals(true, boardManager.puzzleSolved());
+        assertEquals(true, boardManager.isWin());
         swapFirstTwoTiles();
-        assertEquals(false, boardManager.puzzleSolved());
+        assertEquals(false, boardManager.isWin());
     }
 
     /**
@@ -141,7 +141,7 @@ public class BoardAndTileTest {
      */
     @Test
     public void testCreateBoardManager(){
-        boardManager = new BoardManager();
+        boardManager = new SlidingtilesBoardManager();
     }
 
     /**
@@ -149,11 +149,11 @@ public class BoardAndTileTest {
      */
     @Test
     public void test5x5Board(){
-        Board.numCols = 5;
-        Board.numRows = 5;
-        boardManager = new BoardManager();
-        Board.numRows = 4;
-        Board.numCols = 4;
+        SlidingtilesBoard.numCols = 5;
+        SlidingtilesBoard.numRows = 5;
+        boardManager = new SlidingtilesBoardManager();
+        SlidingtilesBoard.numRows = 4;
+        SlidingtilesBoard.numCols = 4;
     }
 
     /**
@@ -161,11 +161,11 @@ public class BoardAndTileTest {
      */
     @Test
     public void test3x3Board(){
-        Board.numCols = 3;
-        Board.numRows = 3;
-        boardManager = new BoardManager();
-        Board.numRows = 4;
-        Board.numCols = 4;
+        SlidingtilesBoard.numCols = 3;
+        SlidingtilesBoard.numRows = 3;
+        boardManager = new SlidingtilesBoardManager();
+        SlidingtilesBoard.numRows = 4;
+        SlidingtilesBoard.numCols = 4;
     }
 
     /**

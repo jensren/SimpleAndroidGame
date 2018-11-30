@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import gamecentre.slidingtiles.R;
 
@@ -21,6 +22,7 @@ public class DogChoiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battlegame_dog_choice);
 
+        changeChoiceText();
         addDetectiveButtonListener();
         addDruidButtonListener();
         addSirShibeButtonListener();
@@ -108,6 +110,15 @@ public class DogChoiceActivity extends AppCompatActivity {
         }
         tmp.putExtras(extras);
         startActivity(tmp);
+    }
+
+    private void changeChoiceText() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            TextView choiceText = findViewById(R.id.askchoose_dog);
+            String text = "Player 2: Choose your fighter!";
+            choiceText.setText(text);
+        }
     }
 
     @Override

@@ -4,7 +4,8 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * Representation of the Shaman Cat character.
+ * Representation of the Shaman Cat character, a healer character. Shaman Cat's special move
+ * increases this character's Health Points by the amount of damage its opponent takes.
  */
 public class ShamanCat extends Character implements Serializable {
 

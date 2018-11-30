@@ -12,7 +12,7 @@ class MovementController {
     /**
      * The current board manager.
      */
-    private BoardManager boardManager = null;
+    private SlidingtilesBoardManager boardManager = null;
     /**
      * The on win listener, will notify when the game is won.
      */
@@ -36,9 +36,9 @@ class MovementController {
     /**
      * Set the boardManager for this MovementController to manage.
      *
-     * @param boardManager The current BoardManager
+     * @param boardManager The current SlidingtilesBoardManager
      */
-    void setBoardManager(BoardManager boardManager) {
+    void setBoardManager(SlidingtilesBoardManager boardManager) {
         this.boardManager = boardManager;
     }
 
@@ -55,7 +55,7 @@ class MovementController {
             boardManager.updateMoves();
 
             boardManager.touchMove(position);
-            if (boardManager.puzzleSolved()) {
+            if (boardManager.isWin()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 SlidingtilesScoreboard.setNumMoves(boardManager.getNumMoves());
                 SlidingtilesScoreboard.setBoardSize(boardManager.getBoardSize());

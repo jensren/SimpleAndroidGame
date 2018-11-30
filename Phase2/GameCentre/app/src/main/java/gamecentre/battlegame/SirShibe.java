@@ -3,7 +3,9 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * Class representing the Sir Shibe character.
+ * Class representing the Sir Shibe character, a fighter character.
+ * A fighter Character's special attack resets the battle queue so that there is only one copy of
+ * each character in the battle queue.
  */
 public class SirShibe extends Character implements Serializable {
 

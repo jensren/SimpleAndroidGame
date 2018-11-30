@@ -31,22 +31,23 @@ public class MatchingScoreboardActivity extends AppCompatActivity {
      */
     Serializer serializer = new Serializer();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.scoreboard);
-        scoreboardView = findViewById(R.id.s_b);
-        scoreboard = (MatchingScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME, this);
-        if (scoreboard == null) {
-            scoreboard = new MatchingScoreboard();
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_scoreboard);
+            scoreboardView = findViewById(R.id.s_b);
+            scoreboard = (MatchingScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME,
+                    this);
+            if (scoreboard == null) {
+                scoreboard = new MatchingScoreboard();
+            }
+            scoreboard.update();
+            serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard, this);
+            scoreboardView.setText(scoreboard.toString());
+            displayScore();
+            displayBestScore();
+            addMainButtonListener();
         }
-        scoreboard.update();
-        serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard, this);
-        scoreboardView.setText(scoreboard.toString());
-        displayScore();
-        displayBestScore();
-        addMainButtonListener();
-    }
 
     @Override
     public void onBackPressed() {

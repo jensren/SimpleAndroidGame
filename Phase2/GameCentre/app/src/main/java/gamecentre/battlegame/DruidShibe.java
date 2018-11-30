@@ -4,9 +4,8 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * DruidShibe character class. Able to perform Regular Move costing 5 Magic points to dealing 8
- * health points damage to its opponent, adds  and a Special Move costing 10 Magic points to
- * dealing 13 Health points damage to its opponent.
+ * A class representing the Druid Shibe character, a healer character. Druid Shibe's special move
+ * increases this characters Health Points byt he amount of damage the opponent took.
  */
 class DruidShibe extends Character implements Serializable {
 

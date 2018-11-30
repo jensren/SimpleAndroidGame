@@ -7,17 +7,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MatchingBoardManager implements Serializable {
+import gamecentre.BoardManager;
+
+public class MatchingBoardManager extends BoardManager implements Serializable {
     /**
      * The board being managed.
      */
-    private MatchingBoard board;
-
-    /**
-     * Number of moves made
-     */
-    private int numMoves = 0;
-
+    MatchingBoard board;
     /**
      * Keeps track of number of cards flipped. Up to 2.
      */
@@ -68,7 +64,8 @@ public class MatchingBoardManager implements Serializable {
      * @param position the position the player touched
      * @return whether or not the tap is valid
      */
-    boolean isValidTap(int position) {
+    @Override
+    protected boolean isValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
         if (flippedTiles[0] != -1) {
@@ -77,7 +74,7 @@ public class MatchingBoardManager implements Serializable {
             }
         }
         int blankId = 17;
-        return board.getTile(row, col).getId() != blankId;
+        return board.matchingGetTile(row, col).getId() != blankId;
     }
 
     /**
@@ -85,7 +82,8 @@ public class MatchingBoardManager implements Serializable {
      *
      * @return Whether you have won or not.
      */
-    boolean isWin() {
+    @Override
+    protected boolean isWin() {
         return tilesMatched == 16;
     }
 
@@ -94,7 +92,8 @@ public class MatchingBoardManager implements Serializable {
      *
      * @param position the position you touched.
      */
-    void touchMove(int position) {
+    @Override
+    protected void touchMove(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
 
@@ -131,27 +130,13 @@ public class MatchingBoardManager implements Serializable {
      * tilesMatched by 2. If they don't match, flip both back to question mark tiles.
      */
     private void checkMatching() {
-        if (board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]][flippedTiles[3]]) == 0) {
+        if (board.tiles[flippedTiles[0]][flippedTiles[1]].compareTo(board.tiles[flippedTiles[2]]
+                [flippedTiles[3]]) == 0) {
             board.flipBlank(flippedTiles);
             tilesMatched += 2;
         } else {
             board.flipBack(flippedTiles[0], flippedTiles[1]);
             board.flipBack(flippedTiles[2], flippedTiles[3]);
         }
-    }
-
-    /**
-     * count the number of total moves made
-     */
-    void updateMoves() {
-        numMoves += 1;
-    }
-
-    /**
-     * @return the number of moves so far.
-     */
-
-    int getNumMoves() {
-        return numMoves;
     }
 }
