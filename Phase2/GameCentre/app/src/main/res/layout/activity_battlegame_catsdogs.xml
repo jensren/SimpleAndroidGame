@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Cats"
         app:layout_constraintBaseline_toBaselineOf="@+id/dogs"
         app:layout_constraintStart_toStartOf="parent" />
@@ -30,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="62dp"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Dogs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
