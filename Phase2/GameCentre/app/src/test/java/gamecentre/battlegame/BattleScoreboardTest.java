@@ -23,8 +23,8 @@ public class BattleScoreboardTest {
      * @return the score list
      */
     private Score[] createScoreList() {
-        Score[] gameHighScores = new Score[Scoreboard.LENGTH];
-        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+        Score[] gameHighScores = new Score[Scoreboard.getLENGTH()];
+        for (int i = 0; i < Scoreboard.getLENGTH(); i++) {
             Score s = new Score(String.format("%d", i + 2), i + 2);
             gameHighScores[i] = s;
         }
@@ -39,7 +39,7 @@ public class BattleScoreboardTest {
      */
     private HashMap<String, Score> createUserToBestScores(Score[] gameHighScores) {
         HashMap<String, Score> userHighScores = new HashMap<>();
-        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+        for (int i = 0; i < Scoreboard.getLENGTH(); i++) {
             userHighScores.put(gameHighScores[i].getUsername(), gameHighScores[i]);
         }
         return userHighScores;
@@ -115,7 +115,7 @@ public class BattleScoreboardTest {
         Score[] expectedGameHighScores = createScoreList();
         HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(expectedGameHighScores);
         Score[] actualGameHighScores = scoreboard.getScoreList();
-        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+        for (int i = 0; i < Scoreboard.getLENGTH(); i++) {
             assertEquals(expectedGameHighScores[i].compareTo(actualGameHighScores[i]), 0);
         }
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
@@ -140,7 +140,7 @@ public class BattleScoreboardTest {
         expectedUserToBestScore.put("New Player", newScore);
 
         Score[] actualGameHighScores = scoreboard.getScoreList();
-        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+        for (int i = 0; i < Scoreboard.getLENGTH(); i++) {
             assertEquals(expectedGameHighScores[i].compareTo(actualGameHighScores[i]), 0);
         }
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
@@ -167,13 +167,13 @@ public class BattleScoreboardTest {
 
         Score[] s = createScoreList();
         HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(s);
-        Score[] expectedGameHighScores = new Score[Scoreboard.LENGTH];
+        Score[] expectedGameHighScores = new Score[Scoreboard.getLENGTH()];
         expectedGameHighScores[0] = newScore;
-        System.arraycopy(s, 0, expectedGameHighScores, 1, Scoreboard.LENGTH - 1);
+        System.arraycopy(s, 0, expectedGameHighScores, 1, Scoreboard.getLENGTH() - 1);
         expectedUserToBestScore.put("Underdog", newScore);
 
         Score[] actualGameHighScores = scoreboard.getScoreList();
-        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+        for (int i = 0; i < Scoreboard.getLENGTH(); i++) {
             assertEquals(expectedGameHighScores[i], actualGameHighScores[i]);
         }
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
@@ -191,7 +191,7 @@ public class BattleScoreboardTest {
         Score[] expectedGameHighScores = createScoreList();
         HashMap<String, Score> expectedUserToBestScore = createUserToBestScores(expectedGameHighScores);
         Score[] actualGameHighScores = scoreboard.getScoreList();
-        for (int i = 0; i < Scoreboard.LENGTH; i++) {
+        for (int i = 0; i < Scoreboard.getLENGTH(); i++) {
             assertEquals(expectedGameHighScores[i].compareTo(actualGameHighScores[i]), 0);
         }
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());

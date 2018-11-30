@@ -8,15 +8,12 @@ import java.util.Locale;
  * An abstract scoreboard.
  */
 public abstract class Scoreboard implements Serializable {
-    /**
-     * Size of scoreboard (ie. how many top scores are stored and displayed).
-     */
-    public static final int LENGTH = 10;
+    private static final int LENGTH = 10;
 
     /**
      * An ordered list with the highest score as first item.
      */
-    private Score[] scoreList = new Score[LENGTH];
+    private Score[] scoreList = new Score[getLENGTH()];
 
     /**
      * A map of username to high scores.
@@ -32,6 +29,13 @@ public abstract class Scoreboard implements Serializable {
 
     public static String getUser() {
         return user;
+    }
+
+    /**
+     * Size of scoreboard (ie. how many top scores are stored and displayed).
+     */
+    public static int getLENGTH() {
+        return LENGTH;
     }
 
     /**
@@ -99,7 +103,7 @@ public abstract class Scoreboard implements Serializable {
     @Override
     public String toString() {
         String scores = "";
-        for (int i = 0; i < LENGTH; i++) {
+        for (int i = 0; i < getLENGTH(); i++) {
             // String looks like: "1. username: score \n 2. username: score ..."
             if (scoreList[i] == null) {
                 // If there is no high score, string looks like: "1. \n 2. \n ..."
@@ -119,11 +123,11 @@ public abstract class Scoreboard implements Serializable {
      */
     protected void updateGameHighScore(Score newScore) {
 
-        for (int i = LENGTH - 1; i >= 0; i--) {
+        for (int i = getLENGTH() - 1; i >= 0; i--) {
             if (scoreList[i] == null || newScore.compareTo(scoreList[i]) < 0) {
                 Score current = scoreList[i];
                 scoreList[i] = newScore;
-                if (i < LENGTH - 1) {
+                if (i < getLENGTH() - 1) {
                     scoreList[i + 1] = current;
                 }
             }
