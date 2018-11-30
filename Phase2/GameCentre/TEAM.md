@@ -68,7 +68,12 @@ don't match, they flip back over.
 * Undo: implemented using a stack by saving each character's HP, MP and BattleQueue before a move is performed so the current game state can ge reset to what it was like before the move was performed.
 
 ## Card Matching Game design decision:
-* TBD
+* Similar design to Sliding Tiles due to also being a board like game.
+* We extracted some superclasses from Sliding Tiles classes that this game, and other potential future board games can extend.
+* We used a Handler to introduce a delay between flipping cards, so the user has time to view what card he flipped.
+* There are two sets of tiles. One of the question mark tiles that the user views on the screen, and another of the actual images to be matched.
+* Tiles are flipped by changing the background of the tile in question, in the question mark tile array.
+* Your win condition is determined by an interger (numTilesMatched) which tracks how many tiles you've correctly matched so far.
 
 ## Current bugs that need fixing:
 
