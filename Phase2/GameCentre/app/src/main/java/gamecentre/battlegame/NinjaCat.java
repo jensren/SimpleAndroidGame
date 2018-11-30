@@ -8,7 +8,7 @@ import java.io.Serializable;
 class NinjaCat extends Character implements Serializable {
 
     /**
-     * The damage done by regular move
+     * The damage done by special move
      */
     private static final int SPECIAL_MOVE_COST = 9;
     /**
@@ -16,7 +16,7 @@ class NinjaCat extends Character implements Serializable {
      */
     private static final int SPECIAL_MOVE_DAMAGE = 15;
     /**
-     * The amount of MP used by special move
+     * The amount of MP used by regular move
      */
     private static final int REGULAR_MOVE_DAMAGE = 5;
 
