@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import gamecentre.BoardManager;
+
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class SlidingtilesBoardManager implements Serializable {
-
+public class SlidingtilesBoardManager extends BoardManager implements Serializable {
     /**
      * The board being managed.
      */
@@ -37,11 +38,6 @@ public class SlidingtilesBoardManager implements Serializable {
     private ArrayList<int[]> previousMoves = new ArrayList<>();
 
     /**
-     * Number of moves made
-     */
-    private int numMoves = 0;
-
-    /**
      * Manage a new shuffled board.
      */
     public SlidingtilesBoardManager() {
@@ -51,10 +47,10 @@ public class SlidingtilesBoardManager implements Serializable {
             tiles.add(new Tile(tileNum));
         }
 
-//        Collections.shuffle(tiles);
-//        while (!solvable(tiles)) {
-//            Collections.shuffle(tiles);
-//        }
+        Collections.shuffle(tiles);
+        while (!solvable(tiles)) {
+            Collections.shuffle(tiles);
+        }
         this.board = new SlidingtilesBoard(tiles);
 
     }
@@ -142,7 +138,8 @@ public class SlidingtilesBoardManager implements Serializable {
      *
      * @return whether the tiles are in row-major order
      */
-    boolean puzzleSolved() {
+    @Override
+    protected boolean isWin() {
         int TileId = 0;
         for (Tile t : board) {
             TileId++;
@@ -188,7 +185,8 @@ public class SlidingtilesBoardManager implements Serializable {
      * @param position the tile to check
      * @return whether the tile at position is surrounded by a blank tile
      */
-    boolean isValidTap(int position) {
+    @Override
+    protected boolean isValidTap(int position) {
         int[] blankPosition = blankTilePosition(position);
         int blankRow = blankPosition[0];
         int blankCol = blankPosition[1];
@@ -201,7 +199,8 @@ public class SlidingtilesBoardManager implements Serializable {
      *
      * @param position the position
      */
-    void touchMove(int position) {
+    @Override
+    protected void touchMove(int position) {
         int row = position / SlidingtilesBoard.numCols;
         int col = position % SlidingtilesBoard.numCols;
 
@@ -238,21 +237,6 @@ public class SlidingtilesBoardManager implements Serializable {
             board.swapTiles(lastMove[0], lastMove[1], lastMove[2], lastMove[3]);
             updateMoves();
         }
-    }
-
-    /**
-     * count the number of total moves made
-     */
-    void updateMoves() {
-        numMoves += 1;
-    }
-
-    /**
-     * @return the highest score
-     */
-
-    int getNumMoves() {
-        return numMoves;
     }
 
     /**

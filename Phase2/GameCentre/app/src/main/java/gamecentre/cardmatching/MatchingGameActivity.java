@@ -49,7 +49,7 @@ public class MatchingGameActivity extends AppCompatActivity{
         updateTileButtons();
         gridView.setAdapter(new CustomAdapter(tileButtons, columnWidth, columnHeight));
         TextView score = findViewById(R.id.moves);
-        String a = "Your moves: " + boardManager.matchingGetNumMoves();
+        String a = "Your moves: " + boardManager.getNumMoves();
         score.setText(a);
     }
     @Override

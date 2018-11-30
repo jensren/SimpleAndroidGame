@@ -55,7 +55,7 @@ class MovementController {
             boardManager.updateMoves();
 
             boardManager.touchMove(position);
-            if (boardManager.puzzleSolved()) {
+            if (boardManager.isWin()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
                 SlidingtilesScoreboard.setNumMoves(boardManager.getNumMoves());
                 SlidingtilesScoreboard.setBoardSize(boardManager.getBoardSize());

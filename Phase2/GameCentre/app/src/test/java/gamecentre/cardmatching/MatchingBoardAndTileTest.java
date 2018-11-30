@@ -74,16 +74,16 @@ public class MatchingBoardAndTileTest {
     @Test
     public void testIsValidTap() {
         setUpCorrect();
-        assertEquals(true, boardManager.matchingIsValidTap(9));
-        assertEquals(true, boardManager.matchingIsValidTap(10));
-        assertEquals(true, boardManager.matchingIsValidTap(11));
+        assertEquals(true, boardManager.isValidTap(9));
+        assertEquals(true, boardManager.isValidTap(10));
+        assertEquals(true, boardManager.isValidTap(11));
         flipFirstTile();
-        assertEquals(false, boardManager.matchingIsValidTap(0));
+        assertEquals(false, boardManager.isValidTap(0));
 
         changeToBlank();
-        assertEquals(false, boardManager.matchingIsValidTap(9));
-        assertEquals(false, boardManager.matchingIsValidTap(10));
-        assertEquals(false, boardManager.matchingIsValidTap(11));
+        assertEquals(false, boardManager.isValidTap(9));
+        assertEquals(false, boardManager.isValidTap(10));
+        assertEquals(false, boardManager.isValidTap(11));
     }
 
     @Test
@@ -165,17 +165,17 @@ public class MatchingBoardAndTileTest {
     }
 
     public void updateMove() {
-        boardManager.matchingUpdateMoves();
+        boardManager.updateMoves();
     }
 
     @Test
     public void testMatchingUpdateMove() {
         setUpCorrect();
-        assertEquals(0, boardManager.matchingGetNumMoves());
+        assertEquals(0, boardManager.getNumMoves());
         updateMove();
-        assertEquals(1, boardManager.matchingGetNumMoves());
+        assertEquals(1, boardManager.getNumMoves());
         updateMove();
-        assertEquals(2, boardManager.matchingGetNumMoves());
+        assertEquals(2, boardManager.getNumMoves());
     }
 
     public void touchMoveFirstTile() {
