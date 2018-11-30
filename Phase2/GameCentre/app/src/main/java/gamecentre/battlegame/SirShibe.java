@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 /**
  * Class representing the Sir Shibe character, a fighter character.
- * A fighter Character's special attack resets the battle queue so that there is only one copy of
- * each character in the battle queue.
  */
 public class SirShibe extends Character implements Serializable {
 
@@ -23,6 +21,10 @@ public class SirShibe extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
+    /**
+     * Plays SirShibe's special move. Resets the battle queue so that there is only one copy of
+     * each character in the battle queue.
+     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
