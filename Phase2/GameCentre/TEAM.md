@@ -82,3 +82,19 @@ Done!
 ## To-do list:
 Done!
 
+##Meeting Notes:
+### Nov 12
+* We debated and decided on which two games we wanted to implement in addition to sliding tiles. Ultimately decided on battle game and card matching
+* We allocated roles for games. Jiaheng and Andrew will work on Matching, Jenney, Cassidy and Ashas work on battle.
+* We went over the feedback for Phase 1, and discussed how to improve on things. This includes writing more java doc, updating team.md more, and allowing scoreboard to be accessed from main screen.
+### Nov 19
+* Updated each other on progress of two games. Matching Game was close to finished, Battle game had the basic implementations but needed the moves and animations to be added.
+* The job of making Sliding Tiles only create solvable boards was given to Jiaheng and Andrew.
+* Began work on unit tests.
+### Nov 26
+* Discussed the importance of having a separate serializer utility class. Decided who would work on it.
+* Discussed if saving feature was needed for battle game. Decided to ask Paul about it on Tuesday lecture.
+* Decided how we would allocate unit tests to write.
+* Discussed how to test certain classes and whether we needed a controller for some activity classes. Decided to ask Paul on Tuesday.
+* Discussed which classes in Sliding Tiles and Matching Game we wanted superclasses for.
+
