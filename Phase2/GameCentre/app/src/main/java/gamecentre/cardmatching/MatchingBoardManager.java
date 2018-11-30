@@ -27,6 +27,10 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
      * Keeps track of the row and col indices of the two flipped tiles. Initialized as -1.
      */
     private int[] flippedTiles = new int[]{-1, -1, -1, -1};
+    /**
+     * Number of moves made
+     */
+    private int numMoves = 0;
 
     /**
      * Manage a board that has been pre-populated.
@@ -138,5 +142,18 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
             board.flipBack(flippedTiles[0], flippedTiles[1]);
             board.flipBack(flippedTiles[2], flippedTiles[3]);
         }
+    }
+    /**
+     * count the number of total moves made
+     */
+    public void updateMoves() {
+        numMoves += 1;
+    }
+
+    /**
+     * @return the highest score
+     */
+    public int getNumMoves() {
+        return numMoves;
     }
 }

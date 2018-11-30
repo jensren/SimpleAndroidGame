@@ -17,6 +17,11 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
     SlidingtilesBoard board;
 
     /**
+     * Number of moves made
+     */
+    private int numMoves = 0;
+
+    /**
      * Manage a board that has been pre-populated.
      *
      * @param board the board
@@ -244,6 +249,20 @@ public class SlidingtilesBoardManager extends BoardManager implements Serializab
      */
     int getBoardSize() {
         return SlidingtilesBoard.numRows;
+    }
+
+    /**
+     * count the number of total moves made
+     */
+    public void updateMoves() {
+        numMoves += 1;
+    }
+
+    /**
+     * @return the highest score
+     */
+    public int getNumMoves() {
+        return numMoves;
     }
 
 }
