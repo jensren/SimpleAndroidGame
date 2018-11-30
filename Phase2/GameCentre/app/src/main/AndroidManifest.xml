@@ -62,6 +62,7 @@
         <activity
             android:name="gamecentre.battlegame.CatChoiceActivity"
             android:parentActivityName="gamecentre.battlegame.BattleStartingActivity" />
+        <activity android:name="gamecentre.battlegame.InstructionsActivity" />
     </application>
 
 </manifest>
