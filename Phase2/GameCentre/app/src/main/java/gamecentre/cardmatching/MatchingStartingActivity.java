@@ -76,7 +76,7 @@ public class MatchingStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                matchingBoardManager = serializer.loadMatchingBoardManagerFromFile(matchingSaveFileName, MatchingStartingActivity.this);
+                matchingBoardManager = serializer.loadMatchingBoardManagerFromFile(matchingAutoSaveFileName, MatchingStartingActivity.this);
                 serializer.saveMatchingBoardManagerToFile(matchingAutoSaveFileName, matchingBoardManager, MatchingStartingActivity.this);
                 serializer.saveMatchingBoardManagerToFile(matchingTempSaveFileName,matchingBoardManager,MatchingStartingActivity.this);
                 makeToastLoadedText();
