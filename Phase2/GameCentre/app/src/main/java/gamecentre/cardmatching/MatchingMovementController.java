@@ -16,6 +16,9 @@ class MatchingMovementController extends MovementController {
      */
     private MatchingBoardManager boardManager = null;
 
+    /**
+     * Creates a new matching game movement controller.
+     */
     MatchingMovementController() {
     }
 
