@@ -51,7 +51,7 @@ public class MatchingBoard extends Board implements Serializable {
      * @param col the tile column
      * @return the tile at (row, col)
      */
-    MatchingTile getTile(int row, int col) {
+    MatchingTile matchingGetTile(int row, int col) {
         return unknownTiles[row][col];
     }
 
