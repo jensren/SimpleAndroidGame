@@ -13,19 +13,10 @@ import gamecentre.Scoreboard;
 public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
 
     /**
-     * The current user, number of moves, and board size
+     * The number of moves and board size
      */
-    private static String user;
     private static int numMoves;
     private static int boardSize;
-
-    /**
-     * The user's current score
-     */
-
-    public static void setUser(String user) {
-        SlidingtilesScoreboard.user = user;
-    }
 
     static void setNumMoves(int numMoves) {
         SlidingtilesScoreboard.numMoves = numMoves;
@@ -35,8 +26,8 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
         SlidingtilesScoreboard.boardSize = boardSize;
     }
 
-    String getUserBestScore() {
-        return super.getUserBestScore(user);
+    protected String getUserBestScore() {
+        return super.getUserBestScore();
     }
 
     protected String getUserCurrentScore() {
@@ -66,7 +57,7 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
     public void update() {
         if (numMoves != 0) {
             int points = numMoves / boardSize;
-            currentScore = new Score(user, points);
+            currentScore = new Score(Scoreboard.getUser(), points);
             updateGameHighScore(currentScore);
             updateUserHighScore(currentScore);
         } else {

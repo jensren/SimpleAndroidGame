@@ -59,9 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
             setFileNames(username);
             serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
             serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
-            MatchingScoreboard.setUser(username);
-            BattleScoreboard.setUser(username);
-            BattleScoreboard.setUser(username);
+            Scoreboard.setUser(username);
             switchToGameChoiceActivity();
         } else {
             Toast.makeText(this, "Username taken", Toast.LENGTH_LONG).show();

@@ -51,10 +51,10 @@ public class SlidingtilesBoardManager implements Serializable {
             tiles.add(new Tile(tileNum));
         }
 
-        Collections.shuffle(tiles);
-        while (!solvable(tiles)) {
-            Collections.shuffle(tiles);
-        }
+//        Collections.shuffle(tiles);
+//        while (!solvable(tiles)) {
+//            Collections.shuffle(tiles);
+//        }
         this.board = new SlidingtilesBoard(tiles);
 
     }

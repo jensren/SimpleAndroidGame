@@ -5,18 +5,9 @@ import gamecentre.Scoreboard;
 
 public class MatchingScoreboard extends Scoreboard {
     /**
-     * The current user, number of moves
+     * The current number of moves
      */
-    private static String user;
     private static int numMoves;
-
-    /**
-     * Sets scoreboard's user to the current player's username.
-     * @param user The username of the player
-     */
-    public static void setUser(String user) {
-        MatchingScoreboard.user = user;
-    }
 
     /**
      * Sets scoreboard's number of moves.
@@ -30,8 +21,8 @@ public class MatchingScoreboard extends Scoreboard {
      * Gets the user's highest high score.
      * @return the best score.
      */
-    String getUserBestScore() {
-        return super.getUserBestScore(user);
+    protected String getUserBestScore() {
+        return super.getUserBestScore();
     }
 
     /**
@@ -77,7 +68,7 @@ public class MatchingScoreboard extends Scoreboard {
     @Override
     public void update() {
         if (numMoves > 0) {
-            currentScore = new Score(user, numMoves);
+            currentScore = new Score(Scoreboard.getUser(), numMoves);
             updateGameHighScore(currentScore);
             updateUserHighScore(currentScore);
         } else {
