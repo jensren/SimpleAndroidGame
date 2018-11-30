@@ -2,26 +2,17 @@ package gamecentre;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import gamecentre.battlegame.BattleScoreboard;
-import gamecentre.battlegame.BattleStartingActivity;
 import gamecentre.cardmatching.MatchingScoreboard;
-import gamecentre.cardmatching.MatchingScoreboardActivity;
 import gamecentre.cardmatching.MatchingStartingActivity;
 import gamecentre.slidingtiles.R;
-import gamecentre.slidingtiles.SlidingtilesScoreboardActivity;
 import gamecentre.slidingtiles.SlidingtilesStartingActivity;
 
 /**
@@ -38,12 +29,16 @@ public class SignUpActivity extends AppCompatActivity {
      * The user manager.
      */
     private UserManager userManager;
+    /**
+     * The serializer for this activity.
+     */
+    Serializer serializer = new Serializer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userManager = new UserManager();
-
+        //  serializer.saveUserManagerToFile(USER_FILENAME,userManager);
         setContentView(R.layout.activity_signup);
         addSignUpButtonListener();
     }
@@ -62,10 +57,9 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (userManager.getPassword(username) == null) {
             userManager.addUser(username, password);
             setFileNames(username);
-            saveToFile();
-            MatchingScoreboard.setUser(username);
-            BattleScoreboard.setUser(username);
-            BattleScoreboard.setUser(username);
+            serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
+            serializer.saveUserManagerToFile(USER_FILENAME, userManager, this);
+            Scoreboard.setUser(username);
             switchToGameChoiceActivity();
         } else {
             Toast.makeText(this, "Username taken", Toast.LENGTH_LONG).show();
@@ -89,12 +83,12 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * Activate the ok button.
      */
-    private void addSignUpButtonListener() {
+    public void addSignUpButtonListener() {
         Button startButton = findViewById(R.id.okup);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile();
+                serializer.loadUserManagerFromFile(USER_FILENAME, SignUpActivity.this);
                 createUser();
             }
         });
@@ -103,46 +97,14 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * Display the game choice activity.
      */
-    private void switchToGameChoiceActivity() {
+    public void switchToGameChoiceActivity() {
         Intent tmp = new Intent(this, GameChoiceActivity.class);
         startActivity(tmp);
     }
 
-    /**
-     * Load the user manager from USER_FILENAME.
-     */
-    private void loadFromFile() {
-        try {
-            InputStream inputStream = this.openFileInput(USER_FILENAME);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                userManager = (UserManager) input.readObject();
-                if (userManager == null) {
-                    userManager = new UserManager();
-                }
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the user manager to USER_FILENAME.
-     */
-    public void saveToFile() {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(USER_FILENAME, MODE_PRIVATE));
-            outputStream.writeObject(userManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
     }
 }
 

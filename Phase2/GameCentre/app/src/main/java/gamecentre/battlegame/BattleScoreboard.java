@@ -5,16 +5,11 @@ import gamecentre.Scoreboard;
 
 public class BattleScoreboard extends Scoreboard {
     /**
-     * The current user, number of moves, and hp of both characters
+     * The number of moves and hp of both characters
      */
-    private static String user;
     private static int numMoves;
     private static int playerHpLost;
     private static int opponentHpLost;
-
-    public static void setUser(String user) {
-        BattleScoreboard.user = user;
-    }
 
     static void setNumMoves(int numMoves) {
         BattleScoreboard.numMoves = numMoves;
@@ -28,12 +23,26 @@ public class BattleScoreboard extends Scoreboard {
         BattleScoreboard.opponentHpLost = opponentHpLost;
     }
 
-    String getUserBestScore() {
-        return super.getUserBestScore(user);
+    protected String getUserBestScore() {
+        return super.getUserBestScore();
     }
 
     public static int getNumMoves() {
         return numMoves;
+    }
+
+    /**
+     * Get the winner of the game
+     *
+     * @return a String saying player 1 won or player 2 won
+     */
+    String getWinner() {
+        if (playerHpLost == Character.getInitialHp()) {
+            return "Player 2 is the winner!";
+        } else if (opponentHpLost == Character.getInitialHp()) {
+            return "Player 1 is the winner!";
+        }
+        return "";
     }
 
     protected String getUserCurrentScore() {
@@ -59,11 +68,13 @@ public class BattleScoreboard extends Scoreboard {
     protected void update() {
         if (numMoves != 0) {
             int points = ((100 + playerHpLost - opponentHpLost) * numMoves) / 10;
-            currentScore = new Score(user, points);
+            currentScore = new Score(Scoreboard.getUser(), points);
             updateGameHighScore(currentScore);
             updateUserHighScore(currentScore);
         } else {
             currentScore = null;
+            playerHpLost = 0;
+            opponentHpLost = 0;
         }
     }
 }

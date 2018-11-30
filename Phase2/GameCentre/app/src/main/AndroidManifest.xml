@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="gamecentre.slidingtiles">
 
     <application
@@ -8,30 +9,59 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="gamecentre.GameLaunchCentreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="gamecentre.slidingtiles.GameActivity" />
-        <activity android:name="gamecentre.SignInActivity" />
-        <activity android:name="gamecentre.SignUpActivity" />
-        <activity android:name="gamecentre.slidingtiles.SlidingtilesStartingActivity" />
-        <activity android:name="gamecentre.slidingtiles.SlidingtilesScoreboardActivity" />
-        <activity android:name="gamecentre.GameChoiceActivity" />
-        <activity android:name="gamecentre.battlegame.BattleScoreboardActivity" />
-        <activity android:name="gamecentre.cardmatching.MatchingStartingActivity" />
-        <activity android:name="gamecentre.cardmatching.MatchingGameActivity" />
-        <activity android:name="gamecentre.cardmatching.MatchingScoreboardActivity" />
-        <activity android:name="gamecentre.battlegame.BattleStartingActivity" />
-        <activity android:name="gamecentre.battlegame.BattleGameActivity" />
-        <activity android:name="gamecentre.battlegame.CatOrDogActivity" />
-        <activity android:name="gamecentre.battlegame.Player1DogChoiceActivity" />
-        <activity android:name="gamecentre.battlegame.Player1CatChoiceActivity" />
-        <activity android:name="gamecentre.battlegame.Player2CatChoiceActivity" />
-        <activity android:name="gamecentre.battlegame.Player2DogChoiceActivity" />
+        <activity
+            android:name="gamecentre.slidingtiles.GameActivity"
+            android:parentActivityName="gamecentre.slidingtiles.SlidingtilesStartingActivity" />
+        <activity
+            android:name="gamecentre.SignInActivity"
+            android:parentActivityName="gamecentre.GameLaunchCentreActivity" />
+        <activity
+            android:name="gamecentre.SignUpActivity"
+            android:parentActivityName="gamecentre.GameLaunchCentreActivity" />
+        <activity
+            android:name="gamecentre.slidingtiles.SlidingtilesStartingActivity"
+            android:parentActivityName="gamecentre.GameChoiceActivity" />
+        <activity
+            android:name="gamecentre.slidingtiles.SlidingtilesScoreboardActivity"
+            android:parentActivityName="gamecentre.slidingtiles.SlidingtilesStartingActivity" />
+        <activity
+            android:name="gamecentre.GameChoiceActivity"
+            android:parentActivityName="gamecentre.GameLaunchCentreActivity" />
+        <activity
+            android:name="gamecentre.battlegame.BattleScoreboardActivity"
+            android:parentActivityName="gamecentre.battlegame.BattleStartingActivity" />
+        <activity
+            android:name="gamecentre.cardmatching.MatchingStartingActivity"
+            android:parentActivityName="gamecentre.GameChoiceActivity" />
+        <activity
+            android:name="gamecentre.cardmatching.MatchingGameActivity"
+            android:parentActivityName="gamecentre.cardmatching.MatchingStartingActivity" />
+        <activity
+            android:name="gamecentre.cardmatching.MatchingScoreboardActivity"
+            android:parentActivityName="gamecentre.cardmatching.MatchingStartingActivity" />
+        <activity
+            android:name="gamecentre.battlegame.BattleStartingActivity"
+            android:parentActivityName="gamecentre.GameChoiceActivity" />
+        <activity
+            android:name="gamecentre.battlegame.BattleGameActivity"
+            android:parentActivityName="gamecentre.battlegame.BattleStartingActivity" />
+        <activity
+            android:name="gamecentre.battlegame.CatOrDogActivity"
+            android:parentActivityName="gamecentre.battlegame.BattleStartingActivity" />
+        <activity
+            android:name="gamecentre.battlegame.DogChoiceActivity"
+            android:parentActivityName="gamecentre.battlegame.BattleStartingActivity" />
+        <activity
+            android:name="gamecentre.battlegame.CatChoiceActivity"
+            android:parentActivityName="gamecentre.battlegame.BattleStartingActivity" />
     </application>
 
 </manifest>

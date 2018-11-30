@@ -1,19 +1,15 @@
 package gamecentre.slidingtiles;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import gamecentre.Serializer;
 
 /**
  * The initial activity for the sliding puzzle tile game.
@@ -35,13 +31,17 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private SlidingtilesBoardManager boardManager;
+    /**
+     * The serializer for this activity
+     */
+    Serializer serializer = new Serializer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boardManager = new BoardManager();
-        saveToFile(tempSaveFileName);
+        boardManager = new SlidingtilesBoardManager();
+        serializer.saveBoardManagerToFile(tempSaveFileName, boardManager, this);
         SlidingtilesScoreboard.reset();
 
         setContentView(R.layout.activity_slidingtiles_starting);
@@ -60,9 +60,9 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Board.numCols = Board.size;
-                Board.numRows = Board.size;
-                boardManager = new BoardManager();
+                SlidingtilesBoard.numCols = SlidingtilesBoard.size;
+                SlidingtilesBoard.numRows = SlidingtilesBoard.size;
+                boardManager = new SlidingtilesBoardManager();
                 switchToGame();
             }
         });
@@ -76,9 +76,9 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFromFile(saveFileName);
-                saveToFile(tempSaveFileName);
-                saveToFile(autoSaveFileName);
+                serializer.loadBoardManagerFromFile(autoSaveFileName, SlidingtilesStartingActivity.this);
+                serializer.saveBoardManagerToFile(tempSaveFileName, boardManager, SlidingtilesStartingActivity.this);
+                serializer.saveBoardManagerToFile(autoSaveFileName, boardManager, SlidingtilesStartingActivity.this);
                 makeToastLoadedText();
                 switchToGame();
             }
@@ -113,8 +113,8 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToFile(saveFileName);
-                saveToFile(tempSaveFileName);
+                serializer.saveBoardManagerToFile(saveFileName, boardManager, SlidingtilesStartingActivity.this);
+                serializer.saveBoardManagerToFile(tempSaveFileName, boardManager, SlidingtilesStartingActivity.this);
                 makeToastSavedText();
             }
         });
@@ -132,13 +132,13 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
 
                 switch (index) {
                     case 0: // 3x3 case
-                        Board.size = 3;
+                        SlidingtilesBoard.size = 3;
                         break;
                     case 1: // 4x4 case
-                        Board.size = 4;
+                        SlidingtilesBoard.size = 4;
                         break;
                     case 2: // 5x5 case
-                        Board.size = 5;
+                        SlidingtilesBoard.size = 5;
                         break;
                 }
             }
@@ -165,7 +165,7 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
      */
     private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity.class);
-        saveToFile(SlidingtilesStartingActivity.tempSaveFileName);
+        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.tempSaveFileName, boardManager, this);
         startActivity(tmp);
     }
 
@@ -175,52 +175,12 @@ public class SlidingtilesStartingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadFromFile(tempSaveFileName);
+        serializer.loadBoardManagerFromFile(tempSaveFileName, this);
     }
 
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            InputStream autoInputStream = this.openFileInput(autoSaveFileName);
-            if (inputStream != null && inputStream == autoInputStream) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
-                inputStream.close();
-            } else {
-                if (autoInputStream != null) {
-                    ObjectInputStream input = new ObjectInputStream(autoInputStream);
-                    boardManager = (BoardManager) input.readObject();
-                    autoInputStream.close();
-                }
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
     }
 }
 

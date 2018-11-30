@@ -3,6 +3,7 @@ package gamecentre;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,12 @@ public class GameChoiceActivity extends AppCompatActivity {
         addCardMatchingButtonListener();
         addBattleButtonListener();
     }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
+    }
+
 
     /**
      * Add a Cats vs Doges game button.

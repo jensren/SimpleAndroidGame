@@ -2,23 +2,19 @@ package gamecentre.slidingtiles;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import gamecentre.BoardUpdateListener;
 import gamecentre.OnWinListener;
+import gamecentre.Serializer;
 
 /**
  * The game activity.
@@ -28,15 +24,25 @@ public class GameActivity extends AppCompatActivity {
     /**
      * The board manager.
      */
-    private BoardManager boardManager;
+    private SlidingtilesBoardManager boardManager;
 
     /**
      * The buttons to display.
      */
     private ArrayList<Button> tileButtons;
 
-    // Grid View and calculated column height and width based on device size
+    /**
+     * The saver and loader.
+     */
+    Serializer serializer = new Serializer();
+
+    /**
+     * The gridview for the game
+     */
     private GestureDetectGridView gridView;
+    /**
+     * Calculated column height and width based on device size
+     */
     private static int columnWidth, columnHeight;
 
     /**
@@ -51,7 +57,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadFromFile(SlidingtilesStartingActivity.tempSaveFileName);
+        boardManager = serializer.loadBoardManagerFromFile(SlidingtilesStartingActivity.tempSaveFileName, this);
         createTileButtons(this);
         setContentView(R.layout.activity_slidingtiles_main);
         Button undoButton = findViewById(R.id.Undo);
@@ -59,18 +65,18 @@ public class GameActivity extends AppCompatActivity {
 
         // Add View to activity
         gridView = findViewById(R.id.grid);
-        gridView.setNumColumns(Board.numCols);
+        gridView.setNumColumns(SlidingtilesBoard.numCols);
         gridView.setBoardManager(boardManager);
-        boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {
+        boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {  //Sets the board update listener. Will update display when board updates.
             @Override
             public void onBoardChanged() {
                 display();
-                saveToFile(SlidingtilesStartingActivity.autoSaveFileName);
+                serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager, GameActivity.this);
             }
         });
         gridView.mController.setOnWinListener(new OnWinListener() {
             @Override
-            public void onWin() {
+            public void onWin() {  //Sets the win listener. Will switch to scoreboard when the game is won.
                 switchToScoreBoardActivity();
             }
         });
@@ -95,8 +101,8 @@ public class GameActivity extends AppCompatActivity {
                         int displayWidth = gridView.getMeasuredWidth();
                         int displayHeight = gridView.getMeasuredHeight();
 
-                        columnWidth = displayWidth / Board.numCols;
-                        columnHeight = displayHeight / Board.numRows;
+                        columnWidth = displayWidth / SlidingtilesBoard.numCols;
+                        columnHeight = displayHeight / SlidingtilesBoard.numRows;
 
                         display();
                     }
@@ -109,10 +115,10 @@ public class GameActivity extends AppCompatActivity {
      * @param context the context
      */
     private void createTileButtons(Context context) {
-        Board board = boardManager.getBoard();
+        SlidingtilesBoard board = boardManager.getBoard();
         tileButtons = new ArrayList<>();
-        for (int row = 0; row != Board.numRows; row++) {
-            for (int col = 0; col != Board.numCols; col++) {
+        for (int row = 0; row != SlidingtilesBoard.numRows; row++) {
+            for (int col = 0; col != SlidingtilesBoard.numCols; col++) {
                 Button tmp = new Button(context);
                 tmp.setBackgroundResource(board.getTile(row, col).getBackground());
                 this.tileButtons.add(tmp);
@@ -124,11 +130,11 @@ public class GameActivity extends AppCompatActivity {
      * Update the backgrounds on the buttons to match the tiles.
      */
     private void updateTileButtons() {
-        Board board = boardManager.getBoard();
+        SlidingtilesBoard board = boardManager.getBoard();
         int nextPos = 0;
         for (Button b : tileButtons) {
-            int row = nextPos / Board.numRows;
-            int col = nextPos % Board.numCols;
+            int row = nextPos / SlidingtilesBoard.numRows;
+            int col = nextPos % SlidingtilesBoard.numCols;
             b.setBackgroundResource(board.getTile(row, col).getBackground());
             nextPos++;
         }
@@ -140,57 +146,18 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(SlidingtilesStartingActivity.tempSaveFileName);
-        saveToFile(SlidingtilesStartingActivity.autoSaveFileName);
+        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.tempSaveFileName, boardManager, this);
+        serializer.saveBoardManagerToFile(SlidingtilesStartingActivity.autoSaveFileName, boardManager, this);
     }
 
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (BoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
-    }
 
     private void switchToScoreBoardActivity() {
         Intent tmp = new Intent(this, SlidingtilesScoreboardActivity.class);
         startActivity(tmp);
     }
 
-//    private class WinObserver implements Observer {
-//        public void update(Observable o, Object arg) {
-//            switchToScoreBoardActivity();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
+    }
 }

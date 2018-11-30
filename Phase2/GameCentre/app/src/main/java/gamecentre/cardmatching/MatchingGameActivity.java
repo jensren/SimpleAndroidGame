@@ -3,21 +3,17 @@ package gamecentre.cardmatching;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import gamecentre.BoardUpdateListener;
 import gamecentre.OnWinListener;
+import gamecentre.Serializer;
 import gamecentre.slidingtiles.CustomAdapter;
 import gamecentre.slidingtiles.R;
 
@@ -31,14 +27,23 @@ public class MatchingGameActivity extends AppCompatActivity{
      * The buttons to display.
      */
     private ArrayList<Button> tileButtons;
-
-    // Grid View and calculated column height and width based on device size
+    /**
+     * The gridview for this game
+     */
     private MatchingGestureDetectGridView gridView;
+    /**
+     * Calculated column height and width based on device size
+     */
     private static int columnWidth, columnHeight;
+    /**
+     * The serializer for this activity.
+     */
+    Serializer serializer = new Serializer();
 
     /**
      * Set up the background image for each button based on the master list
-     * of positions, and then call the adapter to set the view.
+     * of positions, updates the display for user's number of moves, and then call the adapter to
+     * set the view.
      */
     public void display() {
         updateTileButtons();
@@ -50,7 +55,8 @@ public class MatchingGameActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        loadFromFile(MatchingStartingActivity.matchingTempSaveFileName);
+        boardManager = serializer.loadMatchingBoardManagerFromFile(
+                MatchingStartingActivity.matchingTempSaveFileName, this);
         createTileButtons(this);
         setContentView(R.layout.activity_cardmatching_main);
 
@@ -60,12 +66,14 @@ public class MatchingGameActivity extends AppCompatActivity{
         gridView.setBoardManager(boardManager);
         boardManager.getBoard().setBoardUpdateListener(new BoardUpdateListener() {
             @Override
-            public void onBoardChanged() {
+            public void onBoardChanged() {   //Sets the board update listener. Will update display when board updates.
                 display();
-                saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
+                serializer.saveMatchingBoardManagerToFile(
+                        MatchingStartingActivity.matchingAutoSaveFileName, boardManager,
+                        MatchingGameActivity.this);
             }
         });
-        gridView.mController.setOnWinListener(new OnWinListener() {
+        gridView.mController.setOnWinListener(new OnWinListener() {  //Sets the win listener. Will switch to scoreboard when the game is won.
             @Override
             public void onWin() {
                 switchToScoreBoardActivity();
@@ -100,7 +108,7 @@ public class MatchingGameActivity extends AppCompatActivity{
         for (int row = 0; row != MatchingBoard.numRows; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
                 Button tmp = new Button(context);
-                tmp.setBackgroundResource(board.getTile(row, col).getBackground());
+                tmp.setBackgroundResource(board.matchingGetTile(row, col).getBackground());
                 this.tileButtons.add(tmp);
             }
         }
@@ -115,7 +123,7 @@ public class MatchingGameActivity extends AppCompatActivity{
         for (Button b : tileButtons) {
             int row = nextPos / MatchingBoard.numRows;
             int col = nextPos % MatchingBoard.numCols;
-            b.setBackgroundResource(board.getTile(row, col).getBackground());
+            b.setBackgroundResource(board.matchingGetTile(row, col).getBackground());
             nextPos++;
         }
     }
@@ -126,47 +134,10 @@ public class MatchingGameActivity extends AppCompatActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        saveToFile(MatchingStartingActivity.matchingTempSaveFileName);
-        saveToFile(MatchingStartingActivity.matchingAutoSaveFileName);
-    }
-
-    /**
-     * Load the board manager from fileName.
-     *
-     * @param fileName the name of the file
-     */
-    private void loadFromFile(String fileName) {
-
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                boardManager = (MatchingBoardManager) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the board manager to fileName.
-     *
-     * @param fileName the name of the file
-     */
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(boardManager);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingTempSaveFileName,
+                boardManager, this);
+        serializer.saveMatchingBoardManagerToFile(MatchingStartingActivity.matchingAutoSaveFileName,
+                boardManager, this);
     }
 
     /**
@@ -175,5 +146,10 @@ public class MatchingGameActivity extends AppCompatActivity{
     private void switchToScoreBoardActivity() {
         Intent tmp = new Intent(this, MatchingScoreboardActivity.class);
         startActivity(tmp);
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavUtils.navigateUpFromSameTask(this);
     }
 }

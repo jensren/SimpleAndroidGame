@@ -14,28 +14,43 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import gamecentre.Score;
+import gamecentre.Serializer;
 import gamecentre.slidingtiles.R;
 
 public class BattleScoreboardActivity extends AppCompatActivity {
+    /**
+     * The file where scoreboard will be saved
+     */
     public static final String SCORE_FILENAME = "battle_scoreboard_file.ser";
-    TextView scoreBoard;
+    /**
+     * The textview for scoreboard
+     */
+    TextView scoreBoardView;
+    /**
+     * The battle scoreboard
+     */
     BattleScoreboard scoreboard;
+    /**
+     * The serializer for this activity
+     */
+    Serializer serializer = new Serializer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scoreboard);
-        scoreBoard = findViewById(R.id.s_b);
-        loadFromFile(SCORE_FILENAME);
+        scoreBoardView = findViewById(R.id.s_b);
+
+        serializer.loadScoreboardFromFile(SCORE_FILENAME, this);
         if (scoreboard == null) {
             scoreboard = new BattleScoreboard();
         }
         scoreboard.update();
-        saveToFile(SCORE_FILENAME);
-        scoreBoard.setText(scoreboard.toString());
+        serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard, this);
+        scoreBoardView.setText(scoreboard.toString());
         displayScore();
         displayBestScore();
+        displayWinner();
         addMainButtonListener();
     }
 
@@ -49,46 +64,7 @@ public class BattleScoreboardActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        saveToFile(SCORE_FILENAME);
-    }
-
-    /**
-     * Load a preexisting ScoreBoard from a previous game.
-     *
-     * @param fileName name of file to load
-     */
-    private void loadFromFile(String fileName) {
-        try {
-            InputStream inputStream = this.openFileInput(fileName);
-            if (inputStream != null) {
-                ObjectInputStream input = new ObjectInputStream(inputStream);
-                scoreboard = (BattleScoreboard) input.readObject();
-                inputStream.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
-            Log.e("login activity", "Can not read file: " + e.toString());
-        } catch (ClassNotFoundException e) {
-            Log.e("login activity", "File contained unexpected data type: " + e.toString());
-        }
-    }
-
-    /**
-     * Save the current scoreBoard to file for later access.
-     *
-     * @param fileName name of the file to save
-     */
-
-    public void saveToFile(String fileName) {
-        try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(scoreboard);
-            outputStream.close();
-        } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
-        }
+        serializer.saveScoreboardToFile(SCORE_FILENAME, scoreboard, this);
     }
 
     /**
@@ -105,6 +81,14 @@ public class BattleScoreboardActivity extends AppCompatActivity {
     private void displayBestScore() {
         TextView highScore = findViewById(R.id.highScore);
         highScore.setText(scoreboard.getUserBestScore());
+    }
+
+    /**
+     * Display the winner of the game
+     */
+    private void displayWinner() {
+        TextView winText = findViewById(R.id.winText);
+        winText.setText(scoreboard.getWinner());
     }
 
     /**

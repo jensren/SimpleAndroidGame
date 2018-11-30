@@ -5,25 +5,20 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import gamecentre.BoardUpdateListener;
+import gamecentre.Board;
 import gamecentre.slidingtiles.R;
 
-public class MatchingBoard implements Serializable {
-    transient private BoardUpdateListener boardUpdateListener = null;
+public class MatchingBoard extends Board implements Serializable {
 
-    public void setBoardUpdateListener(BoardUpdateListener boardUpdateListener){
-        this.boardUpdateListener = boardUpdateListener;
-    }
     /**
-     * The number of rows.
+     * Number of rows in matching board.
      */
     final static int numRows = 4;
 
     /**
-     * The number of columns.
+     * Number of columns in matching board.
      */
     final static int numCols = 4;
-
     /**
      * The question mark cards.
      */
@@ -56,7 +51,7 @@ public class MatchingBoard implements Serializable {
      * @param col the tile column
      * @return the tile at (row, col)
      */
-    MatchingTile getTile(int row, int col) {
+    MatchingTile matchingGetTile(int row, int col) {
         return unknownTiles[row][col];
     }
 
@@ -88,12 +83,6 @@ public class MatchingBoard implements Serializable {
         unknownTiles[flippedTiles[0]][flippedTiles[1]] = new MatchingTile(17,R.drawable.tile_25);
         unknownTiles[flippedTiles[2]][flippedTiles[3]] = new MatchingTile(17,R.drawable.tile_25);
         listenerUpdate();
-    }
-
-    private void listenerUpdate(){
-        if (boardUpdateListener != null){
-            boardUpdateListener.onBoardChanged();
-        }
     }
 
     @Override
