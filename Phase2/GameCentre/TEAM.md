@@ -47,7 +47,7 @@
 * Regular attacks for all the characters are the same in function, the only difference is the amount of damage they cause. They all add the character performing the attack back onto the battle queue once.
 * The stealth characters, Detective Shibe and Ninja Cat add the opponent into the battle queue and then themselves twice during their special move.
 * The fighter characters, Sir Shibe and Samurai cat reset the battle queue so that there is only 1 copy of each character and then adds themselves during the special move.
-* The healer characeters, Druid Shibe and Shaman Cat increase their health points by the amount of damage the opponent takes during the character's special move.
+* The healer characters, Druid Shibe and Shaman Cat increase their health points by the amount of damage the opponent takes during the character's special move.
 * For the animations, image 0 and 1 are the standing animation, image 2 and 3 are the regular attack
   animation, and image 4 and 5 are the special attack animation
  
