@@ -144,6 +144,9 @@ public class MatchingStartingActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
+    /**
+     * Read the temporary board from disk.
+     */
     @Override
     protected void onResume() {
         super.onResume();

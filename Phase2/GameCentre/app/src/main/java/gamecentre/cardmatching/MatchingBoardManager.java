@@ -145,14 +145,14 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
     }
 
     /**
-     * count the number of total moves made
+     * Increments the number of moves by 1
      */
     public void updateMoves() {
         numMoves += 1;
     }
 
     /**
-     * @return the highest score
+     * @return the number of moves
      */
     public int getNumMoves() {
         return numMoves;
