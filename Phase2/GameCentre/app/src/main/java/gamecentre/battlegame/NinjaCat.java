@@ -7,8 +7,17 @@ import java.io.Serializable;
  */
 class NinjaCat extends Character implements Serializable {
 
+    /**
+     * The MP consumed by special move
+     */
     private static final int SPECIAL_MOVE_COST = 9;
+    /**
+     * The amount of damage done by special move
+     */
     private static final int SPECIAL_MOVE_DAMAGE = 15;
+    /**
+     * The amount of damage done by regular move
+     */
     private static final int REGULAR_MOVE_DAMAGE = 5;
 
     @Override

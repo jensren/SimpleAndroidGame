@@ -7,8 +7,17 @@ import java.io.Serializable;
  */
 public class DetectiveShibe extends Character implements Serializable {
 
+    /**
+     * The damage done by regular move
+     */
     private static final int REGULAR_MOVE_DAMAGE = 7;
+    /**
+     * The damage done by special move
+     */
     private static final int SPECIAL_MOVE_DAMAGE = 12;
+    /**
+     * The amount of MP used by special move
+     */
     private static final int SPECIAL_MOVE_COST = 15;
 
     @Override
@@ -23,7 +32,8 @@ public class DetectiveShibe extends Character implements Serializable {
 
     /**
      * Plays Detective Shibe's special move.
-     * Adds its opponent and then itself into the battle queue.
+     * Adds its opponent to the battle queue and then itself twice so that this character can
+     * attack twice in concession after its opponent attacks.
      */
     @Override
     void specialMove() {

@@ -8,6 +8,9 @@ abstract class Character implements Serializable {
      * The initial HP of the character.
      */
     private static final int INITIAL_HP = 100;
+    /**
+     * The initial HP of the character.
+     */
     private int hp = INITIAL_HP;
     /**
      * The initial MP of the character.

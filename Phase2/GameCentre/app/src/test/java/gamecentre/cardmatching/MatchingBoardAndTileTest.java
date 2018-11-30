@@ -10,6 +10,9 @@ import gamecentre.slidingtiles.R;
 import static org.junit.Assert.*;
 
 public class MatchingBoardAndTileTest {
+    /**
+     * The matching board manager for testing
+     */
     private MatchingBoardManager boardManager;
 
     /**
@@ -32,7 +35,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Make a solved board.
+     * Make a solved board. (All images flipped over)
      */
     private void setUpCorrect() {
         List<MatchingTile> tiles = makeTiles();
@@ -85,9 +88,10 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Flip all of the tiles to blank except last two tiles and then touch the 14th tile.
+     * Set up board of all tile images. Flip all of the tiles to blank except last two tiles
+     * and then touch the 14th tile to flip it back.
      */
-    private void FlipBackLastTwo() {
+    private void flipBack14th() {
         MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
         for (int row = 0; row != MatchingBoard.numRows - 1; row++) {
             for (int col = 0; col != MatchingBoard.numCols; col++) {
@@ -186,9 +190,9 @@ public class MatchingBoardAndTileTest {
      * Test whether method flipTile works by flipping last tile.
      */
     @Test
-    public void testMatchingFlipBlackLastTwo() {
+    public void testMatchingFlipBack() {
         setUpCorrect();
-        FlipBackLastTwo();
+        flipBack14th();
         assertEquals(7, boardManager.getBoard().matchingGetTile(3, 2).getId());
         boardManager.getBoard().flipBack(3,2);
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 2).getId());
@@ -200,7 +204,7 @@ public class MatchingBoardAndTileTest {
     @Test
     public void testTilesMatching() {
         setUpCorrect();
-        FlipBackLastTwo();
+        flipBack14th();
         boardManager.touchMove(15);
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 2).getId());
         assertEquals(16, boardManager.getBoard().matchingGetTile(3, 3).getId());

@@ -85,13 +85,13 @@ public class MatchingBoardManager extends BoardManager implements Serializable {
     }
 
     /**
-     * Checks if you won the game by seeing if there are 16 tiles matched.
+     * Checks if you won the game by seeing if all tiles on the board have been matched.
      *
      * @return Whether you have won or not.
      */
     @Override
     protected boolean isWin() {
-        return tilesMatched == 16;
+        return tilesMatched == board.numTiles();
     }
 
     /**

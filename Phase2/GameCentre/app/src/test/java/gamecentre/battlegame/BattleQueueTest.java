@@ -6,8 +6,17 @@ import static org.junit.Assert.*;
 
 public class BattleQueueTest {
 
+    /**
+     * The battle queue for testing.
+     */
     private BattleQueue bq = new BattleQueue();
+    /**
+     * Player 1
+     */
     private Character player1;
+    /**
+     * Player 2
+     */
     private Character player2;
 
     /**
@@ -32,7 +41,9 @@ public class BattleQueueTest {
         player2.setOpponent(player1);
     }
 
-
+    /**
+     * Test to get the next character in an empty battle queue.
+     */
     @Test
     public void testGetNextCharacterEmptyBattleQueue() {
         assertTrue(bq.isEmpty());
@@ -40,6 +51,9 @@ public class BattleQueueTest {
         assertNull(nextCharacter);
     }
 
+    /**
+     * Test to get the next character in a battle queue before any moves are performed.
+     */
     @Test
     public void testGetNextCharacterWithCharacters() {
         setUpBattleQueue();
@@ -47,6 +61,9 @@ public class BattleQueueTest {
         assertEquals(player1, nextCharacter);
     }
 
+    /**
+     * Test getWinner in a battle queue with no winner.
+     */
     @Test
     public void TestGetWinnerNoWinner() {
         setUpBattleQueue();
@@ -55,6 +72,10 @@ public class BattleQueueTest {
 
     }
 
+    /**
+     * Test to make sure the getters for player1 and player2 are returning the corresponding
+     * characters.
+     */
     @Test
     public void testGetPlayers() {
         setUpBattleQueue();
@@ -63,8 +84,11 @@ public class BattleQueueTest {
         assertEquals(player2, bq.getPlayer2());
     }
 
+    /**
+     * Test getWinner when one player1 has 0 HP and when player2 has 0 HP.
+     */
     @Test
-    public void testWinner() {
+    public void testGetWinner() {
         setUpBattleQueue();
         player1.setHp(0);
         assertEquals(player2, bq.getWinner());
@@ -73,6 +97,9 @@ public class BattleQueueTest {
         assertEquals(player1, bq.getWinner());
     }
 
+    /**
+     * Test IsValidUndo on a BattleQueue that doesn't have any moves performed in it.
+     */
     @Test
     public void testInValidUndo() {
         setUpBattleQueue();
@@ -80,13 +107,17 @@ public class BattleQueueTest {
         assertEquals(0, bq.getNumMoves());
     }
 
+    /**
+     * Test undo function when a player performs a regular move. The attributes should be set to
+     * what they were before the move was performed.
+     */
     @Test
-    public void testPlayer1Undo() {
+    public void testPlayerUndo() {
         setUpBattleQueue();
         bq.getNextCharacter().regularMove();
         bq.undo();
         assertEquals(player1, bq.getNextCharacter());
-        assertEquals(100, player1.getHp());
+        assertEquals(100, player2.getHp());
         bq.getNextCharacter().regularMove();
         bq.getNextCharacter().regularMove();
         bq.undo();

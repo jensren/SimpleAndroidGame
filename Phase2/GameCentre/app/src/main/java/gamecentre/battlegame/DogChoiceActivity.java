@@ -28,7 +28,6 @@ public class DogChoiceActivity extends AppCompatActivity {
         addSirShibeButtonListener();
 
         startAnimations();
-
     }
 
     /**

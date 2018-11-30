@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="25dp"
     android:background="@drawable/backgound">
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
         android:layout_marginBottom="112dp"
         android:text="Choose a game:"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -22,34 +21,36 @@
 
     <Button
         android:id="@+id/slidingtiles"
-        android:layout_width="119dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="26dp"
-        android:text="Slidingtiles"
-        app:layout_constraintBottom_toTopOf="@+id/battlegame"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="166dp"
+        android:backgroundTint="@android:color/holo_purple"
+        android:text="Slidingtiles" />
 
     <Button
         android:id="@+id/battlegame"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="24dp"
-        android:text="Cats vs Doges"
-        app:layout_constraintBottom_toTopOf="@+id/cardmatching"
-        app:layout_constraintStart_toStartOf="@+id/cardmatching"
-        app:layout_constraintTop_toBottomOf="@+id/slidingtiles" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-5dp"
+        android:layout_marginBottom="253dp"
+        android:backgroundTint="@android:color/holo_purple"
+        android:text="Cats vs Dogs" />
 
     <Button
         android:id="@+id/cardmatching"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="171dp"
-        android:text="Card matching"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/battlegame" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_alignEnd="@+id/battlegame"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-8dp"
+        android:layout_marginBottom="110dp"
+        android:backgroundTint="@android:color/holo_purple"
+        android:text="Card matching" />
+</RelativeLayout>
