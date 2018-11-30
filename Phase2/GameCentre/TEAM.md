@@ -77,8 +77,8 @@ don't match, they flip back over.
 * Your win condition is determined by an integer (tilesMatched) which tracks how many tiles you've correctly matched so far.
 
 ## Current bugs that need fixing:
+Done!
 
 ## To-do list:
-* Finish typing readme and team.md
-
+Done!
 
