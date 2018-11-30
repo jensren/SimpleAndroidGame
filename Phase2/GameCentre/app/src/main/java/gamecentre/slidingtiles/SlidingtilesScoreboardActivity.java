@@ -37,7 +37,7 @@ public class SlidingtilesScoreboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scoreboard);
+        setContentView(R.layout.activity_scoreboard);
         scoreboardView = findViewById(R.id.s_b);
         scoreboard = (SlidingtilesScoreboard) serializer.loadScoreboardFromFile(SCORE_FILENAME, this);
         if (scoreboard == null) {
