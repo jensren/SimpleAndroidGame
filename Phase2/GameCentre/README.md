@@ -25,10 +25,35 @@ The user can select a game, and then load the game/start a new game.
 * Game choice: Users can choose what game to play.
 * Scoreboard: The scoreboard will display every time you win the game. It stores the top 10 scores of all players of the game,
 and will display the score the user received that game as well as the user's high score.
-The score is calculated as the number of moves it took you to win, divided by the board complexity. The lower your score, the higher your ranking.
 * Autosave: Slidingtiles and Card Matching automatically saves after every move, so you won't lose any progress if you exit
 the game or if the game crashes.
 * Undo: SlidingTiles and BattleGame allows the user to press the undo button until there are no more moves left to undo (the game state is reset to a new game state).
 * Sliding tile puzzle game complexity: The user can choose between a 3x3, 4x4 or 5x5 grid.
 * BattleGame features: The user can choose to play as 1 of 3 cats or 1 of 3 dogs and also choose their opponent. The game continues until one character has 0 HP.
 
+##Rules for SlidingTiles:
+* Choose the size of your grid (3x3, 4x4, 5x5)
+* Tap on a tile with a blank space next to it to move it to the blank space. 
+* Repeat this process until the tiles are in order to win. 
+* The score is calculated as the number of moves it took you to win, divided by the board complexity. The lower your score, the higher your ranking.
+
+
+##Rules for Card Matching Game:
+* Click a card to flip it over, when you flip over the second card, if they match, they will be removed from the board. If they
+don't match, they flip back over.
+* Game ends when players matches all the cards.
+* Your score depends on how many turns it took for you to complete the game. The lower your score, the higher your ranking. 
+
+
+##Rules for Battle Game (i.e. Cats vs. Dogs)
+* You can choose to play as a dog or a cat in the game. 
+* Dogs you can choose from: Druid, Sir and Detective
+* Cats you can choose from: Shaman, Samurai and Ninja
+* Each round, you can choose to use your regular or your special move. Regular moves don't use up MP, but special moves do.
+* The game ends once a player runs out of HP. The winner is the player with HP remaining.
+* There are 3 types of characters: Fighter characters, Stealth characters and Healer characters.
+* Regular attacks for all the characters are the same in function, the only difference is the amount of damage they cause. They all add the character performing the attack back onto the battle queue once.
+* The stealth characters, Detective Shibe and Ninja Cat add the opponent into the battle queue and then themselves twice during their special move.
+* The fighter characters, Sir Shibe and Samurai cat reset the battle queue so that there is only 1 copy of each character and then adds themselves during the special move.
+* The healer characters, Druid Shibe and Shaman Cat increase their health points by the amount of damage the opponent takes during the character's special move.
+* The score is calculated based on the number of moves made and the amount of HP each character loses. The lower your score, the higher your ranking. 
