@@ -10,7 +10,7 @@ class NinjaCat extends Character implements Serializable {
     /**
      * The damage done by regular move
      */
-    private static final int REGULAR_MOVE_DAMAGE = 9;
+    private static final int SPECIAL_MOVE_COST = 9;
     /**
      * The damage done by special move
      */
@@ -18,7 +18,7 @@ class NinjaCat extends Character implements Serializable {
     /**
      * The amount of MP used by special move
      */
-    private static final int SPECIAL_MOVE_COST = 5;
+    private static final int REGULAR_MOVE_DAMAGE = 5;
 
     @Override
     boolean hasAttackMp() {
