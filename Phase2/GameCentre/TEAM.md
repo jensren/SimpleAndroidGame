@@ -31,8 +31,9 @@
 ## Responsibilities:
 * Art for the battle game sprites, scoreboard: Jenney
 * Sliding Tiles only creates solvable boards: Jiaheng
-* Activities and animations for battle game, BattleQueueManager: Cassidy
+* Activities and animations for battle game, BattleQueueManager, serializer: Cassidy
 * BattleQueue, attack mechanisms for battle game, undo: Ashas
+* Replacing observers with listeners, serializer, extracting superclasses for board style games: Yu Jie
 
 
 ## Battle Game Rules:
@@ -78,8 +79,6 @@ don't match, they flip back over.
 ## Current bugs that need fixing:
 
 ## To-do list:
-* Finish extracting superclasses
-* Is board abstract class necessary?
 * Finish typing readme and team.md
 
 
