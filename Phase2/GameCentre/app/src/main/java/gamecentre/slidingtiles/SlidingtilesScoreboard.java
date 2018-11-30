@@ -18,10 +18,18 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
     private static int numMoves;
     private static int boardSize;
 
+    /**
+     * Setter for num moves.
+     * @param numMoves The integer to be set.
+     */
     static void setNumMoves(int numMoves) {
         SlidingtilesScoreboard.numMoves = numMoves;
     }
 
+    /**
+     * Setter for board size.
+     * @param boardSize the integer for size to be set.
+     */
     static void setBoardSize(int boardSize) {
         SlidingtilesScoreboard.boardSize = boardSize;
     }
@@ -34,6 +42,10 @@ public class SlidingtilesScoreboard extends Scoreboard implements Serializable {
         return super.getUserCurrentScore();
     }
 
+    /**
+     * Gets the current number of moves
+     * @return the number of moves
+     */
     public static int getNumMoves() {
         return numMoves;
     }
