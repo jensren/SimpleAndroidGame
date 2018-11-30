@@ -7,8 +7,17 @@ import java.io.Serializable;
  */
 public class DetectiveShibe extends Character implements Serializable {
 
+    /**
+     * The damage done by regular move
+     */
     private static final int REGULAR_MOVE_DAMAGE = 7;
+    /**
+     * The damage done by special move
+     */
     private static final int SPECIAL_MOVE_DAMAGE = 12;
+    /**
+     * The amount of MP used by special move
+     */
     private static final int SPECIAL_MOVE_COST = 15;
 
     @Override
