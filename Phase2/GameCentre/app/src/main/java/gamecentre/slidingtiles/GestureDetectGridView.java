@@ -26,11 +26,11 @@ import gamecentre.MovementController;
 public class GestureDetectGridView extends GridView {
     public static final int SWIPE_MIN_DISTANCE = 100;
     private GestureDetector gDetector;
-    public MovementController mController;
+    public SlidingtilesMovementController mController;
     private boolean mFlingConfirmed = false;
     private float mTouchX;
     private float mTouchY;
-    BoardManager boardManager;
+    SlidingtilesBoardManager boardManager;
 
     public GestureDetectGridView(Context context) {
         super(context);
@@ -105,7 +105,7 @@ public class GestureDetectGridView extends GridView {
      *
      * @param boardManager the boardManager
      */
-    public void setBoardManager(BoardManager boardManager) {
+    public void setBoardManager(SlidingtilesBoardManager boardManager) {
         this.boardManager = boardManager;
         mController.setBoardManager(boardManager);
     }
