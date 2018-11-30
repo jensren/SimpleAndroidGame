@@ -6,8 +6,17 @@ import static org.junit.Assert.*;
 
 public class BattleQueueTest {
 
+    /**
+     * The battle queue for testing.
+     */
     private BattleQueue bq = new BattleQueue();
+    /**
+     * Player 1
+     */
     private Character player1;
+    /**
+     * Player 2
+     */
     private Character player2;
 
     /**

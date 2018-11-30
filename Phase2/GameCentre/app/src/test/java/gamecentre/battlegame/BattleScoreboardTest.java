@@ -179,6 +179,9 @@ public class BattleScoreboardTest {
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
 
+    /**
+     * Test update() when there is no score
+     */
     @Test
     public void testUpdateWithNoScore() {
         populateScoreboard();
@@ -194,6 +197,9 @@ public class BattleScoreboardTest {
         assertEquals(expectedUserToBestScore, scoreboard.getUserToBestScore());
     }
 
+    /**
+     * Test whether the scoreboard resets
+     */
     @Test
     public void testReset() {
         BattleScoreboard.setNumMoves(1);

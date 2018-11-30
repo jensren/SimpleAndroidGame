@@ -10,6 +10,9 @@ import gamecentre.slidingtiles.R;
 import static org.junit.Assert.*;
 
 public class MatchingBoardAndTileTest {
+    /**
+     * The matching board manager for testing
+     */
     private MatchingBoardManager boardManager;
 
     /**
