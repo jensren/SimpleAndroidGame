@@ -6,11 +6,19 @@ import java.util.Iterator;
 import java.util.List;
 
 import gamecentre.Board;
-import gamecentre.BoardUpdateListener;
 import gamecentre.slidingtiles.R;
 
 public class MatchingBoard extends Board implements Serializable {
 
+    /**
+     * Number of rows in matching board.
+     */
+    final static int numRows = 4;
+
+    /**
+     * Number of columns in matching board.
+     */
+    final static int numCols = 4;
     /**
      * The question mark cards.
      */

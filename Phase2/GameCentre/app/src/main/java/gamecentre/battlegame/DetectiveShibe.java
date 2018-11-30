@@ -3,7 +3,8 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * Representation of the Detective Shibe character.
+ * A class representing the Detective Shibe character, a stealth character. Detective Shibe's
+ * special move adds its opponent and then itself into the battle queue.
  */
 public class DetectiveShibe extends Character implements Serializable {
 

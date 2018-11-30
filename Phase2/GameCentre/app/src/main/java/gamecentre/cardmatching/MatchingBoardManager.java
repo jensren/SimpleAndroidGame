@@ -7,17 +7,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MatchingBoardManager implements Serializable {
+import gamecentre.BoardManager;
+
+public class MatchingBoardManager extends BoardManager implements Serializable {
     /**
      * The board being managed.
      */
-    private MatchingBoard board;
-
-    /**
-     * Number of moves made
-     */
-    private int numMoves = 0;
-
+    MatchingBoard board;
     /**
      * Keeps track of number of cards flipped. Up to 2.
      */
@@ -64,10 +60,12 @@ public class MatchingBoardManager implements Serializable {
 
     /**
      * Checks if a tap made by the player is valid.
+     *
      * @param position the position the player touched
      * @return whether or not the tap is valid
      */
-    boolean matchingIsValidTap(int position) {
+    @Override
+    protected boolean isValidTap(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
         if (flippedTiles[0] != -1) {
@@ -84,7 +82,8 @@ public class MatchingBoardManager implements Serializable {
      *
      * @return Whether you have won or not.
      */
-    boolean isWin() {
+    @Override
+    protected boolean isWin() {
         return tilesMatched == 16;
     }
 
@@ -93,13 +92,14 @@ public class MatchingBoardManager implements Serializable {
      *
      * @param position the position you touched.
      */
-    void touchMove(int position) {
+    @Override
+    protected void touchMove(int position) {
         int row = position / MatchingBoard.numCols;
         int col = position % MatchingBoard.numCols;
 
-        if (matchingIsValidTap(position)) {
-            if (tilesCurrentlyFlipped == 0){
-                board.flipTile(row,col);
+        if (isValidTap(position)) {
+            if (tilesCurrentlyFlipped == 0) {
+                board.flipTile(row, col);
                 flippedTiles[0] = row;
                 flippedTiles[1] = col;
                 tilesCurrentlyFlipped++;
@@ -138,20 +138,5 @@ public class MatchingBoardManager implements Serializable {
             board.flipBack(flippedTiles[0], flippedTiles[1]);
             board.flipBack(flippedTiles[2], flippedTiles[3]);
         }
-    }
-
-    /**
-     * count the number of total moves made
-     */
-    void matchingUpdateMoves() {
-        numMoves += 1;
-    }
-
-    /**
-     * @return the number of moves so far.
-     */
-
-    int matchingGetNumMoves() {
-        return numMoves;
     }
 }

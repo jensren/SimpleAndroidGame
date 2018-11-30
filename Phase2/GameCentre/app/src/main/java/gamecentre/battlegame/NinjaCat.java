@@ -3,7 +3,9 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * The Ninja Cat character class. Represents the Ninja Cat character.
+ * A class representing the Ninja Cat character, a stealth character. Ninja cat's special move adds
+ * its opponent to the battle queue and then itself twice so that this character can attack twice
+ * in concession after its opponent attacks.
  */
 class NinjaCat extends Character implements Serializable {
 

@@ -69,7 +69,8 @@ don't match, they flip back over.
 ## Current bugs that need fixing:
 
 ## To-do list:
-* Fix code smells (extract superclasses)
+* Finish extracting superclasses
+* Is board abstract class necessary?
 * Finish typing readme and team.md
 
 

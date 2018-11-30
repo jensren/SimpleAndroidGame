@@ -111,7 +111,6 @@ abstract class Character implements Serializable {
         getBattleQueue().makeMove();
         getBattleQueue().updatePlayerAttributesStack(this);
         getBattleQueue().updateUndoStack(getBattleQueue().copyBq());
-        getBattleQueue().removeCharacter();
         reduceMp(specialMoveCost);
         getOpponent().reduceHp(specialMoveDamage);
     }
@@ -124,6 +123,7 @@ abstract class Character implements Serializable {
      * the next round.
      */
     void stealthCharacterSpecial() {
+        getBattleQueue().removeCharacter();
         getBattleQueue().add(this.getOpponent());
         getBattleQueue().add(this);
         getBattleQueue().add(this);
@@ -132,15 +132,18 @@ abstract class Character implements Serializable {
     /**
      * Process the unique special attack for a fighter character.
      *
-     * Unique effect: reset the battle queue so that each character appears once.
+     * Unique effect: reset the battle queue so that each character appears once and then add
+     * itself.
      */
     void fighterCharacterSpecial() {
         BattleQueue bq = getBattleQueue();
+        bq.removeCharacter();
+        Character currCharacter = bq.getNextCharacter();
         while (!bq.isEmpty()) {
             bq.removeCharacter();
         }
-        bq.add(this.getOpponent());
-        bq.add(this);
+        bq.add(currCharacter);
+        bq.add(currCharacter.getOpponent());
         bq.add(this);
     }
 
@@ -152,6 +155,7 @@ abstract class Character implements Serializable {
      * @param specialMoveDamage the damage done by a special move
      */
     void healerCharacterSpecial(int specialMoveDamage) {
+        getBattleQueue().removeCharacter();
         increaseHp(specialMoveDamage);
         getBattleQueue().add(this);
         if (hp > INITIAL_HP) {

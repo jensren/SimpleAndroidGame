@@ -53,9 +53,9 @@ public class SlidingtilesBoardAndTileTest {
     @Test
     public void testIsSolved() {
         setUpCorrect();
-        assertEquals(true, boardManager.puzzleSolved());
+        assertEquals(true, boardManager.isWin());
         swapFirstTwoTiles();
-        assertEquals(false, boardManager.puzzleSolved());
+        assertEquals(false, boardManager.isWin());
     }
 
     /**
