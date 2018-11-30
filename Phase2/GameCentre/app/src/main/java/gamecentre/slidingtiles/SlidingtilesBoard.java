@@ -15,7 +15,15 @@ import gamecentre.Board;
  * The sliding tiles board.
  */
 public class SlidingtilesBoard extends Board implements Serializable, Iterable<Tile> {
+    /**
+     * The number of rows.
+     */
+    static int numRows = 4;
 
+    /**
+     * The number of rows.
+     */
+    static int numCols = 4;
     /**
      * Variable to handle user's desired board size input. Used to change numRows and numCols
      * if user starts new game.
@@ -69,6 +77,15 @@ public class SlidingtilesBoard extends Board implements Serializable, Iterable<T
         tiles[row2][col2] = tempTile1;
 
         listenerUpdate();
+    }
+
+    /**
+     * Return the number of tiles on the board.
+     *
+     * @return the number of tiles on the board
+     */
+    public int numTiles() {
+        return numCols * numRows;
     }
 
     @NonNull
