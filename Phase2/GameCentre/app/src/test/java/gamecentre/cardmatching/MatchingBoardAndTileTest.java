@@ -41,7 +41,7 @@ public class MatchingBoardAndTileTest {
     }
 
     /**
-     * Shuffle a few tiles.
+     * Sets board to a won state: All tiles flipped to blank and tiles matched set to 16.
      */
     private void changeToBlank() {
         MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
@@ -53,14 +53,23 @@ public class MatchingBoardAndTileTest {
         boardManager.tilesMatched = 16;
     }
 
+    /**
+     * Flips the first tile
+     */
     private void flipFirstTile() {
         boardManager.touchMove(0);
     }
 
+    /**
+     * Flips the last tile
+     */
     private void flipLastTile() {
         boardManager.touchMove(15);
     }
 
+    /**
+     * Sets board to have 14 tiles matched, and you flip over the last two remaining tiles on the board.
+     */
     private void FlipBlankLastTwo() {
         MatchingTile tile = new MatchingTile(17, R.drawable.tile_25);
         for (int row = 0; row != MatchingBoard.numRows; row++) {
@@ -88,16 +97,22 @@ public class MatchingBoardAndTileTest {
         boardManager.touchMove(14);
     }
 
+    /**
+     * Updates number of moves.
+     */
     private void updateMove() {
         boardManager.updateMoves();
     }
 
+    /**
+     * Tap the first tile.
+     */
     private void touchMoveFirstTile() {
         boardManager.touchMove(0);
     }
 
     /**
-     * Test whether swapping two tiles makes a solved board unsolved.
+     * Test if board manager correctly detects when the game is solved.
      */
     @Test
     public void testIsSolved() {
@@ -224,7 +239,7 @@ public class MatchingBoardAndTileTest {
     }
 
     @Test
-    public void testMatchingTilesGetBackgound(){
+    public void testMatchingTilesGetBackground(){
         setUpCorrect();
         assertEquals(0, boardManager.getBoard().tiles[0][0].getBackground());
         assertEquals(7, boardManager.getBoard().tiles[1][3].getBackground());
