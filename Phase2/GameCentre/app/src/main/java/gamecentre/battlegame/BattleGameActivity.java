@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import gamecentre.slidingtiles.R;
 
+/*
+ * The image for the background was taken from https://www.pinterest.ca/pin/374784000221729233/
+ */
+
 /**
  * The game activity.
  */
