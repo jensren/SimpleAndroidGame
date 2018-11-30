@@ -112,6 +112,9 @@ public class DogChoiceActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
+    /**
+     * Change the text based on which player is choosing their character.
+     */
     private void changeChoiceText() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
