@@ -60,12 +60,12 @@ don't match, they flip back over.
 
 ## Battle Game design decisions:
 * Character will be an abstract superclass, and each specific type of playable character in the game will be a subclass that extends it.
-* BattleQueue will handle which character will be the next to play. Some special moves will add the character to the BattleQueue more than once. 
+* BattleQueue will handle which character will be the next to play. Some special moves will add the character to the BattleQueue more than once.
+* The order of characters in the BattleQueue will be modified when the character performs a regular or special move or undo.
 * The game will end when a character runs out of HP (health points). 
 * The scoreboard will be ordered from highest to lowest score. The score will be HP you cause in damage to the opponent + HP you have left. 
 * Regular moves don't use MP (magic points) to avoid there every being a tie, but special moves use up MP. If a character looses up all their MP, they are still able to use the regular move and cause damage.
 * Undo: implemented using a stack by saving each character's HP, MP and BattleQueue before a move is performed so the current game state can ge reset to what it was like before the move was performed.
-* Saving: save BattleQueue???
 
 ## Card Matching Game design decision:
 * TBD
