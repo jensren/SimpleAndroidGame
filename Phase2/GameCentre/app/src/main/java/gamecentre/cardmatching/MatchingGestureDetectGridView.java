@@ -6,6 +6,12 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
+/**
+ * An extension of GridView containing built in logic for handling swipes between buttons
+ * Adapted from:
+ * https://github.com/DaveNOTDavid/sample-puzzle/blob/master/app/src/main/java/com/davenotdavid/
+ * samplepuzzle/GestureDetectGridView.java
+ */
 public class MatchingGestureDetectGridView extends GridView {
     /**
      * The minimum swipe distance

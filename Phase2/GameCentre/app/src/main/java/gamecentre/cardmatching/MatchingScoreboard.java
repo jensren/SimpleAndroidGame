@@ -3,6 +3,9 @@ package gamecentre.cardmatching;
 import gamecentre.Score;
 import gamecentre.Scoreboard;
 
+/**
+ * The matching scoreboard.
+ */
 public class MatchingScoreboard extends Scoreboard {
     /**
      * The current number of moves

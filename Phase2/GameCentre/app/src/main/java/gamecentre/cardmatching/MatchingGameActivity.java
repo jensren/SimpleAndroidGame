@@ -17,6 +17,9 @@ import gamecentre.Serializer;
 import gamecentre.slidingtiles.CustomAdapter;
 import gamecentre.slidingtiles.R;
 
+/**
+ * The game activity for the matching game.
+ */
 public class MatchingGameActivity extends AppCompatActivity{
     /**
      * The board manager.
@@ -52,6 +55,7 @@ public class MatchingGameActivity extends AppCompatActivity{
         String a = "Your moves: " + boardManager.getNumMoves();
         score.setText(a);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -97,6 +101,7 @@ public class MatchingGameActivity extends AppCompatActivity{
                     }
                 });
     }
+
     /**
      * Create the buttons for displaying the tiles.
      *

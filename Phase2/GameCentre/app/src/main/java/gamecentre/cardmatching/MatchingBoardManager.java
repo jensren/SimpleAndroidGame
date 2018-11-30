@@ -9,6 +9,9 @@ import java.util.List;
 
 import gamecentre.BoardManager;
 
+/**
+ * Manager for the matching board.
+ */
 public class MatchingBoardManager extends BoardManager implements Serializable {
     /**
      * The board being managed.
