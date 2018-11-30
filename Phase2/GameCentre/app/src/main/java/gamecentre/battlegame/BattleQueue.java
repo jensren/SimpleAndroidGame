@@ -192,8 +192,6 @@ public class BattleQueue implements Serializable {
                     player1.setMp(attributes[1]);
                     player2.setHp(attributes[2]);
                     player2.setMp(attributes[3]);
-                } else {
-                    throw new IndexOutOfBoundsException("Attribute stack empty!");
                 }
             } else {
                 int[] attributes = playerAttributesStack.remove(playerAttributesStack.size() - 1);
