@@ -132,7 +132,8 @@ abstract class Character implements Serializable {
     /**
      * Process the unique special attack for a fighter character.
      *
-     * Unique effect: reset the battle queue so that each character appears once.
+     * Unique effect: reset the battle queue so that each character appears once and then add
+     * itself.
      */
     void fighterCharacterSpecial() {
         BattleQueue bq = getBattleQueue();
