@@ -94,7 +94,7 @@ public class DogChoiceActivity extends AppCompatActivity {
     }
 
     /**
-     * Switch to the DogChoiceActivity if second player needs to pick a dog, or switch to
+     * Switch to the CatChoiceActivity if second player needs to pick a dog, or switch to
      * BattleGameActivity if both players have chosen their characters
      */
     private void switchToNextActivity(String character) {
@@ -112,6 +112,9 @@ public class DogChoiceActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
+    /**
+     * Change the text based on which player is choosing their character.
+     */
     private void changeChoiceText() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
