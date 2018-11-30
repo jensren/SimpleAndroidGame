@@ -27,6 +27,22 @@ public class BattleStartingActivity extends AppCompatActivity {
 
         addStartButtonListener();
         addScoreboardButtonListener();
+        addInstructionsButtonListener();
+    }
+
+    private void addInstructionsButtonListener() {
+        Button startButton = findViewById(R.id.instruction);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToInstructions();
+            }
+        });
+    }
+
+    private void switchToInstructions() {
+        Intent m = new Intent(this, InstructionsActivity.class);
+        startActivity(m);
     }
 
     /**
