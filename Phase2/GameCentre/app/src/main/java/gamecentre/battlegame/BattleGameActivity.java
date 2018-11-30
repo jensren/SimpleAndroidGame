@@ -47,7 +47,7 @@ public class BattleGameActivity extends AppCompatActivity {
      * The ImageView for the dog's image
      */
     private ImageView dogImage;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

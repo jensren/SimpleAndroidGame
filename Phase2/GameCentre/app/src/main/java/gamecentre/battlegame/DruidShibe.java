@@ -4,8 +4,7 @@ package gamecentre.battlegame;
 import java.io.Serializable;
 
 /**
- * A class representing the Druid Shibe character, a healer character. Druid Shibe's special move
- * increases this characters Health Points byt he amount of damage the opponent took.
+ * A class representing the Druid Shibe character, a healer character.
  */
 class DruidShibe extends Character implements Serializable {
 
@@ -32,6 +31,10 @@ class DruidShibe extends Character implements Serializable {
         super.regularMoveHelper(REGULAR_MOVE_DAMAGE);
     }
 
+    /**
+     * Plays Druid Shibe's special move.
+     * Increases this characters Health Points by the amount of damage the opponent took.
+     */
     @Override
     void specialMove() {
         super.specialMoveHelper(SPECIAL_MOVE_COST, SPECIAL_MOVE_DAMAGE);
